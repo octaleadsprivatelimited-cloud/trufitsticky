@@ -1,11 +1,12 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Layout from "./pages/Layout";
-import SuspenseFallback from "./components/SuspenseFallback";
+import HomePage from "./pages/HomePage";
+import CoachLandingIndex from "./pages/CoachLandingIndex";
 import ErrorPage from "./pages/ErrorPage";
 
 // Lazy load all page components for code splitting
-const HomePage = lazy(() => import("./pages/HomePage"));
+
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const PlansPage = lazy(() => import("./pages/PlansPage"));
 const CoachPage = lazy(() => import("./pages/CoachPage"));
@@ -25,13 +26,14 @@ const router = createBrowserRouter([
         element: <Layout />,
         errorElement: <ErrorPage />,
         children: [
-            { path: "/start/:coachName", element: <Suspense fallback={<SuspenseFallback />}><CoachLandingPage /></Suspense> },
-            { path: "/plans", element: <Suspense fallback={<SuspenseFallback />}><PlansPage /></Suspense> },
-            { path: "/payment/couple", element: <Suspense fallback={<SuspenseFallback />}><CouplePaymentPage /></Suspense> },
+            { path: "/start", element: <CoachLandingIndex/> },
+            { path: "/start/:coachName", element: <Suspense fallback={null}><CoachLandingPage /></Suspense> },
+            { path: "/plans", element: <Suspense fallback={null}><PlansPage /></Suspense> },
+            { path: "/payment/couple", element: <Suspense fallback={null}><CouplePaymentPage /></Suspense> },
             {
                 index: true, 
                 element: (
-                    <Suspense fallback={<SuspenseFallback />}>
+                    <Suspense fallback={null}>
                         <HomePage />
                     </Suspense>
                 )
@@ -39,7 +41,7 @@ const router = createBrowserRouter([
             {
                 path: "/about", 
                 element: (
-                    <Suspense fallback={<SuspenseFallback />}>
+                    <Suspense fallback={null}>
                         <AboutPage />
                     </Suspense>
                 )
@@ -47,7 +49,7 @@ const router = createBrowserRouter([
             {
                 path: "/coaches", 
                 element: (
-                    <Suspense fallback={<SuspenseFallback />}>
+                    <Suspense fallback={null}>
                         <CoachPage />
                     </Suspense>
                 )
@@ -55,7 +57,7 @@ const router = createBrowserRouter([
             {
                 path: "/coaches/:coachName",
                 element: (
-                    <Suspense fallback={<SuspenseFallback />}>
+                    <Suspense fallback={null}>
                         <CoachDetailPage />
                     </Suspense>
                 )
@@ -63,7 +65,7 @@ const router = createBrowserRouter([
             {
                 path: "/findmycoach",
                 element: (
-                    <Suspense fallback={<SuspenseFallback />}>
+                    <Suspense fallback={null}>
                         <FindMyCoachPage />
                     </Suspense>
                 )
@@ -71,7 +73,7 @@ const router = createBrowserRouter([
             {
                 path: "/survey", 
                 element: (
-                    <Suspense fallback={<SuspenseFallback />}>
+                    <Suspense fallback={null}>
                         <SurveyPage />
                     </Suspense>
                 )
@@ -79,7 +81,7 @@ const router = createBrowserRouter([
             {
                 path: "/privacy-policy", 
                 element: (
-                    <Suspense fallback={<SuspenseFallback />}>
+                    <Suspense fallback={null}>
                         <PrivacyPolicyPage />
                     </Suspense>
                 )
@@ -87,7 +89,7 @@ const router = createBrowserRouter([
             {
                 path: "/terms-conditions", 
                 element: (
-                    <Suspense fallback={<SuspenseFallback />}>
+                    <Suspense fallback={null}>
                         <TermsConditionsPage />
                     </Suspense>
                 )
@@ -95,7 +97,7 @@ const router = createBrowserRouter([
             {
                 path: "/refund-policy", 
                 element: (
-                    <Suspense fallback={<SuspenseFallback />}>
+                    <Suspense fallback={null}>
                         <RefundPolicyPage />
                     </Suspense>
                 )
@@ -103,7 +105,7 @@ const router = createBrowserRouter([
             {
                 path: "/payment/callback", 
                 element: (
-                    <Suspense fallback={<SuspenseFallback />}>
+                    <Suspense fallback={null}>
                         <PaymentCallbackPage />
                     </Suspense>
                 )

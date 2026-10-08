@@ -2,6 +2,7 @@ import { landingSeoPages } from '../content/coachLandings.mjs';
 export const DEFAULT_ORIGIN='https://www.betrufit.com';
 export const pages={
  ...landingSeoPages,
+ '/start':{title:'Meet Your Coach — Coaching Stories & Plans | Tru Fit',heading:'Your next chapter. Your kind of coach.',description:'Meet Jaswant and Srikar, explore their personal journeys, compare coaching plans, and start your Tru Fit journey.'},
  '/':{title:'Tru Fit — Personal Fitness Coaching That Fits Your Life',heading:'Fitness that fits your life.',description:'Find a real coach, personalized workouts, nutrition guidance, and regular check-ins. Build sustainable fitness habits with Tru Fit.'},
  '/coaches':{title:'Find Your Coach — Personal Fitness Coaches | Tru Fit',heading:'Find your kind of coach.',description:'Explore Tru Fit coaches, compare experience and specialties, and find personalized fitness coaching that fits your goals and routine.'},
  '/plans':{title:'Coaching Plans & Pricing | Tru Fit',heading:'Your goals. Your kind of plan.',description:'Explore Tru Fit coaching programs, compare durations and regional prices, and choose a personal coach. See the full price before starting.'},

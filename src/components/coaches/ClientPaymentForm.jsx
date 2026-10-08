@@ -1,8 +1,12 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 import CardClose from "../../assets/card-close.svg";
 import { trackEvent } from "../../analytics/analytics";
 
 const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planName, paymentMode, calendlyLink, subscriptionAmount, spurfit_url, onClose }) => {
+  const isConsultation = String(planName).toLowerCase().includes("consultation");
+  const defaultDialCode = isConsultation ? (paymentMode === "cashfree" ? "91" : "1") : "";
   const [formData, setFormData] = useState(() => {
     const savedLead = sessionStorage.getItem("capturedLead");
     if (savedLead) {
@@ -11,7 +15,7 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
         return {
           name: parsed.name || "",
           email: parsed.email || "",
-          country_code: parsed.country_code || "",
+          country_code: parsed.country_code || defaultDialCode,
           phone_number: parsed.phone_number || "",
           residence: "",
           state: "",
@@ -24,7 +28,7 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
     return {
       name: "",
       email: "",
-      country_code: "",
+      country_code: defaultDialCode,
       phone_number: "",
       residence: "",
       state: "",
@@ -902,8 +906,8 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
         </div>
 
         <div className="client__form__head-title">
-          <h2>Complete your enrollment</h2>
-          <p>Fill in your details to continue to secure payment.</p>
+          <h2>{isConsultation ? "Book your consultation" : "Complete your enrollment"}</h2>
+          <p>{isConsultation ? `20 minutes with ${coachName}. Complete your details to continue to secure payment.` : "Fill in your details to continue to secure payment."}</p>
         </div>
 
         <form data-clarity-mask="true" data-form-id="coach_enrollment" onSubmit={handleSubmit}>
@@ -920,6 +924,7 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
               {errors.email && <p style={{ color: "red", fontSize: "12px", margin: "0", fontFamily: "Montserrat" }}>{errors.email}</p>}
             </div>
 
+            {!isConsultation && <>
             <div className="client__form__inp-field">
               <label htmlFor="country_code">Country Code<sup style={{ color: "red" }}>*</sup></label>
               <select
@@ -940,18 +945,27 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
               {errors.country_code && <p style={{ color: "red", fontSize: "12px", margin: "0", fontFamily: "Montserrat" }}>{errors.country_code}</p>}
             </div>
 
+            </>}
             <div className="client__form__inp-field">
               <label htmlFor="phone_number">WhatsApp Number<sup style={{ color: "red" }}>*</sup></label>
-              <input type="tel" id="phone_number" name="phone_number" placeholder="Enter WhatsApp number (without country code)" className="unstyled-inputs" value={formData.phone_number} onChange={handleChange} required />
+              {isConsultation ? <PhoneInput defaultCountry={paymentMode === 'cashfree' ? 'in' : 'us'} value={`+${formData.country_code}${formData.phone_number}`} preferredCountries={['in','us','gb','ca','ae','au']} charAfterDialCode=" " onChange={(value, meta) => {
+                const digits = value.replace(/\D/g, '');
+                const dialCode = meta.country.dialCode;
+                setFormData(prev => ({...prev, country_code: dialCode, phone_number: digits.slice(dialCode.length)}));
+                setErrors(prev => ({...prev, country_code: '', phone_number: ''}));
+              }} inputProps={{id:'phone_number',name:'phone_number',required:true,autoComplete:'tel','aria-invalid':Boolean(errors.phone_number || errors.country_code)}}/> : <input type="tel" id="phone_number" name="phone_number" placeholder="Enter WhatsApp number (without country code)" className="unstyled-inputs" value={formData.phone_number} onChange={handleChange} required />}
+              {isConsultation && errors.country_code && <p className="consultation-phone-error">{errors.country_code}</p>}
               {errors.phone_number && <p style={{ color: "red", fontSize: "12px", margin: "0", fontFamily: "Montserrat" }}>{errors.phone_number}</p>}
             </div>
 
+            {!isConsultation && <>
             <div className="client__form__inp-field">
               <label htmlFor="coach">Coach</label>
               <input type="text" id="coach" name="coach" value={coachName} disabled className="unstyled-inputs" />
               <input type="hidden" name="coach" value={coachId} />
             </div>
 
+            </>}
             <div className="client__form__inp-field">
               <label htmlFor="residence">Country<sup style={{ color: "red" }}>*</sup></label>
               <select

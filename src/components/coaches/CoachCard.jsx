@@ -1,6 +1,6 @@
 import { scrollToSection } from '../../scroll/smoothScroll';
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { trackCoachEvent } from "../../analytics/analytics";
 import Point from "../../assets/card-plan-desc.svg";
 import InstagramIcon from "../../assets/social-insta.svg";
@@ -12,7 +12,9 @@ import CoachSpecialties from "./CoachSpecialties";
 import CoachPortrait from "./CoachPortrait";
 import SharedContext from "../../context/SharedContext";
 import CouplePlans from "./CouplePlans";
-import { fetchCatalog } from "./catalog";
+import { coachLandings } from "../../content/coachLandings.mjs";
+import "../../styles/featured-coaching.css";
+import { fetchCatalog, coachSlug } from "./catalog";
 
 /**
  * CoachCard — public coach profile page.
@@ -790,7 +792,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
                 ))}
               </div>
             )}
-            <a className="profile-plan-link" href="#cpx-plans">Explore coaching plans <span aria-hidden="true">↗</span></a>
+            <a className="profile-plan-link" href="#cpx-plans">Explore coaching plans <span aria-hidden="true">↗</span></a>{coachLandings[coachSlug(coach)] && <Link className="profile-landing-link" to={`/start/${coachSlug(coach)}`}>His story & coaching overview ↗</Link>}
           </div>
         </div>
       </header>

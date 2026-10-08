@@ -2635,3 +2635,9 @@
     font-size: 13px;
   }
 }
+
+.client__form__inp-field .react-international-phone-input-container{width:100%;display:flex}
+.client__form__inp-field .react-international-phone-input{flex:1;width:0;min-width:0;border-radius:0 8px 8px 0}
+.client__form__inp-field .react-international-phone-country-selector-button{height:100%;min-height:46px;border:1px solid #e2deea;background:#f8f6fb;border-radius:8px 0 0 8px;padding-inline:9px}
+.client__form__inp-field .react-international-phone-country-selector-dropdown{z-index:10;width:260px;max-width:75vw}
+.consultation-phone-error{color:#a72929;font-size:12px;margin:0}

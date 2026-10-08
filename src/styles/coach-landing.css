@@ -237,3 +237,27 @@ html:has(.sales-landing){scroll-padding-top:20px}
 }
 @media(max-width:370px){.landing-hero h1{font-size:32px}.landing-visual{height:136px}.landing-visual-caption span{display:none}.landing-plan>strong{font-size:16px}.landing-story-stat{grid-template-columns:110px 1fr}}
 @media(prefers-reduced-motion:reduce){.landing-visual{transition:none}.landing-visual:hover{transform:none}}
+
+/* Warm, optimistic accents keep each part of the journey easy to recognize. */
+.landing-hero{background:linear-gradient(115deg,#fff0dc 0%,#f7f2e8 48%,#ece1f6 100%);border-radius:0 0 22px 22px;padding-inline:32px}
+.landing-coach-pill{background:#eee0fa;border-color:#d6bee9;color:#583579}
+.landing-hero h1 em{color:#70518b}
+.landing-visual-coach{border-color:#62417c}.landing-visual-coach .landing-visual-bar{background:#62417c}
+.landing-visual-training{border-color:#2e625b}.landing-visual-training .landing-visual-bar{background:#2e625b}
+.landing-visual-life{border-color:#8c4e3e}.landing-visual-life .landing-visual-bar{background:#8c4e3e}
+.landing-assurance{color:#345c52;border-color:#c9d9ce}
+.landing-story-stat{background:#dce8c5}
+.landing-benefit-grid article:nth-child(1){background:#ebe1f4;border-color:#dbc9ea}
+.landing-benefit-grid article:nth-child(2){background:#f7e2cc;border-color:#edd1b6}
+.landing-benefit-grid article:nth-child(3){background:#dcebea;border-color:#c5dcda}
+.landing-benefit-grid article:nth-child(4){background:#f3edc9;border-color:#e7dfac}
+.landing-plan.is-selected{background:#eee4f7;border-color:#775294;box-shadow:inset 0 0 0 1px #775294}
+.landing-plan.is-selected>strong{color:#5d397b}.landing-plan input{accent-color:#775294}
+.landing-consultation{background:#fae3d3}
+.landing-enquiry{background:linear-gradient(125deg,#e0eeed,#e7e4f5);border-color:#cbdcdd}
+.landing-final{background:#f3e9ba;border:1px solid #e7dca6}.landing-final em{color:#74572d}
+.landing-actions .landing-whatsapp{background:#d7eadb;border-color:#bad6c0;color:#28543b}
+.landing-sticky .button{background:#60417c;color:#fff}
+.landing-explore{display:flex;gap:24px;flex-wrap:wrap;padding-top:27px;font-size:11px;font-weight:600;color:#60417c}
+@media(max-width:800px){.landing-header nav{gap:14px}.landing-header nav a{font-size:10px}}
+@media(max-width:600px){.landing-hero{padding-inline:18px;width:calc(100% - 24px);border-radius:0 0 17px 17px}.landing-explore{gap:16px;font-size:10px;padding-top:22px}}

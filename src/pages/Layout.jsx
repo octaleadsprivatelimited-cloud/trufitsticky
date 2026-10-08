@@ -18,7 +18,7 @@ export default function Layout(){
  const landingPage=location.pathname.startsWith('/start/');
  const coachDetail=/^\/coaches\/[^/]+\/?$/.test(location.pathname);
  const protectedPage=location.pathname.startsWith('/payment')||location.pathname==='/survey';
- const contact=['/','/about','/coaches','/plans'].includes(location.pathname);
+ const contact=['/','/about','/coaches','/plans','/start'].includes(location.pathname);
  useEffect(()=>{if(location.hash){const t=setTimeout(()=>scrollToSection(document.getElementById(location.hash.slice(1))),150);return()=>clearTimeout(t)}},[location.pathname,location.hash]);
  return <><Seo/><PageInsights/><PageMotion/><SmoothScrolling/>{!landingPage&&<NavBar/>}<main id="main-content" tabIndex={-1} data-clarity-mask={protectedPage?'true':undefined}><Outlet/>{contact&&<ContactForm/>}</main>{!landingPage&&!contact&&!location.pathname.startsWith('/payment')&&<Footer/>}{(location.pathname==='/'||coachDetail)&&<QuickNavigation key={location.pathname} coachPage={coachDetail}/>}<CookieConsent/><ScrollRestoration/></>;
 }

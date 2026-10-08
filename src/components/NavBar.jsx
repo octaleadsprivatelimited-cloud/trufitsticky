@@ -12,7 +12,7 @@ export default function NavBar() {
       <Link className="brand" to="/" aria-label="Tru Fit home"><img src={Logo} alt=""/><img className="original-wordmark" src={LogoText} alt=""/></Link>
       <button className="menu-button" aria-expanded={expanded} aria-controls="site-links" onClick={() => setOpen(expanded ? false : pathname)}>{expanded ? 'Close' : 'Menu'}</button>
       <nav id="site-links" className={expanded ? 'nav-links is-open' : 'nav-links'} aria-label="Main navigation">
-        <NavLink to="/coaches">Our coaches</NavLink><NavLink to="/plans">Plans</NavLink><NavLink to="/about">Our approach</NavLink>
+        <NavLink to="/coaches">Our coaches</NavLink><NavLink to="/plans">Plans</NavLink><NavLink to="/start">Start here</NavLink><NavLink to="/about">Our approach</NavLink>
         <Link className="button button-small" to="/findmycoach" data-track="cta_click" data-source="navigation">Find my coach <span aria-hidden="true">↗</span></Link>
       </nav>
     </div>
