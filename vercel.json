@@ -1,0 +1,56 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/backend/admin_functions/:path*",
+      "destination": "https://apibe.betrufit.com/admin_functions/:path*"
+    },
+    {
+      "source": "/coaches/:coachName",
+      "destination": "/"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml"
+        }
+      ]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/payment/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/survey",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ],
+  "trailingSlash": false,
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm ci"
+}

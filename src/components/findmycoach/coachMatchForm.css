@@ -1,0 +1,23 @@
+.coach-match{padding-block:40px 55px;max-width:760px}
+.coach-match-heading{margin-bottom:28px;max-width:760px}
+.coach-match-heading h1{font-size:clamp(38px,5vw,56px);line-height:1.04;margin:14px 0 18px}
+.coach-match-heading h1 em{font-style:normal;color:var(--accent,#506847)}
+.coach-match-heading>p:last-child{color:var(--muted,#62685b);font-size:14px;line-height:1.6}
+.coach-match-questions{display:grid;grid-template-columns:1fr;gap:24px}
+.coach-match-question{border:0;border-top:1px solid var(--line,#d8dbd1);margin:0;padding:16px 0 0;min-width:0;scroll-margin-top:20px}
+.coach-match-question legend{float:left;width:100%;padding:0;margin-bottom:13px;font-size:16px;font-weight:600;line-height:1.4}
+.coach-match-options{clear:both;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.coach-match-option{display:flex;align-items:center;gap:12px;padding:10px 12px;background:#fffdf7;border:1px solid #d9ddcf;border-radius:7px;cursor:pointer;min-height:46px;font-size:12px;line-height:1.5;transition:background .18s,border-color .18s}
+.coach-match-option input{appearance:auto;accent-color:#526c3f;width:16px;height:16px;flex-shrink:0;margin:0}
+.coach-match-option:has(input:checked){background:#e2ebc8;border-color:#7f9859;color:#25351d}
+.coach-match-option:hover{border-color:#7f9859}
+.coach-match-option:has(input:focus-visible){outline:2px solid #9815ff;outline-offset:3px}
+.coach-match-option:has(input:disabled){cursor:wait}
+.coach-match-submit{scroll-margin-top:110px;margin-top:24px;padding-top:20px;border-top:1px solid var(--line,#d8dbd1);display:flex;align-items:center;justify-content:space-between;gap:20px}
+.coach-match-submit p{font-size:13px;font-weight:600;margin-bottom:5px}
+.coach-match-submit span{font-size:11px;color:var(--muted,#62685b)}
+.coach-match-submit button{min-height:48px}
+.coach-match-submit button:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:700px){.coach-match{padding-block:35px 50px}.coach-match-heading{margin-bottom:25px}.coach-match-heading h1{font-size:43px}.coach-match-questions{grid-template-columns:1fr;gap:25px}.coach-match-question legend{font-size:16px}.coach-match-option{font-size:12px;padding:11px 12px}.coach-match-submit{align-items:stretch;flex-direction:column;gap:15px}.coach-match-submit button{width:100%;justify-content:center}}
+
+@media(max-width:480px){.coach-match-options{grid-template-columns:1fr}.coach-match-question legend{margin-bottom:11px}.coach-match-heading h1{font-size:38px}.coach-match-option{min-height:42px;padding:9px 11px}}

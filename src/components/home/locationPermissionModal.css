@@ -1,0 +1,231 @@
+.locperm__container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(97, 97, 97, 0.6); /* overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* make sure it sits above everything */
+}
+
+.locperm__content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.locperm__close-btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  font-size: 24px;
+  line-height: 1;
+  color: #666;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  z-index: 1001;
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.locperm__close-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  color: #000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.locperm__close-btn:active {
+  background: rgba(255, 255, 255, 0.95);
+  transform: scale(0.95);
+}
+
+.locperm__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 10px 10px 10px;
+}
+
+.locperm__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.locperm__logo-main {
+  width: 30px;
+  height: 30px;
+}
+
+.locperm__logo-text {
+  width: 90px;
+  height: 30px;
+}
+
+.locperm__body {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+}
+
+.locperm__message {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+
+.locperm__message-head {
+  color: #000;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.locperm__message-text {
+  color: #666;
+  font-family: "Open Sans";
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.locperm__btn-sec {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.locperm__btn {
+  background: #9c27ff;
+  border-radius: 20px;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.locperm__btn:hover {
+  background: #8a1fe6;
+}
+
+.locperm__btn:active {
+  transform: scale(0.98);
+}
+
+.locperm__btn p {
+  color: #fff;
+  text-align: center;
+  font-family: "Darker Grotesque";
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .locperm__content {
+    width: 400px;
+    padding: 20px;
+  }
+  .locperm__close-btn {
+    top: -10px;
+    right: -10px;
+    width: 36px;
+    height: 36px;
+    font-size: 28px;
+  }
+  .locperm__header {
+    padding: 20px 10px 15px 10px;
+  }
+  .locperm__logo-main {
+    width: 40px;
+    height: 40px;
+  }
+  .locperm__logo-text {
+    width: 100px;
+    height: 40px;
+  }
+  .locperm__body {
+    padding: 15px;
+    gap: 20px;
+  }
+  .locperm__message-head {
+    font-size: 20px;
+  }
+  .locperm__message-text {
+    font-size: 14px;
+  }
+  .locperm__btn {
+    border-radius: 30px;
+    padding: 12px 40px;
+  }
+  .locperm__btn p {
+    font-size: 20px;
+    margin-top: -4px;
+  }
+  .locperm__btn-sec {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .locperm__content {
+    width: 500px;
+    padding: 30px;
+  }
+  .locperm__close-btn {
+    top: -12px;
+    right: -12px;
+    width: 40px;
+    height: 40px;
+    font-size: 32px;
+  }
+  .locperm__header {
+    padding: 25px 10px 20px 10px;
+  }
+  .locperm__logo-main {
+    width: 50px;
+    height: 50px;
+  }
+  .locperm__logo-text {
+    width: 120px;
+    height: 50px;
+  }
+  .locperm__body {
+    padding: 20px;
+    gap: 25px;
+  }
+  .locperm__message-head {
+    font-size: 24px;
+  }
+  .locperm__message-text {
+    font-size: 16px;
+  }
+  .locperm__btn {
+    border-radius: 30px;
+    padding: 15px 50px;
+  }
+  .locperm__btn p {
+    font-size: 24px;
+  }
+  .locperm__btn-sec {
+    margin-top: 15px;
+  }
+}

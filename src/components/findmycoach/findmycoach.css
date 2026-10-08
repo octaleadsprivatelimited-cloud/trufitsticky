@@ -1,0 +1,437 @@
+.fmc__section {
+  background: #fff;
+  height: 100vh;
+}
+
+.fmc__container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.fmc__head {
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    url("../../assets/find-my-coach.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.fmc__content {
+  position: absolute;
+  bottom: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fmc__title,
+.fmc__title h1 {
+  text-align: center;
+  color: #fff;
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  width: 95%;
+}
+
+.fmc__tag {
+  color: #fff;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 10px 0 0 0;
+  width: 95%;
+}
+
+.fmc-btn {
+  /* border: 1px solid #000; */
+  margin: 20px 0 0 0;
+}
+
+@media screen and (min-width: 768px) {
+  .fmc__container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  .fmc__head {
+    width: 75%;
+  }
+  .fmc__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 45px;
+    bottom: 0;
+    width: 50%;
+  }
+  .fmc__title,
+.fmc__title h1 {
+    color: #000;
+    text-align: left;
+    /* font-size: 32px; */
+    width: 95%;
+  }
+
+  .fmc__tag {
+    color: #000;
+    text-align: left;
+    /* font-size: 24px; */
+    margin: 15px 0 0 0;
+    width: 95%;
+  }
+  .fmc-btn {
+    border: 1px solid #000;
+    margin: 25px 0 0 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .fmc__head {
+    width: 60%;
+  }
+  .fmc__title,
+.fmc__title h1 {
+    font-size: 32px;
+  }
+  .fmc__tag {
+    font-size: 24px;
+    width: 80%;
+  }
+  .fmc-btn {
+    border: 1px solid #000;
+    margin: 25px 0 0 0;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .fmc__title,
+.fmc__title h1 {
+    font-size: 48px;
+  }
+
+  .fmc__tag {
+    font-size: 32px;
+  }
+
+  .fmc-btn {
+    margin: 30px 0 0 0;
+  }
+}
+
+/* QUESTIONNAIRE */
+
+.que__section {
+  padding: 10px;
+  margin: 60px 0;
+}
+
+.que__head {
+  padding: 20px;
+}
+
+.progress__multi-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.progress__segment {
+  flex: 1;
+  text-align: center;
+}
+
+.progress__label {
+  font-family: Montserrat;
+  font-size: 12px;
+  margin-bottom: 5px;
+  font-weight: 400;
+  color: #000;
+}
+
+.progress__bar {
+  height: 6px;
+  background: #eee;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress__fill {
+  height: 100%;
+  background: #9c27ff;
+  transition: width 0.3s ease;
+}
+.que__nav {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.que__nav button {
+  padding: 14px 32px;
+  background: #9c27ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  min-width: 100px;
+}
+.que__nav button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.progress__bar {
+  position: relative;
+  height: 5px;
+  border-radius: 65px;
+  border: 1px solid #000;
+  background: #fff;
+}
+
+.progress__fill {
+  height: 100%;
+  border-radius: 65px;
+  background: #9c27ff;
+  transition: width 0.4s ease;
+}
+
+.progress__moving {
+  position: absolute;
+  top: -350%;
+  transition: left 0.4s ease;
+  /* width: 35px; */
+  height: 15px;
+}
+
+.progress__finish {
+  position: absolute;
+  top: -350%;
+  right: 0;
+  /* width: 35px; */
+  height: 15px;
+  overflow: visible;
+  width: 20px;
+}
+
+.que__ques p {
+  color: #000;
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+}
+
+.que__ans-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.que__option {
+  padding: 15px 20px;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  color: #000;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+.que__option:hover {
+  border: 2px solid #ccc;
+}
+
+.que__option.selected {
+  border: 2px solid #9c27ff;
+}
+
+@media screen and (min-width: 768px) {
+  .que__section {
+    margin: 80px 0 0 0;
+  }
+  .progress__row {
+    display: flex;
+    justify-content: center;
+  }
+  .progress__multi-bar {
+    gap: 25px;
+    width: 80%;
+  }
+  .progress__segment {
+    text-align: left;
+  }
+  .progress__moving {
+    top: -550%;
+    width: 25px;
+    height: 25px;
+  }
+
+  .progress__finish {
+    top: -550%;
+    width: 25px;
+    height: 25px;
+  }
+  .que__content {
+    width: 70%;
+  }
+  .que__container form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .que__ques p {
+    text-align: center;
+    font-size: 30px;
+  }
+  .que__option {
+    padding: 15px 20px;
+    border-radius: 15px;
+    font-size: 18px;
+  }
+  .que__nav button {
+    padding: 16px 40px;
+    font-size: 18px;
+    min-width: 120px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .progress__multi-bar {
+    width: 60%;
+  }
+  .progress__label {
+    font-size: 14px;
+  }
+  .progress__moving {
+    top: -750%;
+    width: 35px;
+    height: 35px;
+  }
+
+  .progress__finish {
+    top: -750%;
+    width: 35px;
+    height: 35px;
+  }
+  .que__content {
+    width: 60%;
+  }
+  .que__nav button {
+    padding: 18px 48px;
+    font-size: 20px;
+    min-width: 140px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .que__section {
+    margin: 100px 0;
+  }
+  .progress__bar {
+    height: 8px;
+    border-radius: 5px;
+  }
+  .progress__moving {
+    top: -950%;
+    width: 45px;
+    height: 45px;
+  }
+
+  .progress__finish {
+    top: -950%;
+    width: 45px;
+    height: 45px;
+  }
+  .que__content {
+    width: 50%;
+  }
+  .que__nav button {
+    padding: 20px 56px;
+    font-size: 22px;
+    min-width: 160px;
+    border-radius: 10px;
+  }
+}
+
+/* SPINNER */
+
+.spin__section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(97, 97, 97, 0.6); /* overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* make sure it sits above everything */
+  /* padding: 5px; */
+}
+
+.spin__section svg {
+  width: 4em;
+  transform-origin: center;
+  animation: rotate4 2s linear infinite;
+}
+
+.spin__section circle {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash4 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate4 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash4 {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}

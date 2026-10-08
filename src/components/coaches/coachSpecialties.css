@@ -1,0 +1,18 @@
+.coach-specialties{margin:14px 0 20px;min-width:0}
+.coach-specialties-label{display:block;margin-bottom:9px;color:#62685b;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.coach-specialties-list{display:flex;flex-wrap:wrap;gap:7px;list-style:none;margin:0;padding:0}
+.coach-specialties-list>li{max-width:100%;padding:7px 11px;border:1px solid #c5d396;border-radius:6px;background:#e2ebc8;color:#26331e;font-size:11px;font-weight:600;line-height:1.45;overflow-wrap:anywhere}
+.coach-specialties-list>li:first-child{background:#d4e784;border-color:#bdcf70}
+.coach-specialties-list>li:nth-child(3n+2){background:#e5dcef;border-color:#d2c4e0;color:#41324f}
+.coach-specialties-list>li:nth-child(3n){background:#f0dfcb;border-color:#e1ccb4;color:#4a3826}
+.cpx-hero .coach-specialties{margin:18px 0 16px}
+.cpx-hero .coach-specialties-list>li{font-size:12px;padding:8px 12px}
+.cpx-hero>div:last-child{min-width:0}
+@media(max-width:700px){
+ .coach-specialties{margin:12px 0 16px}
+ .coach-specialties-list{gap:6px}
+ .coach-specialties-list>li{font-size:10px;padding:6px 9px}
+ .cpx-hero .coach-specialties{margin:13px 0 12px}
+ .cpx-hero .coach-specialties-label{font-size:8px;margin-bottom:7px}
+ .cpx-hero .coach-specialties-list>li{font-size:9px;padding:5px 7px}
+}

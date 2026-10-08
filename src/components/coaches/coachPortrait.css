@@ -1,0 +1,37 @@
+.coach-portrait-media{position:relative;width:100%;height:100%;overflow:hidden}
+.coach-portrait-media>img{display:block;width:100%;height:100%;object-fit:cover}
+.coach-portrait-media>video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:0;pointer-events:none;transition:opacity .2s}
+.coach-portrait-media>video.is-playing{opacity:1}
+.coach-sample-label{position:absolute;right:8px;bottom:8px;background:#20271edb;color:#fff;padding:4px 7px;border-radius:3px;font-size:8px;line-height:1.3;pointer-events:none}
+.directory-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.directory-grid .coach-photo{aspect-ratio:1.4}
+.directory-grid .coach-card-body{padding:17px 16px 16px}
+.directory-grid .coach-card-body h2{font-size:18px;line-height:1.25;margin-bottom:5px}
+.directory-grid .coach-specialties{margin:10px 0 13px}
+.directory-grid .coach-specialties-label{font-size:8px;margin-bottom:7px}
+.directory-grid .coach-specialties-list{gap:5px}
+.directory-grid .coach-specialties-list>li{font-size:9px;padding:4px 7px;border-radius:4px}
+.directory-grid .coach-card-description{font-size:11px;-webkit-line-clamp:2;margin-bottom:15px;line-height:1.6}
+.directory-grid .coach-card-bottom{gap:8px;flex-wrap:wrap;margin-top:auto}
+.directory-grid .coach-card-bottom strong{font-size:17px}
+.directory-grid .coach-card-bottom .text-link{font-size:10px}
+.directory-grid .tier-badge{top:10px;left:10px;font-size:8px;padding:5px 8px;pointer-events:none}
+.directory-grid .photo-arrow{width:29px;height:29px;bottom:10px;right:10px;font-size:17px;pointer-events:none}
+.directory-grid .coach-photo:has(video.is-playing) .photo-arrow{opacity:0}
+@media(max-width:1100px){.directory-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}}
+@media(max-width:800px){.directory-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}}
+@media(max-width:700px){
+ .directory-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .directory-grid .coach-photo{aspect-ratio:1.25}
+ .directory-grid .coach-card-body{padding:13px 11px}
+ .directory-grid .coach-card-body h2{font-size:15px;line-height:1.25}
+ .directory-grid .coach-specialties-list>li{font-size:8px;padding:3px 5px}
+ .directory-grid .coach-specialties-label{font-size:7px}
+ .directory-grid .coach-card-description{display:none}
+ .directory-grid .coach-card-bottom{align-items:start;flex-direction:column;gap:10px}
+ .directory-grid .coach-card-bottom strong{font-size:16px}
+ .directory-grid .coach-card-bottom>div>span{font-size:8px}
+ .directory-grid .coach-card-bottom small{font-size:8px}
+ .directory-grid .tier-badge{font-size:7px;padding:4px 6px;top:8px;left:8px}
+}
+@media(prefers-reduced-motion:reduce){.coach-portrait-media>video{transition:none}}
