@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/backend/admin_functions/:path*",
-      "destination": "https://apibe.betrufit.com/admin_functions/:path*"
+      "destination": "https://apibe.betrufit.com/admin_functions/:path*/"
     },
     {
       "source": "/coaches/:coachName",

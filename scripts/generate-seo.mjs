@@ -37,7 +37,7 @@ for(const [path,page] of Object.entries(allPages)){
 }
 for(const path of ['/survey','/payment/callback','/payment/couple']){const file=join(dist,path.slice(1)+'.html');await mkdir(dirname(file),{recursive:true});await writeFile(file,htmlFor(path,{title:'Private Booking | Tru Fit',description:'Tru Fit booking and payment flow.',heading:'Tru Fit'},true))}
 const sitemap=`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${Object.keys(allPages).map(path=>`  <url><loc>${escapeHtml(origin+path)}</loc></url>`).join('\n')}\n</urlset>\n`;
-const robots=`User-agent: *\nAllow: /\nDisallow: /admin_functions/\nDisallow: /api/\n\nSitemap: ${origin}/sitemap.xml\n`;
+const robots=`User-agent: *\nAllow: /\nDisallow: /admin_functions/\nDisallow: /api/\nDisallow: /backend/\n\nSitemap: ${origin}/sitemap.xml\n`;
 await writeFile(join(dist,'sitemap.xml'),sitemap);await writeFile(join(dist,'robots.txt'),robots);
 await writeFile(resolve('public/sitemap.xml'),sitemap);await writeFile(resolve('public/robots.txt'),robots);
 console.log(`SEO: generated ${Object.keys(allPages).length} crawlable pages, sitemap.xml and robots.txt for ${origin}.`);

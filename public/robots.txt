@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /admin_functions/
 Disallow: /api/
+Disallow: /backend/
 
 Sitemap: https://trufitsticky.vercel.app/sitemap.xml
