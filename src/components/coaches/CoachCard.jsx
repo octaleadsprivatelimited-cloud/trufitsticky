@@ -1,20 +1,16 @@
 import { scrollToSection } from '../../scroll/smoothScroll';
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { trackCoachEvent } from "../../analytics/analytics";
 import Point from "../../assets/card-plan-desc.svg";
-import InstagramIcon from "../../assets/social-insta.svg";
-import LinkedInIcon from "../../assets/social-linkedin.svg";
 import ClientPaymentForm from "./ClientPaymentForm";
 import ProgramDescriptionRenderer from "./ProgramDescriptionRenderer";
 import ProgramBenefit from "./ProgramBenefit";
-import CoachSpecialties from "./CoachSpecialties";
-import CoachPortrait from "./CoachPortrait";
 import SharedContext from "../../context/SharedContext";
 import CouplePlans from "./CouplePlans";
-import { coachLandings } from "../../content/coachLandings.mjs";
+import CoachProfileOverview from "./CoachProfileOverview";
 import "../../styles/featured-coaching.css";
-import { fetchCatalog, coachSlug } from "./catalog";
+import { fetchCatalog } from "./catalog";
 
 /**
  * CoachCard — public coach profile page.
@@ -57,7 +53,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
   const includedRef = useRef(null);
   const allPlansCloseRef = useRef(null);
 
-  // Global testimonials (site-wide) that power the member-feedback marquee.
+  // Published testimonials are attributed by coach in the profile overview.
   const [testimonials, setTestimonials] = useState([]);
 
   // Lookup table: `${level}:${location}:${duration_weeks ?? "consult"}` -> bool.
@@ -231,8 +227,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [baseUrl, coach]);
 
-  // Global testimonials for the member-feedback marquee. Failure is non-fatal:
-  // the section simply hides when there are none.
+  // Fetch published reviews; missing data leaves an explicit empty state.
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -438,40 +433,9 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
   const resolvedConsultationBlocks = descriptionDocs.consultation;
 
   // ---- Presentational data --------------------------------------------------
-  const coachLevelName = (() => {
-    const label = String(coach.coach_level_name || "").trim();
-    if (!label) return "";
-    if (label !== label.toUpperCase()) return label;
-    return label
-      .toLowerCase()
-      .replace(/(^|[\s-])([a-z])/g, (_match, separator, letter) => (
-        `${separator}${letter.toUpperCase()}`
-      ));
-  })();
-  const specializations = (coach.specializations || "")
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean);
-
-
-  const years = (() => {
-    const m = String(coach.experience_details || "").match(/(\d+)\s*\+?\s*year/i);
-    return m ? m[1] : null;
-  })();
-  const levelLabel = coachLevelName
-    ? `${coachLevelName} coach`
-    : null;
-  const statItems = [];
-  if (levelLabel) statItems.push({ strong: true, star: true, text: levelLabel });
-  if (years) statItems.push({ text: `${years} yrs experience` });
-
   const certChips = Array.isArray(coach.certifications)
     ? coach.certifications.map((c) => c.certificate).filter(Boolean)
     : [];
-
-  // Reviews: duplicate the list so the marquee loops seamlessly.
-  const marqueeReviews = testimonials.length ? [...testimonials, ...testimonials] : [];
-  const marqueeDuration = `${Math.max(30, testimonials.length * 7)}s`;
 
   // ---- Renderers for the collapsible program details ------------------------
   const renderCoachingDetails = () =>
@@ -752,57 +716,13 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
 
   return (
     <div className="cpx-page">
-      {/* HERO */}
-      <header id="coach-overview" tabIndex={-1} className="cpx-pad">
-        <div className="cpx-hero">
-          <span className="profile-sticker">A human in your corner ↗</span>
-          <div className="cpx-hero-portrait">
-            <CoachPortrait coach={coach} />
-          </div>
-          <div>
-            <p className="cpx-eyebrow">Your coach</p>
-            <div className="cpx-name-row">
-              <h1 className="cpx-name">{coach.name}</h1>
-              {(coach.insta_link || coach.linkedin_link) && (
-                <div className="cpx-socials cpx-socials--inline">
-                  {coach.insta_link && (
-                    <a href={coach.insta_link} target="_blank" rel="noreferrer" aria-label="Instagram">
-                      <img src={InstagramIcon} alt="Instagram" style={{ width: 18, height: 18 }} />
-                    </a>
-                  )}
-                  {coach.linkedin_link && (
-                    <a href={coach.linkedin_link} target="_blank" rel="noreferrer" aria-label="LinkedIn">
-                      <img src={LinkedInIcon} alt="LinkedIn" style={{ width: 18, height: 18 }} />
-                    </a>
-                  )}
-                </div>
-              )}
-            </div>
-            <CoachSpecialties value={coach.specializations} />
-            {coach.location && <p className="cpx-subtitle">{coach.location}</p>}
-            {statItems.length > 0 && (
-              <div className="cpx-stats">
-                {statItems.map((s, i) => (
-                  <React.Fragment key={i}>
-                    {i > 0 && <span className="cpx-dot">•</span>}
-                    <span className={s.strong ? "cpx-strong" : ""}>
-                      {s.star ? "★ " : ""}{s.text}
-                    </span>
-                  </React.Fragment>
-                ))}
-              </div>
-            )}
-            <a className="profile-plan-link" href="#cpx-plans">Explore coaching plans <span aria-hidden="true">↗</span></a>{coachLandings[coachSlug(coach)] && <Link className="profile-landing-link" to={`/lp/${coachSlug(coach)}`}>His story & coaching overview ↗</Link>}
-          </div>
-        </div>
-      </header>
-      <nav className="profile-section-nav cpx-pad" aria-label="Coach profile sections"><a href="#cpx-plans">Coaching plans</a><a href="#coach-about">About {firstName}</a><a href="#coach-next">Getting started</a></nav>
+      <CoachProfileOverview coach={coach} testimonials={testimonials} certifications={certChips}/>
 
       {/* WEEKLY PLANS */}
       <section className="cpx-section" id="cpx-plans" tabIndex={-1}>
         {coach.preview && !coach.livePreview && <div className="cpx-pad catalogue-note"><strong>Your coaching plan</strong><p>Personalized workouts, nutrition guidance, and regular check-ins. Connect the backend to view current plans and subscription prices.</p></div>}
         <div className="cpx-pad">
-          <div className="package-heading" data-reveal><div><p className="eyebrow">Your next chapter starts here</p><h2>FIND YOUR <em>KIND OF PLAN.</em></h2></div><p>Clear options. A price up front.<br/>Support built around your everyday.</p></div>
+          <div className="package-heading" data-reveal><div><p className="eyebrow">Your next chapter starts here</p><h2>Choose your coaching plan.</h2></div><p>Clear options. A price up front.<br/>Support built around your everyday.</p></div>
           <div className="package-type-head"><p className="package-step"><span>01</span> Choose who’s joining</p>{countryCode && !loadingLocation && <label className="package-region">Pricing region<select value={countryCode} onChange={event => handleManualRegionSelect(event.target.value === 'DOMESTIC' ? 'india' : 'international')}><option value="DOMESTIC">India · INR</option><option value="INTERNATIONAL">International · USD</option></select></label>}</div>
           <div className="couple-mode-switch" aria-label="Coaching package">
             <button type="button" aria-pressed={!isCoupleMode} onClick={() => { setCoupleMode(false); trackCoachEvent('plan_interest', coach, { plan_type: 'individual', pricing_region: countryCode }); }}><span className="package-person-icon" aria-hidden="true">01</span><span><strong>Individual</strong><small>A plan built just for you</small></span><span className="selection-dot" aria-hidden="true"/></button>
@@ -850,79 +770,6 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
           )}
         </div>
       </section>
-
-      {/* ABOUT & EXPERTISE — merged into one collapsible panel, stacked tightly
-          right under the "What's included" panel (no big inter-section gap). */}
-      {(coach.bio || coach.previous_work || certChips.length > 0 || specializations.length > 0) && (
-        <section className="cpx-section cpx-section--stack" id="coach-about" tabIndex={-1}>
-          <div className="cpx-pad">
-            <details className="cpx-collapse">
-              <summary>About {firstName} &amp; expertise</summary>
-              <div className="cpx-collapse-body cpx-about-body">
-                {(coach.bio || coach.previous_work || certChips.length > 0) && (
-                  <div className="cpx-about-block">
-                    <p className="cpx-label">About</p>
-                    <div className="cpx-body">
-                      {coach.bio && <p>{coach.bio}</p>}
-                      {coach.previous_work && <p>{coach.previous_work}</p>}
-                    </div>
-                    {certChips.length > 0 && (
-                      <div className="cpx-chips">
-                        {certChips.map((c, i) => <span className="cpx-chip" key={i}>{c}</span>)}
-                        {years && <span className="cpx-chip">{years} yrs coaching</span>}
-                      </div>
-                    )}
-                  </div>
-                )}
-                {specializations.length > 0 && (
-                  <div className="cpx-about-block">
-                    <p className="cpx-label">Expertise</p>
-                    <div className="cpx-chips" style={{ marginTop: 0 }}>
-                      {specializations.map((s, i) => <span className="cpx-chip" key={i}>{s}</span>)}
-                    </div>
-                    {coach.location && (
-                      <p className="cpx-subtitle" style={{ marginTop: 16 }}>Based in {coach.location}</p>
-                    )}
-                  </div>
-                )}
-              </div>
-            </details>
-          </div>
-        </section>
-      )}
-
-      {/* MEMBER FEEDBACK — auto-scroll marquee */}
-      {marqueeReviews.length > 0 && (
-        <section className="cpx-feedback">
-          <div className="cpx-feedback-head">
-            <p className="cpx-eyebrow" style={{ color: "#9e93b8" }}>Member feedback</p>
-            <h2 className="cpx-h2">In their words</h2>
-          </div>
-          <div className="cpx-marquee">
-            <div className="cpx-marquee-track" style={{ animationDuration: marqueeDuration }}>
-              {marqueeReviews.map((t, i) => {
-                const role = t.tags || t.age || "";
-                const initial = (t.client_name || "?").trim().charAt(0).toUpperCase();
-                return (
-                  <div className="cpx-review" key={`${t.id}-${i}`} aria-hidden={i >= testimonials.length}>
-                    <div className="cpx-review-stars">★★★★★</div>
-                    <p className="cpx-review-body">{`“${t.body}”`}</p>
-                    <div className="cpx-review-foot">
-                      <div className="cpx-review-avatar">
-                        {t.image_url ? <img src={t.image_url} alt={t.client_name} /> : initial}
-                      </div>
-                      <div>
-                        <div className="cpx-review-name">{t.client_name}</div>
-                        {role && <div className="cpx-review-role">{role}</div>}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-      )}
 
       <section className="profile-onboarding cpx-pad" id="coach-next" tabIndex={-1} data-reveal><p className="eyebrow">A little structure from day one</p><h2>WHAT HAPPENS <em>NEXT.</em></h2><div className="steps-grid">{[['1','Make it official','Choose an available package and complete your enrolment.'],['2','Tell us about you','Complete your intake so your coach understands your goals and routine.'],['3','Build your rhythm','Your coach reviews your details, then helps you get started with a personal plan.']].map(([number,title,copy]) => <div key={number}><span className="step-number">{number}</span><h3>{title}</h3><p>{copy}</p></div>)}</div></section>
       <section id="coach-faq" tabIndex={-1} className="profile-faq cpx-pad" data-reveal><div><p className="eyebrow">Before you begin</p><h2>GOOD TO <em>KNOW.</em></h2></div><div className="faq-list">{[['What’s different about couple coaching?', 'Two people enrol with one coach and a shared start date. Each person receives individual guidance. The displayed couple price covers both participants.'],['Is the weekly price a subscription?', 'No. The weekly price helps compare programs. You pay the full program total once, with no automatic renewal.'],['Can I speak to my coach first?', 'Choose the 20-minute consultation when it is available for your coach and pricing region. You can schedule the call after payment.'],['What if my coach’s plan is full?', 'Available programs can be booked. When a plan is full, you can join its waitlist. Couple programs require two available places.']].map(([question,answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div></section>
