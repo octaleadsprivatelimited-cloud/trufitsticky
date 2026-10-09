@@ -285,3 +285,32 @@ html:has(.sales-landing){scroll-padding-top:20px}
 .landing-fit strong{font-size:13px}.landing-fit p{font-size:11px;line-height:1.85;color:#606a54;max-width:700px;margin:7px 0 0}.landing-fit>a{white-space:nowrap}
 @media(max-width:800px){.landing-pitch{gap:25px;grid-template-columns:1fr 1fr}.landing-pitch-copy h2{font-size:30px}.landing-objection-grid{grid-template-columns:1fr}.landing-objection-grid summary{font-size:12px}}
 @media(max-width:600px){.landing-pitch{grid-template-columns:1fr;gap:22px;padding-block:28px}.landing-pitch-copy h2{font-size:27px}.landing-pitch-copy>p:not(.eyebrow){font-size:12px;margin-bottom:17px}.landing-shift{padding:17px}.landing-shift-head{font-size:9px;gap:30px}.landing-shift-row{gap:9px;padding-block:14px}.landing-shift-row p{font-size:11px}.landing-shift-foot{font-size:10px}.landing-decision{padding-top:28px}.landing-decision-intro{font-size:11px;max-width:none;margin-top:12px}.landing-objection-grid summary{font-size:11px;padding:15px}.landing-objection-grid details>p{font-size:11px}.landing-fit{align-items:start;flex-direction:column;gap:12px;padding-block:20px}.landing-fit strong{font-size:12px}.landing-fit p{font-size:10px}}
+
+/* Clear, high-contrast actions with a consistent WhatsApp contact treatment. */
+.sales-landing .button{background:#6d28d9;color:#fff;border:2px solid #6d28d9;font-weight:800;box-shadow:0 3px 0 #49148e;border-radius:8px;transition:background .18s ease,transform .18s ease,box-shadow .18s ease}
+.sales-landing .button:hover{background:#581bb9;border-color:#581bb9;transform:translateY(-1px);box-shadow:0 4px 0 #49148e}
+.sales-landing .button:active{transform:translateY(2px);box-shadow:0 1px 0 #49148e}
+.sales-landing a:focus-visible,.sales-landing button:focus-visible{outline:3px solid #b56d00;outline-offset:4px}
+.sales-landing .landing-whatsapp,.sales-landing .landing-actions .landing-whatsapp,.sales-landing .landing-sticky-chat{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px;min-height:46px;border:2px solid #25d366;border-radius:8px;background:#25d366;color:#073b24;font-size:12px;font-weight:800;text-decoration:none;box-shadow:0 3px 0 #148447;line-height:1.4;transition:background .18s ease,transform .18s ease}
+.sales-landing .landing-whatsapp:hover,.sales-landing .landing-sticky-chat:hover{background:#1fc45d;border-color:#1fc45d;transform:translateY(-1px)}
+.landing-whatsapp-mark{display:inline-grid;place-items:center;width:27px;height:27px;flex:none;background:#fff;border-radius:50%;padding:5px}
+.landing-whatsapp-mark img{width:100%;height:100%;display:block;object-fit:contain}
+.sales-landing .landing-call{background:#20271e;color:#fff;border:2px solid #20271e;font-weight:800;box-shadow:0 3px 0 #10170f}
+.landing-final{background:#542383;border:1px solid #542383;color:#fff;padding:38px}
+.landing-final .eyebrow{color:#e4d3f4}.landing-final h2{font-size:35px;line-height:1.22}.landing-final em{color:#ffdf79}
+.landing-final .button{background:#ffdf79;border-color:#ffdf79;color:#33210b;box-shadow:0 3px 0 #c89829}.landing-final .button:hover{background:#fbd65f;border-color:#fbd65f}
+.landing-momentum{display:grid;grid-template-columns:1fr .7fr;align-items:center;gap:40px;padding:30px;margin-bottom:22px;background:#ffdf79;border:1px solid #edc75b;border-radius:13px;color:#3c2a15}
+.landing-momentum h2{font-size:37px;margin:12px 0 15px}.landing-momentum h2 em{font-style:normal;color:#694293}
+.landing-momentum>div>p:not(.eyebrow){font-size:13px;line-height:1.8;margin:0;max-width:520px}
+.landing-momentum-action{display:flex;flex-direction:column;align-items:start;gap:13px}.landing-momentum-action>span{font-size:55px;line-height:1;color:#6b3d91}.landing-momentum-action small{font-size:10px;line-height:1.7;max-width:270px;color:#594724}
+.landing-fit{gap:20px}.landing-fit>a{white-space:normal;flex-shrink:0}
+@media(max-width:800px){.landing-final h2{font-size:29px}.landing-final .landing-actions{flex-shrink:0}.landing-momentum{gap:25px}.landing-momentum h2{font-size:30px}}
+@media(max-width:600px){
+ .sales-landing .button{font-size:11px;min-height:45px;padding:11px 14px}
+ .sales-landing .landing-whatsapp,.sales-landing .landing-actions .landing-whatsapp{font-size:11px;min-height:45px;padding:9px 12px;gap:8px}
+ .landing-hero .landing-actions{gap:10px}.landing-hero .landing-actions .button{width:100%}.landing-hero .landing-call{font-size:10px;min-height:45px;padding:11px 12px}
+ .landing-momentum{grid-template-columns:1fr;padding:23px;gap:21px}.landing-momentum h2{font-size:29px}.landing-momentum>div>p:not(.eyebrow){font-size:12px}.landing-momentum-action>span{display:none}.landing-momentum-action .button{width:100%}.landing-momentum-action{align-items:stretch}
+ .landing-final{padding:24px}.landing-final h2{font-size:28px}.landing-final .landing-actions{align-items:stretch;width:100%}.landing-final .landing-actions a{width:100%}
+ .landing-sticky>.landing-wrap{grid-template-columns:1.25fr .8fr 1fr;gap:7px}.sales-landing .landing-sticky-chat{font-size:9px;min-height:43px;padding:7px 6px;gap:5px}.landing-sticky .landing-whatsapp-mark{width:21px;height:21px;padding:4px}.sales-landing .landing-sticky .button{font-size:10px;min-height:43px;padding:9px 8px}.landing-sticky-call{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){.sales-landing .button,.sales-landing .landing-whatsapp,.sales-landing .landing-sticky-chat{transition:none}.sales-landing .button:hover,.sales-landing .button:active,.sales-landing .landing-whatsapp:hover,.sales-landing .landing-sticky-chat:hover{transform:none}}

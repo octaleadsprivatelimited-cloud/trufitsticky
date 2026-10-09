@@ -1,3 +1,4 @@
+import WhatsAppMark from './WhatsAppMark';
 import { trackCoachEvent } from '../../analytics/analytics';
 
 export function LandingSalesPitch({ coach, content }) {
@@ -17,6 +18,6 @@ export function LandingSalesDecision({ coach, whatsappUrl, onContact }) {
    <details><summary><span aria-hidden="true">↺</span> “I’ve tried before.” <span aria-hidden="true">+</span></summary><p>You don’t have to repeat the same approach. Work with your coach on manageable habits, review what gets in the way, and adjust as you go.</p></details>
    <details><summary><span aria-hidden="true">?</span> “What if this isn’t right for me?” <span aria-hidden="true">+</span></summary><p>Ask about the approach on WhatsApp, or choose a paid consultation where available. Explore expectations and fit before choosing a full program.</p></details>
   </div>
-  <div className="landing-fit"><div><strong>This could be your kind of coaching.</strong><p>You’re willing to practice, share honest updates, and build habits over time. Your coach brings structure and feedback; progress still takes your participation.</p></div><a href={whatsappUrl} className="landing-whatsapp" target="_blank" rel="noreferrer" onClick={onContact}>Ask {firstName} if it’s a fit ↗</a></div>
+  <div className="landing-fit"><div><strong>This could be your kind of coaching.</strong><p>You’re willing to practice, share honest updates, and build habits over time. Your coach brings structure and feedback; progress still takes your participation.</p></div><a href={whatsappUrl} className="landing-whatsapp" target="_blank" rel="noreferrer" onClick={onContact}><WhatsAppMark/>Chat on WhatsApp</a></div>
  </section>;
 }
