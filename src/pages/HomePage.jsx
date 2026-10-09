@@ -16,7 +16,6 @@ export default function HomePage() {
   <ProgressShowcase/>
 
  </section>
- <div className="promise-strip"><div className="wrap"><span>Training that adapts</span><span>Food you enjoy</span><span>A coach who listens</span><span>Progress at your pace</span></div></div>
  <section className="section wrap" id="the-trufit-way" tabIndex={-1}><div className="section-heading" data-reveal><div><p className="eyebrow">01 / The Tru Fit way</p><h2>LESS GUESSWORK.<br/>MORE <em>GOING FORWARD.</em></h2></div><p>You don’t need another rigid routine. You need a coach who listens, a clear next step, and support that stays with you.</p></div><div className="feature-grid">{[
  ['01','A coach who gets you','Someone who understands your starting point, listens to your goals, and keeps you accountable without the pressure.','↗'],
  ['02','A plan that adapts','Workouts and nutrition shaped around your schedule, preferences, and the equipment you actually have.','✳'],

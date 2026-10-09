@@ -197,3 +197,5 @@ body{background:#fff;background-image:none}
  #root .directory-toolbar{gap:16px;padding-block:16px}
  #root .tier-tabs button[aria-pressed=true]{background:#7135b5;color:#fff}
 }
+
+#root .progress-film-copy em{color:#fff}
