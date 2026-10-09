@@ -35,8 +35,8 @@ test('consenting on an already-open coach profile records that coach once',()=>{
 });
 
 test('sales landing pages attribute coach actions and clear context on leaving',()=>{
- const r=runtime('/start/jaswant-medidi');r.client.setConsent(true);
- r.client.coach({id:9,name:'Jaswant Medidi',profile_slug:'jaswant-medidi',coach_level:'juniorplus'},'/start/jaswant-medidi','Train with Jaswant');
+ const r=runtime('/lp/jaswant-medidi');r.client.setConsent(true);
+ r.client.coach({id:9,name:'Jaswant Medidi',profile_slug:'jaswant-medidi',coach_level:'juniorplus'},'/lp/jaswant-medidi','Train with Jaswant');
  r.client.track('contact_click',{source:'landing_whatsapp'});
  const contact=r.w.dataLayer.find(a=>a[0]==='event'&&a[1]==='contact_click');
  assert.equal(contact[2].coach_id,'9');assert.equal(contact[2].source,'landing_whatsapp');

@@ -792,7 +792,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
                 ))}
               </div>
             )}
-            <a className="profile-plan-link" href="#cpx-plans">Explore coaching plans <span aria-hidden="true">↗</span></a>{coachLandings[coachSlug(coach)] && <Link className="profile-landing-link" to={`/start/${coachSlug(coach)}`}>His story & coaching overview ↗</Link>}
+            <a className="profile-plan-link" href="#cpx-plans">Explore coaching plans <span aria-hidden="true">↗</span></a>{coachLandings[coachSlug(coach)] && <Link className="profile-landing-link" to={`/lp/${coachSlug(coach)}`}>His story & coaching overview ↗</Link>}
           </div>
         </div>
       </header>

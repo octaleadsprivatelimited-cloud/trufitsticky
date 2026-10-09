@@ -78,13 +78,13 @@ export function createAnalytics({ ga4Id='', clarityId='', enabled=true, debug=fa
   if(path===lastPage){recordCoachView();return;}
   if(started && validGa) w.gtag('set',{page_location:cleanUrl(path,w.location.origin),page_referrer:previousPage||cleanUrl(d.referrer)});
   const url=cleanUrl(path,w.location.origin);
-  const group=path.startsWith('/start/')?'coach_landing':path.startsWith('/coaches/')?'coach_profile':path==='/coaches'?'coaches':path==='/plans'?'plans':path==='/'?'home':'other';
+  const group=path.startsWith('/lp/')?'coach_landing':path.startsWith('/coaches/')?'coach_profile':path==='/coaches'?'coaches':path==='/plans'?'plans':path==='/'?'home':'other';
   track('page_view',{page_location:url,page_title:title,page_path:path,page_referrer:previousPage||cleanUrl(d.referrer),content_group:group});
   if(started&&validClarity)w.clarity?.('set','page_type',group);
   previousPage=url;lastPage=path;recordCoachView();
  };
  const coach=(profile,path,title=d.title)=>{
-  if(!/^\/(coaches|start)\/[^/]+\/?$/.test(path))return;
+  if(!/^\/(coaches|lp)\/[^/]+\/?$/.test(path))return;
   coachContext=safeParams({coach_id:String(profile.id),coach_name:profile.name,coach_slug:profile.profile_slug||String(profile.name).toLowerCase().replace(/\s+/g,''),coach_level:profile.coach_level});
   coachPath=path;page(path,title);
  };

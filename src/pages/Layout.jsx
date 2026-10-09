@@ -15,7 +15,7 @@ import '../styles/editorial.css';
 import '../styles/contact.css';
 export default function Layout(){
  const location=useLocation();
- const landingPage=location.pathname.startsWith('/start/');
+ const landingPage=location.pathname.startsWith('/lp/');
  const coachDetail=/^\/coaches\/[^/]+\/?$/.test(location.pathname);
  const protectedPage=location.pathname.startsWith('/payment')||location.pathname==='/survey';
  const contact=['/','/about','/coaches','/plans','/start'].includes(location.pathname);

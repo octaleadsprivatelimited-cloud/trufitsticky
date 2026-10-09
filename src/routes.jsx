@@ -1,7 +1,8 @@
 import { lazy, Suspense } from "react";
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Layout from "./pages/Layout";
 import HomePage from "./pages/HomePage";
+import LegacyCoachLanding from "./pages/LegacyCoachLanding";
 import CoachLandingIndex from "./pages/CoachLandingIndex";
 import ErrorPage from "./pages/ErrorPage";
 
@@ -27,7 +28,8 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             { path: "/start", element: <CoachLandingIndex/> },
-            { path: "/start/:coachName", element: <Suspense fallback={null}><CoachLandingPage /></Suspense> },
+            { path: "/start/:coachName", element: <LegacyCoachLanding /> },
+            { path: "/lp/:coachName", element: <Suspense fallback={null}><CoachLandingPage /></Suspense> },
             { path: "/plans", element: <Suspense fallback={null}><PlansPage /></Suspense> },
             { path: "/payment/couple", element: <Suspense fallback={null}><CouplePaymentPage /></Suspense> },
             {

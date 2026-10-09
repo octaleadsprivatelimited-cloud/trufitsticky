@@ -27,5 +27,5 @@ export const coachLandings = {
  },
 };
 export const landingSeoPages = Object.fromEntries(Object.entries(coachLandings).map(([slug, coach]) => [
- `/start/${slug}`, { title: `Train with ${coach.name} — Plans & Booking | Tru Fit`, heading: `Personal coaching with ${coach.name}`, description: `Meet ${coach.name}, explore personalized coaching, compare INR and USD plans, and take your next step with Tru Fit.` },
+ `/lp/${slug}`, { title: `Train with ${coach.name} — Plans & Booking | Tru Fit`, heading: `Personal coaching with ${coach.name}`, description: `Meet ${coach.name}, explore personalized coaching, compare INR and USD plans, and take your next step with Tru Fit.` },
 ]));
