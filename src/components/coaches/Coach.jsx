@@ -6,16 +6,16 @@ import LeadCapture from './LeadCapture';
 import { fetchCatalog, previewCoaches, coachSlug } from './catalog';
 import { trackEvent, trackCoachEvent } from '../../analytics/analytics';
 import './coachPage.css';
-import { coachLandings } from '../../content/coachLandings.mjs';
-import '../../styles/featured-coaching.css';
-import CoachSpecialties from './CoachSpecialties';
 import CoachPortrait from './CoachPortrait';
+import WhatsAppMark from './WhatsAppMark';
+import './coachDirectory.css';
 export default function Coach(){
  const { countryCode, setCountryCode, queFilteredCoaches, setQueFilteredCoaches } = useContext(SharedContext);
  const location = useLocation();
  const featuredSlug=location.hash.startsWith('#coach-')?location.hash.slice(7):'';
  const scrolledVisit=useRef(null);
  const [coaches,setCoaches] = useState([]), [plans,setPlans] = useState([]), [loading,setLoading] = useState(true), [error,setError] = useState(''), [retry,setRetry] = useState(0);
+ const [reviews,setReviews] = useState([]);
  const [tier,setTier] = useState('all'), [query,setQuery] = useState(''), [goal,setGoal] = useState('all');
  const [showLead,setShowLead] = useState(Boolean(location.state?.fromQuestionnaire) && sessionStorage.getItem('leadCaptureDate') !== new Date().toISOString().split('T')[0]);
  const [leadData,setLeadData] = useState({name:'',email:''});
@@ -24,6 +24,7 @@ export default function Coach(){
   const request = queFilteredCoaches && !featuredSlug ? Promise.resolve(queFilteredCoaches) : fetchCatalog('coach-profiles',controller.signal);
   request.then(data=>setCoaches(Array.isArray(data)?data:[])).catch(e=>{if(e.name !== 'AbortError'){setError(e.message);setCoaches(previewCoaches)}}).finally(()=>{if(!controller.signal.aborted)setLoading(false)});
   fetchCatalog('plans',controller.signal).then(setPlans).catch(()=>setPlans([]));
+  fetchCatalog('testimonials',controller.signal).then(setReviews).catch(()=>setReviews([]));
   return ()=>controller.abort();
  },[queFilteredCoaches,retry,featuredSlug]);
  const region = countryCode || 'DOMESTIC';
@@ -42,19 +43,38 @@ export default function Coach(){
   return()=>cancelAnimationFrame(frame);
  },[loading,filtered,featuredSlug,location.key]);
  const closeLead = submitted => {if(submitted) sessionStorage.setItem('leadCaptureDate',new Date().toISOString().split('T')[0]);else setQueFilteredCoaches(null);setShowLead(false)};
- return <><section className="page-intro wrap coach-intro"><div><p className="eyebrow">Your people. Your progress.</p><h1>Choose your coach.</h1><p>Compare specialties and plans, then enrol with the coach who fits your goals.</p></div><div className="intro-aside"><span className="status-dot"/><p>Not sure where to start?</p><Link className="text-link" to="/findmycoach" data-track="cta_click" data-source="coach_directory">Let’s find your match ↗</Link></div></section>
+ const focuses = [['all','All coaching','✦'],['weight loss','Weight loss','↘'],['strength','Strength training','↗'],['nutrition','Nutrition coaching','◉'],['habit','Healthy habits','✓'],['beginner','Beginner fitness','◎']];
+ const selectFocus = value => {setGoal(value);trackEvent('filter_coaches',{filter:value})};
+ return <div className="coach-catalogue">
  {showLead && <LeadCapture leadData={leadData} setLeadData={setLeadData} onSubmit={()=>closeLead(true)} onClose={closeLead} coachCount={location.state?.coachCount||filtered.length}/>}
- <section className="wrap directory-section" aria-label="Browse coaches">
- {livePreview && <p className="preview-notice">Live catalogue preview. Profiles and prices come from Betrufit’s public catalogue; booking is disabled in this local preview.</p>}
- {location.state?.coupleMode && <p className="package-family-note"><strong>Coaching for two.</strong>Choose a coach to explore their couple packages.</p>}<div className="directory-toolbar"><div className="tier-tabs" aria-label="Coach experience"><button aria-pressed={tier==='all'} onClick={()=>{setTier('all');trackEvent('filter_coaches',{filter:'all'})}}>All coaches</button>{tiers.map(t=><button key={t} aria-pressed={tier===t} onClick={()=>{setTier(t);trackEvent('filter_coaches',{filter:t})}}>{coaches.find(c=>c.coach_level===t)?.coach_level_name || t}</button>)}</div><label className="region-control">Pricing region<select value={region} onChange={e=>setCountryCode(e.target.value)}><option value="DOMESTIC">India · INR</option><option value="INTERNATIONAL">International · USD</option></select></label></div>
- <div className="directory-search"><label><span>Search coaches</span><input type="search" placeholder="Name or specialty" value={query} onChange={e=>setQuery(e.target.value)} data-clarity-mask="true"/></label><label><span>Your focus</span><select value={goal} onChange={e=>{setGoal(e.target.value);trackEvent('filter_coaches',{filter:e.target.value})}}><option value="all">All specialties</option><option value="weight loss">Weight loss</option><option value="strength">Strength training</option><option value="nutrition">Nutrition</option><option value="habit">Healthy habits</option></select></label><span className="results-count" aria-live="polite">{filtered.length} {filtered.length===1?'coach':'coaches'}</span></div>
- {error && (import.meta.env.DEV ? <p className="preview-notice" role="status">Local preview: coach information from the supplied project. Connect the backend for current prices, availability, and booking.</p> : <div className="empty-state" role="alert"><h2>We couldn’t load our coaches.</h2><p>Please try again in a moment.</p><button className="button" onClick={()=>setRetry(r=>r+1)}>Try again</button></div>)}
- {loading ? <div className="skeleton-grid" aria-label="Loading coaches">{[1,2,3].map(n=><div className="skeleton" key={n}/>)}</div> : <div className="directory-grid">{filtered.map(coach=>{
- const pricePlans=plans.filter(p=>p.category?.coach_level?.toLowerCase()===coach.coach_level?.toLowerCase() && p.category?.location?.toUpperCase()===region && Number(p.duration_weeks)>0 && Number(p.price)>0);
- const minimum=pricePlans.length?Math.min(...pricePlans.map(p=>Math.ceil(Number(p.price)/Number(p.duration_weeks)))):null;
- const slug=coachSlug(coach);
- return <article className={`directory-card ${slug===featuredSlug?'is-featured-coach':''}`} id={`coach-${slug}`} tabIndex={-1} key={coach.id}><Link className="coach-photo" to={`/coaches/${encodeURIComponent(slug)}`} state={{coach,coupleMode:Boolean(location.state?.coupleMode)}} aria-label={`View ${coach.name}’s profile`} onClick={()=>trackCoachEvent('select_coach',coach,{source:'directory_photo',pricing_region:region})}><CoachPortrait coach={coach} /><span className="tier-badge">{coach.coach_level_name||coach.coach_level||'Coach'}</span><span className="photo-arrow" aria-hidden="true">↗</span></Link><div className="coach-card-body"><h2><Link to={`/coaches/${encodeURIComponent(slug)}`} state={{coach,coupleMode:Boolean(location.state?.coupleMode)}} onClick={()=>trackCoachEvent('select_coach',coach,{source:'directory_name',pricing_region:region})}>{coach.name}</Link></h2><CoachSpecialties value={coach.specializations || coach.tags} /><p className="coach-card-description">{coach.tagline||coach.previous_work||'Work together on a routine that fits your goals and your life.'}</p><div className="coach-card-bottom"><div>{minimum?<><span>Plans from</span><strong>{region==='DOMESTIC'?'₹':'$'}{minimum.toLocaleString()}<small> / week</small></strong></>:<span>Personalized coaching</span>}</div><Link className="text-link" to={`/coaches/${encodeURIComponent(slug)}`} state={{coach,coupleMode:Boolean(location.state?.coupleMode)}} onClick={()=>trackCoachEvent('select_coach',coach,{source:'directory_button',pricing_region:region})}>View profile ↗</Link></div>{coachLandings[slug] && <Link className="directory-landing-link" to={`/lp/${slug}`} onClick={()=>trackCoachEvent('cta_click',coach,{source:'directory_landing'})}>His story, coaching & plans ↗</Link>}</div></article>
- })}</div>}
- {!loading&&!error&&filtered.length===0&&<div className="empty-state"><h2>No matches just yet.</h2><p>Try another name or specialty.</p><button className="button button-outline" onClick={()=>{setTier('all');setGoal('all');setQuery('')}}>Clear filters</button></div>}
- </section><section className="start-banner wrap"><p className="eyebrow">A plan for your next chapter</p><h2>Know what<br/>you’re signing up for.</h2><Link className="button button-outline" to="/plans">Explore coaching plans ↗</Link></section></>;
+ <div className="catalogue-layout">
+  <aside className="catalogue-sidebar" aria-label="Coaching specialties"><p>Find your focus</p><nav>{focuses.map(([value,label,icon])=><button key={value} aria-pressed={goal===value} onClick={()=>selectFocus(value)}><span aria-hidden="true">{icon}</span>{label}</button>)}</nav><Link className="catalogue-match" to="/findmycoach">Need help choosing?<strong>Find my coach ↗</strong></Link></aside>
+  <section className="catalogue-main" aria-label="Browse coaches">
+   <header className="catalogue-heading"><div><h1>Fitness & nutrition coaches</h1><p><Link to="/">Home</Link><span aria-hidden="true"> / </span>Our coaches</p></div><label className="catalogue-search"><span className="sr-only">Search coaches</span><span aria-hidden="true">⌕</span><input type="search" placeholder="Search name or specialty" value={query} onChange={e=>setQuery(e.target.value)} data-clarity-mask="true"/></label></header>
+   <div className="catalogue-controls"><span className="catalogue-count" aria-live="polite">{loading?'Loading coaches…':`${filtered.length} coaches`}</span><details className="catalogue-filters"><summary>Filters <span aria-hidden="true">☰</span></summary><div><label>Coach level<select value={tier} onChange={e=>{setTier(e.target.value);trackEvent('filter_coaches',{filter:e.target.value})}}><option value="all">All levels</option>{tiers.map(t=><option key={t} value={t}>{coaches.find(c=>c.coach_level===t)?.coach_level_name||t}</option>)}</select></label><label>Pricing region<select value={region} onChange={e=>setCountryCode(e.target.value)}><option value="DOMESTIC">India · INR</option><option value="INTERNATIONAL">International · USD</option></select></label><button onClick={()=>{setTier('all');setGoal('all');setQuery('')}}>Clear filters</button></div></details></div>
+   {livePreview && <p className="preview-notice">Catalogue preview. Booking is unavailable in this preview.</p>}
+   {location.state?.coupleMode && <p className="package-family-note">Choose a coach to explore couple packages.</p>}
+   {error && <div className="empty-state" role="alert"><h2>We couldn’t load our coaches.</h2><p>Please try again.</p><button className="button" onClick={()=>setRetry(r=>r+1)}>Retry</button></div>}
+   {loading?<div className="skeleton-grid" aria-label="Loading coaches">{[1,2,3].map(n=><div className="skeleton" key={n}/>)}</div>:<div className="catalogue-grid">{filtered.map(coach=>{
+    const slug=coachSlug(coach);
+    const pricePlans=plans.filter(p=>p.category?.coach_level?.toLowerCase()===coach.coach_level?.toLowerCase()&&p.category?.location?.toUpperCase()===region&&Number(p.duration_weeks)>0&&Number(p.price)>0);
+    const startingPrice=pricePlans.length?Math.min(...pricePlans.map(p=>Number(p.price))):null;
+    const specialties=String(coach.specializations||coach.tags||'Personal fitness coaching').split(/[,;\n]/).map(v=>v.trim()).filter(Boolean).slice(0,2);
+    const feedback=reviews.filter(r=>String(r.coach_id??r.coach?.id??r.coach)===String(coach.id)&&Number(r.rating)>=1&&Number(r.rating)<=5);
+    const rating=feedback.length?(feedback.reduce((sum,r)=>sum+Number(r.rating),0)/feedback.length).toFixed(1):null;
+    const capacities=pricePlans.map(p=>coach.dynamic_capacities?.[String(p.duration_weeks)]?.[region.toLowerCase()]).filter(c=>c?.max!=null&&c?.current!=null);
+    const slots=capacities.length?Math.max(...capacities.map(c=>Math.max(0,Number(c.max)-Number(c.current)))):null;
+    const whatsapp=String(coach.whatsapp_number||'917207259556').replace(/\D/g,'');
+    const selected=source=>trackCoachEvent('select_coach',coach,{source,pricing_region:region});
+    const profile=`/coaches/${encodeURIComponent(slug)}`;
+    const state={coach,coupleMode:Boolean(location.state?.coupleMode)};
+    return <article className={`catalogue-card ${slug===featuredSlug?'is-featured-coach':''}`} id={`coach-${slug}`} tabIndex={-1} key={coach.id}>
+     <Link className="catalogue-portrait" to={profile} state={state} aria-label={`View ${coach.name}’s profile`} onClick={()=>selected('directory_photo')}><CoachPortrait coach={coach}/></Link>
+     <div className="catalogue-card-info"><span className="catalogue-tier">{coach.coach_level_name||coach.coach_level||'Coach'}</span><h2><Link to={profile} state={state} onClick={()=>selected('directory_name')}>{coach.name}</Link></h2><p className="catalogue-specialties">{specialties.join(' · ')}</p><p className="catalogue-proof">{rating?<><span aria-label={`${rating} out of 5 stars`}>★ {rating}</span><span> · {feedback.length} reviews</span></>:coach.experience?<span>{coach.experience} {Number(coach.experience)===1?'year':'years'} experience</span>:<span>Personalized training & nutrition</span>}</p><div className="catalogue-availability">{slots!==null?(slots>0?`${slots} ${slots===1?'place':'places'} available`:'Join waitlist'):startingPrice?`Programs from ${new Intl.NumberFormat(region==='DOMESTIC'?'en-IN':'en-US',{style:'currency',currency:region==='DOMESTIC'?'INR':'USD',maximumFractionDigits:0}).format(startingPrice)} total`:'Explore coaching programs'}</div><div className="catalogue-card-actions"><a className="catalogue-chat" href={`https://wa.me/${whatsapp}?text=${encodeURIComponent(`Hi ${coach.name.split(' ')[0]}, I’d like to ask about your Tru Fit coaching plans.`)}`} target="_blank" rel="noreferrer" aria-label={`Chat with ${coach.name} on WhatsApp`} onClick={()=>trackCoachEvent('contact_click',coach,{source:'directory_whatsapp',pricing_region:region})}><WhatsAppMark/></a><Link className="button" to={`${profile}#cpx-plans`} state={state} onClick={()=>selected('directory_plans')}>See plans <span aria-hidden="true">↗</span></Link></div></div>
+    </article>;
+   })}</div>}
+   {!loading&&!error&&filtered.length===0&&<div className="empty-state"><h2>No matching coaches.</h2><p>Try another specialty or name.</p><button className="button button-outline" onClick={()=>{setTier('all');setGoal('all');setQuery('')}}>Clear filters</button></div>}
+  </section>
+ </div>
+ </div>;
 }
