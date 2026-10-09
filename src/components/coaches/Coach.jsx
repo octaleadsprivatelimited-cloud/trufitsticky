@@ -42,7 +42,7 @@ export default function Coach(){
   return()=>cancelAnimationFrame(frame);
  },[loading,filtered,featuredSlug,location.key]);
  const closeLead = submitted => {if(submitted) sessionStorage.setItem('leadCaptureDate',new Date().toISOString().split('T')[0]);else setQueFilteredCoaches(null);setShowLead(false)};
- return <><section className="page-intro wrap coach-intro"><div><p className="eyebrow">Your people. Your progress.</p><h1>Find your<br/><em>kind of coach.</em></h1><p>A little encouragement. A clear plan. Someone who understands where you want to go.</p></div><div className="intro-aside"><span className="status-dot"/><p>Not sure where to start?</p><Link className="text-link" to="/findmycoach" data-track="cta_click" data-source="coach_directory">Let’s find your match ↗</Link></div></section>
+ return <><section className="page-intro wrap coach-intro"><div><p className="eyebrow">Your people. Your progress.</p><h1>Choose your coach.</h1><p>Compare specialties and plans, then enrol with the coach who fits your goals.</p></div><div className="intro-aside"><span className="status-dot"/><p>Not sure where to start?</p><Link className="text-link" to="/findmycoach" data-track="cta_click" data-source="coach_directory">Let’s find your match ↗</Link></div></section>
  {showLead && <LeadCapture leadData={leadData} setLeadData={setLeadData} onSubmit={()=>closeLead(true)} onClose={closeLead} coachCount={location.state?.coachCount||filtered.length}/>}
  <section className="wrap directory-section" aria-label="Browse coaches">
  {livePreview && <p className="preview-notice">Live catalogue preview. Profiles and prices come from Betrufit’s public catalogue; booking is disabled in this local preview.</p>}

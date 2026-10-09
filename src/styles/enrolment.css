@@ -186,3 +186,14 @@ body{background:#fff;background-image:none}
 
 #root .coach-specialties-list li{background:#f6f2fa;color:#5f2e92;border:1px solid #e5d9f0}
 #root .profile-sticker{display:none}
+#root .page-intro h1{font-size:44px;line-height:1.15;text-transform:none}
+#root .page-intro{padding-block:32px;gap:24px}
+#root .intro-aside{background:#f8f8fa;border:1px solid #e6e5ea;border-radius:10px;padding:18px}
+@media(max-width:600px){
+ #root .page-intro{padding-block:24px;gap:18px}
+ #root .page-intro h1{font-size:32px;margin:12px 0 16px}
+ #root .page-intro>div>p:not(.eyebrow){font-size:15px;line-height:1.65}
+ #root .coach-intro .intro-aside{display:none}
+ #root .directory-toolbar{gap:16px;padding-block:16px}
+ #root .tier-tabs button[aria-pressed=true]{background:#7135b5;color:#fff}
+}
