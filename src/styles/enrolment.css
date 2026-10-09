@@ -147,3 +147,39 @@ body{background:#fff;background-image:none}
  #root .cpx-h2{font-size:24px}
  #root .cpx-review-body,#root .card-plan-desc-text{font-size:14px;line-height:1.65}
 }
+#root .progress-showcase{display:block}
+#root .progress-film{height:340px;border-radius:12px;transform:none}
+#root .landing-plan h3 span{font-size:14px;margin-left:4px}
+#root .landing-plan h3{border:0;padding:0}
+@media(max-width:600px){#root .progress-film{height:210px}#root .progress-film-copy p{font-size:28px}}
+#root .cpx-page h1,#root .cpx-page h2,#root .cpx-page h3,#root .cpx-page .cpx-plan-pill-name{font-family:inherit}
+#root .cpx-sticky{background:#fff;color:#242329;border-top:1px solid #e6e5ea;box-shadow:0 -2px 12px #24232908}
+#root .cpx-sticky-name,#root .cpx-sticky-plan,#root .cpx-sticky-price{color:#242329}
+#root .cpx-sticky .cpx-sticky-btn,#root .cpx-plan-selector-action{background:#7135b5;color:#fff;border:1px solid #7135b5;border-radius:8px;min-height:46px;font-size:14px;box-shadow:none}
+#root .couple-mode-switch button{background:#fff;border:1px solid #e6e5ea;border-radius:8px;box-shadow:none}
+#root .couple-mode-switch button[aria-pressed=true]{background:#f6f2fa;border:2px solid #7135b5}
+#root .package-person-icon,#root .package-step>span{display:none}
+#root .selection-dot{color:#7135b5}
+@media(max-width:600px){
+ #root .section-rail{display:none}
+ #root .package-heading h2{font-size:24px;font-family:inherit}
+ #root .package-heading p,#root .package-step{font-size:14px}
+ #root .couple-mode-switch button{min-height:64px;padding:12px}
+ #root .couple-mode-switch strong{font-size:15px}
+ #root .package-type-head{gap:12px}
+ #root .cpx-plan-pill-row{display:grid;grid-template-columns:1fr;gap:10px}
+ #root .cpx-plan-pill{display:grid;grid-template-columns:1fr auto;gap:7px 14px;text-align:left;padding:16px;min-height:100px;border:1px solid #e6e5ea;border-radius:10px}
+ #root .cpx-plan-pill--active{border:2px solid #7135b5;padding:15px}
+ #root .cpx-plan-pill-topline{display:block;grid-column:1;grid-row:1;padding:0;margin:0}
+ #root .cpx-plan-pill-name{font-size:19px;font-family:inherit;line-height:1.3}
+ #root .cpx-plan-pill-mobile-label{display:none}
+ #root .cpx-plan-pill-price{grid-column:2;grid-row:2;font-size:22px;margin:0}
+ #root .cpx-plan-pill-price small{font-size:11px}
+ #root .package-card-caption{grid-column:1;grid-row:2;font-size:12px;margin:0;align-self:center}
+ #root .package-card-weekly{grid-column:1/-1;grid-row:3;font-size:12px;margin:0}
+ #root .cpx-plan-pill-badge{position:static;grid-column:1/-1;font-size:11px}
+ #root .cpx-plan-pill-status{font-size:12px}
+ #root .cpx-plan-pill .selection-dot{position:absolute;right:16px;top:16px}
+ #root .cpx-selected-summary{padding:20px;border-radius:10px}
+ #root .cpx-selected-summary h3{font-size:22px}
+}
