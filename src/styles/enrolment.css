@@ -4,10 +4,10 @@ body{background:#fff;background-image:none}
 #root .site-header,#root .landing-header{background:#fff;border-bottom:1px solid #e6e5ea}
 #root h1,#root h2{font-family:inherit;font-weight:700;letter-spacing:-.035em;line-height:1.15}
 #root h2{font-size:clamp(26px,3.5vw,42px)}
-#root .button,#root .contact-submit,#root .cpx-sticky-btn{background:#7135b5;color:#fff;border:1px solid #7135b5;border-radius:8px;box-shadow:none;min-height:46px;font-size:14px;font-weight:650}
+#root .button,#root .contact-submit,#root .cpx-sticky-btn{background:#7135b5 !important;color:#fff !important;border:1px solid #7135b5 !important;border-radius:8px !important;box-shadow:none !important;min-height:46px !important;font-size:14px !important;font-weight:650 !important}
 #root .button:hover,#root .contact-submit:hover{background:#5e299a;transform:none;box-shadow:none}
 #root .button-outline{background:#fff;color:#7135b5}
-#root .feature-card,#root .journey-card,#root .featured-coaching-card,#root .plan-card,#root .start-banner,#root .contact-panel,#root .contact-details,#root .cpx-hero,#root .cpx-stats,#root .couple-panel{background:#f8f8fa;border:1px solid #e6e5ea;color:#242329;box-shadow:none;transform:none;border-radius:12px}
+#root .feature-card,#root .journey-card,#root .featured-coaching-card,#root .plan-card,#root .start-banner,#root .contact-panel,#root .contact-details,#root .cpx-hero,#root .cpx-stats,#root .couple-panel{background:#f8f8fa !important;border:1px solid #e6e5ea !important;color:#242329 !important;box-shadow:none !important;transform:none !important;border-radius:12px !important}
 #root .feature-card p,#root .featured-coaching-card p{color:#62616a}
 #root .hero-sticker,#root .photo-note,#root .banner-spark{display:none}
 #root .culture-title-row h1{font-size:clamp(36px,5.5vw,68px);line-height:1.1}
@@ -130,11 +130,11 @@ body{background:#fff;background-image:none}
 }
 #root .culture-hero-bottom{margin-bottom:24px}
 #root .culture-hero-bottom p{font-size:16px;color:#62616a}
-#root .cpx-plan-pill{background:#fff;border-color:#e6e5ea;box-shadow:none}
-#root .cpx-plan-pill--active{background:#f6f2fa;border-color:#7135b5}
-#root .cpx-hero-portrait{border-radius:12px;transform:none}
-#root .cpx-marquee{display:none}
-#root .cpx-selected-summary{background:#f8f8fa;border-color:#e6e5ea}
+#root .cpx-plan-pill{background:#fff !important;border-color:#e6e5ea !important;box-shadow:none !important}
+#root .cpx-plan-pill--active{background:#f6f2fa !important;border-color:#7135b5 !important}
+#root .cpx-hero-portrait{border-radius:12px !important;transform:none !important}
+#root .cpx-marquee{display:none !important}
+#root .cpx-selected-summary{background:#f8f8fa !important;border-color:#e6e5ea !important}
 #root .coach-photo{border-radius:10px 10px 0 0}
 #root .featured-coaching-card:hover{transform:none;border-color:#7135b5}
 @media(max-width:600px){
@@ -142,44 +142,47 @@ body{background:#fff;background-image:none}
  #root .culture-hero-bottom .button-row{display:flex;align-items:center;gap:16px}
  #root .culture-hero-bottom .button{flex:1}
  #root .culture-hero-bottom p{font-size:15px}
- #root .cpx-name{font-size:28px;line-height:1.2}
- #root .cpx-pad{padding-block:24px}
- #root .cpx-h2{font-size:24px}
- #root .cpx-review-body,#root .card-plan-desc-text{font-size:14px;line-height:1.65}
+ #root .cpx-name{font-size:28px !important;line-height:1.2 !important}
+ #root .cpx-pad{padding-block:24px !important}
+ #root .cpx-h2{font-size:24px !important}
+ #root .cpx-review-body,#root .card-plan-desc-text{font-size:14px !important;line-height:1.65 !important}
 }
 #root .progress-showcase{display:block}
 #root .progress-film{height:340px;border-radius:12px;transform:none}
 #root .landing-plan h3 span{font-size:14px;margin-left:4px}
 #root .landing-plan h3{border:0;padding:0}
 @media(max-width:600px){#root .progress-film{height:210px}#root .progress-film-copy p{font-size:28px}}
-#root .cpx-page h1,#root .cpx-page h2,#root .cpx-page h3,#root .cpx-page .cpx-plan-pill-name{font-family:inherit}
-#root .cpx-sticky{background:#fff;color:#242329;border-top:1px solid #e6e5ea;box-shadow:0 -2px 12px #24232908}
-#root .cpx-sticky-name,#root .cpx-sticky-plan,#root .cpx-sticky-price{color:#242329}
-#root .cpx-sticky .cpx-sticky-btn,#root .cpx-plan-selector-action{background:#7135b5;color:#fff;border:1px solid #7135b5;border-radius:8px;min-height:46px;font-size:14px;box-shadow:none}
-#root .couple-mode-switch button{background:#fff;border:1px solid #e6e5ea;border-radius:8px;box-shadow:none}
-#root .couple-mode-switch button[aria-pressed=true]{background:#f6f2fa;border:2px solid #7135b5}
-#root .package-person-icon,#root .package-step>span{display:none}
-#root .selection-dot{color:#7135b5}
+#root .cpx-page h1,#root .cpx-page h2,#root .cpx-page h3,#root .cpx-page .cpx-plan-pill-name{font-family:inherit !important}
+#root .cpx-sticky{background:#fff !important;color:#242329 !important;border-top:1px solid #e6e5ea !important;box-shadow:0 -2px 12px #24232908 !important}
+#root .cpx-sticky-name,#root .cpx-sticky-plan,#root .cpx-sticky-price{color:#242329 !important}
+#root .cpx-sticky .cpx-sticky-btn,#root .cpx-plan-selector-action{background:#7135b5 !important;color:#fff !important;border:1px solid #7135b5 !important;border-radius:8px !important;min-height:46px !important;font-size:14px !important;box-shadow:none !important}
+#root .couple-mode-switch button{background:#fff !important;border:1px solid #e6e5ea !important;border-radius:8px !important;box-shadow:none !important}
+#root .couple-mode-switch button[aria-pressed=true]{background:#f6f2fa !important;border:2px solid #7135b5 !important}
+#root .package-person-icon,#root .package-step>span{display:none !important}
+#root .selection-dot{color:#7135b5 !important}
 @media(max-width:600px){
  #root .section-rail{display:none}
- #root .package-heading h2{font-size:24px;font-family:inherit}
- #root .package-heading p,#root .package-step{font-size:14px}
- #root .couple-mode-switch button{min-height:64px;padding:12px}
- #root .couple-mode-switch strong{font-size:15px}
- #root .package-type-head{gap:12px}
- #root .cpx-plan-pill-row{display:grid;grid-template-columns:1fr;gap:10px}
- #root .cpx-plan-pill{display:grid;grid-template-columns:1fr auto;gap:7px 14px;text-align:left;padding:16px;min-height:100px;border:1px solid #e6e5ea;border-radius:10px}
- #root .cpx-plan-pill--active{border:2px solid #7135b5;padding:15px}
- #root .cpx-plan-pill-topline{display:block;grid-column:1;grid-row:1;padding:0;margin:0}
- #root .cpx-plan-pill-name{font-size:19px;font-family:inherit;line-height:1.3}
- #root .cpx-plan-pill-mobile-label{display:none}
- #root .cpx-plan-pill-price{grid-column:2;grid-row:2;font-size:22px;margin:0}
- #root .cpx-plan-pill-price small{font-size:11px}
- #root .package-card-caption{grid-column:1;grid-row:2;font-size:12px;margin:0;align-self:center}
- #root .package-card-weekly{grid-column:1/-1;grid-row:3;font-size:12px;margin:0}
- #root .cpx-plan-pill-badge{position:static;grid-column:1/-1;font-size:11px}
- #root .cpx-plan-pill-status{font-size:12px}
- #root .cpx-plan-pill .selection-dot{position:absolute;right:16px;top:16px}
- #root .cpx-selected-summary{padding:20px;border-radius:10px}
- #root .cpx-selected-summary h3{font-size:22px}
+ #root .package-heading h2{font-size:24px !important;font-family:inherit !important}
+ #root .package-heading p,#root .package-step{font-size:14px !important}
+ #root .couple-mode-switch button{min-height:64px !important;padding:12px !important}
+ #root .couple-mode-switch strong{font-size:15px !important}
+ #root .package-type-head{gap:12px !important}
+ #root .cpx-plan-pill-row{display:grid !important;grid-template-columns:1fr !important;gap:10px !important}
+ #root .cpx-plan-pill{display:grid !important;grid-template-columns:1fr auto !important;gap:7px 14px !important;text-align:left !important;padding:16px !important;min-height:100px !important;border:1px solid #e6e5ea !important;border-radius:10px !important}
+ #root .cpx-plan-pill--active{border:2px solid #7135b5 !important;padding:15px !important}
+ #root .cpx-plan-pill-topline{display:block !important;grid-column:1 !important;grid-row:1 !important;padding:0 !important;margin:0 !important}
+ #root .cpx-plan-pill-name{font-size:19px !important;font-family:inherit !important;line-height:1.3 !important}
+ #root .cpx-plan-pill-mobile-label{display:none !important}
+ #root .cpx-plan-pill-price{grid-column:2 !important;grid-row:2 !important;font-size:22px !important;margin:0 !important}
+ #root .cpx-plan-pill-price small{font-size:11px !important}
+ #root .package-card-caption{grid-column:1 !important;grid-row:2 !important;font-size:12px !important;margin:0 !important;align-self:center !important}
+ #root .package-card-weekly{grid-column:1/-1 !important;grid-row:3 !important;font-size:12px !important;margin:0 !important}
+ #root .cpx-plan-pill-badge{position:static !important;grid-column:1/-1 !important;font-size:11px !important}
+ #root .cpx-plan-pill-status{font-size:12px !important}
+ #root .cpx-plan-pill .selection-dot{position:absolute !important;right:16px !important;top:16px !important}
+ #root .cpx-selected-summary{padding:20px !important;border-radius:10px !important}
+ #root .cpx-selected-summary h3{font-size:22px !important}
 }
+
+#root .coach-specialties-list li{background:#f6f2fa;color:#5f2e92;border:1px solid #e5d9f0}
+#root .profile-sticker{display:none}
