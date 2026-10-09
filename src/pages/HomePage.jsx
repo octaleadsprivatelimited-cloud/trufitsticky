@@ -12,9 +12,10 @@ const faq = [
 export default function HomePage() {
  return <>
  <section id="home-overview" tabIndex={-1} className="culture-hero wrap" aria-labelledby="home-title">
-  <div className="culture-title-row"><h1 id="home-title">REAL COACHING.<br/><span>REAL <em>LIFE.</em></span></h1><div className="hero-sticker"><span aria-hidden="true">✳</span><p>Your pace.<br/>Your people.<br/><strong>Your progress.</strong></p></div></div>
-  <ProgressShowcase/>
+  <div className="culture-title-row"><h1 id="home-title">Personal coaching.<br/><span>Built around <em>you.</em></span></h1><div className="hero-sticker"><span aria-hidden="true">✳</span><p>Your pace.<br/>Your people.<br/><strong>Your progress.</strong></p></div></div>
   <div className="culture-hero-bottom"><p>A coach who gets you. A plan that fits.<br/>Make room for a healthier everyday.</p><div className="button-row"><Link className="button" to="/coaches" data-track="cta_click" data-source="home_hero">Meet your coach <span aria-hidden="true">↗</span></Link><Link className="text-link" to="/plans">Explore plans <span aria-hidden="true">→</span></Link></div></div>
+  <ProgressShowcase/>
+
  </section>
  <div className="promise-strip"><div className="wrap"><span>Training that adapts</span><span>Food you enjoy</span><span>A coach who listens</span><span>Progress at your pace</span></div></div>
  <section className="section wrap" id="the-trufit-way" tabIndex={-1}><div className="section-heading" data-reveal><div><p className="eyebrow">01 / The Tru Fit way</p><h2>LESS GUESSWORK.<br/>MORE <em>GOING FORWARD.</em></h2></div><p>You don’t need another rigid routine. You need a coach who listens, a clear next step, and support that stays with you.</p></div><div className="feature-grid">{[

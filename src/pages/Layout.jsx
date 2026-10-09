@@ -13,6 +13,7 @@ import PageMotion from '../components/PageMotion';
 import '../styles/minimal.css';
 import '../styles/editorial.css';
 import '../styles/contact.css';
+import '../styles/enrolment.css';
 export default function Layout(){
  const location=useLocation();
  const landingPage=location.pathname.startsWith('/lp/');
