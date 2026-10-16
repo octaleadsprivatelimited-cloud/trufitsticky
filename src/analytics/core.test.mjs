@@ -46,7 +46,7 @@ test('sales landing pages attribute coach actions and clear context on leaving',
 });
 
 test('member portal and referral identifiers never initialize analytics or recording', () => {
- for (const path of ['/team','/team/products','/team/customers/demo-member','/signin','/portal','/portal/programs','/portal/profile','/portal/products','/portal/referrals','/portal/invoices','/refer/ALEX-TRUFIT']) {
+ for (const path of ['/team','/team/products','/team/customers/demo-member','/signin','/portal','/portal/programs','/portal/profile','/portal/products','/portal/referrals','/portal/invoices','/refer/BHEEMESH-TRUFIT']) {
   const r=runtime(path);r.client.setConsent(true);r.client.page(path,'Member portal');
   assert.equal(r.scripts.length,0);
   assert.equal(r.client.track('page_view',{}),false);
