@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import CoachPortrait from './CoachPortrait';
+import TruFitSymbol from '../../assets/logo-original.svg';
 import WhatsAppMark from './WhatsAppMark';
 import { trackCoachEvent } from '../../analytics/analytics';
 import './coachProfileOverview.css';
@@ -33,6 +34,7 @@ export default function CoachProfileOverview({ coach, testimonials = [], certifi
  };
  return <>
   <header className="profile-banner" id="coach-overview" tabIndex={-1}>
+   <img className="profile-brand-mark" src={TruFitSymbol} alt="" aria-hidden="true"/>
    <div className="profile-identity"><div className="profile-avatar"><CoachPortrait coach={coach} enablePreview={false}/></div><div><p className="profile-kicker">{levelLabel(coach)} coach{coach.location ? ` · ${coach.location}` : ''}</p><h1>{coach.name}</h1><p className="profile-location">Personal training, nutrition, and regular check-ins.</p></div></div>
    <ProfileSpecialties specialties={specialties} className="profile-mobile-specialties"/>
    <a className="profile-whatsapp" href={whatsapp} target="_blank" rel="noreferrer" onClick={()=>trackCoachEvent('contact_click',coach,{source:'profile_banner_whatsapp'})}><WhatsAppMark/>Ask a question</a>
