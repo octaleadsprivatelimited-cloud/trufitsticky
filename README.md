@@ -46,7 +46,7 @@ npm test
 
 ## Coach booking experience
 
-Coach profiles open on the Plans tab, with About me and Reviews alongside it. Plan and region selections are preserved while browsing the other tabs. The UI has three stages: choose a plan, enter details in one form, and continue to the existing payment provider. Landing-page plan selections open that same details form directly.
+Coach profiles open on the Plans tab, with About me and Reviews alongside it. Plan and region selections are preserved while browsing the other tabs. The UI has three stages: choose a plan, enter details in an inline page section, and continue to the existing payment provider. Continue to details replaces the plan chooser with a responsive form on the same page; Back to plans restores the selection. Sign-in, couple booking, and payment previews also stay inline, without a booking popup or background scroll lock. Landing-page plan selections open that same details form directly.
 
 Local catalogue previews can exercise all three stages without a backend. The preview guard stops before any customer/order creation or payment-provider call; the final preview screen links to a sample booking welcome page. Existing payment endpoints and provider code remain in place, but demo identities always stay in preview mode. Program capacity and waitlist handling remain separate from payment.
 

@@ -12,18 +12,19 @@ export default function AuthCard({ booking = false }) {
   const [provider, setProvider] = useState(null);
   const { signInPreview } = useAuth();
   const titleRef = useRef(null);
+  const Heading = booking ? 'h2' : 'h1';
   useEffect(() => { if (provider) titleRef.current?.focus(); }, [provider]);
   return <div className="member-auth-card" data-clarity-mask="true">
     <span className="member-access-badge">UI preview</span>
     {provider ? <>
       <span className="member-provider-mark"><ProviderIcon provider={provider}/></span>
-      <h1 id="member-auth-title" ref={titleRef} tabIndex={-1}>{provider === 'google' ? 'Google' : 'Apple'} sign-in preview</h1>
+      <Heading id="member-auth-title" ref={titleRef} tabIndex={-1}>{provider === 'google' ? 'Google' : 'Apple'} sign-in preview</Heading>
       <p>Explore with {demoAccount.name}’s sample account. This preview doesn’t connect to {provider === 'google' ? 'Google' : 'Apple'} or verify your identity.</p>
       <button className="member-primary" onClick={() => signInPreview(provider)}>Continue with demo account</button>
       <button className="member-text-button" onClick={() => setProvider(null)}>Choose another sign-in option</button>
     </> : <>
       <div className="member-auth-tabs" aria-label="Account access"><button aria-pressed={mode === 'signin'} onClick={() => setMode('signin')}>Sign in</button><button aria-pressed={mode === 'signup'} onClick={() => setMode('signup')}>Sign up</button></div>
-      <h1 id="member-auth-title">{mode === 'signin' ? 'Welcome back.' : 'Your next chapter starts here.'}</h1>
+      <Heading id="member-auth-title" tabIndex={-1}>{mode === 'signin' ? 'Welcome back.' : 'Your next chapter starts here.'}</Heading>
       <p>{booking ? 'Sign in or create your account to continue. Your coach and plan are saved right here.' : 'Your coach, sessions, and progress. All in your Tru Fit space.'}</p>
       <div className="member-provider-buttons">{['google', 'apple'].map(item => <button key={item} onClick={() => setProvider(item)}><ProviderIcon provider={item}/>Continue with {item === 'google' ? 'Google' : 'Apple'}</button>)}</div>
       <p className="member-auth-note">The same Google or Apple account will be used for sign-in and sign-up. No password to remember.</p>

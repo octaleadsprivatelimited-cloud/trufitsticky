@@ -4,6 +4,8 @@ import { useAuth } from "../../auth/AuthContext";
 import { saveDemoBooking } from "../../portal/booking.mjs";
 import { coachSlug } from "./catalog";
 import SessionPicker from "./SessionPicker";
+import BookingSteps from "./BookingSteps";
+import { scrollToSection } from "../../scroll/smoothScroll";
 import { coupleRequest, loadPaymentSdk } from "./coupleApi";
 import "./couplePlans.css";
 import { trackCoachEvent } from "../../analytics/analytics";
@@ -23,20 +25,19 @@ export default function CoupleCheckout({ coach, plan, waitlist = false, onClose 
   const [error, setError] = useState("");
   const [reference, setReference] = useState("");
   const [complete, setComplete] = useState(false);
-  const dialog = useRef(null);
+  const panel = useRef(null);
   const errorRef = useRef(null);
   const checkoutKey = useRef(crypto.randomUUID());
   const formId = useId();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const element = dialog.current;
-    const previousFocus = document.activeElement;
-    element.showModal();
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { element.close(); document.body.style.overflow = previousOverflow; previousFocus?.focus(); };
-  }, []);
+    const frame = requestAnimationFrame(() => {
+      panel.current?.querySelector(previewPayment ? '.member-auth-card h2' : '.couple-dialog-heading h2')?.focus({ preventScroll:true });
+      scrollToSection(panel.current);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [previewPayment]);
 
   useEffect(() => { if (error) errorRef.current?.focus(); }, [error]);
 
@@ -80,22 +81,18 @@ export default function CoupleCheckout({ coach, plan, waitlist = false, onClose 
       if (checkout.gateway === "cashfree") {
         await window.Cashfree({ mode: checkout.mode }).checkout({ paymentSessionId: checkout.payment_session_id, redirectTarget: "_self" });
       } else {
-        // Native dialogs live above every document overlay. Close it before
-        // the provider opens its own accessible modal, and restore on dismissal.
-        dialog.current.close();
         const payment = new window.Razorpay({
           key: checkout.key, order_id: checkout.order_id, amount: checkout.amount, currency: checkout.currency,
           name: "Tru Fit", description: `${plan.duration_weeks}-week couple coaching`,
           prefill: { name: normalized[0].name, email: normalized[0].email, contact: normalized[0].phone_number },
           handler: () => navigate(statusPath),
-          modal: { ondismiss: () => { dialog.current?.showModal(); setBusy(false); setError("Checkout was closed. You can reopen this same order while the reservation is valid."); } },
+          modal: { ondismiss: () => { setBusy(false); setError("Checkout was closed. You can reopen this same order while the reservation is valid."); } },
         });
         payment.on("payment.failed", () => { setBusy(false); setError("The payment attempt was unsuccessful. Please retry the same order or contact support if debited."); });
         payment.open();
       }
     } catch (failure) {
       trackCoachEvent("form_error", coach, { form_id: waitlistMode ? "couple_waitlist" : "couple_enrollment", error_type: "submission" });
-      if (dialog.current && !dialog.current.open) dialog.current.showModal();
       if (failure.data?.enrollment_id && failure.data?.token) {
         sessionStorage.setItem(`couple:${failure.data.enrollment_id}`, failure.data.token);
         setReference(failure.data.enrollment_id);
@@ -115,13 +112,12 @@ export default function CoupleCheckout({ coach, plan, waitlist = false, onClose 
     navigate('/payment/success?demo=1', { state: { booking: { ...booking, isPreview: true, reference: 'TF-DEMO-BOOKING' } } });
   }
   return (
-    <dialog ref={dialog} className="couple-dialog" aria-labelledby={`${formId}-title`} onCancel={event => { event.preventDefault(); if (!busy) onClose(); }}>
+    <section ref={panel} className="couple-dialog couple-inline" aria-labelledby={`${formId}-title`}><button type="button" className="booking-back" onClick={onClose} disabled={busy}>Back to plans</button>{!waitlistMode && <BookingSteps current={previewPayment ? 3 : 2}/>}
       <div className="couple-dialog-heading">
         <div><p className="couple-eyebrow">{coach.name} · {plan.duration_weeks} weeks</p>
-          <h2 id={`${formId}-title`}>{waitlistMode ? "Join the couple waitlist" : "Your journey, together"}</h2></div>
-        <button type="button" className="couple-close" onClick={onClose} disabled={busy} aria-label="Close couple checkout">×</button>
+          <h2 id={`${formId}-title`} tabIndex={-1}>{waitlistMode ? "Join the couple waitlist" : "Your journey, together"}</h2></div>
       </div>
-      {previewPayment ? <div className="member-auth-card"><span className="member-access-badge">UI preview</span><h2>{waitlistMode ? 'Waitlist preview' : 'Ready for payment'}</h2><p>{waitlistMode ? 'Your details are ready. This preview does not submit a real waitlist request.' : 'Your couple plan and session are ready. No payment or reservation will be made.'}</p>{!waitlistMode && <button type="button" className="member-primary" onClick={previewWelcome}>Preview booking confirmation</button>}<button type="button" className="member-text-button" onClick={() => setPreviewPayment(false)}>Edit details</button></div> : complete ? <div role="status"><p>You’re on the couple waitlist. We’ll contact you when two slots are available.</p><button type="button" className="couple-primary" onClick={onClose}>Done</button></div> : (
+      {previewPayment ? <div className="member-auth-card"><span className="member-access-badge">UI preview</span><h2 tabIndex={-1}>{waitlistMode ? 'Waitlist preview' : 'Ready for payment'}</h2><p>{waitlistMode ? 'Your details are ready. This preview does not submit a real waitlist request.' : 'Your couple plan and session are ready. No payment or reservation will be made.'}</p>{!waitlistMode && <button type="button" className="member-primary" onClick={previewWelcome}>Preview booking confirmation</button>}<button type="button" className="member-text-button" onClick={() => setPreviewPayment(false)}>Edit details</button></div> : complete ? <div role="status"><p>You’re on the couple waitlist. We’ll contact you when two slots are available.</p><button type="button" className="couple-primary" onClick={onClose}>Done</button></div> : (
         <form data-clarity-mask="true" data-form-id={waitlistMode ? "couple_waitlist" : "couple_enrollment"} onSubmit={submit}>
           {previewMode && <p className="couple-footnote">UI preview. No details are sent and no payment is taken.</p>}
           <p className="couple-intro">{waitlistMode ? "Leave the payer’s contact details. A couple plan needs two coaching slots." : "One payment. Two individual coaching plans. The same coach and start date."}</p>
@@ -150,6 +146,6 @@ export default function CoupleCheckout({ coach, plan, waitlist = false, onClose 
           {!waitlistMode && !previewMode && <small className="couple-footnote">Two slots are reserved for 30 minutes. Your program begins seven days after payment confirmation. Each participant receives their own onboarding email.</small>}
         </form>
       )}
-    </dialog>
+    </section>
   );
 }

@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from "../../auth/AuthContext";
-import { AuthDialog } from "../../auth/AuthCard";
+import AuthCard from "../../auth/AuthCard";
+import InlineBooking from "./InlineBooking";
+import BookingSteps from "./BookingSteps";
+import { scrollToSection } from "../../scroll/smoothScroll";
 import CoupleCheckout from './CoupleCheckout';
 import ProgramDescriptionRenderer from './ProgramDescriptionRenderer';
 import './couplePlans.css';
@@ -29,6 +32,10 @@ export default function CouplePlans({ coach, plans, region = 'DOMESTIC' }) {
   const price = formatPrice(plan, region);
   const perPersonWeekly = formatPrice({ ...plan, price: Number(plan.price) / Number(plan.duration_weeks) / 2 }, region);
   const openCheckout = () => setShowCheckout(true);
+  const closeCheckout = () => {
+    setShowCheckout(false);
+    requestAnimationFrame(() => { document.getElementById('profile-tab-plans')?.focus({ preventScroll:true }); scrollToSection(document.getElementById('cpx-plans')); });
+  };
   const action = full ? 'Join couple waitlist' : 'Choose couple plan';
   return <div className="couple-panel">
     <p className="package-step"><span>02</span> Choose your shared timeline</p>
@@ -36,8 +43,7 @@ export default function CouplePlans({ coach, plans, region = 'DOMESTIC' }) {
       <aside className="cpx-selected-summary" aria-label="Selected couple plan summary" aria-live="polite"><p className="eyebrow">Your plan at a glance</p><h3>{plan.duration_weeks}-week couple coaching</h3><p className="summary-coach">Two people · with {firstName}</p><p className="summary-price">{price} <small>total for both</small></p><p className="summary-rate">About {perPersonWeekly} / person / week</p><ul className="summary-inclusions">{benefits.map(item => <li key={item}>{item}</li>)}</ul><button className="couple-primary" type="button" onClick={openCheckout}>{action}</button><p className="summary-note">One payment for both participants. No automatic renewal.</p>{full && <p className="couple-footnote">This program needs two available places. Join the waitlist to hear about an opening.</p>}</aside>
     </div>
     {plan.description_blocks?.length > 0 && <details className="cpx-collapse couple-description" open><summary>What’s included for both participants</summary><div className="cpx-collapse-body"><ProgramDescriptionRenderer blocks={plan.description_blocks}/></div></details>}
-    <div className="cpx-sticky"><div className="cpx-sticky-inner couple-sticky-inner"><div className="cpx-sticky-info"><div className="cpx-sticky-name">{coach.name}</div><div className="cpx-sticky-sub"><span className="cpx-sticky-plan">Couple · {plan.duration_weeks} weeks</span><span className="cpx-sticky-price">{price} for both</span></div></div><button className="cpx-sticky-btn" type="button" onClick={openCheckout}>{full ? 'Join waitlist' : 'Choose couple plan'}</button></div></div>
-    {showCheckout && !user && <AuthDialog onClose={() => setShowCheckout(false)}/>}
-    {showCheckout && user && <CoupleCheckout coach={coach} plan={plan} waitlist={full} onClose={() => setShowCheckout(false)}/>}
+    {!showCheckout && <div className="cpx-sticky"><div className="cpx-sticky-inner couple-sticky-inner"><div className="cpx-sticky-info"><div className="cpx-sticky-name">{coach.name}</div><div className="cpx-sticky-sub"><span className="cpx-sticky-plan">Couple · {plan.duration_weeks} weeks</span><span className="cpx-sticky-price">{price} for both</span></div></div><button className="cpx-sticky-btn" type="button" onClick={openCheckout}>{full ? 'Join waitlist' : 'Choose couple plan'}</button></div></div>}
+    {showCheckout && <InlineBooking>{!user ? <><button type="button" className="booking-back" onClick={closeCheckout}>Back to plans</button><BookingSteps current={2}/><AuthCard booking/></> : <CoupleCheckout coach={coach} plan={plan} waitlist={full} onClose={closeCheckout}/>}</InlineBooking>}
   </div>;
 }

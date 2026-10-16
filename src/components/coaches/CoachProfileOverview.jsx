@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import CoachPortrait from './CoachPortrait';
 import TruFitSymbol from '../../assets/logo-original.svg';
 import WhatsAppMark from './WhatsAppMark';
@@ -12,9 +12,10 @@ function ProfileSpecialties({ specialties, className }) {
  return <section className={className}><h2>Specialties</h2><ul className="profile-specialty-list">{specialties.map(value => <li key={value}>{value}</li>)}</ul></section>;
 }
 
-export default function CoachProfileOverview({ coach, testimonials = [], certifications = [], children }) {
+export default function CoachProfileOverview({ coach, testimonials = [], certifications = [], bookingOpen = false, children }) {
  const [active, setActive] = useState('plans');
  const tabs = useRef([]);
+ useLayoutEffect(() => { if (bookingOpen) setActive('plans'); }, [bookingOpen]);
  const firstName = coach.name.split(' ')[0];
  const reviews = testimonials.filter(review => review.body && review.client_name && String(review.coach_id ?? review.coach?.id ?? review.coach) === String(coach.id));
  const rated = reviews.filter(review => Number(review.rating) >= 1 && Number(review.rating) <= 5);

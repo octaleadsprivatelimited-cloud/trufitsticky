@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import { useAuth } from "../../auth/AuthContext";
 import { saveDemoBooking, sessionLabel } from "../../portal/booking.mjs";
 import SessionPicker from "./SessionPicker";
 import BookingSteps from "./BookingSteps";
+import { scrollToSection } from '../../scroll/smoothScroll';
 import { trackEvent } from "../../analytics/analytics";
 
 const ClientPaymentForm = ({ coachId, coachName, coachSlug, coachImage, planId, analyticsPlanId, planName, paymentMode, calendlyLink, subscriptionAmount, spurfit_url, onClose, previewMode = false }) => {
@@ -53,25 +54,15 @@ const ClientPaymentForm = ({ coachId, coachName, coachSlug, coachImage, planId, 
   });
   const [submitting, setSubmitting] = useState(false);
   const [previewPayment, setPreviewPayment] = useState(false);
-  const modalRef = useRef(null);
+  const formRef = useRef(null);
 
   useEffect(() => {
-    const previousFocus = document.activeElement;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    modalRef.current?.querySelector('input')?.focus();
-    const keydown = event => {
-      if (event.key === 'Escape' && modalRef.current?.contains(event.target)) onClose();
-      if (event.key !== 'Tab') return;
-      const controls = [...(modalRef.current?.querySelectorAll('button:not(:disabled), input:not(:disabled), select:not(:disabled), a[href]') || [])].filter(node => node.getClientRects().length);
-      const first = controls[0], last = controls[controls.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
-    };
-    document.addEventListener('keydown', keydown);
-    return () => { document.body.style.overflow = previousOverflow; document.removeEventListener('keydown', keydown); previousFocus?.focus(); };
-  }, [onClose]);
-  useEffect(() => { if (previewPayment) modalRef.current?.querySelector('#checkout-title')?.focus(); }, [previewPayment]);
+    const frame = requestAnimationFrame(() => {
+      formRef.current?.querySelector('#checkout-title')?.focus({ preventScroll:true });
+      scrollToSection(formRef.current);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [previewPayment]);
 
   const nameRef = useRef(null);
   const emailRef = useRef(null);
@@ -220,25 +211,6 @@ const ClientPaymentForm = ({ coachId, coachName, coachSlug, coachImage, planId, 
   const getCityLabel = () => {
     return "City";
   };
-
-  // Handle click outside modal to close - memoized to prevent stale closures
-  const handleClickOutside = useCallback((event) => {
-    // Prevent event propagation to parent modal
-    event.stopPropagation();
-
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
-      onClose();
-    }
-  }, [onClose]);
-
-  // Add event listener for click outside
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [handleClickOutside]);
-
 
   // Helper functions for state and city
   const getStatesForCountry = (country) => {
@@ -928,19 +900,19 @@ const ClientPaymentForm = ({ coachId, coachName, coachSlug, coachImage, planId, 
     catch { /* Route state keeps the preview available when storage is blocked. */ }
     navigate('/payment/success?demo=1', { state: { booking: { ...booking, isPreview: true, reference: 'TF-DEMO-BOOKING' } } });
   }
-  if (previewPayment) return <div className="client__form__section"><div className="client__form__container checkout-payment-preview" ref={modalRef} role="dialog" aria-modal="true" aria-labelledby="checkout-title" data-clarity-mask="true"><div className="client__form__head"><button type="button" className="checkout-close" onClick={onClose} aria-label="Close checkout">×</button></div><BookingSteps current={3}/><div className="client__form__head-title"><h2 id="checkout-title" tabIndex={-1}>Ready for payment</h2><p>Your coach, session, and details are ready.</p></div><div className="checkout-selection"><div><strong>{planName} with {coachName}</strong><span>{formData.name} · {formData.email}</span><span>{sessionLabel(slot)?.date}</span><span>{sessionLabel(slot)?.time} · India Standard Time</span></div><strong>{subscriptionAmount}<small> total</small></strong></div><div className="checkout-preview-payment"><span>Payment preview</span><h3>{subscriptionAmount}</h3><p>No order, reservation, or charge will be created. Continue to see the welcome screen that follows a successful payment.</p><button type="button" className="member-primary" onClick={previewWelcome}>Preview booking confirmation</button></div><button type="button" className="text-link checkout-edit-details" onClick={()=>setPreviewPayment(false)}>Edit details or session</button></div></div>;
+  if (previewPayment) return <div className="client__form__section checkout-inline"><div className="client__form__container checkout-payment-preview" ref={formRef} role="region" aria-labelledby="checkout-title" data-clarity-mask="true"><div className="client__form__head"><button type="button" className="booking-back" onClick={onClose} disabled={submitting}>Back to plans</button></div><BookingSteps current={3}/><div className="client__form__head-title"><h2 id="checkout-title" tabIndex={-1}>Ready for payment</h2><p>Your coach, session, and details are ready.</p></div><div className="checkout-selection"><div><strong>{planName} with {coachName}</strong><span>{formData.name} · {formData.email}</span><span>{sessionLabel(slot)?.date}</span><span>{sessionLabel(slot)?.time} · India Standard Time</span></div><strong>{subscriptionAmount}<small> total</small></strong></div><div className="checkout-preview-payment"><span>Payment preview</span><h3>{subscriptionAmount}</h3><p>No order, reservation, or charge will be created. Continue to see the welcome screen that follows a successful payment.</p><button type="button" className="member-primary" onClick={previewWelcome}>Preview booking confirmation</button></div><button type="button" className="text-link checkout-edit-details" onClick={()=>setPreviewPayment(false)}>Edit details or session</button></div></div>;
 
   return (
-    <div className="client__form__section">
-      <div className="client__form__container" ref={modalRef} role="dialog" aria-modal="true" aria-labelledby="checkout-title">
-        {/* Close Button */}
+    <div className="client__form__section checkout-inline">
+      <div className="client__form__container" ref={formRef} role="region" aria-labelledby="checkout-title">
+        {/* Return to the plan chooser */}
         <div className="client__form__head">
-          <button type="button" className="checkout-close" aria-label="Close checkout" onClick={onClose}>×</button>
+          <button type="button" className="booking-back" onClick={onClose} disabled={submitting}>Back to plans</button>
         </div>
 
         <BookingSteps current={2}/>
         <div className="client__form__head-title">
-          <h2 id="checkout-title">Your details</h2>
+          <h2 id="checkout-title" tabIndex={-1}>Your details</h2>
           <p>{isConsultation ? `20 minutes with ${coachName}. Complete your details to continue to secure payment.` : "Fill in your details to continue to secure payment."}</p>
         </div>
 

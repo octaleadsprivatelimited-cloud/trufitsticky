@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { trackCoachEvent } from "../../analytics/analytics";
 import Point from "../../assets/card-plan-desc.svg";
 import { useAuth } from "../../auth/AuthContext";
-import { AuthDialog } from "../../auth/AuthCard";
+import AuthCard from "../../auth/AuthCard";
+import InlineBooking from "./InlineBooking";
 import { coachSlug } from "./catalog";
 import ClientPaymentForm from "./ClientPaymentForm";
 import ProgramDescriptionRenderer from "./ProgramDescriptionRenderer";
@@ -433,6 +434,14 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
     }
   };
 
+  function closeBooking() {
+    setShowForm(false);
+    requestAnimationFrame(() => {
+      document.getElementById('profile-tab-plans')?.focus({ preventScroll:true });
+      scrollToSection(document.getElementById('cpx-plans'));
+    });
+  }
+
   // ---- Derived program-description blocks -----------------------------------
   const activeDurationWeeks = (() => {
     if (!activePlan || activePlan === "Consultation Call") return null;
@@ -731,12 +740,13 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
 
   return (
     <div className="cpx-page">
-      <CoachProfileOverview coach={coach} testimonials={testimonials} certifications={certChips}>
+      <CoachProfileOverview bookingOpen={showForm} coach={coach} testimonials={testimonials} certifications={certChips}>
 
       {/* WEEKLY PLANS */}
       <section className="cpx-section" id="cpx-plans" tabIndex={-1}>
         {coach.preview && !coach.livePreview && <div className="cpx-pad catalogue-note"><strong>Your coaching plan</strong><p>Personalized workouts, nutrition guidance, and regular check-ins. Connect the backend to view current plans and subscription prices.</p></div>}
         <div className="cpx-pad">
+          <div hidden={showForm}>
           <BookingSteps current={1}/><div className="package-heading"><div><p className="eyebrow">Your next chapter starts here</p><h2>Choose your coaching plan.</h2></div><p>Clear options. A price up front.<br/>Support built around your everyday.</p></div>
           <div className="package-choice-row"><div className="package-type-head">{countryCode && !loadingLocation && <label className="package-region">Pricing region<select value={countryCode} onChange={event => handleManualRegionSelect(event.target.value === 'DOMESTIC' ? 'india' : 'international')}><option value="DOMESTIC">India · INR</option><option value="INTERNATIONAL">International · USD</option></select></label>}</div>
           <div className="couple-mode-switch" aria-label="Coaching package">
@@ -764,9 +774,29 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
             </div>
           )}
 
+          </div>
+
+      {showForm && <InlineBooking>{!user ? <><button type="button" className="booking-back" onClick={closeBooking}>Back to plans</button><BookingSteps current={2}/><AuthCard booking/></> : (
+        <ClientPaymentForm
+          previewMode={Boolean(coach.preview) || user.isPreview}
+          coachSlug={coachSlug(coach)}
+          coachImage={coach.image}
+          coachId={coach.id}
+          coachName={coach.name}
+          planId={planIdMap[activePlan]}
+          analyticsPlanId={analyticsPlanFields(activePlan).plan_id}
+          planName={activePlan}
+          paymentMode={countryCode === "DOMESTIC" ? "cashfree" : "razorpay"}
+          calendlyLink={coach.calendly_link}
+          spurfit_url={coach.spurfit_url}
+          subscriptionAmount={price}
+          onClose={closeBooking}
+        />
+      )}</InlineBooking>}
+
           {/* Collapsible "What's included" — full width so it aligns with the
               About panel below; expanded by default. */}
-          {!isCoupleMode && !loadingLocation && countryCode && !showRegionSelector && activePlan && (
+          {!showForm && !isCoupleMode && !loadingLocation && countryCode && !showRegionSelector && activePlan && (
             <details
               className="cpx-collapse included-design"
               id="coach-included"
@@ -792,7 +822,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
       <section id="coach-faq" tabIndex={-1} className="profile-faq cpx-pad" data-reveal><div><p className="eyebrow">Before you begin</p><h2>Good to <em>know.</em></h2></div><div className="faq-list">{[['What’s different about couple coaching?', 'Two people enrol with one coach and a shared start date. Each person receives individual guidance. The displayed couple price covers both participants.'],['Is the weekly price a subscription?', 'No. The weekly price helps compare programs. You pay the full program total once, with no automatic renewal.'],['Can I speak to my coach first?', 'Choose the 20-minute consultation when it is available for your coach and pricing region. You can schedule the call after payment.'],['What if my coach’s plan is full?', 'Available programs can be booked. When a plan is full, you can join its waitlist. Couple programs require two available places.']].map(([question,answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div></section>
 
       {/* STICKY BOTTOM CTA */}
-      {!isCoupleMode && <div className="cpx-sticky">
+      {!isCoupleMode && !showForm && <div className="cpx-sticky">
         <div className="cpx-sticky-inner">
           <div className="cpx-sticky-info">
             <div className="cpx-sticky-name">{coach.name}</div>
@@ -955,25 +985,6 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
             </form>
           </div>
         </div>
-      )}
-
-      {showForm && !user && <AuthDialog onClose={() => setShowForm(false)}/>}
-      {showForm && user && (
-        <ClientPaymentForm
-          previewMode={Boolean(coach.preview) || user.isPreview}
-          coachSlug={coachSlug(coach)}
-          coachImage={coach.image}
-          coachId={coach.id}
-          coachName={coach.name}
-          planId={planIdMap[activePlan]}
-          analyticsPlanId={analyticsPlanFields(activePlan).plan_id}
-          planName={activePlan}
-          paymentMode={countryCode === "DOMESTIC" ? "cashfree" : "razorpay"}
-          calendlyLink={coach.calendly_link}
-          spurfit_url={coach.spurfit_url}
-          subscriptionAmount={price}
-          onClose={() => setShowForm(false)}
-        />
       )}
     </div>
   );
