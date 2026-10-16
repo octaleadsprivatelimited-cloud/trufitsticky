@@ -96,3 +96,14 @@
 @media(max-width:650px){#root .cpx-page .package-choice-row{flex-direction:column;align-items:stretch;gap:12px;margin-bottom:19px}#root .cpx-page .package-choice-row>.couple-mode-switch{width:100%}}
 #root .cpx-page .package-choice-row>.couple-mode-switch{flex:0 1 400px;max-width:400px}
 @media(max-width:650px){#root .cpx-page .package-choice-row>.couple-mode-switch{flex:0 1 auto;max-width:none}}
+
+/* Mobile visitors can see a coach's focus before choosing a plan. */
+#root .cpx-page .profile-mobile-specialties{display:none}
+@media(max-width:650px){
+ #root .cpx-page .profile-banner{flex-wrap:wrap}
+ #root .cpx-page .profile-mobile-specialties{display:block;flex-basis:100%;min-width:0;padding-top:3px}
+ #root .cpx-page .profile-mobile-specialties h2{font:600 12px/1.5 'DM Sans',sans-serif!important;letter-spacing:0;text-transform:none;color:var(--ink);margin:0 0 9px}
+ #root .cpx-page .profile-mobile-specialties .profile-specialty-list{gap:6px}
+ #root .cpx-page .profile-mobile-specialties .profile-specialty-list li{font-size:11px;line-height:1.5;padding:6px 9px;border-radius:6px;border-color:var(--line);background:#faf7ff;color:var(--accent);overflow-wrap:anywhere;max-width:100%}
+ #root .cpx-page .profile-desktop-specialties{display:none}
+}

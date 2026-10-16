@@ -6,6 +6,11 @@ import './coachProfileOverview.css';
 
 const tabOptions = [['plans', 'Plans'], ['about', 'About me'], ['reviews', 'Reviews']];
 const levelLabel = coach => String(coach.coach_level_name || coach.coach_level || 'Coach').toLowerCase().replace(/^./, value => value.toUpperCase());
+function ProfileSpecialties({ specialties, className }) {
+ if (!specialties.length) return null;
+ return <section className={className}><h2>Specialties</h2><ul className="profile-specialty-list">{specialties.map(value => <li key={value}>{value}</li>)}</ul></section>;
+}
+
 export default function CoachProfileOverview({ coach, testimonials = [], certifications = [], children }) {
  const [active, setActive] = useState('plans');
  const tabs = useRef([]);
@@ -29,6 +34,7 @@ export default function CoachProfileOverview({ coach, testimonials = [], certifi
  return <>
   <header className="profile-banner" id="coach-overview" tabIndex={-1}>
    <div className="profile-identity"><div className="profile-avatar"><CoachPortrait coach={coach}/></div><div><p className="profile-kicker">{levelLabel(coach)} coach{coach.location ? ` · ${coach.location}` : ''}</p><h1>{coach.name}</h1><p className="profile-location">Personal training, nutrition, and regular check-ins.</p></div></div>
+   <ProfileSpecialties specialties={specialties} className="profile-mobile-specialties"/>
    <a className="profile-whatsapp" href={whatsapp} target="_blank" rel="noreferrer" onClick={()=>trackCoachEvent('contact_click',coach,{source:'profile_banner_whatsapp'})}><WhatsAppMark/>Ask a question</a>
   </header>
   <div className="profile-tabs" role="tablist" aria-label="Explore this coach">{tabOptions.map(([value,label],index)=><button key={value} ref={node=>{tabs.current[index]=node}} role="tab" id={`profile-tab-${value}`} aria-selected={active===value} aria-controls={`profile-panel-${value}`} tabIndex={active===value?0:-1} onClick={()=>setActive(value)} onKeyDown={event=>tabKeys(event,index)}>{label}{value==='reviews' && reviews.length>0 ? ` (${reviews.length})` : ''}</button>)}</div>
@@ -38,7 +44,7 @@ export default function CoachProfileOverview({ coach, testimonials = [], certifi
     <section className="profile-content-panel"><h2>Meet {firstName}</h2>{coach.summary && <p>{coach.summary}</p>}{coach.bio && coach.bio!==coach.summary && <p>{coach.bio}</p>}{coach.previous_work && coach.previous_work!==coach.summary && coach.previous_work!==coach.bio && <p>{coach.previous_work}</p>}{!coach.summary && !coach.bio && !coach.previous_work && <p>Chat with {firstName} to discuss your goals and routine.</p>}<button type="button" className="text-link profile-return-to-plans" onClick={()=>{setActive('plans');tabs.current[0]?.focus();}}>Back to plans</button></section>
     <aside className="profile-facts" aria-label="Coach details">
      <section className="profile-fact-card"><h2>Coaching experience</h2><div className="profile-metrics"><div><strong>{experience > 0 ? experience : levelLabel(coach)}</strong><span>{experience > 0 ? `${experience === 1 ? 'year' : 'years'} coaching` : 'Coaching level'}</span></div><div><strong>{average ? `${average}/5` : '—'}</strong><span>{average ? `${rated.length} published reviews` : 'No rated reviews yet'}</span></div></div></section>
-     {specialties.length > 0 && <section className="profile-fact-card"><h2>Specialties</h2><ul className="profile-specialty-list">{specialties.map(value=><li key={value}>{value}</li>)}</ul></section>}
+     <ProfileSpecialties specialties={specialties} className="profile-fact-card profile-desktop-specialties"/>
      {certifications.length > 0 && <section className="profile-fact-card"><h2>Qualifications</h2><ul className="profile-qualifications">{certifications.map(value=><li key={value}>{value}</li>)}</ul></section>}
      {(coach.insta_link || coach.linkedin_link) && <div className="profile-social-links">{coach.insta_link && <a href={coach.insta_link} target="_blank" rel="noreferrer">Instagram</a>}{coach.linkedin_link && <a href={coach.linkedin_link} target="_blank" rel="noreferrer">LinkedIn</a>}</div>}
     </aside>
