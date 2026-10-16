@@ -34,10 +34,25 @@
 @media(max-width:650px){
  #root .cpx-page .booking-inline {margin-top:18px;scroll-margin-top:82px;}
  #root .booking-inline .client__form__container,#root .booking-inline .couple-inline {padding:16px;scroll-margin-top:82px;}
- #root .booking-inline .client__form__content {grid-template-columns:1fr;gap:15px;margin-top:18px;}
- #root .booking-inline .client__form__head-title h2 {font-size:24px!important;}
- #root .booking-inline .client__form__head {margin-bottom:16px!important;}
- #root .booking-inline .checkout-selection {flex-direction:column;gap:10px;padding:14px;}
+ #root .booking-inline .client__form__content {grid-template-columns:1fr;gap:8px;margin:12px 0;}
+ #root .booking-inline .client__form__inp-field {gap:4px;}
+ #root .booking-inline .client__form__inp-field label {margin:0;font-size:12px;line-height:1.25;}
+ #root .booking-inline .client__form__inp-field input,#root .booking-inline .client__form__inp-field select {height:44px;min-height:44px;padding:9px 11px;}
+ #root .booking-inline .client__form__inp-field select {padding-right:32px;}
+ #root .booking-inline .react-international-phone-input-container .react-international-phone-input,#root .booking-inline .react-international-phone-country-selector-button {box-sizing:border-box!important;height:44px!important;min-height:44px!important;}
+ #root .booking-inline .client__form__container .booking-steps {margin:4px 0 14px;}
+ #root .booking-inline .client__form__head-title p {margin:4px 0 0;line-height:1.5;}
+ #root .booking-inline .checkout-preview-note {margin:10px 0 12px;line-height:1.5;}
+ #root .booking-inline .checkout-selection span {margin-top:3px;}
+ #root .booking-inline .member-session-picker {padding:12px;margin:12px 0;}
+ #root .booking-inline .member-session-picker>p {margin-bottom:10px;}
+ #root .booking-inline .member-session-picker>div {gap:8px;}
+ #root .booking-inline .member-session-picker label {gap:4px;}
+ #root .booking-inline .member-session-picker select {height:44px;min-height:44px;padding:9px 8px;}
+ #root .booking-inline .member-session-picker>small {margin-top:6px;}
+ #root .booking-inline .client__form__head-title h2 {font-size:24px!important;margin-bottom:4px;}
+ #root .booking-inline .client__form__head {margin-bottom:10px!important;}
+ #root .booking-inline .checkout-selection {flex-direction:column;gap:6px;padding:10px 12px;margin:12px 0;}
  #root .booking-inline .client__form__sbt-btn {max-width:none;}
  #root .cpx-page .booking-inline>.member-auth-card {padding:20px 16px;}
  #root .booking-inline .couple-people {grid-template-columns:1fr;}
