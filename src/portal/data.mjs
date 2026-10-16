@@ -1,5 +1,5 @@
 export const demoAccount = {
-  id: 'demo-member', name: 'Alex Morgan', email: 'alex@example.com', memberId: 'TF-DEMO-1024', joinedAt: '2026-04-12', timezone: 'Asia/Kolkata',
+  id: 'demo-member', name: 'Bheemesh', email: 'alex@example.com', memberId: 'TF-DEMO-1024', joinedAt: '2026-04-12', timezone: 'Asia/Kolkata',
   programs: [
     { id: 'program-24', name: 'Personal coaching', description: 'A little structure. A stronger everyday.', durationWeeks: 24, startDate: '2026-07-12', endDate: '2026-12-26', status: 'active', coach: 'Jaswant Medidi', coachSlug: 'jaswant-medidi', focus: ['Personalized training', 'Nutrition guidance', 'Weekly check-ins'], invoiceId: 'TF-DEMO-002' },
     { id: 'program-12', name: 'Your foundation program', description: 'Your first chapter of consistent movement.', durationWeeks: 12, startDate: '2026-04-12', endDate: '2026-07-04', status: 'completed', coach: 'Jaswant Medidi', coachSlug: 'jaswant-medidi', focus: ['Building a routine', 'Training fundamentals', 'Everyday nutrition'], invoiceId: 'TF-DEMO-001' },
@@ -17,6 +17,8 @@ export const demoAccount = {
     ],
   },
 };
+
+export const demoInitials = demoAccount.name.split(/\s+/).map(part => part[0]).slice(0,2).join('');
 
 // Configure the reward copy here once the business defines the program.
 // These are presentation settings; the UI never issues or promises credits.

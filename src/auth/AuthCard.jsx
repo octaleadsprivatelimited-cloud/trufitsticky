@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from './AuthContext';
+import { demoAccount } from '../portal/data.mjs';
 import '../styles/member-access.css';
 
 function ProviderIcon({ provider }) {
@@ -17,7 +18,7 @@ export default function AuthCard({ booking = false }) {
     {provider ? <>
       <span className="member-provider-mark"><ProviderIcon provider={provider}/></span>
       <h1 id="member-auth-title" ref={titleRef} tabIndex={-1}>{provider === 'google' ? 'Google' : 'Apple'} sign-in preview</h1>
-      <p>Explore with Alex’s sample account. This preview doesn’t connect to {provider === 'google' ? 'Google' : 'Apple'} or verify your identity.</p>
+      <p>Explore with {demoAccount.name}’s sample account. This preview doesn’t connect to {provider === 'google' ? 'Google' : 'Apple'} or verify your identity.</p>
       <button className="member-primary" onClick={() => signInPreview(provider)}>Continue with demo account</button>
       <button className="member-text-button" onClick={() => setProvider(null)}>Choose another sign-in option</button>
     </> : <>
