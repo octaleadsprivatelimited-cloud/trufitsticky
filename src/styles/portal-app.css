@@ -45,3 +45,117 @@
 #root .portal-compact .compact-profile-content{flex:1}
 #root .portal-compact .compact-profile-actions{flex-shrink:0}
 #root .portal-compact .portal-content{scrollbar-gutter:auto}
+
+/* Purple depth and light, scoped to the member workspace. */
+#root .portal-compact {
+  --portal-action-gradient:linear-gradient(120deg,#5420b0 0%,#6d28d9 62%,#7838db 100%);
+  --portal-surface-gradient:linear-gradient(135deg,#fff 35%,#f7f2ff 100%);
+}
+#root .portal-compact .portal-workspace {
+  background:radial-gradient(ellipse at 100% 0%,#f0e7ff 0%,#fff 52%);
+}
+#root .portal-compact .portal-sidebar {
+  background:linear-gradient(180deg,#fff 55%,#faf7ff 100%);
+}
+#root .portal-compact .portal-topbar {
+  background:linear-gradient(110deg,#fff 45%,#faf7ff 100%);
+}
+#root .portal-compact .portal-member-hero {
+  background:radial-gradient(ellipse at 86% 14%,#a78bfa66 0%,transparent 47%),linear-gradient(112deg,#43158b 0%,#6d28d9 54%,#8142e4 100%);
+  border:1px solid #ffffff30;
+  box-shadow:inset 0 1px 0 #ffffff26;
+}
+#root .portal-compact .portal-member-hero::before {
+  content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(125deg,transparent 48%,#ffffff09 48%,#ffffff03 72%,transparent 72%);
+}
+#root .portal-compact .portal-member-hero::after {
+  border-color:#ffffff24;
+  background:radial-gradient(circle at 30% 30%,#ffffff12,transparent 70%);
+  box-shadow:0 0 0 20px #ffffff07,0 0 0 42px #ffffff04;
+}
+#root .portal-compact .portal-hero-days {
+  border-left-color:#ffffff38;
+  text-shadow:0 2px 16px #43158b25;
+}
+#root .portal-compact .compact-stats article {
+  background:linear-gradient(135deg,#fff 30%,#f4edff 100%);
+  border-color:#e4d8f7;
+  box-shadow:inset 0 1px 0 #fff;
+}
+#root .portal-compact .compact-stats strong {
+  color:#6425bd;
+  background:linear-gradient(145deg,#4b198d,#7c3bdd);
+  background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+#root .portal-compact .compact-overview-grid>.portal-card:first-child,
+#root .portal-compact .compact-program,
+#root .portal-compact .compact-profile-snapshot {
+  background:var(--portal-surface-gradient);
+  border-color:#ddcef2;
+}
+#root .portal-compact .portal-card,
+#root .portal-compact .compact-product {
+  box-shadow:0 2px 8px #43158b04,inset 0 1px 0 #ffffffb3;
+}
+#root .portal-compact .compact-shortcuts a {
+  background:linear-gradient(135deg,#fff 52%,#f8f4ff 100%);
+  border-color:#e5daf4;
+  transition:border-color .2s ease,background-color .2s ease;
+}
+#root .portal-compact .compact-shortcuts a:hover {
+  border-color:#b99bdf;
+  background:linear-gradient(135deg,#fff,#f0e7ff);
+}
+#root .portal-compact .portal-navigation a.active,
+#root .portal-compact .portal-button:not(.portal-button-outline) {
+  background:var(--portal-action-gradient);
+  border-color:#6727c8;
+  box-shadow:inset 0 1px 0 #ffffff24;
+  color:#fff;
+}
+#root .portal-compact progress::-webkit-progress-value {
+  background:linear-gradient(90deg,#5720b4,#8b5cf6);
+}
+#root .portal-compact progress::-moz-progress-bar {
+  background:linear-gradient(90deg,#5720b4,#8b5cf6);
+}
+#root .portal-compact .portal-avatar {
+  background:var(--portal-action-gradient);
+  color:#fff;border-color:#ffffff80;
+  box-shadow:0 0 0 3px #f1e9ff;
+}
+#root .portal-compact .portal-section-tabs button[aria-selected=true] {
+  background:linear-gradient(180deg,#fff,#f4edff);
+}
+#root .portal-app-sheet {
+  background:radial-gradient(ellipse at 100% 0%,#f2eaff,transparent 45%),#fff;
+}
+#root .portal-app-sheet nav a {
+  background:linear-gradient(135deg,#fff 40%,#f8f4ff);
+}
+@media(max-width:767px) {
+  #root .portal-compact .portal-app-header {
+    background:linear-gradient(110deg,#fff 50%,#f9f5ff 100%);
+  }
+  #root .portal-compact .portal-app-tabs {
+    background:linear-gradient(180deg,#fff,#fbf9ff);
+    border-top-color:#e3d7f5;
+  }
+  #root .portal-compact .portal-app-tabs>a,
+  #root .portal-compact .portal-app-tabs>button {background:transparent;}
+  #root .portal-compact .portal-app-tabs .active {
+    background:var(--portal-action-gradient);
+    box-shadow:inset 0 1px 0 #ffffff30;
+    color:#fff;
+  }
+  #root .portal-compact .portal-member-hero::after {
+    box-shadow:0 0 0 18px #ffffff06,0 0 0 36px #ffffff03;
+  }
+}
+@media(forced-colors:active) {
+  #root .portal-compact .compact-stats strong {
+    background:none;-webkit-text-fill-color:currentColor;
+  }
+}
+#root .portal-compact .portal-demo-banner {background:transparent;}
