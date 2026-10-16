@@ -12,13 +12,6 @@
 #root .portal-compact .portal-runner-art {display:block;position:absolute;inset:0;margin:auto;width:100%;height:100%;max-height:190px;overflow:visible;}
 #root .portal-compact .portal-program-progress {flex-shrink:0;}
 #root .portal-compact .portal-program-progress .compact-progress {margin-top:5px;}
-#root .portal-compact .portal-runner-toggle {
-  position:absolute;top:0;right:-4px;display:grid;place-items:center;width:44px;height:44px;
-  border:0;background:transparent;color:#6d28d9;cursor:pointer;border-radius:50%;
-}
-#root .portal-compact .portal-runner-toggle svg {width:22px;height:22px;padding:3px;box-sizing:content-box;border:1px solid #e2d4f5;border-radius:50%;background:#ffffffeb;}
-#root .portal-compact .portal-runner-toggle:hover svg {background:#f0e7ff;border-color:#ba9bdf;}
-#root .portal-compact .portal-runner-toggle:focus-visible {outline:2px solid #6d28d9;outline-offset:-4px;}
 #root .portal-compact .portal-runner-body {animation:portal-run-bounce .72s linear infinite;}
 #root .portal-compact .portal-runner-leg {transform-origin:92px 104px;animation:portal-run-stride .72s ease-in-out infinite;}
 #root .portal-compact .portal-runner-leg-back {animation-delay:-.36s;}
@@ -28,7 +21,6 @@
 #root .portal-compact .portal-runner-arm-back {animation-delay:-.36s;}
 #root .portal-compact .portal-runner-shadow {transform-origin:95px 164px;animation:portal-run-shadow .36s ease-in-out infinite;}
 #root .portal-compact .portal-runner-trail,#root .portal-compact .portal-runner-dash {animation:portal-run-trail .72s linear infinite;}
-#root .portal-compact .portal-program-runner.is-paused * {animation-play-state:paused;}
 @keyframes portal-run-bounce {0%,50%,100%{transform:translateY(0)}25%,75%{transform:translateY(-4px)}}
 @keyframes portal-run-stride {0%,100%{transform:rotate(-36deg)}50%{transform:rotate(36deg)}}
 @keyframes portal-run-knee {0%,100%{transform:rotate(-12deg)}30%{transform:rotate(15deg)}65%{transform:rotate(72deg)}}
@@ -40,7 +32,6 @@
   #root .portal-compact .portal-program-runner {flex-basis:38%;max-width:140px;}
   #root .portal-compact .portal-runner-art {max-height:130px;}
   #root .portal-compact .portal-program-scene .compact-program-name strong {font-size:13px;}
-  #root .portal-compact .portal-runner-toggle {top:-9px;right:-7px;}
 }
 @media(prefers-reduced-motion:reduce){
   #root .portal-compact .portal-program-runner * {animation:none!important;}
@@ -49,7 +40,6 @@
   #root .portal-compact .portal-runner-shin-back {transform:rotate(60deg);}
   #root .portal-compact .portal-runner-arm-front {transform:rotate(30deg);}
   #root .portal-compact .portal-runner-arm-back {transform:rotate(-30deg);}
-  #root .portal-compact .portal-runner-toggle {display:none;}
 }
 @media(min-width:651px){
   #root .portal-compact .portal-program-runner {align-self:center;height:clamp(84px,18dvh,180px);}

@@ -1,11 +1,10 @@
-import { useId, useState } from 'react';
+import { useId } from 'react';
 import './program-runner.css';
 
 export default function ProgramRunner() {
-  const [paused, setPaused] = useState(false);
   const id = useId().replaceAll(':','');
   const shirt = `${id}-shirt`, ground = `${id}-ground`;
-  return <div className={`portal-program-runner ${paused ? 'is-paused' : ''}`}>
+  return <div className="portal-program-runner">
     <svg className="portal-runner-art" viewBox="0 0 180 180" fill="none" aria-hidden="true" focusable="false">
       <defs><linearGradient id={shirt} x1="83" y1="65" x2="110" y2="107" gradientUnits="userSpaceOnUse"><stop stopColor="#9b71ed"/><stop offset="1" stopColor="#6024bd"/></linearGradient><radialGradient id={ground}><stop stopColor="#a78bfa" stopOpacity=".35"/><stop offset="1" stopColor="#a78bfa" stopOpacity="0"/></radialGradient></defs>
       <circle cx="99" cy="88" r="63" fill="#eee5fc"/>
@@ -27,6 +26,5 @@ export default function ProgramRunner() {
         <g className="portal-runner-arm portal-runner-arm-front" stroke="#7135b5" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round"><path d="M100 74l-1 21 16-9"/><circle cx="115" cy="86" r="4" fill="#f0e4ff" strokeWidth="2"/></g>
       </g>
     </svg>
-    <button type="button" className="portal-runner-toggle" onClick={() => setPaused(!paused)} aria-label={paused ? 'Resume running animation' : 'Pause running animation'} title={paused ? 'Resume animation' : 'Pause animation'}><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">{paused ? <path d="m7 4 9 6-9 6z"/> : <path d="M6 4h3v12H6zM12 4h3v12h-3z"/>}</svg></button>
   </div>;
 }
