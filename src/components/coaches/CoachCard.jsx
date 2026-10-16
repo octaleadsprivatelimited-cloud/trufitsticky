@@ -14,6 +14,7 @@ import CouplePlans from "./CouplePlans";
 import CoachProfileOverview from "./CoachProfileOverview";
 import BookingSteps from "./BookingSteps";
 import "./coachBooking.css";
+import "./coachProfileHero.css";
 import "../../styles/featured-coaching.css";
 import { fetchCatalog } from "./catalog";
 

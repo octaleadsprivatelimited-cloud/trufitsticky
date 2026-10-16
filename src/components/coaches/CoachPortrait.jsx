@@ -2,13 +2,13 @@ import { useState } from 'react';
 import SampleFilm from '../../assets/hero-video.mp4';
 import './coachPortrait.css';
 
-export default function CoachPortrait({ coach }) {
+export default function CoachPortrait({ coach, enablePreview = true }) {
   const [active, setActive] = useState(false);
   const [ready, setReady] = useState(false);
   const video = coach.video_url || SampleFilm;
   const stop = () => { setActive(false); setReady(false); };
   const preview = event => {
-    if (event.pointerType === 'touch' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!enablePreview || event.pointerType === 'touch' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     setActive(true);
   };
   return <div className="coach-portrait-media" onPointerEnter={preview} onPointerLeave={stop}>
