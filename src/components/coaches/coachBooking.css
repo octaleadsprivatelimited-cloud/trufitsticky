@@ -107,3 +107,29 @@
  #root .cpx-page .profile-mobile-specialties .profile-specialty-list li{font-size:11px;line-height:1.5;padding:6px 9px;border-radius:6px;border-color:var(--line);background:#faf7ff;color:var(--accent);overflow-wrap:anywhere;max-width:100%}
  #root .cpx-page .profile-desktop-specialties{display:none}
 }
+
+/* Compact duration choices keep prices close to their labels. */
+#root .cpx-page .package-options .cpx-plan-pill {
+ min-height:126px!important;height:auto!important;padding:28px 14px 14px!important;gap:6px;justify-content:center;
+}
+#root .cpx-page .package-options .cpx-plan-pill--active {padding:27px 13px 13px!important}
+#root .cpx-page .package-options .cpx-plan-pill-topline {margin-bottom:0!important}
+#root .cpx-page .package-options .cpx-plan-pill-name {font-size:21px!important}
+#root .cpx-page .package-options .cpx-plan-pill-price {font-size:19px!important;margin-top:0!important}
+#root .cpx-page .package-options .package-card-weekly {margin-top:0!important}
+#root .cpx-page .package-options .cpx-plan-pill--consultation {min-height:64px!important;padding:12px 14px!important;gap:5px}
+#root .cpx-page .package-options .cpx-plan-pill--consultation .cpx-plan-pill-name {font-size:14px!important}
+#root .cpx-page .package-options .cpx-plan-pill--consultation .cpx-plan-pill-price {font-size:17px!important}
+@media(max-width:650px){
+ #root .cpx-page .package-options .cpx-plan-pill {min-height:88px!important;padding:10px 8px!important;gap:5px;justify-content:center!important}
+ #root .cpx-page .package-options .cpx-plan-pill--active {padding:9px 7px!important}
+ #root .cpx-page .package-options .cpx-plan-pill-name {font-size:clamp(14px,3.9vw,17px)!important}
+ #root .cpx-page .package-options .cpx-plan-pill-price {font-size:clamp(14px,4vw,16px)!important;line-height:1.2}
+ #root .cpx-page .package-options .cpx-plan-pill-badge {top:0!important;left:8px!important;right:auto;transform:translateY(-50%)}
+ #root .cpx-page .package-options .cpx-plan-pill-status {margin-top:0}
+ #root .cpx-page .package-options .cpx-plan-pill--consultation {min-height:62px!important;padding:10px 12px!important;gap:4px 8px;align-items:center!important}
+ #root .cpx-page .package-options .cpx-plan-pill--consultation .cpx-plan-pill-name {font-size:13px!important}
+ #root .cpx-page .package-options .cpx-plan-pill--consultation .cpx-plan-pill-price {font-size:15px!important}
+ #root .cpx-page .package-choice-row {margin-bottom:12px}
+ #root .cpx-page .package-step {margin-bottom:9px}
+}
