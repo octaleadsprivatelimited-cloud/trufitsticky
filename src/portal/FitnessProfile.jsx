@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PortalPageHero from './PortalPageHero';
 import { CompactPanel, CompactTabs, PortalDialog } from './CompactControls';
 import { emptyProfile, PROFILE_KEY, readProfile, saveProfile } from './profile.mjs';
 import './member-wellness.css';
@@ -43,9 +44,9 @@ export default function FitnessProfile() {
     catch { setNotice('Your browser could not clear the saved profile. Please try again.'); return; }
     setValues({ ...emptyProfile }); setSaved({ values: { ...emptyProfile }, savedAt: null }); setClearing(false); setNotice('Your saved preview profile has been cleared.');
   }
-  return <div className="member-wellness compact-profile" data-clarity-mask="true">
-    <div className="portal-view-heading"><div><h2>Your fitness & diet</h2><p>One section at a time. All fields are optional.</p></div><button type="button" className="portal-quiet-button" onClick={() => setOptions(true)}>Options</button></div>
-    <div className="compact-profile-snapshot"><span>Weight <strong>{saved.values.weight ? `${saved.values.weight} kg` : 'Not added'}</strong></span><span>Height <strong>{saved.values.height ? `${saved.values.height} cm` : 'Not added'}</strong></span><span className="compact-profile-saved">{dirty ? 'Unsaved changes' : saved.savedAt ? 'Saved in this tab' : 'No saved profile'}</span></div>
+  return <div className="member-wellness compact-profile portal-subpage" data-clarity-mask="true">
+    <PortalPageHero type="profile" title="Made around you." description="Your fitness, food, and everyday routine."/>
+    <div className="compact-profile-snapshot"><span>Weight <strong>{saved.values.weight ? `${saved.values.weight} kg` : 'Not added'}</strong></span><span>Height <strong>{saved.values.height ? `${saved.values.height} cm` : 'Not added'}</strong></span><span className="compact-profile-saved">{dirty ? 'Unsaved changes' : saved.savedAt ? 'Saved in this tab' : 'No saved profile'}</span><button type="button" className="portal-quiet-button" onClick={() => setOptions(true)}>Options</button></div>
     <CompactTabs id="fitness" label="Profile section" value={active} items={profileSections} onChange={setActive}/>
     <form className="wellness-form compact-profile-form" onSubmit={save} autoComplete="off">
       <div className="compact-profile-content">
