@@ -22,7 +22,7 @@ import Point from "../../assets/card-plan-desc.svg";
  */
 
 const ICON_ASSETS = { point: Point };
-const LINK_STYLE = { color: "#9c27ff", textDecoration: "underline" };
+const LINK_STYLE = { color: "#6d28d9", textDecoration: "underline" };
 
 // Defense-in-depth: the backend already allowlists link hrefs, but never emit a
 // non-(internal | https) href — browsers execute javascript:/data: URIs in href.
@@ -44,7 +44,7 @@ function renderInline(text) {
     i % 2 === 1 ? (
       <span key={i} className="card-plan-desc-title" style={{ display: "inline" }}>
         {part}
-      </span>
+</span>
     ) : (
       <React.Fragment key={i}>{part}</React.Fragment>
     )
@@ -62,12 +62,12 @@ function BulletMarker({ style, icon, emoji, marker, index, bulletIcon }) {
         fontSize: "12px",
         fontWeight: 600,
         lineHeight: "normal",
-        color: "#000",
+        color: "#2e1065",
         flexShrink: 0,
       }}
     >
       {content}
-    </span>
+</span>
   );
   switch (style) {
     case "emoji":
@@ -137,10 +137,10 @@ function Block({ block, bulletIcon }) {
                   {" "}
                   <a href={safeHref(block.link.href)} style={LINK_STYLE}>
                     {block.link.label || block.link.href}
-                  </a>
+</a>
                 </>
               )}
-            </span>
+</span>
           </div>
         </div>
       );
@@ -166,7 +166,6 @@ function Block({ block, bulletIcon }) {
     default:
       // Unknown/forward-compatible block type — skip, never throw.
       if (import.meta && import.meta.env && import.meta.env.DEV) {
-        // eslint-disable-next-line no-console
         console.warn("[ProgramDescriptionRenderer] unknown block type:", block.type);
       }
       return null;

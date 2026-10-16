@@ -204,7 +204,7 @@ const LeadCapture = ({ leadData, setLeadData, onSubmit, coachCount, onClose }) =
           aria-label="Close form"
         >
           ×
-        </button>
+</button>
         <div className="leadcap__img">
           <div className="leadcap__det">
             <div className="leadcap__det-logo">
@@ -225,7 +225,7 @@ const LeadCapture = ({ leadData, setLeadData, onSubmit, coachCount, onClose }) =
           <form data-clarity-mask="true" onSubmit={handleSubmit}>
             <div className="leadcap__form-field">
               <label htmlFor="name">
-                Name<sup style={{ color: "red" }}>*</sup>
+                Name<sup style={{ color: "#6d28d9" }}>*</sup>
               </label>
               <input
                 ref={nameRef}
@@ -240,7 +240,7 @@ const LeadCapture = ({ leadData, setLeadData, onSubmit, coachCount, onClose }) =
               {errors.name && (
                 <p
                   style={{
-                    color: "red",
+                    color: "#6d28d9",
                     fontSize: "12px",
                     fontFamily: "Montserrat",
                     margin: "0",
@@ -252,7 +252,7 @@ const LeadCapture = ({ leadData, setLeadData, onSubmit, coachCount, onClose }) =
             </div>
             <div className="leadcap__form-field">
               <label htmlFor="email">
-                Email<sup style={{ color: "red" }}>*</sup>
+                Email<sup style={{ color: "#6d28d9" }}>*</sup>
               </label>
               <input
                 ref={emailRef}
@@ -267,7 +267,7 @@ const LeadCapture = ({ leadData, setLeadData, onSubmit, coachCount, onClose }) =
               {errors.email && (
                 <p
                   style={{
-                    color: "red",
+                    color: "#6d28d9",
                     fontSize: "12px",
                     fontFamily: "Montserrat",
                     margin: "0",
@@ -279,7 +279,7 @@ const LeadCapture = ({ leadData, setLeadData, onSubmit, coachCount, onClose }) =
             </div>
             <div className="leadcap__form-field">
               <label htmlFor="country_code">
-                Country Code<sup style={{ color: "red" }}>*</sup>
+                Country Code<sup style={{ color: "#6d28d9" }}>*</sup>
               </label>
               <select
                 ref={countryCodeRef}
@@ -310,7 +310,7 @@ const LeadCapture = ({ leadData, setLeadData, onSubmit, coachCount, onClose }) =
               {errors.country_code && (
                 <p
                   style={{
-                    color: "red",
+                    color: "#6d28d9",
                     fontSize: "12px",
                     fontFamily: "Montserrat",
                     margin: "0",
@@ -322,7 +322,7 @@ const LeadCapture = ({ leadData, setLeadData, onSubmit, coachCount, onClose }) =
             </div>
             <div className="leadcap__form-field">
               <label htmlFor="phone_number">
-                WhatsApp Number<sup style={{ color: "red" }}>*</sup>
+                WhatsApp Number<sup style={{ color: "#6d28d9" }}>*</sup>
               </label>
               <input
                 ref={phoneRef}
@@ -347,7 +347,7 @@ const LeadCapture = ({ leadData, setLeadData, onSubmit, coachCount, onClose }) =
               {errors.phone_number && (
                 <p
                   style={{
-                    color: "red",
+                    color: "#6d28d9",
                     fontSize: "12px",
                     fontFamily: "Montserrat",
                     margin: "0",
@@ -359,7 +359,7 @@ const LeadCapture = ({ leadData, setLeadData, onSubmit, coachCount, onClose }) =
             </div>
             <div className="leadcap__btn-sec">
               {errors.submit && (
-                <p style={{ color: "red", fontSize: "12px", fontFamily: "Montserrat", margin: "0 0 8px 0", textAlign: "center" }}>
+                <p style={{ color: "#6d28d9", fontSize: "12px", fontFamily: "Montserrat", margin: "0 0 8px 0", textAlign: "center" }}>
                   {errors.submit}
                 </p>
               )}
@@ -377,7 +377,7 @@ const LeadCapture = ({ leadData, setLeadData, onSubmit, coachCount, onClose }) =
                 }}
               >
                 <p>{loading ? "Submitting..." : "Reveal My Matches"}</p>
-              </button>
+</button>
             </div>
           </form>
         </div>

@@ -17,6 +17,7 @@ const ErrorPage = () => {
   // Check if it's a CSS preload error (non-critical)
   const isCssPreloadError = error?.message?.includes("preload CSS") || 
                            error?.message?.includes("Unable to preload");
+  const isNotFound = error?.status === 404;
 
   return (
     <div
@@ -28,7 +29,7 @@ const ErrorPage = () => {
         minHeight: "100vh",
         padding: "20px",
         textAlign: "center",
-        backgroundColor: "#efefef",
+        backgroundColor: "#ffffff",
       }}
     >
       <div
@@ -52,31 +53,31 @@ const ErrorPage = () => {
           fontFamily: "Montserrat, sans-serif",
           fontSize: "32px",
           fontWeight: 600,
-          color: "#333",
+          color: "#2e1065",
           margin: "0 0 20px 0",
         }}
       >
-        {isCssPreloadError ? "Loading..." : "Something went wrong"}
+        {isCssPreloadError ? "Loading..." : isNotFound ? "Page not found" : "Something went wrong"}
       </h1>
 
       {!isCssPreloadError && (
         <p
           style={{
-            color: "#666",
+            color: "#705b8c",
             fontFamily: "Open Sans, sans-serif",
             fontSize: "16px",
             margin: "0 0 30px 0",
             maxWidth: "500px",
           }}
         >
-          {error?.message || "An unexpected error occurred. Please try again."}
+          {isNotFound ? "This page doesn’t exist. Head back home to explore Tru Fit." : error?.message || "An unexpected error occurred. Please try again."}
         </p>
       )}
 
       {isCssPreloadError && (
         <p
           style={{
-            color: "#666",
+            color: "#705b8c",
             fontFamily: "Open Sans, sans-serif",
             fontSize: "16px",
             margin: "0 0 30px 0",
@@ -99,7 +100,7 @@ const ErrorPage = () => {
           onClick={handleRetry}
           style={{
             padding: "12px 24px",
-            backgroundColor: "#9c27ff",
+            backgroundColor: "#6d28d9",
             color: "white",
             border: "none",
             borderRadius: "24px",
@@ -113,14 +114,14 @@ const ErrorPage = () => {
           onMouseOut={(e) => (e.currentTarget.style.opacity = "1")}
         >
           Retry
-        </button>
+</button>
         <button
           onClick={handleGoHome}
           style={{
             padding: "12px 24px",
             backgroundColor: "transparent",
-            color: "#333",
-            border: "1px solid #333",
+            color: "#2e1065",
+            border: "1px solid #2e1065",
             borderRadius: "24px",
             cursor: "pointer",
             fontFamily: "Darker Grotesque, sans-serif",
@@ -132,7 +133,7 @@ const ErrorPage = () => {
           onMouseOut={(e) => (e.currentTarget.style.opacity = "1")}
         >
           Go to Home
-        </button>
+</button>
       </div>
 
       {import.meta.env.DEV && error && (
@@ -140,7 +141,7 @@ const ErrorPage = () => {
           style={{
             marginTop: "40px",
             padding: "20px",
-            backgroundColor: "#fff",
+            backgroundColor: "#ffffff",
             borderRadius: "8px",
             maxWidth: "600px",
             textAlign: "left",
@@ -155,7 +156,7 @@ const ErrorPage = () => {
             style={{
               whiteSpace: "pre-wrap",
               wordBreak: "break-word",
-              color: "#d32f2f",
+              color: "#6d28d9",
             }}
           >
             {JSON.stringify(error, null, 2)}

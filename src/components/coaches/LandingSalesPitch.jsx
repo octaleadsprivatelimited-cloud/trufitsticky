@@ -4,8 +4,8 @@ import { trackCoachEvent } from '../../analytics/analytics';
 export function LandingSalesPitch({ coach, content }) {
  const firstName = coach.name.split(' ')[0];
  return <section className="landing-pitch landing-wrap" aria-labelledby="landing-pitch-title">
-  <div className="landing-pitch-copy"><p className="eyebrow">Make your next start count</p><h2 id="landing-pitch-title">{content.pitchTitle}</h2><p>{content.pitch}</p><a className="button" href="#landing-plans" onClick={() => trackCoachEvent('cta_click', coach, {source:'landing_pitch'})}>Build my routine ↗</a><span className="landing-pitch-note">Explore the full price and support before you book.</span></div>
-  <div className="landing-shift"><div className="landing-shift-head"><span>Sound familiar?</span><span>Your next approach</span></div>{content.shifts.map(([friction, support]) => <div className="landing-shift-row" key={friction}><p>{friction}</p><span aria-hidden="true">→</span><p>{support}</p></div>)}<p className="landing-shift-foot">You bring the effort. {firstName} helps you give it direction.</p></div>
+  <div className="landing-pitch-copy"><p className="eyebrow">Make your next start count</p><h2 id="landing-pitch-title">{content.pitchTitle}</h2><p>{content.pitch}</p><a className="button" href="#landing-plans" onClick={() => trackCoachEvent('cta_click', coach, {source:'landing_pitch'})}>Build my routine</a><span className="landing-pitch-note">Explore the full price and support before you book.</span></div>
+  <div className="landing-shift"><div className="landing-shift-head"><span>Sound familiar?</span><span>Your next approach</span></div>{content.shifts.map(([friction, support]) => <div className="landing-shift-row" key={friction}><p>{friction}</p><p>{support}</p></div>)}<p className="landing-shift-foot">You bring the effort. {firstName} helps you give it direction.</p></div>
  </section>;
 }
 

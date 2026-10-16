@@ -2,14 +2,8 @@ import React from "react";
 import "../home/homePage.css"
 import "./coachPage.css"
 import Arrow from "../../assets/arrow.svg"
-import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
-    const navigate = useNavigate();
-
-    const findMyCoach = () => {
-        navigate("/findmycoach")
-    }
   return (
     <>
         <div className='hero__section'>

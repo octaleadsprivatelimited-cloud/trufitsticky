@@ -8,6 +8,10 @@
     {
       "source": "/coaches/:coachName",
       "destination": "/"
+    },
+    {
+      "source": "/refer/:code",
+      "destination": "/"
     }
   ],
   "headers": [
@@ -40,6 +44,42 @@
     },
     {
       "source": "/survey",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/portal/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/refer/:code",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/signin",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/team/:path*",
       "headers": [
         {
           "key": "X-Robots-Tag",

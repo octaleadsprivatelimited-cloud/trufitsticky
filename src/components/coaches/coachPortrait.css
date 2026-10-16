@@ -2,7 +2,7 @@
 .coach-portrait-media>img{display:block;width:100%;height:100%;object-fit:cover}
 .coach-portrait-media>video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:0;pointer-events:none;transition:opacity .2s}
 .coach-portrait-media>video.is-playing{opacity:1}
-.coach-sample-label{position:absolute;right:8px;bottom:8px;background:#20271edb;color:#fff;padding:4px 7px;border-radius:3px;font-size:8px;line-height:1.3;pointer-events:none}
+.coach-sample-label{position:absolute;right:8px;bottom:8px;background:#2e1065db;color:#ffffff;padding:4px 7px;border-radius:3px;font-size:8px;line-height:1.3;pointer-events:none}
 .directory-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .directory-grid .coach-photo{aspect-ratio:1.4}
 .directory-grid .coach-card-body{padding:17px 16px 16px}

@@ -1,70 +1,70 @@
 /* One brand accent, neutral surfaces, and a clear mobile enrolment hierarchy. */
-:root{--paper:#fff;--ink:#242329;--muted:#62616a;--line:#e6e5ea;--accent:#7135b5;--accent-soft:#f6f2fa;--sage:#f7f7f9;--lime:#f6f2fa;--lavender:#f6f2fa}
-body{background:#fff;background-image:none}
-#root .site-header,#root .landing-header{background:#fff;border-bottom:1px solid #e6e5ea}
+:root{--paper:#ffffff;--ink:#2e1065;--muted:#705b8c;--line:#ffffff;--accent:#6d28d9;--accent-soft:#ffffff;--sage:#ffffff;--lime:#ffffff;--lavender:#ffffff}
+body{background:#ffffff;background-image:none}
+#root .site-header,#root .landing-header{background:#ffffff;border-bottom:1px solid #ffffff}
 #root h1,#root h2{font-family:inherit;font-weight:700;letter-spacing:-.035em;line-height:1.15}
 #root h2{font-size:clamp(26px,3.5vw,42px)}
-#root .button,#root .contact-submit,#root .cpx-sticky-btn{background:#7135b5 !important;color:#fff !important;border:1px solid #7135b5 !important;border-radius:8px !important;box-shadow:none !important;min-height:46px !important;font-size:14px !important;font-weight:650 !important}
-#root .button:hover,#root .contact-submit:hover{background:#5e299a;transform:none;box-shadow:none}
-#root .button-outline{background:#fff;color:#7135b5}
-#root .feature-card,#root .journey-card,#root .featured-coaching-card,#root .plan-card,#root .start-banner,#root .contact-panel,#root .contact-details,#root .cpx-hero,#root .cpx-stats,#root .couple-panel{background:#f8f8fa !important;border:1px solid #e6e5ea !important;color:#242329 !important;box-shadow:none !important;transform:none !important;border-radius:12px !important}
-#root .feature-card p,#root .featured-coaching-card p{color:#62616a}
+#root .button,#root .contact-submit,#root .cpx-sticky-btn{background:#6d28d9 !important;color:#ffffff !important;border:1px solid #6d28d9 !important;border-radius:8px !important;box-shadow:none !important;min-height:46px !important;font-size:14px !important;font-weight:650 !important}
+#root .button:hover,#root .contact-submit:hover{background:#6d28d9;transform:none;box-shadow:none}
+#root .button-outline{background:#ffffff;color:#6d28d9}
+#root .feature-card,#root .journey-card,#root .featured-coaching-card,#root .plan-card,#root .start-banner,#root .contact-panel,#root .contact-details,#root .cpx-hero,#root .cpx-stats,#root .couple-panel{background:#ffffff !important;border:1px solid #ffffff !important;color:#2e1065 !important;box-shadow:none !important;transform:none !important;border-radius:12px !important}
+#root .feature-card p,#root .featured-coaching-card p{color:#705b8c}
 #root .hero-sticker,#root .photo-note,#root .banner-spark{display:none}
 #root .culture-title-row h1{font-size:clamp(36px,5.5vw,68px);line-height:1.1}
 #root .culture-title-row h1 em:before{display:none}
-#root .culture-title-row h1 em{color:#7135b5}
-#root .promise-strip{background:#f8f8fa;color:#62616a;border-block:1px solid #e6e5ea}
-#root .promise-strip span:before{color:#7135b5}
-#root .contact-shell{background:#f8f8fa;border-radius:12px}
+#root .culture-title-row h1 em{color:#6d28d9}
+#root .promise-strip{background:#ffffff;color:#705b8c;border-block:1px solid #ffffff}
+#root .promise-strip span:before{color:#6d28d9}
+#root .contact-shell{background:#ffffff;border-radius:12px}
 #root .contact-details-heading h2{font-size:28px}
-#root .section-rail{box-shadow:0 2px 12px #2423290c;border:1px solid #e6e5ea}
-#root .section-rail a.is-active{background:#7135b5;color:white}
-#root .sales-landing{background:#fff}
+#root .section-rail{box-shadow:0 2px 12px #2e10650c;border:1px solid #ffffff}
+#root .section-rail a.is-active{background:#6d28d9;color:white}
+#root .sales-landing{background:#ffffff}
 #root .sales-landing .landing-wrap{max-width:980px}
-#root .sales-landing .landing-hero{background:#fff;border-radius:0;padding:32px 0;grid-template-columns:1fr 240px;gap:32px}
+#root .sales-landing .landing-hero{background:#ffffff;border-radius:0;padding:32px 0;grid-template-columns:1fr 240px;gap:32px}
 #root .sales-landing .landing-hero h1{font-size:38px;margin:16px 0;line-height:1.15}
-#root .sales-landing .landing-hero h1 em{color:#242329;font-style:normal}
-#root .landing-coach-pill{background:#f6f2fa;border:0;color:#7135b5;font-size:12px}
+#root .sales-landing .landing-hero h1 em{color:#2e1065;font-style:normal}
+#root .landing-coach-pill{background:#ffffff;border:0;color:#6d28d9;font-size:12px}
 #root .landing-simple-portrait img{width:100%;height:240px;object-fit:cover;object-position:center 20%;border-radius:12px}
-#root .landing-intro{font-size:16px;color:#62616a}
-#root .landing-coach-note{font-size:14px;color:#62616a;max-width:460px}
+#root .landing-intro{font-size:16px;color:#705b8c}
+#root .landing-coach-note{font-size:14px;color:#705b8c;max-width:460px}
 #root .landing-price-teaser{font-size:13px}
 #root .sales-landing .landing-actions{gap:12px}
-#root .sales-landing .landing-whatsapp,#root .sales-landing .landing-sticky-chat{background:#fff;color:#242329;border:1px solid #e6e5ea;box-shadow:none;font-size:14px;font-weight:600;min-height:46px;padding:10px 14px;transform:none}
+#root .sales-landing .landing-whatsapp,#root .sales-landing .landing-sticky-chat{background:#ffffff;color:#2e1065;border:1px solid #ffffff;box-shadow:none;font-size:14px;font-weight:600;min-height:46px;padding:10px 14px;transform:none}
 #root .landing-whatsapp-mark{padding:0;background:none;width:23px;height:23px}
-#root .landing-assurance{font-size:12px;color:#62616a;padding-block:16px;border-color:#e6e5ea}
+#root .landing-assurance{font-size:12px;color:#705b8c;padding-block:16px;border-color:#ffffff}
 #root .sales-landing .landing-plans{padding-block:28px}
 #root .sales-landing .landing-section-heading h2{font-size:28px;margin:0}
 #root .sales-landing .landing-section-heading .eyebrow{display:none}
 #root .landing-plan-grid{gap:12px}
-#root .sales-landing .landing-plan{background:#fff;border:1px solid #e6e5ea;border-radius:10px;padding:20px;box-shadow:none}
-#root .sales-landing .landing-plan.is-selected{border:2px solid #7135b5;background:#f6f2fa;padding:19px;box-shadow:none}
+#root .sales-landing .landing-plan{background:#ffffff;border:1px solid #ffffff;border-radius:10px;padding:20px;box-shadow:none}
+#root .sales-landing .landing-plan.is-selected{border:2px solid #6d28d9;background:#ffffff;padding:19px;box-shadow:none}
 #root .landing-plan h3{font-size:22px}
-#root .landing-plan>strong,#root .landing-plan.is-selected>strong{font-size:25px;color:#242329}
-#root .landing-plan p,#root .landing-weekly{font-size:12px;color:#62616a}
-#root .landing-plan-badge{font-size:11px;color:#7135b5}
-#root .landing-plan input{accent-color:#7135b5}
-#root .landing-booking-row{background:#f8f8fa;border:1px solid #e6e5ea;border-radius:10px;padding:18px}
+#root .landing-plan>strong,#root .landing-plan.is-selected>strong{font-size:25px;color:#2e1065}
+#root .landing-plan p,#root .landing-weekly{font-size:12px;color:#705b8c}
+#root .landing-plan-badge{font-size:11px;color:#6d28d9}
+#root .landing-plan input{accent-color:#6d28d9}
+#root .landing-booking-row{background:#ffffff;border:1px solid #ffffff;border-radius:10px;padding:18px}
 #root .landing-booking-row strong{font-size:15px}
 #root .landing-booking-row p,#root .landing-consultation p{font-size:13px}
-#root .landing-consultation{background:#fff;border:0;border-bottom:1px solid #e6e5ea;border-radius:0;padding:20px 0}
-#root .landing-story{padding-block:28px;border-top:1px solid #e6e5ea;gap:24px}
-#root .landing-story-stat{background:#f8f8fa;border:1px solid #e6e5ea;border-radius:10px}
+#root .landing-consultation{background:#ffffff;border:0;border-bottom:1px solid #ffffff;border-radius:0;padding:20px 0}
+#root .landing-story{padding-block:28px;border-top:1px solid #ffffff;gap:24px}
+#root .landing-story-stat{background:#ffffff;border:1px solid #ffffff;border-radius:10px}
 #root .landing-story h2{font-size:26px}
 #root .landing-story blockquote{font-size:14px;line-height:1.7}
-#root .landing-benefit-grid article{background:#fff;border:1px solid #e6e5ea;border-radius:10px;padding:18px}
+#root .landing-benefit-grid article{background:#ffffff;border:1px solid #ffffff;border-radius:10px;padding:18px}
 #root .landing-benefit-grid h3{font-size:16px}
-#root .landing-benefit-grid p{font-size:14px;line-height:1.6;color:#62616a}
+#root .landing-benefit-grid p{font-size:14px;line-height:1.6;color:#705b8c}
 #root .landing-steps{padding-block:24px}
 #root .landing-steps strong{font-size:15px}
 #root .landing-steps p{font-size:13px}
-#root .landing-enquiry{background:#f8f8fa;border:1px solid #e6e5ea;padding:24px;gap:28px}
+#root .landing-enquiry{background:#ffffff;border:1px solid #ffffff;padding:24px;gap:28px}
 #root .landing-enquiry h2{font-size:28px}
 #root .landing-enquiry>div>p:not(.eyebrow){font-size:14px}
 #root .landing-faq .faq-list summary{font-size:15px;padding-block:18px}
 #root .landing-faq .faq-list p{font-size:14px;line-height:1.7}
-#root .landing-explore{font-size:13px;color:#62616a;gap:18px}
-#root .landing-sticky{background:#fff;border-top:1px solid #e6e5ea;box-shadow:0 -2px 12px #24232908}
+#root .landing-explore{font-size:13px;color:#705b8c;gap:18px}
+#root .landing-sticky{background:#ffffff;border-top:1px solid #ffffff;box-shadow:0 -2px 12px #2e106508}
 #root .landing-sticky>.landing-wrap{display:flex;gap:12px;align-items:center}
 #root .landing-sticky>.landing-wrap>div{margin-right:auto}
 @media(max-width:600px){
@@ -116,8 +116,8 @@ body{background:#fff;background-image:none}
  #root .landing-story-stat{padding:18px}
  #root .landing-story-stat strong{font-size:32px}
  #root .landing-small{font-size:12px}
- #root .landing-benefit-grid{grid-template-columns:1fr;gap:0;border:1px solid #e6e5ea;border-radius:10px;overflow:hidden}
- #root .landing-benefit-grid article{border:0;border-bottom:1px solid #e6e5ea;border-radius:0;padding:16px}
+ #root .landing-benefit-grid{grid-template-columns:1fr;gap:0;border:1px solid #ffffff;border-radius:10px;overflow:hidden}
+ #root .landing-benefit-grid article{border:0;border-bottom:1px solid #ffffff;border-radius:0;padding:16px}
  #root .landing-benefit-grid article:last-child{border-bottom:0}
  #root .landing-benefit-grid article>span{font-size:20px}
  #root .landing-benefit-grid h3{font-size:16px;margin:8px 0}
@@ -129,14 +129,14 @@ body{background:#fff;background-image:none}
  #root .sales-landing .landing-sticky .button{font-size:14px;min-height:46px}
 }
 #root .culture-hero-bottom{margin-bottom:24px}
-#root .culture-hero-bottom p{font-size:16px;color:#62616a}
-#root .cpx-plan-pill{background:#fff !important;border-color:#e6e5ea !important;box-shadow:none !important}
-#root .cpx-plan-pill--active{background:#f6f2fa !important;border-color:#7135b5 !important}
+#root .culture-hero-bottom p{font-size:16px;color:#705b8c}
+#root .cpx-plan-pill{background:#ffffff !important;border-color:#ffffff !important;box-shadow:none !important}
+#root .cpx-plan-pill--active{background:#ffffff !important;border-color:#6d28d9 !important}
 #root .cpx-hero-portrait{border-radius:12px !important;transform:none !important}
 #root .cpx-marquee{display:none !important}
-#root .cpx-selected-summary{background:#f8f8fa !important;border-color:#e6e5ea !important}
+#root .cpx-selected-summary{background:#ffffff !important;border-color:#ffffff !important}
 #root .coach-photo{border-radius:10px 10px 0 0}
-#root .featured-coaching-card:hover{transform:none;border-color:#7135b5}
+#root .featured-coaching-card:hover{transform:none;border-color:#6d28d9}
 @media(max-width:600px){
  #root .culture-hero-bottom{align-items:stretch;gap:16px;margin-bottom:24px}
  #root .culture-hero-bottom .button-row{display:flex;align-items:center;gap:16px}
@@ -153,13 +153,13 @@ body{background:#fff;background-image:none}
 #root .landing-plan h3{border:0;padding:0}
 @media(max-width:600px){#root .progress-film{height:210px}#root .progress-film-copy p{font-size:28px}}
 #root .cpx-page h1,#root .cpx-page h2,#root .cpx-page h3,#root .cpx-page .cpx-plan-pill-name{font-family:inherit !important}
-#root .cpx-sticky{background:#fff !important;color:#242329 !important;border-top:1px solid #e6e5ea !important;box-shadow:0 -2px 12px #24232908 !important}
-#root .cpx-sticky-name,#root .cpx-sticky-plan,#root .cpx-sticky-price{color:#242329 !important}
-#root .cpx-sticky .cpx-sticky-btn,#root .cpx-plan-selector-action{background:#7135b5 !important;color:#fff !important;border:1px solid #7135b5 !important;border-radius:8px !important;min-height:46px !important;font-size:14px !important;box-shadow:none !important}
-#root .couple-mode-switch button{background:#fff !important;border:1px solid #e6e5ea !important;border-radius:8px !important;box-shadow:none !important}
-#root .couple-mode-switch button[aria-pressed=true]{background:#f6f2fa !important;border:2px solid #7135b5 !important}
+#root .cpx-sticky{background:#ffffff !important;color:#2e1065 !important;border-top:1px solid #ffffff !important;box-shadow:0 -2px 12px #2e106508 !important}
+#root .cpx-sticky-name,#root .cpx-sticky-plan,#root .cpx-sticky-price{color:#2e1065 !important}
+#root .cpx-sticky .cpx-sticky-btn,#root .cpx-plan-selector-action{background:#6d28d9 !important;color:#ffffff !important;border:1px solid #6d28d9 !important;border-radius:8px !important;min-height:46px !important;font-size:14px !important;box-shadow:none !important}
+#root .couple-mode-switch button{background:#ffffff !important;border:1px solid #ffffff !important;border-radius:8px !important;box-shadow:none !important}
+#root .couple-mode-switch button[aria-pressed=true]{background:#ffffff !important;border:2px solid #6d28d9 !important}
 #root .package-person-icon,#root .package-step>span{display:none !important}
-#root .selection-dot{color:#7135b5 !important}
+#root .selection-dot{color:#6d28d9 !important}
 @media(max-width:600px){
  #root .section-rail{display:none}
  #root .package-heading h2{font-size:24px !important;font-family:inherit !important}
@@ -168,8 +168,8 @@ body{background:#fff;background-image:none}
  #root .couple-mode-switch strong{font-size:15px !important}
  #root .package-type-head{gap:12px !important}
  #root .cpx-plan-pill-row{display:grid !important;grid-template-columns:1fr !important;gap:10px !important}
- #root .cpx-plan-pill{display:grid !important;grid-template-columns:1fr auto !important;gap:7px 14px !important;text-align:left !important;padding:16px !important;min-height:100px !important;border:1px solid #e6e5ea !important;border-radius:10px !important}
- #root .cpx-plan-pill--active{border:2px solid #7135b5 !important;padding:15px !important}
+ #root .cpx-plan-pill{display:grid !important;grid-template-columns:1fr auto !important;gap:7px 14px !important;text-align:left !important;padding:16px !important;min-height:100px !important;border:1px solid #ffffff !important;border-radius:10px !important}
+ #root .cpx-plan-pill--active{border:2px solid #6d28d9 !important;padding:15px !important}
  #root .cpx-plan-pill-topline{display:block !important;grid-column:1 !important;grid-row:1 !important;padding:0 !important;margin:0 !important}
  #root .cpx-plan-pill-name{font-size:19px !important;font-family:inherit !important;line-height:1.3 !important}
  #root .cpx-plan-pill-mobile-label{display:none !important}
@@ -184,18 +184,18 @@ body{background:#fff;background-image:none}
  #root .cpx-selected-summary h3{font-size:22px !important}
 }
 
-#root .coach-specialties-list li{background:#f6f2fa;color:#5f2e92;border:1px solid #e5d9f0}
+#root .coach-specialties-list li{background:#ffffff;color:#6d28d9;border:1px solid #e5d8fa}
 #root .profile-sticker{display:none}
 #root .page-intro h1{font-size:44px;line-height:1.15;text-transform:none}
 #root .page-intro{padding-block:32px;gap:24px}
-#root .intro-aside{background:#f8f8fa;border:1px solid #e6e5ea;border-radius:10px;padding:18px}
+#root .intro-aside{background:#ffffff;border:1px solid #ffffff;border-radius:10px;padding:18px}
 @media(max-width:600px){
  #root .page-intro{padding-block:24px;gap:18px}
  #root .page-intro h1{font-size:32px;margin:12px 0 16px}
  #root .page-intro>div>p:not(.eyebrow){font-size:15px;line-height:1.65}
  #root .coach-intro .intro-aside{display:none}
  #root .directory-toolbar{gap:16px;padding-block:16px}
- #root .tier-tabs button[aria-pressed=true]{background:#7135b5;color:#fff}
+ #root .tier-tabs button[aria-pressed=true]{background:#6d28d9;color:#ffffff}
 }
 
-#root .progress-film-copy em{color:#fff}
+#root .progress-film-copy em{color:#ffffff}

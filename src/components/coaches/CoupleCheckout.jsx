@@ -1,5 +1,9 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth/AuthContext";
+import { saveDemoBooking } from "../../portal/booking.mjs";
+import { coachSlug } from "./catalog";
+import SessionPicker from "./SessionPicker";
 import { coupleRequest, loadPaymentSdk } from "./coupleApi";
 import "./couplePlans.css";
 import { trackCoachEvent } from "../../analytics/analytics";
@@ -7,9 +11,13 @@ import { trackCoachEvent } from "../../analytics/analytics";
 const blankPerson = domestic => ({ name: "", email: "", phone_number: domestic ? "+91" : "+", residence: domestic ? "India" : "" });
 
 export default function CoupleCheckout({ coach, plan, waitlist = false, onClose }) {
+  const { user } = useAuth();
+  const previewMode = Boolean(user?.isPreview || coach.preview);
+  const [slot, setSlot] = useState({ date: "", time: "" });
+  const [previewPayment, setPreviewPayment] = useState(false);
   const [waitlistMode, setWaitlistMode] = useState(waitlist);
   const domestic = plan.currency === "INR";
-  const [people, setPeople] = useState(() => [blankPerson(domestic), blankPerson(domestic)]);
+  const [people, setPeople] = useState(() => [{ ...blankPerson(domestic), name: user?.name || "", email: user?.email || "" }, blankPerson(domestic)]);
   const [consent, setConsent] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -51,6 +59,7 @@ export default function CoupleCheckout({ coach, plan, waitlist = false, onClose 
       setError("Both participants must be in the selected pricing region. Select Individual for a mixed-region purchase.");
       return;
     }
+    if (previewMode) { setPreviewPayment(true); return; }
     setBusy(true);
     try {
       if (waitlistMode) {
@@ -100,6 +109,11 @@ export default function CoupleCheckout({ coach, plan, waitlist = false, onClose 
     }
   };
 
+  function previewWelcome() {
+    const booking = { name: people[0].name, coachName: coach.name, coachSlug: coachSlug(coach), coachImage: coach.image, planName: `${plan.duration_weeks}-week couple coaching`, slot };
+    try { saveDemoBooking(booking); } catch { /* Route state also carries this preview. */ }
+    navigate('/payment/success?demo=1', { state: { booking: { ...booking, isPreview: true, reference: 'TF-DEMO-BOOKING' } } });
+  }
   return (
     <dialog ref={dialog} className="couple-dialog" aria-labelledby={`${formId}-title`} onCancel={event => { event.preventDefault(); if (!busy) onClose(); }}>
       <div className="couple-dialog-heading">
@@ -107,8 +121,9 @@ export default function CoupleCheckout({ coach, plan, waitlist = false, onClose 
           <h2 id={`${formId}-title`}>{waitlistMode ? "Join the couple waitlist" : "Your journey, together"}</h2></div>
         <button type="button" className="couple-close" onClick={onClose} disabled={busy} aria-label="Close couple checkout">×</button>
       </div>
-      {complete ? <div role="status"><p>You’re on the couple waitlist. We’ll contact you when two slots are available.</p><button type="button" className="couple-primary" onClick={onClose}>Done</button></div> : (
+      {previewPayment ? <div className="member-auth-card"><span className="member-access-badge">UI preview</span><h2>{waitlistMode ? 'Waitlist preview' : 'Ready for payment'}</h2><p>{waitlistMode ? 'Your details are ready. This preview does not submit a real waitlist request.' : 'Your couple plan and session are ready. No payment or reservation will be made.'}</p>{!waitlistMode && <button type="button" className="member-primary" onClick={previewWelcome}>Preview booking confirmation</button>}<button type="button" className="member-text-button" onClick={() => setPreviewPayment(false)}>Edit details</button></div> : complete ? <div role="status"><p>You’re on the couple waitlist. We’ll contact you when two slots are available.</p><button type="button" className="couple-primary" onClick={onClose}>Done</button></div> : (
         <form data-clarity-mask="true" data-form-id={waitlistMode ? "couple_waitlist" : "couple_enrollment"} onSubmit={submit}>
+          {previewMode && <p className="couple-footnote">UI preview. No details are sent and no payment is taken.</p>}
           <p className="couple-intro">{waitlistMode ? "Leave the payer’s contact details. A couple plan needs two coaching slots." : "One payment. Two individual coaching plans. The same coach and start date."}</p>
           {!waitlistMode && <p className="couple-summary">{new Intl.NumberFormat("en-IN", { style: "currency", currency: plan.currency, maximumFractionDigits: 2 }).format(Number(plan.price))} total for both participants</p>}
           {error && <p className="couple-error" ref={errorRef} role="alert" tabIndex={-1}>{error}</p>}
@@ -129,9 +144,10 @@ export default function CoupleCheckout({ coach, plan, waitlist = false, onClose 
             ))}
           </div>
           {!waitlistMode && <label className="couple-consent"><input type="checkbox" checked={consent} required disabled={busy || !!reference} onChange={event => setConsent(event.target.checked)} /><span>I confirm both participants consent to enrollment and accept the <a href="/terms-conditions" target="_blank" rel="noreferrer">program terms</a> and <a href="/refund-policy" target="_blank" rel="noreferrer">refund policy</a>.</span></label>}
+          {previewMode && !waitlistMode && <SessionPicker slot={slot} onChange={setSlot}/>}
           {reference && <p className="couple-reference">Order reference: {reference}. <a href={`/payment/couple?enrollment_id=${reference}`}>Check payment status</a></p>}
           <button type="submit" className="couple-primary" disabled={busy}>{busy ? "Preparing checkout…" : waitlistMode ? "Join waitlist" : reference ? "Reopen payment" : "Continue to secure payment"}</button>
-          {!waitlistMode && <small className="couple-footnote">Two slots are reserved for 30 minutes. Your program begins seven days after payment confirmation. Each participant receives their own onboarding email.</small>}
+          {!waitlistMode && !previewMode && <small className="couple-footnote">Two slots are reserved for 30 minutes. Your program begins seven days after payment confirmation. Each participant receives their own onboarding email.</small>}
         </form>
       )}
     </dialog>

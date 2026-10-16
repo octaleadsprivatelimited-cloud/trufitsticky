@@ -3,28 +3,27 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { trackCoachEvent } from "../../analytics/analytics";
 import Point from "../../assets/card-plan-desc.svg";
+import { useAuth } from "../../auth/AuthContext";
+import { AuthDialog } from "../../auth/AuthCard";
+import { coachSlug } from "./catalog";
 import ClientPaymentForm from "./ClientPaymentForm";
 import ProgramDescriptionRenderer from "./ProgramDescriptionRenderer";
 import ProgramBenefit from "./ProgramBenefit";
 import SharedContext from "../../context/SharedContext";
 import CouplePlans from "./CouplePlans";
 import CoachProfileOverview from "./CoachProfileOverview";
+import BookingSteps from "./BookingSteps";
+import "./coachBooking.css";
 import "../../styles/featured-coaching.css";
 import { fetchCatalog } from "./catalog";
 
 /**
- * CoachCard — public coach profile page.
- *
- * Layout mirrors the Coach.dc reference design (breadcrumb → hero → about →
- * approach/journey/expertise → weekly plans grid → member-feedback marquee →
- * sticky CTA) while staying 100% data-driven: region detection, per-tier
- * pricing, capacity → waitlist, the consultation flow, the payment form and the
- * admin-authored program descriptions are all preserved from the previous
- * implementation. The presentational classes are namespaced `cpx-` (see
- * coachPage.css); the legacy `.card-plan-*` classes are reused only inside the
- * collapsible "What's included" panels via ProgramDescriptionRenderer.
+ * Public coach profile and booking flow. Plans open first; biography and reviews
+ * share the same tabs. Pricing, capacity, waitlists, program descriptions, and
+ * payment selections are preserved while moving between views.
  */
-const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => {
+const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initialCheckout = false }) => {
+  const { user } = useAuth();
   const [activePlan, setActivePlan] = useState(initialPlan); // landing pages may carry an existing catalogue selection
   const [couplePlans, setCouplePlans] = useState([]);
   const [coupleMode, setCoupleMode] = useState(initialCoupleMode);
@@ -43,13 +42,14 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
   const [waitingListSuccess, setWaitingListSuccess] = useState(false);
 
   const [siteSettings, setSiteSettings] = useState(null);
+  const [pricingLoading, setPricingLoading] = useState(true);
   const [planIdMap, setPlanIdMap] = useState({});
   const [analyticsPlanIds, setAnalyticsPlanIds] = useState({});
   const [coachingPlanNames, setCoachingPlanNames] = useState([]);
 
   // Controlled "What's included" panel: expanded by default; the hero "Check
   // what's included here" link scrolls to it and the user can still toggle it.
-  const [includedOpen, setIncludedOpen] = useState(true);
+  const [includedOpen, setIncludedOpen] = useState(false);
   const includedRef = useRef(null);
   const allPlansCloseRef = useRef(null);
 
@@ -69,6 +69,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
   // True once the visitor manually selects a plan. Stops the auto-default and
   // region-sync effects from overriding their choice.
   const userPickedRef = useRef(Boolean(initialPlan));
+  const checkoutOpenedRef = useRef(false);
 
   const navigate = useNavigate();
   const baseUrl = coach?.livePreview ? '/catalog-preview' : import.meta.env.VITE_BASE_URL;
@@ -105,6 +106,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
   // Fetch site settings, plans and program content.
   useEffect(() => {
     const fetchDynamicData = async () => {
+      setPricingLoading(true);
       try {
         const [settingsRes, plansRes, contentRes] = await Promise.all([
           fetch(`${baseUrl}/admin_functions/site-settings/`),
@@ -217,6 +219,8 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
         }
       } catch (err) {
         console.error("Error fetching dynamic data:", err);
+      } finally {
+        setPricingLoading(false);
       }
     };
 
@@ -296,6 +300,17 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
     setShowRegionSelector(false);
     setLocationError("");
   };
+
+  useEffect(() => {
+    if (!initialCheckout || checkoutOpenedRef.current || !activePlan || !countryCode) return;
+    const level = coach?.coach_level?.toLowerCase();
+    if (!pricingRef.current[level]?.[countryCode]?.[activePlan]) return;
+    checkoutOpenedRef.current = true;
+    const weeks = String(activePlan).match(/\d+/)?.[0];
+    const capacity = weeks && coach.dynamic_capacities?.[weeks]?.[countryCode.toLowerCase()];
+    if (!coach.preview && capacity?.max != null && Number(capacity.current) >= Number(capacity.max)) setShowWaitingList(true);
+    else setShowForm(true);
+  }, [initialCheckout, activePlan, countryCode, siteSettings, coach]);
 
   if (!coach) return null;
 
@@ -400,7 +415,6 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
   // form directly (the separate plan-selection page has been removed). If no
   // plan is priced yet (region unresolved), nudge the visitor to the plans grid.
   const goEnroll = () => {
-    if (coach.preview) return;
     if (isCoupleMode) {
       scrollToSection(document.getElementById('cpx-plans'));
       return;
@@ -449,7 +463,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
             <div className="card-plan-desc">
               <span className="card-plan-desc-text">
                 Your Tru Fit coaching experience combines personalized guidance from your coach with our AI-powered client app, giving you everything you need to stay consistent, accountable, and on track.
-              </span>
+</span>
             </div>
           </div>
           <div className="card-plan-desc-sec">
@@ -486,7 +500,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
             <div className="card-plan-desc">
               <span className="card-plan-desc-text">
                 Everything you need is in one place, simple, structured, and tailored to you.
-              </span>
+</span>
             </div>
           </div>
         </div>
@@ -505,8 +519,8 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
             <div className="card-plan-desc">
               <span className="card-plan-desc-text">
                 For more information, refer to our{" "}
-                <a href="/terms-conditions" style={{ color: "#9c27ff", textDecoration: "underline" }}>Terms & Conditions</a>
-              </span>
+                <a href="/terms-conditions" style={{ color: "#6d28d9", textDecoration: "underline" }}>Terms & Conditions</a>
+</span>
             </div>
           </div>
         </div>
@@ -535,7 +549,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
           <div className="card-plan-desc">
             <span className="card-plan-desc-text">
               This call is perfect for those exploring whether a full coaching program is the right fit for their goals.
-            </span>
+</span>
           </div>
         </div>
 
@@ -546,7 +560,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
             <div className="card-plan-desc">
               <p className="card-plan-desc-title">Schedule Instantly:<span className="card-plan-desc-text">
                 {" "}Once your payment is complete, you'll be automatically redirected to our Calendly page to schedule your consultation slot with your chosen coach.
-              </span></p>
+</span></p>
             </div>
           </div>
           <div className="card-plan-desc-sec">
@@ -554,7 +568,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
             <div className="card-plan-desc">
               <p className="card-plan-desc-title">Confirm Your Booking:<span className="card-plan-desc-text">
                 {" "}You'll receive a confirmation email with the meeting details and a calendar invite.
-              </span></p>
+</span></p>
             </div>
           </div>
           <div className="card-plan-desc-sec">
@@ -562,7 +576,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
             <div className="card-plan-desc">
               <p className="card-plan-desc-title">Meet Your Coach:<span className="card-plan-desc-text">
                 {" "}At your chosen time, join your 1-on-1 consultation to discuss your fitness goals, questions, and next steps.
-              </span></p>
+</span></p>
             </div>
           </div>
         </div>
@@ -574,7 +588,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
             <div className="card-plan-desc">
               <span className="card-plan-desc-text">
                 This is a <span className="card-plan-desc-title">one-time payment</span> for a single consultation session.
-              </span>
+</span>
             </div>
           </div>
           <div className="card-plan-desc-sec">
@@ -582,7 +596,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
             <div className="card-plan-desc">
               <span className="card-plan-desc-text">
                 <span className="card-plan-desc-title">No refunds</span> are provided for consultation calls.
-              </span>
+</span>
             </div>
           </div>
           <div className="card-plan-desc-sec">
@@ -590,7 +604,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
             <div className="card-plan-desc">
               <span className="card-plan-desc-text">
                 Please ensure you're available at your selected time and have a stable network connection.
-              </span>
+</span>
             </div>
           </div>
         </div>
@@ -600,8 +614,8 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
             <div className="card-plan-desc">
               <span className="card-plan-desc-text">
                 For more information, refer to our{" "}
-                <a href="/terms-conditions" style={{ color: "#9c27ff", textDecoration: "underline" }}>Terms & Conditions</a>
-              </span>
+                <a href="/terms-conditions" style={{ color: "#6d28d9", textDecoration: "underline" }}>Terms & Conditions</a>
+</span>
             </div>
           </div>
         </div>
@@ -635,24 +649,24 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
         {recommended && <span className="cpx-plan-pill-badge">Coach recommended</span>}
         <span className="selection-dot" aria-hidden="true"/>
         <span className="cpx-plan-pill-topline">
-          <span className="cpx-plan-pill-name">{weeks ? `${weeks} Weeks` : plan}</span>
-        </span>
+          <span className="cpx-plan-pill-name">{weeks ? `${weeks} weeks` : plan}</span>
+</span>
         <span className="cpx-plan-pill-mobile-label" aria-hidden="true">
           <strong>{weeks || plan}</strong>
           <span>{weeks ? "week" : "coaching"}</span>
-        </span>
+</span>
         <span className="package-card-caption">{Number(weeks) <= 12 ? 'Build your foundation' : Number(weeks) <= 24 ? 'Find your rhythm' : 'Keep moving forward'}</span>
         <span className="cpx-plan-pill-price">
           {cardPrice || "Unavailable"}
           {cardPrice && <small> total</small>}
-        </span>
+</span>
         {weeklyRateForPlan(plan) && <span className="package-card-weekly">About {currencySymbol}{Math.round(weeklyRateForPlan(plan)).toLocaleString()} / week</span>}
         {full ? (
           <span className="cpx-plan-pill-status cpx-plan-pill-status--full">Join waitlist</span>
         ) : remaining !== null && remaining > 0 && remaining <= 3 ? (
           <span className="cpx-plan-pill-status">{remaining} slot{remaining === 1 ? "" : "s"} left</span>
         ) : null}
-      </button>
+</button>
     );
   };
 
@@ -679,20 +693,20 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
         {recommended && <span className="cpx-plan-pill-badge">Coach recommended</span>}
         <span className="selection-dot" aria-hidden="true"/>
         <span className="cpx-plan-pill-topline">
-          <span className="cpx-plan-pill-name">Consultation Call</span>
-        </span>
+          <span className="cpx-plan-pill-name">Consultation call</span>
+</span>
         <span className="cpx-plan-pill-mobile-label" aria-hidden="true">
           <strong>20</strong>
           <span>min call</span>
-        </span>
+</span>
         <span className="cpx-plan-pill-price">
           {cPrice || "Unavailable"}
           {cPrice && <small> one-time</small>}
-        </span>
+</span>
         <span className="cpx-plan-pill-status">
           {consultationAvailable ? `20 min with ${firstName}` : "Not available"}
-        </span>
-      </button>
+</span>
+</button>
     );
   };
 
@@ -712,25 +726,26 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
     ? "Join waitlist"
     : activePlan === "Consultation Call"
       ? (consultationAvailable ? "Book consultation" : "View other coaches")
-      : "Enroll now";
+      : "Continue to details";
 
   return (
     <div className="cpx-page">
-      <CoachProfileOverview coach={coach} testimonials={testimonials} certifications={certChips}/>
+      <CoachProfileOverview coach={coach} testimonials={testimonials} certifications={certChips}>
 
       {/* WEEKLY PLANS */}
       <section className="cpx-section" id="cpx-plans" tabIndex={-1}>
         {coach.preview && !coach.livePreview && <div className="cpx-pad catalogue-note"><strong>Your coaching plan</strong><p>Personalized workouts, nutrition guidance, and regular check-ins. Connect the backend to view current plans and subscription prices.</p></div>}
         <div className="cpx-pad">
-          <div className="package-heading" data-reveal><div><p className="eyebrow">Your next chapter starts here</p><h2>Choose your coaching plan.</h2></div><p>Clear options. A price up front.<br/>Support built around your everyday.</p></div>
-          <div className="package-type-head"><p className="package-step"><span>01</span> Choose who’s joining</p>{countryCode && !loadingLocation && <label className="package-region">Pricing region<select value={countryCode} onChange={event => handleManualRegionSelect(event.target.value === 'DOMESTIC' ? 'india' : 'international')}><option value="DOMESTIC">India · INR</option><option value="INTERNATIONAL">International · USD</option></select></label>}</div>
+          <BookingSteps current={1}/><div className="package-heading"><div><p className="eyebrow">Your next chapter starts here</p><h2>Choose your coaching plan.</h2></div><p>Clear options. A price up front.<br/>Support built around your everyday.</p></div>
+          <div className="package-choice-row"><div className="package-type-head">{countryCode && !loadingLocation && <label className="package-region">Pricing region<select value={countryCode} onChange={event => handleManualRegionSelect(event.target.value === 'DOMESTIC' ? 'india' : 'international')}><option value="DOMESTIC">India · INR</option><option value="INTERNATIONAL">International · USD</option></select></label>}</div>
           <div className="couple-mode-switch" aria-label="Coaching package">
-            <button type="button" aria-pressed={!isCoupleMode} onClick={() => { setCoupleMode(false); trackCoachEvent('plan_interest', coach, { plan_type: 'individual', pricing_region: countryCode }); }}><span className="package-person-icon" aria-hidden="true">01</span><span><strong>Individual</strong><small>A plan built just for you</small></span><span className="selection-dot" aria-hidden="true"/></button>
-            <button type="button" aria-pressed={isCoupleMode} onClick={() => { setCoupleMode(true); trackCoachEvent('plan_interest', coach, { plan_type: 'couple', pricing_region: countryCode }); }}><span className="package-person-icon" aria-hidden="true">02</span><span><strong>Couple</strong><small>Two people. Individual goals.</small></span><span className="selection-dot" aria-hidden="true"/></button>
+            <button type="button" aria-pressed={!isCoupleMode} onClick={() => { setCoupleMode(false); trackCoachEvent('plan_interest', coach, { plan_type: 'individual', pricing_region: countryCode }); }}><span><strong>Individual</strong><small>A plan built just for you</small></span><span className="selection-dot" aria-hidden="true"/></button>
+            <button type="button" aria-pressed={isCoupleMode} onClick={() => { setCoupleMode(true); trackCoachEvent('plan_interest', coach, { plan_type: 'couple', pricing_region: countryCode }); }}><span><strong>Couple</strong><small>Two people. Individual goals.</small></span><span className="selection-dot" aria-hidden="true"/></button>
           </div>
-          {loadingLocation ? <p className="cpx-plan-selector-loading" role="status">Finding your pricing region…</p> : (!countryCode || showRegionSelector) ? <div className="cpx-region"><p>Select your region to view pricing</p><div className="cpx-region-btns"><button type="button" onClick={() => handleManualRegionSelect('india')}>India · INR</button><button type="button" onClick={() => handleManualRegionSelect('international')}>International · USD</button></div>{locationError && <p role="alert">{locationError}</p>}</div> : isCoupleMode ? <CouplePlans coach={coach} plans={activeCouplePlans} region={countryCode} /> : (
+          </div>
+          {loadingLocation ? <p className="cpx-plan-selector-loading" role="status">Finding your pricing region…</p> : (!countryCode || showRegionSelector) ? <div className="cpx-region"><p>Select your region to view pricing</p><div className="cpx-region-btns"><button type="button" onClick={() => handleManualRegionSelect('india')}>India · INR</button><button type="button" onClick={() => handleManualRegionSelect('international')}>International · USD</button></div>{locationError && <p role="alert">{locationError}</p>}</div> : pricingLoading ? <p role="status" className="cpx-prices-loading">Loading coaching plans…</p> : isCoupleMode ? <CouplePlans coach={coach} plans={activeCouplePlans} region={countryCode} /> : (
             <div className="cpx-plan-selector" hidden={coach.preview && !coach.livePreview}>
-              <p className="package-step"><span>02</span> Choose your timeline</p>
+              <p className="package-step">Choose your timeline</p>
               <div className="package-body">
                 <div className="package-options"><div className="cpx-plan-pill-row">
                   {hasCoachingPlans && inlineCoachingPlanNames.map(plan => renderCoachingPill(plan))}
@@ -741,7 +756,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
                   <p className="summary-price">{hasSelectedPrice ? price : '—'}{hasSelectedPrice && <small> total</small>}</p>
                   <p className="summary-rate">{activePlan === 'Consultation Call' ? 'One 20-minute consultation' : selectedWeeklyPrice ? `About ${selectedWeeklyPrice} / week` : 'Select a priced plan to continue'}</p>
                   <ul className="summary-inclusions">{(activePlan === 'Consultation Call' ? ['Talk through your goals', 'Meet your coach', 'Understand your next steps'] : ['Personalized workouts', 'Nutrition guidance', 'Regular check-ins', 'Ongoing coach support']).map(item => <li key={item}>{item}</li>)}</ul>
-                  <button type="button" className="cpx-plan-selector-action" disabled={!hasSelectedPrice || coach.preview} onClick={goEnroll}>{coach.preview ? 'Booking disabled in preview' : selectedActionLabel} <span aria-hidden="true">↗</span></button>
+                  <button type="button" className="cpx-plan-selector-action" disabled={!hasSelectedPrice} onClick={goEnroll}>{selectedActionLabel}</button>
                   <p className="summary-note">{activePlan === 'Consultation Call' ? 'A single consultation. Schedule your call after payment.' : 'One payment. A fixed-duration program. No automatic renewal.'}</p>
                 </aside>
               </div>
@@ -770,9 +785,10 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
           )}
         </div>
       </section>
+      </CoachProfileOverview>
 
-      <section className="profile-onboarding cpx-pad" id="coach-next" tabIndex={-1} data-reveal><p className="eyebrow">A little structure from day one</p><h2>WHAT HAPPENS <em>NEXT.</em></h2><div className="steps-grid">{[['1','Make it official','Choose an available package and complete your enrolment.'],['2','Tell us about you','Complete your intake so your coach understands your goals and routine.'],['3','Build your rhythm','Your coach reviews your details, then helps you get started with a personal plan.']].map(([number,title,copy]) => <div key={number}><span className="step-number">{number}</span><h3>{title}</h3><p>{copy}</p></div>)}</div></section>
-      <section id="coach-faq" tabIndex={-1} className="profile-faq cpx-pad" data-reveal><div><p className="eyebrow">Before you begin</p><h2>GOOD TO <em>KNOW.</em></h2></div><div className="faq-list">{[['What’s different about couple coaching?', 'Two people enrol with one coach and a shared start date. Each person receives individual guidance. The displayed couple price covers both participants.'],['Is the weekly price a subscription?', 'No. The weekly price helps compare programs. You pay the full program total once, with no automatic renewal.'],['Can I speak to my coach first?', 'Choose the 20-minute consultation when it is available for your coach and pricing region. You can schedule the call after payment.'],['What if my coach’s plan is full?', 'Available programs can be booked. When a plan is full, you can join its waitlist. Couple programs require two available places.']].map(([question,answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div></section>
+      <section className="profile-onboarding cpx-pad" id="coach-next" tabIndex={-1} data-reveal><p className="eyebrow">A little structure from day one</p><h2>What happens <em>next.</em></h2><div className="steps-grid">{[['1','Make it official','Choose an available package and complete your enrolment.'],['2','Tell us about you','Complete your intake so your coach understands your goals and routine.'],['3','Build your rhythm','Your coach reviews your details, then helps you get started with a personal plan.']].map(([number,title,copy]) => <div key={number}><span className="step-number">{number}</span><h3>{title}</h3><p>{copy}</p></div>)}</div></section>
+      <section id="coach-faq" tabIndex={-1} className="profile-faq cpx-pad" data-reveal><div><p className="eyebrow">Before you begin</p><h2>Good to <em>know.</em></h2></div><div className="faq-list">{[['What’s different about couple coaching?', 'Two people enrol with one coach and a shared start date. Each person receives individual guidance. The displayed couple price covers both participants.'],['Is the weekly price a subscription?', 'No. The weekly price helps compare programs. You pay the full program total once, with no automatic renewal.'],['Can I speak to my coach first?', 'Choose the 20-minute consultation when it is available for your coach and pricing region. You can schedule the call after payment.'],['What if my coach’s plan is full?', 'Available programs can be booked. When a plan is full, you can join its waitlist. Couple programs require two available places.']].map(([question,answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div></section>
 
       {/* STICKY BOTTOM CTA */}
       {!isCoupleMode && <div className="cpx-sticky">
@@ -786,9 +802,9 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
               </div>
             ) : null}
           </div>
-          <button type="button" className="cpx-sticky-btn" disabled={!hasSelectedPrice || coach.preview} onClick={goEnroll}>
-            {coach.preview ? 'Local preview' : selectedActionLabel}
-          </button>
+          <button type="button" className="cpx-sticky-btn" disabled={!hasSelectedPrice} onClick={goEnroll}>
+            {selectedActionLabel}
+</button>
         </div>
       </div>}
 
@@ -819,7 +835,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
                 aria-label="Close all plans"
               >
                 &times;
-              </button>
+</button>
             </header>
 
             <div className="cpx-all-plans-grid">
@@ -838,24 +854,24 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
       {showWaitingList && (
         <div style={{
           position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
-          background: "rgba(0,0,0,0.5)", zIndex: 9999,
+          background: "rgba(46,16,101,0.5)", zIndex: 9999,
           display: "flex", alignItems: "center", justifyContent: "center",
           padding: "20px",
         }} onClick={(e) => { if (e.target === e.currentTarget) setShowWaitingList(false); }}>
           <div style={{
-            background: "#fff", borderRadius: "16px", padding: "32px",
+            background: "#ffffff", borderRadius: "16px", padding: "32px",
             maxWidth: "480px", width: "100%", position: "relative",
             fontFamily: "Open Sans",
           }}>
             <button onClick={() => setShowWaitingList(false)} style={{
               position: "absolute", top: "12px", right: "16px",
               background: "none", border: "none", fontSize: "24px",
-              cursor: "pointer", color: "#999",
+              cursor: "pointer", color: "#705b8c",
             }}>×</button>
-            <h3 style={{ fontFamily: "Montserrat", fontSize: "20px", fontWeight: "700", marginBottom: "6px", color: "#1a1a1a" }}>
+            <h3 style={{ fontFamily: "Montserrat", fontSize: "20px", fontWeight: "700", marginBottom: "6px", color: "#2e1065" }}>
               Join Waiting List
             </h3>
-            <p style={{ fontSize: "14px", color: "#666", marginBottom: "20px" }}>
+            <p style={{ fontSize: "14px", color: "#705b8c", marginBottom: "20px" }}>
               for <strong>{coach.name}</strong>
             </p>
             <form data-clarity-mask="true" data-form-id="waiting_list" onSubmit={async (e) => {
@@ -881,58 +897,58 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
               {waitingListSuccess ? (
                 <div style={{ textAlign: "center", padding: "20px 0" }}>
                   <p style={{ fontSize: "48px", marginBottom: "12px", lineHeight: 1 }}>✅</p>
-                  <p style={{ fontSize: "16px", fontWeight: "600", color: "#1b8a4a" }}>
+                  <p style={{ fontSize: "16px", fontWeight: "600", color: "#6d28d9" }}>
                     You've been added to the waiting list!
                   </p>
-                  <p style={{ fontSize: "14px", color: "#666", marginTop: "8px" }}>
+                  <p style={{ fontSize: "14px", color: "#705b8c", marginTop: "8px" }}>
                     We'll reach out when {coach.name} has an opening.
                   </p>
                   <button type="button" onClick={() => setShowWaitingList(false)} style={{
                     marginTop: "20px", padding: "10px 24px", borderRadius: "8px",
-                    background: "#7c3aed", color: "#fff", border: "none",
+                    background: "#6d28d9", color: "#ffffff", border: "none",
                     fontFamily: "Open Sans", fontSize: "14px", fontWeight: "600", cursor: "pointer",
                   }}>Close</button>
                 </div>
               ) : (
                 <>
                   <div style={{ marginBottom: "14px" }}>
-                    <label style={{ fontSize: "13px", fontWeight: "600", color: "#333", display: "block", marginBottom: "4px" }}>Full Name <sup style={{ color: "red" }}>*</sup></label>
+                    <label style={{ fontSize: "13px", fontWeight: "600", color: "#2e1065", display: "block", marginBottom: "4px" }}>Full Name <sup style={{ color: "#6d28d9" }}>*</sup></label>
                     <input type="text" required value={waitingListData.name}
                       onChange={(e) => setWaitingListData((prev) => ({ ...prev, name: e.target.value }))}
-                      style={{ width: "100%", padding: "10px 12px", borderRadius: "8px", border: "1px solid #ddd", fontSize: "14px", fontFamily: "Open Sans", boxSizing: "border-box" }}
+                      style={{ width: "100%", padding: "10px 12px", borderRadius: "8px", border: "1px solid #e5d8fa", fontSize: "14px", fontFamily: "Open Sans", boxSizing: "border-box" }}
                     />
                   </div>
                   <div style={{ marginBottom: "14px" }}>
-                    <label style={{ fontSize: "13px", fontWeight: "600", color: "#333", display: "block", marginBottom: "4px" }}>Email <sup style={{ color: "red" }}>*</sup></label>
+                    <label style={{ fontSize: "13px", fontWeight: "600", color: "#2e1065", display: "block", marginBottom: "4px" }}>Email <sup style={{ color: "#6d28d9" }}>*</sup></label>
                     <input type="email" required value={waitingListData.email}
                       onChange={(e) => setWaitingListData((prev) => ({ ...prev, email: e.target.value }))}
-                      style={{ width: "100%", padding: "10px 12px", borderRadius: "8px", border: "1px solid #ddd", fontSize: "14px", fontFamily: "Open Sans", boxSizing: "border-box" }}
+                      style={{ width: "100%", padding: "10px 12px", borderRadius: "8px", border: "1px solid #e5d8fa", fontSize: "14px", fontFamily: "Open Sans", boxSizing: "border-box" }}
                     />
                   </div>
                   <div style={{ marginBottom: "14px" }}>
-                    <label style={{ fontSize: "13px", fontWeight: "600", color: "#333", display: "block", marginBottom: "4px" }}>WhatsApp Number</label>
+                    <label style={{ fontSize: "13px", fontWeight: "600", color: "#2e1065", display: "block", marginBottom: "4px" }}>WhatsApp Number</label>
                     <input type="tel" value={waitingListData.phone_number}
                       onChange={(e) => setWaitingListData((prev) => ({ ...prev, phone_number: e.target.value }))}
-                      style={{ width: "100%", padding: "10px 12px", borderRadius: "8px", border: "1px solid #ddd", fontSize: "14px", fontFamily: "Open Sans", boxSizing: "border-box" }}
+                      style={{ width: "100%", padding: "10px 12px", borderRadius: "8px", border: "1px solid #e5d8fa", fontSize: "14px", fontFamily: "Open Sans", boxSizing: "border-box" }}
                     />
                   </div>
                   <div style={{ marginBottom: "20px" }}>
-                    <label style={{ fontSize: "13px", fontWeight: "600", color: "#333", display: "block", marginBottom: "4px" }}>Additional Details</label>
+                    <label style={{ fontSize: "13px", fontWeight: "600", color: "#2e1065", display: "block", marginBottom: "4px" }}>Additional Details</label>
                     <textarea value={waitingListData.details}
                       onChange={(e) => setWaitingListData((prev) => ({ ...prev, details: e.target.value }))}
                       rows={3}
-                      style={{ width: "100%", padding: "10px 12px", borderRadius: "8px", border: "1px solid #ddd", fontSize: "14px", fontFamily: "Open Sans", resize: "vertical", boxSizing: "border-box" }}
+                      style={{ width: "100%", padding: "10px 12px", borderRadius: "8px", border: "1px solid #e5d8fa", fontSize: "14px", fontFamily: "Open Sans", resize: "vertical", boxSizing: "border-box" }}
                     />
                   </div>
-                  {waitingListError && <p style={{ color: "#d32f2f", fontSize: "13px", marginBottom: "12px" }}>{waitingListError}</p>}
+                  {waitingListError && <p style={{ color: "#6d28d9", fontSize: "13px", marginBottom: "12px" }}>{waitingListError}</p>}
                   <button type="submit" disabled={waitingListLoading} style={{
                     width: "100%", padding: "12px", borderRadius: "8px",
-                    background: waitingListLoading ? "#b39ddb" : "#7c3aed",
-                    color: "#fff", border: "none", fontFamily: "Open Sans",
+                    background: waitingListLoading ? "#c4a8ee" : "#6d28d9",
+                    color: "#ffffff", border: "none", fontFamily: "Open Sans",
                     fontSize: "15px", fontWeight: "600", cursor: waitingListLoading ? "not-allowed" : "pointer",
                   }}>
                     {waitingListLoading ? "Submitting..." : "Join Waiting List"}
-                  </button>
+</button>
                 </>
               )}
             </form>
@@ -940,8 +956,12 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null }) => 
         </div>
       )}
 
-      {showForm && (
+      {showForm && !user && <AuthDialog onClose={() => setShowForm(false)}/>}
+      {showForm && user && (
         <ClientPaymentForm
+          previewMode={Boolean(coach.preview) || user.isPreview}
+          coachSlug={coachSlug(coach)}
+          coachImage={coach.image}
           coachId={coach.id}
           coachName={coach.name}
           planId={planIdMap[activePlan]}

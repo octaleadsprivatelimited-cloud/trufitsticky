@@ -2,7 +2,7 @@ export const CONSENT_KEY = 'trufit_analytics_consent_v1';
 const CONSENT_AGE = 180 * 24 * 60 * 60 * 1000;
 const events = new Set(['page_view','cta_click','quiz_start','quiz_complete','select_coach','view_coach','filter_coaches','filter_plans','plan_interest','select_plan','begin_checkout','generate_lead','form_start','form_error','join_waitlist','contact_click','scroll_depth']);
 const fields = new Set(['page_title','page_location','page_referrer','page_path','content_group','source','filter','form_id','error_type','coach_id','coach_name','coach_slug','coach_level','pricing_region','plan_id','plan_type','duration_weeks','value','currency','percent_scrolled']);
-export const isPrivatePath = path => /^\/(payment|survey)(\/|$)/.test(path);
+export const isPrivatePath = path => /^\/(payment|survey|portal|refer|signin|team)(\/|$)/.test(path);
 export function cleanUrl(value, base = 'https://www.betrufit.com') {
  try { const u = new URL(value,base); return `${u.origin}${u.pathname}`; } catch { return ''; }
 }

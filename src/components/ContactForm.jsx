@@ -182,7 +182,7 @@ const ContactForm = () => {
         <div className="contact-form-column">
           <div className="contact-heading">
             <p className="eyebrow">Your next step starts here</p>
-            <h2 id="contact-title">LET’S <em>TALK.</em></h2>
+            <h2 id="contact-title">Let’s <em>talk.</em></h2>
             <p>Tell us a little about yourself. We’ll help you find the right support.</p>
           </div>
           <form data-clarity-mask="true" data-form-id="contact" className="contact-fields" onSubmit={handleSubmit}>
@@ -203,7 +203,7 @@ const ContactForm = () => {
             </div>
             {errors.submit&&<p className="contact-error" role="alert">{errors.submit}</p>}
             {success&&<p className="contact-success" role="status">{success}</p>}
-            <button type="submit" className="contact-submit" disabled={loading||submitted}><span>{submitted?"Submitted ✓":loading?"Sending…":"Let’s get started"}</span><span aria-hidden="true">↗</span></button>
+            <button type="submit" className="contact-submit" disabled={loading||submitted}><span>{submitted?"Submitted ✓":loading?"Sending…":"Let’s get started"}</span></button>
             <p className="contact-form-note">We’ll use these details to respond to your enquiry.</p>
           </form>
         </div>

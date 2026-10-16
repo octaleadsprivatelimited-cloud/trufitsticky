@@ -154,15 +154,15 @@ const Questionnaire = () => {
             </fieldset>
           ))}
         </div>
-        {error && <div role="alert" className="catalogue-note">{error} <button type="button" className="text-link" onClick={() => navigate("/coaches")}>Browse coaches →</button></div>}
+        {error && <div role="alert" className="catalogue-note">{error} <button type="button" className="text-link" onClick={() => navigate("/coaches")}>Browse coaches</button></div>}
         <div className="coach-match-submit" tabIndex={-1} ref={submitRef}>
           <div>
             <p aria-live="polite">{answeredCount} of {questions.length} answered</p>
             <span>{allQuestionsAnswered ? "Ready when you are." : "Answer each question to find your match."}</span>
           </div>
           <button className="button button-dark" type="submit" disabled={!allQuestionsAnswered || loading}>
-            {loading ? 'Finding your matches…' : 'Find my coach ↗'}
-          </button>
+            {loading ? 'Finding your matches…' : 'Find my coach '}
+</button>
         </div>
       </form>
     </section>

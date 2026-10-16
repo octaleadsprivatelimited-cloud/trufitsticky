@@ -37,7 +37,7 @@ const WeDoIt = () => {
     offset: ["start start", "end end"],
   });
 
-  // ✅ Fixed number of cards → safe to define transforms explicitly
+  // ✅ Fixed number of cards  safe to define transforms explicitly
   const scale0 = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
   const y0 = useTransform(scrollYProgress, [0, 1], [0, 30]);
 

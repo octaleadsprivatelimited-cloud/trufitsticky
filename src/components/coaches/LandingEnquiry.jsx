@@ -34,7 +34,7 @@ export default function LandingEnquiry({ coach, whatsappUrl }) {
    <label htmlFor="landing-email">Email address<input id="landing-email" name="email" type="email" autoComplete="email" placeholder="you@example.com" required maxLength={254} disabled={status === 'success'}/></label>
    {status === 'error' && <p className="landing-form-error" role="alert">We couldn’t send your enquiry. Please try again or contact us on WhatsApp.</p>}
    {status === 'success' && <p className="landing-form-success" role="status">Thank you! Your enquiry has reached the Tru Fit team.</p>}
-   <button className="button" type="submit" disabled={status === 'sending' || status === 'success'}>{status === 'sending' ? 'Sending…' : status === 'success' ? 'Enquiry sent ✓' : 'Help me choose my plan ↗'}</button>
+   <button className="button" type="submit" disabled={status === 'sending' || status === 'success'}>{status === 'sending' ? 'Sending…' : status === 'success' ? 'Enquiry sent ✓' : 'Help me choose my plan '}</button>
    <p className="landing-form-note">We’ll use these details to respond to your enquiry. <Link to="/privacy-policy">Privacy policy</Link></p>
   </form>
  </section>;

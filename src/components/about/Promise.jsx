@@ -4,14 +4,8 @@ import PromiseTwo from "../../assets/promise-two.webp"
 import PromiseThree from "../../assets/promise-three.webp"
 import PromiseFooter from "../../assets/promise-footer.webp"
 import Arrow from "../../assets/arrow.svg"
-import { useNavigate } from "react-router-dom";
 
 const Promise = () => {
-    const navigate = useNavigate();
-
-    const findMyCoach = () => {
-        navigate("/findmycoach")
-    }
 
   return (
     <>

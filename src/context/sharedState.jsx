@@ -30,7 +30,10 @@ const SharedState = ({ children }) => {
   // Auto-detect location on mount (silent IP first, no permission popup)
   useEffect(() => {
     // Already resolved from cache — skip API call
-    if (countryCode) return;
+    if (countryCode) {
+      setLocationLoading(false);
+      return;
+    }
 
     let cancelled = false;
 
@@ -55,7 +58,7 @@ const SharedState = ({ children }) => {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [countryCode]);
 
   return (
     <SharedContext.Provider

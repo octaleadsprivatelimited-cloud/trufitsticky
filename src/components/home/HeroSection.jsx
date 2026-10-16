@@ -4,14 +4,8 @@ import Arrow from "../../assets/arrow.svg"
 import HeroVideo from "../../assets/hero-video.mp4"
 import HeroVideoMobile from "../../assets/hero-video-mobile.mp4"
 import HeroVideoPoster from "../../assets/hero-video-poster.webp"
-import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
-    const navigate = useNavigate();
-
-    const findMyCoach = () => {
-        navigate("/findmycoach")
-    }
     
   return (
     <>

@@ -106,7 +106,7 @@ const CoachDetailPage = () => {
         padding: "20px"
       }}>
         <p style={{ 
-          color: "#9c27ff", 
+          color: "#6d28d9",
           fontFamily: "Open Sans", 
           fontSize: "20px",
           marginBottom: "20px"
@@ -117,7 +117,7 @@ const CoachDetailPage = () => {
           onClick={handleClose}
           style={{
             padding: "10px 20px",
-            backgroundColor: "#9c27ff",
+            backgroundColor: "#6d28d9",
             color: "white",
             border: "none",
             borderRadius: "5px",
@@ -127,12 +127,12 @@ const CoachDetailPage = () => {
           }}
         >
           Back to Coaches
-        </button>
+</button>
       </div>
     );
   }
 
-  return <CoachCard key={coach.id} coach={coach} initialPlan={location.state?.landingPlan || null} initialCoupleMode={Boolean(location.state?.coupleMode)} onClose={handleClose} isPage={true} />;
+  return <CoachCard key={coach.id} coach={coach} initialPlan={location.state?.landingPlan || null} initialCoupleMode={Boolean(location.state?.coupleMode)} initialCheckout={Boolean(location.state?.openCheckout)} onClose={handleClose} isPage={true} />;
 };
 
 export default CoachDetailPage;

@@ -1,0 +1,98 @@
+/* Plans lead the profile; supporting information stays one tab away. */
+#root .cpx-page .profile-banner{min-height:0;padding:20px 0 22px;gap:22px;margin-bottom:0;border:0;border-radius:0;background:#fff}
+#root .cpx-page .profile-avatar{width:86px;height:86px;margin:0}
+#root .cpx-page .profile-identity{gap:22px}
+#root .cpx-page .profile-kicker{margin-bottom:6px;font-size:12px!important;text-transform:none;letter-spacing:0}
+#root .cpx-page .profile-banner h1{font-size:30px!important;margin-bottom:7px}
+#root .cpx-page .profile-location{font-size:13px!important;line-height:1.6}
+#root .cpx-page .profile-whatsapp{border-color:var(--line);font-size:13px;min-height:42px;padding:10px 15px;border-radius:7px;font-weight:500}
+#root .cpx-page .profile-tabs{gap:30px;border-bottom:1px solid var(--line);margin:0 0 21px}
+#root .cpx-page .profile-tabs button{font-size:15px;font-weight:600;padding:13px 2px;text-transform:none;letter-spacing:0}
+#root .cpx-page [role=tabpanel][hidden]{display:none!important}
+#root .cpx-page [role=tabpanel]:focus{outline:none}
+#root .cpx-page .profile-information{grid-template-columns:minmax(0,1fr) 310px;gap:32px;margin:30px 0}
+#root .cpx-page .profile-content-panel,#root .cpx-page .profile-fact-card{border-color:var(--line);background:#fff;border-radius:10px}
+#root .cpx-page .profile-specialty-list li{background:#fff;border-color:var(--line);border-radius:5px;color:var(--muted)}
+#root .cpx-page .profile-return-to-plans{color:var(--accent);margin-top:10px}
+#root .cpx-page #cpx-plans{padding-top:0!important;margin-top:0!important}
+#root .cpx-page #cpx-plans>.cpx-pad{padding-top:0!important}
+#root .cpx-page .package-heading{margin:24px 0 20px;align-items:center}
+#root .cpx-page .package-heading h2{font-size:26px!important;line-height:1.25;text-transform:none;margin:0}
+#root .cpx-page .package-heading .eyebrow,#root .cpx-page .package-heading>p{display:none}
+#root .cpx-page .package-type-head{margin:0 0 10px}
+#root .cpx-page .package-step{font-size:12px!important;text-transform:none!important;letter-spacing:0!important;font-weight:500;color:var(--muted);margin:0 0 12px}
+#root .cpx-page .couple-mode-switch{display:flex!important;gap:8px!important;margin:0 0 22px!important;max-width:400px}
+#root .cpx-page .couple-mode-switch button{display:flex!important;align-items:center;justify-content:center;gap:0!important;min-height:40px!important;border:1px solid var(--line)!important;border-radius:7px!important;padding:9px 22px!important;background:#fff!important;flex:1}
+#root .cpx-page .couple-mode-switch button[aria-pressed=true]{border-color:var(--accent)!important;background:var(--accent-soft)!important;color:var(--accent)!important;box-shadow:none!important}
+#root .cpx-page .couple-mode-switch button strong{font-size:13px;font-weight:600}
+#root .cpx-page .couple-mode-switch button small,#root .cpx-page .couple-mode-switch .selection-dot{display:none!important}
+#root .cpx-page .package-body{display:grid!important;grid-template-columns:minmax(0,1.45fr) minmax(290px,.8fr);gap:26px!important;align-items:start}
+#root .cpx-page .cpx-plan-pill-row{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+#root .cpx-page .cpx-plan-pill{border:1px solid var(--line)!important;background:#fff!important;border-radius:9px!important;min-height:181px!important;padding:39px 18px 19px!important;box-shadow:none!important;text-transform:none!important;overflow:visible}
+#root .cpx-page .cpx-plan-pill--active{border:2px solid var(--accent)!important;background:#fff!important;padding:38px 17px 18px!important;box-shadow:none!important}
+#root .cpx-page .cpx-plan-pill-name{font-size:24px!important;line-height:1.25!important;text-transform:none!important;font-weight:600!important}
+#root .cpx-page .cpx-plan-pill-price{font-size:21px!important;font-weight:600!important;letter-spacing:-.03em}
+#root .cpx-page .cpx-plan-pill-price small{font-size:10px!important;font-weight:400}
+#root .cpx-page .package-card-caption{display:none}
+#root .cpx-page .package-card-weekly{font-size:11px!important;margin-top:8px!important;color:var(--muted)!important}
+#root .cpx-page .cpx-plan-pill-badge{background:var(--accent-soft)!important;color:var(--accent)!important;padding:4px 7px!important;font-size:9px!important;border-radius:4px!important;top:10px!important;left:10px!important;text-transform:none!important;letter-spacing:0!important;font-weight:500!important}
+#root .cpx-page .selection-dot{width:14px;height:14px;top:14px;right:13px;border-color:var(--line)}
+#root .cpx-page .cpx-plan-pill--active .selection-dot{border:4px solid var(--accent)!important;background:#fff!important}
+#root .cpx-page .cpx-plan-pill--consultation{min-height:74px!important;padding:18px!important;grid-column:1/-1!important}
+#root .cpx-page .cpx-plan-pill--consultation .cpx-plan-pill-name{font-size:14px!important}
+#root .cpx-page .cpx-plan-pill--consultation .cpx-plan-pill-price{font-size:18px!important;padding-right:20px!important}
+#root .cpx-page .cpx-plan-pill--consultation .selection-dot{top:calc(50% - 7px)}
+#root .cpx-page .cpx-selected-summary{background:#fff!important;border:1px solid var(--line)!important;border-radius:10px!important;padding:24px!important;box-shadow:none!important;top:100px}
+#root .cpx-page .cpx-selected-summary .eyebrow{font-size:12px!important;text-transform:none!important;letter-spacing:0!important;margin-bottom:14px;color:var(--muted)}
+#root .cpx-page .summary-price{font-size:33px!important;margin-top:18px}
+#root .cpx-page .summary-inclusions{border-color:var(--line)!important;font-size:12px;gap:9px;margin-block:17px;padding-block:16px}
+#root .cpx-page .summary-inclusions li:before{content:'✓';font-size:12px}
+#root .cpx-page .cpx-plan-selector-action{background:var(--accent)!important;color:#fff!important;font-size:14px!important;border-radius:7px!important;font-weight:600!important}
+#root .cpx-page .summary-note{font-size:11px!important;line-height:1.7}
+#root .cpx-page .included-design{border-color:var(--line)!important;border-radius:9px!important;background:#fff!important}
+#root .cpx-page .included-design>summary{padding:18px 22px!important}
+#root .cpx-page .included-summary-copy small{display:none}
+#root .cpx-page .included-summary-copy>span{font-size:17px!important;font-family:inherit!important;font-weight:600!important}
+#root .cpx-page .included-plan-badge{background:#fff;border:1px solid var(--line);font-size:10px}
+#root .cpx-page .cpx-sticky{background:#fff!important;color:var(--ink)!important;border-top:1px solid var(--line)!important;box-shadow:none!important}
+#root .cpx-page .cpx-sticky-name,#root .cpx-page .cpx-sticky-price{color:var(--ink)!important}
+#root .cpx-page .cpx-sticky-plan{color:var(--muted)!important}
+#root .cpx-page .cpx-sticky-btn{background:var(--accent)!important;color:#fff!important;border-radius:7px!important}
+#root .booking-steps{display:flex;align-items:center;list-style:none;padding:0;margin:0 0 20px;gap:28px;font-family:inherit}
+#root .booking-steps li{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--muted);white-space:nowrap}
+#root .booking-steps li>span:first-child{width:24px;height:24px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;font-size:11px;font-weight:600;background:#fff;color:var(--muted)}
+#root .booking-steps .is-current{color:var(--accent);font-weight:600}
+#root .booking-steps .is-current>span:first-child{background:var(--accent);color:#fff;border-color:var(--accent)}
+#root .booking-steps .is-complete>span:first-child{color:var(--accent);border-color:var(--accent)}
+#root .client__form__section{z-index:5000!important}
+#root .client__form__container{max-height:calc(100dvh - 36px)!important;overflow-y:auto!important;border-radius:12px!important;background:#fff!important;box-shadow:0 20px 80px #2e106526!important}
+#root .client__form__container .booking-steps{margin:5px 0 24px;gap:23px}
+#root .client__form__head{display:flex;justify-content:flex-end;margin:0 0 4px!important}
+#root .checkout-close{display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:50%;font-size:23px;line-height:1}
+#root .client__form__head-title h2{font-family:inherit!important;font-size:25px!important;text-transform:none;letter-spacing:-.03em;margin-bottom:10px}
+#root .checkout-selection{display:flex;justify-content:space-between;align-items:start;gap:20px;padding:17px;background:#fff;border:1px solid var(--line);border-radius:8px;margin:20px 0;font-size:13px}
+#root .checkout-selection>div>strong{font-size:13px;display:block;line-height:1.6}
+#root .checkout-selection span{display:block;font-size:11px;color:var(--muted);margin-top:6px;overflow-wrap:anywhere}
+#root .checkout-selection>strong{white-space:nowrap;font-size:17px}
+#root .checkout-selection small{font-size:10px;font-weight:400;color:var(--muted)}
+#root .checkout-preview-note{font-size:11px;color:var(--muted);line-height:1.7;margin-bottom:20px}
+#root .client__form__sbt-btn{background:var(--accent)!important;border-radius:7px!important}
+#root .client__form__sbt-btn p{font-size:14px!important;font-family:inherit!important;text-transform:none!important}
+#root .checkout-preview-payment{padding:26px;border:1px solid var(--line);border-radius:9px;text-align:center;margin-top:20px}
+#root .checkout-preview-payment>span{font-size:12px;color:var(--muted)}
+#root .checkout-preview-payment h3{font-size:32px;margin:15px 0;letter-spacing:-.04em}
+#root .checkout-preview-payment p{font-size:13px;line-height:1.8;color:var(--muted)}
+#root .checkout-preview-payment .button{white-space:normal;width:100%}
+#root .checkout-edit-details{margin:20px 0 0;color:var(--accent);font-size:13px}
+@media(max-width:1000px){#root .cpx-page .package-body{grid-template-columns:1fr!important}#root .cpx-page .cpx-selected-summary{position:static!important}#root .cpx-page .profile-information{grid-template-columns:1fr}#root .cpx-page .profile-facts{grid-template-columns:1fr 1fr}#root .cpx-page .profile-social-links{grid-column:1/-1}}
+@media(max-width:650px){#root .cpx-page{margin-top:6px!important}#root .cpx-page .profile-banner{padding:15px 0 17px!important;gap:13px;flex-wrap:nowrap;align-items:start}#root .cpx-page .profile-identity{gap:13px;align-items:start}#root .cpx-page .profile-avatar{width:61px;height:61px;margin:0}#root .cpx-page .profile-banner h1{font-size:22px!important;margin-bottom:6px}#root .cpx-page .profile-kicker{font-size:10px!important;line-height:1.5}#root .cpx-page .profile-location{font-size:11px!important;line-height:1.6}#root .cpx-page .profile-banner>.profile-whatsapp{display:none}#root .cpx-page .profile-tabs{gap:27px;margin-bottom:20px}#root .cpx-page .profile-tabs button{font-size:14px;padding:12px 0}#root .booking-steps{gap:15px;margin-bottom:20px}#root .booking-steps li{font-size:10px;gap:6px}#root .booking-steps li>span:first-child{width:21px;height:21px;font-size:10px}#root .cpx-page .package-heading{margin:17px 0}#root .cpx-page .package-heading h2{font-size:23px!important}#root .cpx-page .package-type-head{align-items:center;gap:10px}#root .cpx-page .package-step{font-size:11px!important}#root .cpx-page .package-region{font-size:10px!important}#root .cpx-page .couple-mode-switch{margin-bottom:20px!important;max-width:none}#root .cpx-page .couple-mode-switch button{min-height:38px!important;padding:8px 14px!important}#root .cpx-page .cpx-plan-pill-row{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}#root .cpx-page .cpx-plan-pill{min-height:151px!important;padding:39px 10px 14px!important;display:flex!important;flex-direction:column!important;align-items:start!important}#root .cpx-page .cpx-plan-pill--active{padding:38px 9px 13px!important}#root .cpx-page .cpx-plan-pill-topline{display:block!important;margin-bottom:12px!important}#root .cpx-page .cpx-plan-pill-mobile-label{display:none!important}#root .cpx-page .cpx-plan-pill-name{font-size:17px!important;line-height:1.25!important}#root .cpx-page .cpx-plan-pill-price{font-size:16px!important;margin-top:auto!important;white-space:normal!important}#root .cpx-page .cpx-plan-pill-price small{font-size:9px!important;display:block}#root .cpx-page .cpx-plan-pill-badge{font-size:8px!important;padding:4px!important;max-width:calc(100% - 12px);left:5px!important;top:7px!important;white-space:normal;line-height:1.3!important}#root .cpx-page .selection-dot{display:none!important}#root .cpx-page .package-card-weekly{display:none}#root .cpx-page .cpx-plan-pill--consultation{display:grid!important;grid-template-columns:1fr auto!important;min-height:72px!important;padding:15px!important}#root .cpx-page .cpx-plan-pill--consultation .cpx-plan-pill-topline{margin:0!important}#root .cpx-page .cpx-plan-pill--consultation .cpx-plan-pill-price{font-size:16px!important;padding:0!important;margin:0!important}#root .cpx-page .cpx-plan-pill--consultation .cpx-plan-pill-price small{display:inline}#root .cpx-page .cpx-selected-summary{padding:22px!important}#root .cpx-page .profile-facts{grid-template-columns:1fr}#root .client__form__container .booking-steps{gap:13px;margin:6px 0 22px}#root .checkout-selection{padding:14px;gap:14px;flex-direction:column}#root .checkout-selection>strong{font-size:20px}#root .client__form__head-title h2{font-size:24px!important}#root .checkout-preview-payment{padding:22px 18px}}
+#root .cpx-page .package-type-head{flex-direction:row!important;justify-content:flex-end;align-items:center;margin-bottom:12px}
+#root .cpx-page .package-region{flex-direction:row!important;width:auto;gap:12px;margin:0;align-items:center}
+#root .cpx-page .included-design:not([open])>.cpx-collapse-body{display:none!important}
+@media(max-width:650px){#root .cpx-page .package-type-head{margin-bottom:11px}#root .cpx-page .package-region{width:100%;justify-content:space-between}}
+#root .cpx-page .package-choice-row{display:flex;flex-direction:row-reverse;align-items:center;justify-content:space-between;gap:20px;margin-bottom:22px}
+#root .cpx-page .package-choice-row>.package-type-head{margin:0;flex-shrink:0}
+#root .cpx-page .package-choice-row>.couple-mode-switch{margin:0!important;width:400px;max-width:100%;flex:1}
+@media(max-width:650px){#root .cpx-page .package-choice-row{flex-direction:column;align-items:stretch;gap:12px;margin-bottom:19px}#root .cpx-page .package-choice-row>.couple-mode-switch{width:100%}}
+#root .cpx-page .package-choice-row>.couple-mode-switch{flex:0 1 400px;max-width:400px}
+@media(max-width:650px){#root .cpx-page .package-choice-row>.couple-mode-switch{flex:0 1 auto;max-width:none}}

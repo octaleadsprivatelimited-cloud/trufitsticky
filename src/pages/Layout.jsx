@@ -14,12 +14,13 @@ import '../styles/minimal.css';
 import '../styles/editorial.css';
 import '../styles/contact.css';
 import '../styles/enrolment.css';
+import '../styles/brand-theme.css';
 export default function Layout(){
  const location=useLocation();
  const landingPage=location.pathname.startsWith('/lp/');
- const coachDetail=/^\/coaches\/[^/]+\/?$/.test(location.pathname);
- const protectedPage=location.pathname.startsWith('/payment')||location.pathname==='/survey';
+ const portalPage=/^\/(?:portal|team)(?:\/|$)/.test(location.pathname)||location.pathname==='/signin';
+ const protectedPage=portalPage||location.pathname.startsWith('/payment')||location.pathname==='/survey';
  const contact=['/','/about','/coaches','/plans','/start'].includes(location.pathname);
  useEffect(()=>{if(location.hash){const t=setTimeout(()=>scrollToSection(document.getElementById(location.hash.slice(1))),150);return()=>clearTimeout(t)}},[location.pathname,location.hash]);
- return <><Seo/><PageInsights/><PageMotion/><SmoothScrolling/>{!landingPage&&<NavBar/>}<main id="main-content" tabIndex={-1} data-clarity-mask={protectedPage?'true':undefined}><Outlet/>{contact&&<ContactForm/>}</main>{!landingPage&&!contact&&!location.pathname.startsWith('/payment')&&<Footer/>}{(location.pathname==='/'||coachDetail)&&<QuickNavigation key={location.pathname} coachPage={coachDetail}/>}<CookieConsent/><ScrollRestoration/></>;
+ return <><Seo/><PageInsights/>{!portalPage&&<><PageMotion/><SmoothScrolling/></>}{!landingPage&&!portalPage&&<NavBar/>}<main id="main-content" tabIndex={-1} data-clarity-mask={protectedPage?'true':undefined}><Outlet/>{contact&&<ContactForm/>}</main>{!landingPage&&!portalPage&&!contact&&!location.pathname.startsWith('/payment')&&<Footer/>}{location.pathname==='/'&&<QuickNavigation key={location.pathname}/>}<CookieConsent/><ScrollRestoration/></>;
 }

@@ -94,7 +94,7 @@ const TermsConditionsPage = () => {
             cursor: "pointer",
             fontSize: "16px",
             fontFamily: "Open Sans",
-            color: "#9c27ff",
+            color: "#6d28d9",
             display: "flex",
             alignItems: "center",
             gap: "8px",
@@ -103,7 +103,7 @@ const TermsConditionsPage = () => {
           }}
         >
           ← Back
-        </button>
+</button>
         <h1 className="legal__page-title">{content.title}</h1>
         <p className="legal__page-updated">Last Updated: {content.lastUpdated}</p>
         

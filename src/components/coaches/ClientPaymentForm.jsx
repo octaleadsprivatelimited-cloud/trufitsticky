@@ -1,23 +1,30 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
-import CardClose from "../../assets/card-close.svg";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth/AuthContext";
+import { saveDemoBooking, sessionLabel } from "../../portal/booking.mjs";
+import SessionPicker from "./SessionPicker";
+import BookingSteps from "./BookingSteps";
 import { trackEvent } from "../../analytics/analytics";
 
-const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planName, paymentMode, calendlyLink, subscriptionAmount, spurfit_url, onClose }) => {
+const ClientPaymentForm = ({ coachId, coachName, coachSlug, coachImage, planId, analyticsPlanId, planName, paymentMode, calendlyLink, subscriptionAmount, spurfit_url, onClose, previewMode = false }) => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const [slot, setSlot] = useState({ date: "", time: "" });
   const isConsultation = String(planName).toLowerCase().includes("consultation");
-  const defaultDialCode = isConsultation ? (paymentMode === "cashfree" ? "91" : "1") : "";
+  const defaultDialCode = paymentMode === "cashfree" ? "91" : "1";
   const [formData, setFormData] = useState(() => {
     const savedLead = sessionStorage.getItem("capturedLead");
     if (savedLead) {
       try {
         const parsed = JSON.parse(savedLead);
         return {
-          name: parsed.name || "",
-          email: parsed.email || "",
+          name: user?.name || parsed.name || "",
+          email: user?.email || parsed.email || "",
           country_code: parsed.country_code || defaultDialCode,
           phone_number: parsed.phone_number || "",
-          residence: "",
+          residence: paymentMode === "cashfree" ? "India" : "",
           state: "",
           city: "",
         };
@@ -26,11 +33,11 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
       }
     }
     return {
-      name: "",
-      email: "",
+      name: user?.name || "",
+      email: user?.email || "",
       country_code: defaultDialCode,
       phone_number: "",
-      residence: "",
+      residence: paymentMode === "cashfree" ? "India" : "",
       state: "",
       city: "",
     };
@@ -45,7 +52,26 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
     city: "",
   });
   const [submitting, setSubmitting] = useState(false);
+  const [previewPayment, setPreviewPayment] = useState(false);
   const modalRef = useRef(null);
+
+  useEffect(() => {
+    const previousFocus = document.activeElement;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    modalRef.current?.querySelector('input')?.focus();
+    const keydown = event => {
+      if (event.key === 'Escape' && modalRef.current?.contains(event.target)) onClose();
+      if (event.key !== 'Tab') return;
+      const controls = [...(modalRef.current?.querySelectorAll('button:not(:disabled), input:not(:disabled), select:not(:disabled), a[href]') || [])].filter(node => node.getClientRects().length);
+      const first = controls[0], last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    };
+    document.addEventListener('keydown', keydown);
+    return () => { document.body.style.overflow = previousOverflow; document.removeEventListener('keydown', keydown); previousFocus?.focus(); };
+  }, [onClose]);
+  useEffect(() => { if (previewPayment) modalRef.current?.querySelector('#checkout-title')?.focus(); }, [previewPayment]);
 
   const nameRef = useRef(null);
   const emailRef = useRef(null);
@@ -641,6 +667,10 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
       return;
     }
 
+    if (previewMode) {
+      if (!sessionLabel(slot)) return;
+      setPreviewPayment(true); return;
+    }
     setSubmitting(true);
 
     try {
@@ -729,7 +759,7 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
             email: formData.email,
             contact: formData.phone_number,
           },
-          theme: { color: "#3399cc" },
+          theme: { color: "#6d28d9" },
         };
 
         const razorpayInstance = new window.Razorpay(options);
@@ -879,7 +909,7 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
         email: "",
         country_code: "",
         phone_number: "",
-        residence: "",
+        residence: paymentMode === "cashfree" ? "India" : "",
         state: "",
         city: ""
       })
@@ -892,82 +922,60 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
 
 
 
+  function previewWelcome() {
+    const booking = { name: formData.name, coachName, coachSlug, coachImage, planName, amount: subscriptionAmount, slot };
+    try { saveDemoBooking(booking); }
+    catch { /* Route state keeps the preview available when storage is blocked. */ }
+    navigate('/payment/success?demo=1', { state: { booking: { ...booking, isPreview: true, reference: 'TF-DEMO-BOOKING' } } });
+  }
+  if (previewPayment) return <div className="client__form__section"><div className="client__form__container checkout-payment-preview" ref={modalRef} role="dialog" aria-modal="true" aria-labelledby="checkout-title" data-clarity-mask="true"><div className="client__form__head"><button type="button" className="checkout-close" onClick={onClose} aria-label="Close checkout">×</button></div><BookingSteps current={3}/><div className="client__form__head-title"><h2 id="checkout-title" tabIndex={-1}>Ready for payment</h2><p>Your coach, session, and details are ready.</p></div><div className="checkout-selection"><div><strong>{planName} with {coachName}</strong><span>{formData.name} · {formData.email}</span><span>{sessionLabel(slot)?.date}</span><span>{sessionLabel(slot)?.time} · India Standard Time</span></div><strong>{subscriptionAmount}<small> total</small></strong></div><div className="checkout-preview-payment"><span>Payment preview</span><h3>{subscriptionAmount}</h3><p>No order, reservation, or charge will be created. Continue to see the welcome screen that follows a successful payment.</p><button type="button" className="member-primary" onClick={previewWelcome}>Preview booking confirmation</button></div><button type="button" className="text-link checkout-edit-details" onClick={()=>setPreviewPayment(false)}>Edit details or session</button></div></div>;
+
   return (
     <div className="client__form__section">
-      <div className="client__form__container" ref={modalRef}>
+      <div className="client__form__container" ref={modalRef} role="dialog" aria-modal="true" aria-labelledby="checkout-title">
         {/* Close Button */}
         <div className="client__form__head">
-          <img
-            src={CardClose}
-            alt="Close"
-            onClick={onClose}
-            style={{ cursor: "pointer" }}
-          />
+          <button type="button" className="checkout-close" aria-label="Close checkout" onClick={onClose}>×</button>
         </div>
 
+        <BookingSteps current={2}/>
         <div className="client__form__head-title">
-          <h2>{isConsultation ? "Book your consultation" : "Complete your enrollment"}</h2>
+          <h2 id="checkout-title">Your details</h2>
           <p>{isConsultation ? `20 minutes with ${coachName}. Complete your details to continue to secure payment.` : "Fill in your details to continue to secure payment."}</p>
         </div>
 
+        <div className="checkout-selection"><div><strong>{planName === 'Consultation Call' ? '20-minute consultation' : planName} with {coachName}</strong><span>One payment. No automatic renewal.</span></div><strong>{subscriptionAmount}<small> total</small></strong></div>
+        {previewMode && <p className="checkout-preview-note">Local preview. Your details won’t be sent and no payment will be taken.</p>}
         <form data-clarity-mask="true" data-form-id="coach_enrollment" onSubmit={handleSubmit}>
           <div className="client__form__content">
             <div className="client__form__inp-field">
-              <label htmlFor="name">Full Name<sup style={{ color: "red" }}>*</sup></label>
+              <label htmlFor="name">Full name<sup style={{ color: "#6d28d9" }}>*</sup></label>
               <input type="text" id="name" name="name" placeholder="Enter your full name" className="unstyled-inputs" value={formData.name} onChange={handleChange} required />
-              {errors.name && <p style={{ color: "red", fontSize: "12px", margin: "0", fontFamily: "Montserrat" }}>{errors.name}</p>}
+              {errors.name && <p style={{ color: "#6d28d9", fontSize: "12px", margin: "0", fontFamily: "Montserrat" }}>{errors.name}</p>}
             </div>
 
             <div className="client__form__inp-field">
-              <label htmlFor="email">Email<sup style={{ color: "red" }}>*</sup></label>
+              <label htmlFor="email">Email<sup style={{ color: "#6d28d9" }}>*</sup></label>
               <input type="email" id="email" name="email" placeholder="Enter your email" className="unstyled-inputs" value={formData.email} onChange={handleChange} required />
-              {errors.email && <p style={{ color: "red", fontSize: "12px", margin: "0", fontFamily: "Montserrat" }}>{errors.email}</p>}
+              {errors.email && <p style={{ color: "#6d28d9", fontSize: "12px", margin: "0", fontFamily: "Montserrat" }}>{errors.email}</p>}
             </div>
 
-            {!isConsultation && <>
-            <div className="client__form__inp-field">
-              <label htmlFor="country_code">Country Code<sup style={{ color: "red" }}>*</sup></label>
-              <select
-                id="country_code"
-                name="country_code"
-                className="unstyled-inputs"
-                value={formData.country_code}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Select Country</option>
-                {getCountryOptions().map(country => (
-                  <option key={country.code} value={country.code}>
-                    {country.name} (+{country.code})
-                  </option>
-                ))}
-              </select>
-              {errors.country_code && <p style={{ color: "red", fontSize: "12px", margin: "0", fontFamily: "Montserrat" }}>{errors.country_code}</p>}
-            </div>
 
-            </>}
             <div className="client__form__inp-field">
-              <label htmlFor="phone_number">WhatsApp Number<sup style={{ color: "red" }}>*</sup></label>
-              {isConsultation ? <PhoneInput defaultCountry={paymentMode === 'cashfree' ? 'in' : 'us'} value={`+${formData.country_code}${formData.phone_number}`} preferredCountries={['in','us','gb','ca','ae','au']} charAfterDialCode=" " onChange={(value, meta) => {
+              <label htmlFor="phone_number">WhatsApp number<sup style={{ color: "#6d28d9" }}>*</sup></label>
+              <PhoneInput defaultCountry={paymentMode === 'cashfree' ? 'in' : 'us'} value={`+${formData.country_code}${formData.phone_number}`} preferredCountries={['in','us','gb','ca','ae','au']} charAfterDialCode=" " onChange={(value, meta) => {
                 const digits = value.replace(/\D/g, '');
                 const dialCode = meta.country.dialCode;
                 setFormData(prev => ({...prev, country_code: dialCode, phone_number: digits.slice(dialCode.length)}));
                 setErrors(prev => ({...prev, country_code: '', phone_number: ''}));
-              }} inputProps={{id:'phone_number',name:'phone_number',required:true,autoComplete:'tel','aria-invalid':Boolean(errors.phone_number || errors.country_code)}}/> : <input type="tel" id="phone_number" name="phone_number" placeholder="Enter WhatsApp number (without country code)" className="unstyled-inputs" value={formData.phone_number} onChange={handleChange} required />}
-              {isConsultation && errors.country_code && <p className="consultation-phone-error">{errors.country_code}</p>}
-              {errors.phone_number && <p style={{ color: "red", fontSize: "12px", margin: "0", fontFamily: "Montserrat" }}>{errors.phone_number}</p>}
+              }} inputProps={{id:'phone_number',name:'phone_number',required:true,autoComplete:'tel','aria-invalid':Boolean(errors.phone_number || errors.country_code)}}/>
+              {errors.country_code && <p className="consultation-phone-error">{errors.country_code}</p>}
+              {errors.phone_number && <p style={{ color: "#6d28d9", fontSize: "12px", margin: "0", fontFamily: "Montserrat" }}>{errors.phone_number}</p>}
             </div>
 
-            {!isConsultation && <>
-            <div className="client__form__inp-field">
-              <label htmlFor="coach">Coach</label>
-              <input type="text" id="coach" name="coach" value={coachName} disabled className="unstyled-inputs" />
-              <input type="hidden" name="coach" value={coachId} />
-            </div>
 
-            </>}
             <div className="client__form__inp-field">
-              <label htmlFor="residence">Country<sup style={{ color: "red" }}>*</sup></label>
+              <label htmlFor="residence">Country<sup style={{ color: "#6d28d9" }}>*</sup></label>
               <select
                 id="residence"
                 name="residence"
@@ -976,7 +984,7 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
                 onChange={handleChange}
                 required
               >
-                <option value="">Select Country</option>
+                <option value="">Select country</option>
                 <option value="USA">USA</option>
                 <option value="India">India</option>
                 <option value="UK">UK</option>
@@ -984,11 +992,11 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
                 <option value="UAE">UAE</option>
                 <option value="Other">Other</option>
               </select>
-              {errors.residence && <p style={{ color: "red", fontSize: "12px", margin: "0", fontFamily: "Montserrat" }}>{errors.residence}</p>}
+              {errors.residence && <p style={{ color: "#6d28d9", fontSize: "12px", margin: "0", fontFamily: "Montserrat" }}>{errors.residence}</p>}
             </div>
 
             <div className="client__form__inp-field">
-              <label htmlFor="state">{getStateLabel(formData.residence)}<sup style={{ color: "red" }}>*</sup></label>
+              <label htmlFor="state">{getStateLabel(formData.residence)}<sup style={{ color: "#6d28d9" }}>*</sup></label>
               {isOtherCountry(formData.residence) ? (
                 <input
                   type="text"
@@ -1019,11 +1027,11 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
                   ))}
                 </select>
               )}
-              {errors.state && <p style={{ color: "red", fontSize: "12px", margin: "0", fontFamily: "Montserrat" }}>{errors.state}</p>}
+              {errors.state && <p style={{ color: "#6d28d9", fontSize: "12px", margin: "0", fontFamily: "Montserrat" }}>{errors.state}</p>}
             </div>
 
             <div className="client__form__inp-field">
-              <label htmlFor="city">{getCityLabel()}<sup style={{ color: "red" }}>*</sup></label>
+              <label htmlFor="city">{getCityLabel()}<sup style={{ color: "#6d28d9" }}>*</sup></label>
               <input
                 type="text"
                 id="city"
@@ -1035,7 +1043,7 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
                 onChange={handleChange}
                 required
               />
-              {errors.city && <p style={{ color: "red", fontSize: "12px", margin: "0", fontFamily: "Montserrat" }}>{errors.city}</p>}
+              {errors.city && <p style={{ color: "#6d28d9", fontSize: "12px", margin: "0", fontFamily: "Montserrat" }}>{errors.city}</p>}
             </div>
 
             {/* <div className="client__form__inp-field">
@@ -1043,35 +1051,22 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
               <input type="text" id="payment_mode" name="payment_mode" value={paymentMode} disabled className="unstyled-inputs"/>
             </div> */}
 
-            <div className="client__form__inp-field">
-              <label htmlFor="plan">Plan</label>
-              <input type="text" id="plan" name="plan" value={planName} disabled className="unstyled-inputs" />
-              <input type="hidden" name="plan" value={planId} />
-            </div>
 
-            <div className="client__form__inp-field">
-              <label htmlFor="subscription_amount">Subscription Amount<sup style={{ color: "red" }}>*</sup></label>
-              <input
-                type="text"
-                id="subscription_amount"
-                name="subscription_amount"
-                className="unstyled-inputs"
-                value={subscriptionAmount || ""}
-                disabled
-              />
-            </div>
+
+
           </div>
 
 
+          {previewMode && <SessionPicker slot={slot} onChange={setSlot}/>}
           {/* Payment Error Display */}
           {errors.submit && (
             <div style={{
               padding: "12px 16px",
               marginBottom: "16px",
               borderRadius: "8px",
-              backgroundColor: "#fef2f2",
-              border: "1px solid #fecaca",
-              color: "#dc2626",
+              backgroundColor: "#ffffff",
+              border: "1px solid #e5d8fa",
+              color: "#6d28d9",
               fontSize: "14px",
               fontFamily: "Montserrat, sans-serif",
               lineHeight: "1.5"
@@ -1093,8 +1088,8 @@ const ClientPaymentForm = ({ coachId, coachName, planId, analyticsPlanId, planNa
               width: "100%",
             }}
           >
-            {submitting ? <p>Paying...</p> : <p>Pay Now</p>}
-          </button>
+            {submitting ? <p>Preparing payment…</p> : <p>Continue to payment</p>}
+</button>
         </form>
       </div>
     </div>

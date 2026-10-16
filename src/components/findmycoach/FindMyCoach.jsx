@@ -24,7 +24,7 @@ const FindMyCoach = () => {
             <div className="redirect__btn-bg">
               <img src={Arrow} alt="" />
             </div>
-          </button>
+</button>
         </div>
       </div>
     </div>

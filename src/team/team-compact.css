@@ -1,0 +1,163 @@
+/* A bounded workspace keeps the daily tasks in view; long records scroll inside it. */
+#root .team-panel.team-compact{height:100dvh;min-height:0;overflow:hidden;grid-template-columns:210px minmax(0,1fr)}
+#root .team-compact [hidden],#root .team-product-dialog [hidden]{display:none!important}
+#root .team-compact .team-sidebar{padding:22px 18px;min-height:0}
+#root .team-compact .team-workspace{display:flex;flex-direction:column;min-height:0}
+#root .team-compact .team-topbar{min-height:64px;padding:10px 24px;flex-shrink:0}
+#root .team-compact .team-topbar .team-kicker{display:none}
+#root .team-compact .team-topbar strong{font-size:19px}
+#root .team-compact .team-body{width:100%;max-width:none;flex:1;min-height:0;display:flex;flex-direction:column;padding:12px 24px 0}
+#root .team-compact .team-demo-banner{padding:0;margin:0 0 10px;border:0;font-size:10px;flex-shrink:0}
+#root .team-compact .team-content{flex:1;min-height:0;overflow:auto;scrollbar-width:thin;scrollbar-color:#d9c7f4 #fff;outline-offset:-2px;padding-bottom:4px}
+#root .team-compact .team-footer{margin:0;padding:8px 0;flex-shrink:0}
+#root .team-compact .team-hero{position:relative;overflow:hidden;border-radius:14px;background:#6d28d9;color:#fff;padding:20px 24px;max-width:none;margin:0 0 14px;min-height:108px}
+#root .team-compact .team-hero:after{content:'';position:absolute;width:160px;height:160px;border:1px solid #ffffff24;border-radius:50%;right:-25px;top:-45px;pointer-events:none}
+#root .team-compact .team-hero h1{color:#fff;font-size:29px;margin:0 0 5px}
+#root .team-compact .team-hero p,#root .team-compact .team-hero .team-kicker{color:#fff;font-size:12px;line-height:1.5;margin:0}
+#root .team-compact .team-hero .team-kicker{font-size:10px;margin-bottom:6px}
+#root .team-compact .team-stats{gap:12px;margin-bottom:14px}
+#root .team-compact .team-stats article{padding:12px 15px;border-radius:10px;background:#fff}
+#root .team-compact .team-stats strong{font-size:27px;margin:3px 0 0}
+#root .team-compact .team-stats small{display:none}
+#root .team-compact .team-card{padding:16px;border-radius:10px}
+#root .team-compact .team-section-heading{margin-bottom:12px;gap:12px;align-items:center}
+#root .team-compact h2{font-size:19px}
+#root .team-compact .team-section-heading p{font-size:11px;line-height:1.5}
+#root .team-compact .team-toolbar{flex-direction:row;align-items:center;gap:10px;margin-bottom:12px}
+#root .team-compact .team-search{max-width:none}
+#root .team-compact .team-filter{gap:6px}
+#root .team-compact .team-customer-row{padding:13px 0;gap:12px;grid-template-columns:38px minmax(120px,1fr) minmax(120px,1fr) auto}
+#root .team-compact .team-customer-row-program{grid-column:auto}
+#root .team-compact .team-customer-row>.team-status{grid-row:auto;grid-column:auto}
+#root .team-compact .team-row-view{display:none}
+#root .team-compact .team-status{background:#fff;font-size:10px;padding:3px 8px}
+#root .team-compact .team-avatar{background:#fff}
+#root .team-compact .team-breadcrumb{margin:0 0 9px;min-height:25px}
+#root .team-compact .team-customer-heading{min-height:90px;gap:14px;padding:15px 20px;margin-bottom:10px}
+#root .team-compact .team-customer-heading>.team-avatar{width:44px;height:44px;font-size:15px}
+#root .team-compact .team-customer-heading h1{font-size:25px}
+#root .team-compact .team-customer-meta{padding:8px 0;gap:10px 24px;font-size:10px}
+#root .team-compact .team-customer-meta strong{font-size:11px;margin:0}
+#root .team-compact .team-detail-tabs{margin:4px 0 12px;gap:20px}
+#root .team-compact .team-detail-tabs button{min-height:44px;padding:9px 0}
+#root .team-compact .team-key-values{margin-top:10px}
+#root .team-compact .team-key-values>div{padding:10px 0;grid-template-columns:160px minmax(0,1fr);gap:14px}
+#root .team-compact .portal-section-tabs,.team-editor-tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+#root .team-compact .portal-section-tabs button,#root .team-editor-tabs button{font:500 12px 'DM Sans',sans-serif;border:1px solid #e5d8fa;border-radius:7px;background:#fff;color:#705b8c;padding:9px 12px;min-height:40px;cursor:pointer}
+#root .team-compact .portal-section-tabs button[aria-selected=true],#root .team-editor-tabs button[aria-pressed=true]{border-color:#6d28d9;color:#6d28d9;box-shadow:inset 0 -2px #6d28d9}
+#root .team-compact .portal-section-select{display:none}
+#root .team-compact .portal-pager{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;color:#705b8c;margin-top:12px}
+#root .team-compact .portal-pager>div{display:flex;align-items:center;gap:10px}
+#root .team-compact .portal-pager button{background:#fff;border:1px solid #e5d8fa;border-radius:6px;padding:7px 10px;min-height:36px;color:#6d28d9;font:11px 'DM Sans',sans-serif}
+#root .team-compact .portal-pager button:disabled{opacity:.4;cursor:default}
+#root .team-compact .team-product-list{gap:10px}
+#root .team-compact .team-product-row{padding:14px 16px;gap:15px}
+#root .team-compact .team-product-row h3{font-size:15px;margin-bottom:3px}
+#root .team-compact .team-row-actions button{min-height:40px;padding:8px}
+#root .team-compact .team-field,#root .team-product-dialog .team-field{gap:5px;margin-bottom:12px}
+#root .team-compact .team-field input,#root .team-compact .team-field select,#root .team-compact .team-field textarea{padding:9px;min-height:40px}
+#root .team-compact .team-field-grid{gap:12px;grid-template-columns:1fr 1fr}
+#root .team-compact .team-preference-summary{display:grid;gap:4px;font-size:12px;padding:12px;border:1px solid #e5d8fa;border-radius:8px;overflow-wrap:anywhere}
+#root .team-compact .team-meal-picker{display:flex;align-items:flex-end;gap:12px;margin-bottom:12px}
+#root .team-compact .team-meal-picker .team-field{flex:1;margin:0}
+#root .team-compact .team-meal-top{grid-template-columns:minmax(0,1fr) 120px auto}
+#root .team-compact .team-meal-top .team-text-button{grid-column:auto;min-height:40px;margin:0}
+#root .team-compact .team-editor-actions,#root .team-product-dialog .team-editor-actions{margin-top:12px;padding-top:12px;border-top:1px solid #e5d8fa;gap:8px}
+#root .team-compact .team-feedback,#root .team-product-dialog .team-feedback{font-size:11px!important;padding:8px 10px!important;margin:10px 0!important}
+#root .team-compact .team-fine-print{font-size:11px;margin:10px 0;line-height:1.6}
+#root .team-compact .team-published-preview{max-height:180px;overflow:auto}
+#root .team-product-dialog{width:min(600px,calc(100% - 24px));padding:20px}
+#root .team-product-dialog .team-section-heading{margin-bottom:12px}
+#root .team-product-dialog .team-fine-print{font-size:10px;line-height:1.5;margin:10px 0}
+#root .team-product-dialog .team-dialog-close{width:44px;height:44px}
+@media(max-width:1000px){#root .team-compact .team-customer-row{grid-template-columns:38px minmax(0,1fr) auto}#root .team-compact .team-customer-row-program{grid-column:2}#root .team-compact .team-customer-row>.team-status{grid-column:3;grid-row:1/3}}
+@media(max-width:767px){
+#root .team-panel.team-compact{display:flex;flex-direction:column}
+#root .team-compact .team-sidebar{height:64px;flex-shrink:0;position:relative;overflow:visible;padding:10px 16px;border-right:0;border-bottom:1px solid #e5d8fa;z-index:3}
+#root .team-compact .team-sidebar-top{display:flex;align-items:center;justify-content:space-between}
+#root .team-compact .team-brand{width:128px}
+#root .team-compact .team-brand img:first-child{width:24px;height:32px}
+#root .team-compact .team-brand img:last-child{width:89px}
+#root .team-compact .team-menu-button{display:block;min-width:60px;min-height:44px;border:1px solid #e5d8fa;border-radius:8px;background:#fff;color:#6d28d9;font:12px 'DM Sans',sans-serif;padding:8px}
+#root .team-compact .team-sidebar-label{display:none}
+#root .team-compact .team-sidebar nav{position:absolute;top:63px;left:0;right:0;display:none;background:#fff;padding:12px 16px;margin:0;border-bottom:1px solid #e5d8fa;box-shadow:0 10px 20px #2e10650d}
+#root .team-compact .team-sidebar nav.is-open{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#root .team-compact .team-sidebar nav a{min-height:44px;padding:10px;font-size:12px}
+#root .team-compact .team-sidebar-bottom{display:none}
+#root .team-compact .team-sidebar-bottom.is-open{position:absolute;top:132px;left:0;right:0;background:#fff;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid #e5d8fa;box-shadow:0 12px 20px #2e10650d}
+#root .team-compact .team-sidebar-bottom>.team-status,#root .team-compact .team-sidebar-bottom p{display:none}
+#root .team-compact .team-sidebar-bottom>a,#root .team-compact .team-sidebar-bottom button{margin:0;font-size:11px;min-height:44px;display:flex;align-items:center}
+#root .team-compact .team-topbar{min-height:45px;padding:4px 16px}
+#root .team-compact .team-topbar strong{font-size:15px}
+#root .team-compact .team-body{padding:8px 14px 0}
+#root .team-compact .team-footer{display:none}
+#root .team-compact .team-content{padding-bottom:max(12px,env(safe-area-inset-bottom))}
+#root .team-compact .team-demo-banner{font-size:9px;margin-bottom:8px}
+#root .team-compact .team-hero{padding:14px 16px;min-height:94px;margin-bottom:10px}
+#root .team-compact .team-hero h1{font-size:25px}
+#root .team-compact .team-hero p{font-size:11px}
+#root .team-compact .team-stats{gap:8px;margin-bottom:10px}
+#root .team-compact .team-stats article{padding:9px}
+#root .team-compact .team-stats span{font-size:10px;line-height:1.3;min-height:26px;display:block}
+#root .team-compact .team-stats strong{font-size:24px;margin:4px 0 0}
+#root .team-compact .team-card{padding:12px}
+#root .team-compact h2{font-size:17px}
+#root .team-compact .team-section-heading{flex-wrap:nowrap;gap:8px;margin-bottom:10px}
+#root .team-compact .team-section-heading p{display:none}
+#root .team-compact .team-toolbar{flex-direction:column;align-items:stretch;gap:8px;margin-bottom:8px}
+#root .team-compact .team-filter{justify-content:space-between}
+#root .team-compact .team-search input,#root .team-compact .team-filter select,#root .team-compact .team-field input,#root .team-compact .team-field select,#root .team-compact .team-field textarea,#root .team-product-dialog .team-field input,#root .team-product-dialog .team-field select,#root .team-product-dialog .team-field textarea{font-size:16px;min-height:44px;padding:9px;width:100%;max-width:100%}
+#root .team-compact .team-filter select{width:80%;min-width:0}
+#root .team-compact .team-customer-row{grid-template-columns:32px minmax(0,1fr) auto;gap:7px;padding:12px 0}
+#root .team-compact .team-customer-row .team-avatar{width:32px;height:32px;font-size:11px}
+#root .team-compact .team-customer-row h3{font-size:13px;margin-bottom:2px}
+#root .team-compact .team-customer-row>.team-status{font-size:9px;padding:3px 5px}
+#root .team-compact .team-customer-row-program strong{margin:0;font-size:10px}
+#root .team-compact .team-customer-row-name>span{font-size:10px!important}
+#root .team-compact .team-customer-row-program>span{display:none!important}
+#root .team-compact .team-customer-heading{padding:12px;min-height:84px}
+#root .team-compact .team-customer-heading h1{font-size:22px}
+#root .team-compact .team-customer-heading p{font-size:10px}
+#root .team-compact .team-customer-meta{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:7px 0}
+#root .team-compact .team-customer-meta>span:first-child{grid-column:1/-1;display:flex;gap:6px}
+#root .team-compact .team-detail-tabs{justify-content:space-between;gap:8px;margin:2px 0 10px}
+#root .team-compact .team-detail-tabs button{font-size:12px}
+#root .team-compact .portal-section-tabs{display:none}
+#root .team-compact .portal-section-select{display:flex;flex-direction:column;font-size:11px;gap:4px;margin-bottom:12px;color:#705b8c}
+#root .team-compact .portal-section-select select{font:16px 'DM Sans',sans-serif;min-height:44px;padding:9px;border:1px solid #e5d8fa;border-radius:7px;background:#fff;color:#2e1065;width:100%}
+#root .team-compact .team-key-values>div{grid-template-columns:minmax(90px,1fr) minmax(0,1.1fr);gap:10px;font-size:11px;padding:8px 0}
+#root .team-compact .team-editor-tabs{gap:4px;flex-wrap:nowrap}
+#root .team-editor-tabs button{font-size:11px;padding:7px 8px;min-height:44px}
+#root .team-compact .team-meal-top{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+#root .team-compact .team-meal-top .team-text-button{grid-column:1/-1;justify-self:end;min-height:30px;margin:-7px 0 3px}
+#root .team-compact .team-meal-picker{gap:8px}
+#root .team-compact .team-preference-summary{font-size:11px;gap:2px;padding:8px}
+#root .team-compact .team-button,#root .team-product-dialog .team-button{min-height:44px;padding:9px 12px;font-size:11px}
+#root .team-compact .team-editor-actions>span{width:100%}
+#root .team-compact .team-product-row{padding:12px;gap:8px;grid-template-columns:minmax(0,1fr) auto}
+#root .team-compact .team-product-row h3{font-size:14px}
+#root .team-compact .team-product-link-status{grid-column:1}
+#root .team-compact .team-row-actions{grid-column:2;grid-row:1/3;flex-direction:column;gap:0}
+#root .team-compact .team-row-actions button{min-height:44px;font-size:12px}
+#root .team-compact .portal-pager button{min-height:40px;padding:8px}
+#root .team-product-dialog{padding:16px;max-height:calc(100dvh - 24px);border-radius:16px}
+#root .team-product-dialog .team-field-grid{grid-template-columns:1fr 1fr;gap:10px}
+#root .team-product-dialog .team-audience label{min-height:34px;margin:0}
+#root .team-product-dialog .team-audience-customers{padding-top:5px;margin-top:5px}
+}
+@media(prefers-reduced-motion:reduce){#root .team-compact *,#root .team-product-dialog *{animation:none!important;transition:none!important}}
+#root .team-compact .team-content{display:flex;flex-direction:column}
+#root .team-compact .team-content>*{flex-shrink:0}
+#root .team-compact .team-content>section:last-child{flex:1}
+#root .team-compact .team-record{display:flex;flex-direction:column;flex:1;min-height:0}
+#root .team-compact .team-record-section:not([hidden]){flex:1;min-height:0;overflow:auto;animation:trufit-team-in .25s ease-out both}
+#root .team-compact .team-record-section>.team-card{min-height:100%}
+#root .team-compact .team-diet-editor{height:100%;min-height:340px;display:flex;flex-direction:column}
+#root .team-compact .team-edit-pane{flex:1;min-height:0;overflow:auto;animation:trufit-team-in .25s ease-out both;padding:1px 2px}
+#root .team-compact .team-diet-editor>.team-section-heading,#root .team-compact .team-diet-editor>.team-editor-tabs,#root .team-compact .team-editor-actions{flex-shrink:0}
+#root .team-compact .team-content{animation:trufit-team-in .25s ease-out both}
+@keyframes trufit-team-in{from{opacity:.55;transform:scale(.99)}to{opacity:1;transform:scale(1)}}
+@media(max-width:767px){#root .team-compact .team-workspace{flex:1;min-height:0}#root .team-compact .team-customer-meta>span:not(:first-child){display:none}#root .team-compact .team-customer-heading{min-height:72px}#root .team-compact .team-diet-editor{min-height:300px}#root .team-compact .team-preference-summary{max-height:75px;overflow:auto}}
+@media(prefers-reduced-motion:reduce){#root .team-compact .team-content,#root .team-compact .team-edit-pane,#root .team-compact .team-record-section:not([hidden]){animation:none}}
+#root .team-compact .portal-tab-panel:not([hidden]),#root .team-product-dialog form>div:not([hidden]):not(.team-editor-actions){animation:trufit-team-in .25s ease-out both}
+@media(prefers-reduced-motion:reduce){#root .team-compact .portal-tab-panel:not([hidden]),#root .team-product-dialog form>div{animation:none!important}}

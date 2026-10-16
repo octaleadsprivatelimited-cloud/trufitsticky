@@ -27,7 +27,7 @@ const LocationPermissionModal = ({ onClose, onManualSelect }) => {
           aria-label="Close modal"
         >
           ×
-        </button>
+</button>
         <div className="locperm__header">
           <div className="locperm__logo">
             <img src={FooterLogo} alt="TruFit Logo" className="locperm__logo-main" />
@@ -59,7 +59,7 @@ const LocationPermissionModal = ({ onClose, onManualSelect }) => {
               style={{
                 fontFamily: "Open Sans",
                 fontSize: "13px",
-                color: "#888",
+                color: "#705b8c",
                 marginBottom: "10px",
               }}
             >
@@ -71,9 +71,9 @@ const LocationPermissionModal = ({ onClose, onManualSelect }) => {
                 style={{
                   padding: "8px 20px",
                   borderRadius: "8px",
-                  border: "2px solid #3399cc",
-                  backgroundColor: "#fff",
-                  color: "#3399cc",
+                  border: "2px solid #6d28d9",
+                  backgroundColor: "#ffffff",
+                  color: "#6d28d9",
                   fontFamily: "Open Sans",
                   fontSize: "13px",
                   fontWeight: "600",
@@ -81,24 +81,24 @@ const LocationPermissionModal = ({ onClose, onManualSelect }) => {
                   transition: "all 0.2s ease",
                 }}
                 onMouseOver={(e) => {
-                  e.target.style.backgroundColor = "#3399cc";
-                  e.target.style.color = "#fff";
+                  e.target.style.backgroundColor = "#6d28d9";
+                  e.target.style.color = "#ffffff";
                 }}
                 onMouseOut={(e) => {
-                  e.target.style.backgroundColor = "#fff";
-                  e.target.style.color = "#3399cc";
+                  e.target.style.backgroundColor = "#ffffff";
+                  e.target.style.color = "#6d28d9";
                 }}
               >
                 🇮🇳 India
-              </button>
+</button>
               <button
                 onClick={() => onManualSelect && onManualSelect("INTERNATIONAL")}
                 style={{
                   padding: "8px 20px",
                   borderRadius: "8px",
-                  border: "2px solid #3399cc",
-                  backgroundColor: "#fff",
-                  color: "#3399cc",
+                  border: "2px solid #6d28d9",
+                  backgroundColor: "#ffffff",
+                  color: "#6d28d9",
                   fontFamily: "Open Sans",
                   fontSize: "13px",
                   fontWeight: "600",
@@ -106,16 +106,16 @@ const LocationPermissionModal = ({ onClose, onManualSelect }) => {
                   transition: "all 0.2s ease",
                 }}
                 onMouseOver={(e) => {
-                  e.target.style.backgroundColor = "#3399cc";
-                  e.target.style.color = "#fff";
+                  e.target.style.backgroundColor = "#6d28d9";
+                  e.target.style.color = "#ffffff";
                 }}
                 onMouseOut={(e) => {
-                  e.target.style.backgroundColor = "#fff";
-                  e.target.style.color = "#3399cc";
+                  e.target.style.backgroundColor = "#ffffff";
+                  e.target.style.color = "#6d28d9";
                 }}
               >
                 🌎 International
-              </button>
+</button>
             </div>
           </div>
         </div>

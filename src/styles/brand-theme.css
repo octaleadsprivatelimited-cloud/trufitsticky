@@ -1,0 +1,37 @@
+/* Shared Tru Fit palette. Photography retains its original colours. */
+:root{--paper:#ffffff;--ink:#2e1065;--muted:#705b8c;--line:#e5d8fa;--accent:#6d28d9;--accent-soft:#f4edff;--sage:#f4edff;--lime:#e5d8fa;--lavender:#f4edff;--trufit-white:#ffffff;--trufit-purple:#6d28d9;color-scheme:light;accent-color:var(--accent)}
+html,body{background:#ffffff;color:var(--ink)}
+body{background-image:none}
+::selection{background:#6d28d9;color:#ffffff}
+.site-header{background:#ffffff;border-bottom-color:var(--line)}
+.button{background:var(--accent);border-color:var(--accent);color:#ffffff}
+.button:hover{background:#553375;border-color:#553375}
+.button-outline{background:#ffffff;color:var(--accent);border-color:var(--accent)}
+.button-outline:hover{color:#ffffff}
+.brand img,.landing-logo img,.portal-brand img{filter:none}
+.nav-links .customer-portal-link{font-weight:600;color:var(--accent)}
+.site-header .menu-button{background:#ffffff;color:var(--ink);border-color:var(--line)}
+.landing-whatsapp-mark img{filter:brightness(0) saturate(100%) invert(23%) sepia(89%) saturate(2590%) hue-rotate(251deg) brightness(86%) contrast(98%)}
+input::placeholder,textarea::placeholder{color:var(--muted);opacity:1}
+input,select,textarea{accent-color:var(--accent)}
+@media(min-width:701px){.nav-links{gap:24px}.nav-links>a:not(.button){font-size:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media(min-width:701px) and (max-width:1000px){.site-nav{height:80px}.menu-button{display:block;border:1px solid var(--line);background:#ffffff;padding:8px 12px;border-radius:6px;font-size:12px;color:var(--ink)}.nav-links{display:none;position:absolute;top:80px;left:0;right:0;padding:20px;background:#ffffff;flex-direction:column;align-items:stretch;border-bottom:1px solid var(--line);gap:10px}.nav-links.is-open{display:flex}.nav-links>a:not(.button){padding:12px}}
+/* Quieter typography and surfaces: one accent, sentence case, fewer ornaments. */
+#root .eyebrow,#root .featured-coaching-kicker,#root .catalogue-tier,#root .cpx-all-plans-eyebrow,#root .landing-coach-pill,#root .couple-eyebrow,#root .portal-kicker,#root .portal-sidebar-label,#root .profile-kicker,#root .contact-explore h3{letter-spacing:.015em!important;text-transform:none!important}
+#root .feature-card{background:#ffffff!important;border:1px solid var(--line);border-radius:10px;box-shadow:none}
+#root .feature-icon,#root .featured-coaching-arrow,#root .portal-nav-arrow{display:none!important}
+#root .journey-card,#root .journey-couple,#root .featured-coaching-card,#root .featured-coaching-card-0,#root .featured-coaching-card-1{background:#ffffff!important;transform:none!important;box-shadow:none;border-color:var(--line)}
+#root .journey-card:hover,#root .featured-coaching-card:hover{border-color:var(--accent);box-shadow:none!important}
+#root .contact-panel .contact-details{background:#ffffff!important;border:1px solid var(--line);border-radius:12px}
+#root .contact-spark{display:none!important}
+#root .feature-card h3{font-size:21px;font-weight:600}
+#root .section-heading h2,#root .faq-section h2,#root .together-title h2{font-family:'Manrope',sans-serif!important;font-size:clamp(29px,3.2vw,43px)!important;line-height:1.2!important;font-weight:600!important;letter-spacing:-.045em!important;text-transform:none}
+#root .contact-explore a:hover,#root .text-link:hover{text-decoration:underline;text-underline-offset:4px}
+#root .summary-inclusions li::before,#root .couple-benefits li::before{content:'✓'}
+#root .program-benefit>summary::before{content:none!important}
+#root .portal-coach>a{width:auto;border:0;border-radius:0;padding:4px;font-size:12px;color:var(--accent)}
+#root .redirect__btn-bg,#root .sbt-bg{display:none!important}
+#root .contact-submit{justify-content:center}
+#root .profile-onboarding,#root .profile-faq{border-top:1px solid var(--line);padding-top:28px}
+#root .progress-film-copy>span{letter-spacing:.02em;text-transform:none}

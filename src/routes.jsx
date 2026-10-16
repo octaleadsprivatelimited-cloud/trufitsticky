@@ -8,6 +8,8 @@ import ErrorPage from "./pages/ErrorPage";
 
 // Lazy load all page components for code splitting
 
+const TeamPanelPage = lazy(() => import("./pages/TeamPanelPage"));
+const SignInPage = lazy(() => import("./pages/SignInPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const PlansPage = lazy(() => import("./pages/PlansPage"));
 const CoachPage = lazy(() => import("./pages/CoachPage"));
@@ -19,7 +21,10 @@ const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
 const TermsConditionsPage = lazy(() => import("./pages/TermsConditionsPage"));
 const RefundPolicyPage = lazy(() => import("./pages/RefundPolicyPage"));
 const PaymentCallbackPage = lazy(() => import("./pages/PaymentCallbackPage"));
+const PaymentSuccessPage = lazy(() => import("./pages/PaymentSuccessPage"));
 const CouplePaymentPage = lazy(() => import("./pages/CouplePaymentPage"));
+const CustomerPortalPage = lazy(() => import("./pages/CustomerPortalPage"));
+const ReferralPage = lazy(() => import("./pages/ReferralPage"));
 
 const router = createBrowserRouter([
     {
@@ -27,11 +32,18 @@ const router = createBrowserRouter([
         element: <Layout />,
         errorElement: <ErrorPage />,
         children: [
+            { path: "/team", element: <Suspense fallback={null}><TeamPanelPage /></Suspense> },
+            { path: "/team/products", element: <Suspense fallback={null}><TeamPanelPage /></Suspense> },
+            { path: "/team/customers/:customerId", element: <Suspense fallback={null}><TeamPanelPage /></Suspense> },
+            { path: "/signin", element: <Suspense fallback={null}><SignInPage /></Suspense> },
             { path: "/start", element: <CoachLandingIndex/> },
             { path: "/start/:coachName", element: <LegacyCoachLanding /> },
             { path: "/lp/:coachName", element: <Suspense fallback={null}><CoachLandingPage /></Suspense> },
             { path: "/plans", element: <Suspense fallback={null}><PlansPage /></Suspense> },
             { path: "/payment/couple", element: <Suspense fallback={null}><CouplePaymentPage /></Suspense> },
+            { path: "/payment/success", element: <Suspense fallback={null}><PaymentSuccessPage /></Suspense> },
+            { path: "/portal/:section?", element: <Suspense fallback={null}><CustomerPortalPage /></Suspense> },
+            { path: "/refer/:code", element: <Suspense fallback={null}><ReferralPage /></Suspense> },
             {
                 index: true, 
                 element: (

@@ -44,7 +44,7 @@ export default function ProgressShowcase() {
         <div className="progress-film-copy"><span>In motion / Tru Fit</span><p>A little better.<br/><em>Every day.</em></p></div>
         <button type="button" className="film-accessible-toggle" onClick={toggleFilm}>
           {playing ? 'Pause background video' : 'Play background video'}
-        </button>
+</button>
       </div>
 
     </section>

@@ -1,5 +1,5 @@
 .fmc__section {
-  background: #fff;
+  background: #ffffff;
   height: 100vh;
 }
 
@@ -12,8 +12,8 @@
 .fmc__head {
   background: linear-gradient(
       0deg,
-      rgba(0, 0, 0, 0.6) 0%,
-      rgba(0, 0, 0, 0) 100%
+      rgba(46,16,101,0.6) 0%,
+      rgba(46,16,101,0) 100%
     ),
     url("../../assets/find-my-coach.webp");
   background-size: cover;
@@ -35,7 +35,7 @@
 .fmc__title,
 .fmc__title h1 {
   text-align: center;
-  color: #fff;
+  color: #ffffff;
   font-family: Montserrat;
   font-size: 24px;
   font-style: normal;
@@ -46,7 +46,7 @@
 }
 
 .fmc__tag {
-  color: #fff;
+  color: #ffffff;
   text-align: center;
   font-family: Montserrat;
   font-size: 16px;
@@ -58,7 +58,7 @@
 }
 
 .fmc-btn {
-  /* border: 1px solid #000; */
+  /* border: 1px solid #2e1065; */
   margin: 20px 0 0 0;
 }
 
@@ -83,21 +83,21 @@
   }
   .fmc__title,
 .fmc__title h1 {
-    color: #000;
+    color: #2e1065;
     text-align: left;
     /* font-size: 32px; */
     width: 95%;
   }
 
   .fmc__tag {
-    color: #000;
+    color: #2e1065;
     text-align: left;
     /* font-size: 24px; */
     margin: 15px 0 0 0;
     width: 95%;
   }
   .fmc-btn {
-    border: 1px solid #000;
+    border: 1px solid #2e1065;
     margin: 25px 0 0 0;
   }
 }
@@ -115,7 +115,7 @@
     width: 80%;
   }
   .fmc-btn {
-    border: 1px solid #000;
+    border: 1px solid #2e1065;
     margin: 25px 0 0 0;
   }
 }
@@ -163,19 +163,19 @@
   font-size: 12px;
   margin-bottom: 5px;
   font-weight: 400;
-  color: #000;
+  color: #2e1065;
 }
 
 .progress__bar {
   height: 6px;
-  background: #eee;
+  background: #ffffff;
   border-radius: 5px;
   overflow: hidden;
 }
 
 .progress__fill {
   height: 100%;
-  background: #9c27ff;
+  background: #6d28d9;
   transition: width 0.3s ease;
 }
 .que__nav {
@@ -186,8 +186,8 @@
 }
 .que__nav button {
   padding: 14px 32px;
-  background: #9c27ff;
-  color: #fff;
+  background: #6d28d9;
+  color: #ffffff;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -196,7 +196,7 @@
   min-width: 100px;
 }
 .que__nav button:disabled {
-  background: #ccc;
+  background: #e5d8fa;
   cursor: not-allowed;
 }
 
@@ -204,14 +204,14 @@
   position: relative;
   height: 5px;
   border-radius: 65px;
-  border: 1px solid #000;
-  background: #fff;
+  border: 1px solid #2e1065;
+  background: #ffffff;
 }
 
 .progress__fill {
   height: 100%;
   border-radius: 65px;
-  background: #9c27ff;
+  background: #6d28d9;
   transition: width 0.4s ease;
 }
 
@@ -234,7 +234,7 @@
 }
 
 .que__ques p {
-  color: #000;
+  color: #2e1065;
   font-family: Montserrat;
   font-size: 24px;
   font-style: normal;
@@ -253,11 +253,11 @@
 .que__option {
   padding: 15px 20px;
   border-radius: 10px;
-  background: #fff;
+  background: #ffffff;
   cursor: pointer;
   border: 2px solid transparent;
   transition: all 0.3s ease;
-  color: #000;
+  color: #2e1065;
   font-family: Montserrat;
   font-size: 14px;
   font-style: normal;
@@ -267,11 +267,11 @@
 }
 
 .que__option:hover {
-  border: 2px solid #ccc;
+  border: 2px solid #e5d8fa;
 }
 
 .que__option.selected {
-  border: 2px solid #9c27ff;
+  border: 2px solid #6d28d9;
 }
 
 @media screen and (min-width: 768px) {
@@ -390,7 +390,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(97, 97, 97, 0.6); /* overlay */
+  background: rgba(46,16,101,0.6); /* overlay */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -406,7 +406,7 @@
 
 .spin__section circle {
   fill: none;
-  stroke: #fff;
+  stroke: #ffffff;
   stroke-width: 3;
   stroke-dasharray: 1, 200;
   stroke-dashoffset: 0;

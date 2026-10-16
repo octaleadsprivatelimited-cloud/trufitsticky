@@ -4,20 +4,13 @@ import CardClose from "../../assets/card-close.svg";
 const Legal = ({ type, onClose }) => {
   const modalRef = useRef(null);
 
-  // Handle click outside modal to close
-  const handleClickOutside = (event) => {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
-      onClose();
-    }
-  };
-
-  // Add event listener for click outside
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) onClose();
     };
-  }, []);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [onClose]);
 
   // Prevent body scroll when modal is open
   useEffect(() => {

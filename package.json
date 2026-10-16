@@ -9,10 +9,14 @@
     "lint": "eslint .",
     "preview": "node scripts/preview.mjs",
     "seo": "node scripts/generate-seo.mjs",
-    "test:analytics": "node --test src/analytics/core.test.mjs"
+    "test:analytics": "node --test src/analytics/core.test.mjs",
+    "test:portal": "node --test src/portal/data.test.mjs",
+    "test": "npm run test:analytics && npm run test:portal && npm run test:team",
+    "test:team": "node --test src/team/store.test.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.23.12",
+    "jspdf": "^4.2.1",
     "lenis": "^1.3.26",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

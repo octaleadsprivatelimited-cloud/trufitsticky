@@ -103,7 +103,7 @@ const Articles = () => {
           ) : articles.length === 0 ? (
             <p
               style={{
-                color: "#9c27ff",
+                color: "#6d28d9",
                 textAlign: "center",
                 fontFamily: "Open Sans",
                 fontSize: "20px",
@@ -120,8 +120,8 @@ const Articles = () => {
                     style={{
                       backgroundImage: `linear-gradient(
                         0deg,
-                        rgba(0, 0, 0, 0.6) 0%,
-                        rgba(0, 0, 0, 0.6) 100%
+                        rgba(46,16,101,0.6) 0%,
+                        rgba(46,16,101,0.6) 100%
                       ), url(${article.image_url})`,
                       backgroundSize: "cover",
                       backgroundRepeat: "no-repeat",
@@ -129,7 +129,7 @@ const Articles = () => {
                       width: "100%",
                       height: "270px",
                       borderRadius: "18.5px",
-                      boxShadow: "0 3.7px 6.167px 0 rgba(0,0,0,0.25)",
+                      boxShadow: "0 3.7px 6.167px 0 rgba(46,16,101,0.25)",
                     }}
                   ></div>
                   <div className="art__title-tag">

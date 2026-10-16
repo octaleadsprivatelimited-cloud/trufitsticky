@@ -44,3 +44,11 @@ test('sales landing pages attribute coach actions and clear context on leaving',
  assert.ok(r.w.dataLayer.some(a=>a[0]==='event'&&a[1]==='page_view'&&a[2].content_group==='coach_landing'));
  r.client.page('/','Home');r.client.track('cta_click',{source:'home'});assert.equal(r.w.dataLayer.at(-1)[2].coach_id,undefined);
 });
+
+test('member portal and referral identifiers never initialize analytics or recording', () => {
+ for (const path of ['/team','/team/products','/team/customers/demo-member','/signin','/portal','/portal/programs','/portal/profile','/portal/products','/portal/referrals','/portal/invoices','/refer/ALEX-TRUFIT']) {
+  const r=runtime(path);r.client.setConsent(true);r.client.page(path,'Member portal');
+  assert.equal(r.scripts.length,0);
+  assert.equal(r.client.track('page_view',{}),false);
+ }
+});

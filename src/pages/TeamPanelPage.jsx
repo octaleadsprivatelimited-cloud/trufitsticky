@@ -1,0 +1,59 @@
+import { useEffect, useState } from 'react';
+import { Link, NavLink, useLocation, useParams } from 'react-router-dom';
+import Logo from '../assets/logo-original.svg';
+import Wordmark from '../assets/footer-logo-text.svg';
+import { customerProfile, formatTeamDate, publishedProducts, sampleCustomers, TEAM_ACCESS_KEY } from '../team/store.mjs';
+import useWorkspace from '../team/useWorkspace';
+import DietEditor from '../team/DietEditor';
+import ProductManager from '../team/ProductManager';
+import '../team/team-panel.css';
+import '../team/team-compact.css';
+import { CompactTabs, CompactPanel, PortalPager } from '../portal/CompactControls';
+import useProductPageSize from '../portal/useProductPageSize';
+
+function readAccess() { try { return sessionStorage.getItem(TEAM_ACCESS_KEY) === 'demo'; } catch { return false; } }
+function Brand() { return <Link className="team-brand" to="/"><img src={Logo} alt=""/><img src={Wordmark} alt="Tru Fit"/></Link>; }
+const fields = [
+  ['Measurements', [['weight', 'Weight (kg)'], ['height', 'Height (cm)'], ['targetWeight', 'Target weight (kg)']]],
+  ['Fitness & routine', [['goal', 'Main goal'], ['experience', 'Experience'], ['activity', 'Daily activity'], ['trainingLocation', 'Training location'], ['trainingDays', 'Days per week'], ['sleep', 'Sleep (hours/night)'], ['equipment', 'Existing equipment'], ['limitations', 'Movement limitations / context']]],
+  ['Diet & preferences', [['dietPreference', 'Diet preference'], ['meals', 'Meals per day'], ['allergies', 'Allergies / intolerances'], ['avoidFoods', 'Foods to avoid'], ['water', 'Water (litres/day)'], ['usualMeals', 'Usual meals'], ['notes', 'Routine notes']]],
+];
+function FitnessDetails({ customer }) {
+  const [section, setSection] = useState('0');
+  const groups = fields.flatMap(([title,entries]) => Array.from({length:Math.ceil(entries.length / 4)},(_,index) => [title + (entries.length > 4 ? ` · ${index + 1}` : ''),entries.slice(index * 4,index * 4 + 4)]));
+  return <section className="team-card"><CompactTabs id="team-intake" label="Profile section" value={section} onChange={setSection} items={groups.map(([label],index) => ({id:String(index),label}))}/>{groups.map(([title,entries],index) => <CompactPanel key={title} id="team-intake" value={String(index)} active={section}><h2>{title}</h2><dl className="team-key-values">{entries.map(([key,label]) => <div key={key}><dt>{label}</dt><dd>{customer.profileValues[key] || 'Not provided'}</dd></div>)}</dl></CompactPanel>)}<p className="team-fine-print">{customer.id === 'demo-member' ? 'Profile saved by this customer in this browser tab.' : 'Fictional sample profile.'}</p></section>;
+}
+function CustomerDetail({ customer, workspace, saveWorkspace }) {
+  const [tab, setTab] = useState('profile');
+  return <div className="team-record"><Link className="team-breadcrumb" to="/team">All customers</Link><div className="team-customer-heading team-hero"><span className="team-avatar">{customer.initials}</span><div><span className="team-kicker">{customer.memberId} · Sample customer</span><h1>{customer.name}</h1><p>{customer.email} · {customer.program}</p></div></div><div className="team-customer-meta"><span>Coach <strong>{customer.coach}</strong></span><span>Diet plan <strong>{workspace.diets[customer.id]?.published ? 'Published in preview' : 'Not published'}</strong></span><span>Products <strong>{publishedProducts(workspace, customer.id).length} recommended</strong></span></div>
+    <nav className="team-detail-tabs" aria-label="Customer record sections">{[['profile','Fitness details'],['diet','Diet plan'],['products','Products']].map(([key,label]) => <button type="button" key={key} aria-pressed={tab === key} onClick={() => setTab(key)}>{label}</button>)}</nav>
+    <div className="team-record-section" hidden={tab !== 'profile'}><FitnessDetails customer={customer}/></div><div className="team-record-section" hidden={tab !== 'diet'}><DietEditor customer={customer} workspace={workspace} saveWorkspace={saveWorkspace}/></div><div className="team-record-section" hidden={tab !== 'products'}><ProductManager customerId={customer.id} workspace={workspace} saveWorkspace={saveWorkspace}/></div>
+  </div>;
+}
+function Customers({ customers, workspace }) {
+  const [query, setQuery] = useState(''), [filter, setFilter] = useState('all'), [page, setPage] = useState(0);
+  const pageSize = Math.min(3,useProductPageSize());
+  const list = customers.filter(customer => `${customer.name} ${customer.email} ${customer.coach} ${customer.memberId}`.toLowerCase().includes(query.trim().toLowerCase()) && (filter !== 'diet' || !workspace.diets[customer.id]?.published) && (filter !== 'profile' || !Object.values(customer.profileValues).some(Boolean)));
+  const current = Math.min(page,Math.max(0,Math.ceil(list.length / pageSize) - 1));
+  return <><header className="team-page-intro team-hero"><span className="team-kicker">A little care, well organised</span><h1>Your customers.</h1><p>Good guidance starts with knowing your people.</p></header><div className="team-stats"><article><span>Sample customers</span><strong>{customers.length}</strong><small>All in your workspace</small></article><article><span>Published diet plans</span><strong>{customers.filter(customer => workspace.diets[customer.id]?.published).length}</strong><small>Visible in customer previews</small></article><article><span>Published products</span><strong>{workspace.products.filter(product => product.status === 'published').length}</strong><small>With team affiliate links</small></article></div><section className="team-card"><div className="team-section-heading"><div><h2>Customer directory</h2><p>Select a customer to review their profile and update their plan.</p></div><span className="team-status">{list.length} customers</span></div><div className="team-toolbar"><label className="team-search"><span className="sr-only">Search customers</span><input type="search" placeholder="Search name, coach, or member ID" value={query} onChange={event => { setQuery(event.target.value); setPage(0); }}/></label><label className="team-filter">Show<select value={filter} onChange={event => { setFilter(event.target.value); setPage(0); }}><option value="all">All customers</option><option value="diet">Needs a diet plan</option><option value="profile">Profile not completed</option></select></label></div><div className="team-customer-list">{list.slice(current * pageSize,(current + 1) * pageSize).map(customer => <Link className="team-customer-row" key={customer.id} to={`/team/customers/${customer.id}`}><span className="team-avatar">{customer.initials}</span><div className="team-customer-row-name"><h3>{customer.name}</h3><span>{customer.email}</span></div><div className="team-customer-row-program"><strong>{customer.program}</strong><span>{customer.coach}</span></div><span className="team-status">{workspace.diets[customer.id]?.published ? 'Diet published' : 'Needs diet plan'}</span><span className="team-row-view">View customer</span></Link>)}</div><PortalPager page={current} pageSize={pageSize} total={list.length} onChange={setPage}/>{!list.length && <div className="team-empty"><h3>No matching customers</h3><p>Try another name or filter.</p><button className="team-button team-button-outline" onClick={() => { setQuery(''); setFilter('all'); }}>Show all customers</button></div>}</section></>;
+}
+export default function TeamPanelPage() {
+  const [access, setAccess] = useState(readAccess), [menu, setMenu] = useState(false);
+  useEffect(() => {
+    if (!menu) return;
+    const outside = event => { if (!event.target.closest('.team-sidebar')) setMenu(false); };
+    const keyboard = event => { if (event.key === 'Escape') { setMenu(false); document.querySelector('.team-menu-button')?.focus(); } };
+    document.addEventListener('pointerdown',outside); document.addEventListener('keydown',keyboard);
+    return () => { document.removeEventListener('pointerdown',outside); document.removeEventListener('keydown',keyboard); };
+  },[menu]);
+  const [workspace, saveWorkspace] = useWorkspace();
+  const { customerId } = useParams();
+  const location = useLocation();
+  const customers = sampleCustomers.map(customer => ({ ...customer, profileValues: customerProfile(customer) }));
+  const customer = customers.find(item => item.id === customerId);
+  const productsPage = location.pathname === '/team/products';
+  function enter() { try { sessionStorage.setItem(TEAM_ACCESS_KEY, 'demo'); } catch { /* In-memory entry still allows a read-only preview. */ } setAccess(true); }
+  function leave() { try { sessionStorage.removeItem(TEAM_ACCESS_KEY); } catch { /* Clear the in-memory preview as well. */ } setAccess(false); }
+  if (!access) return <section className="team-access-page"><Brand/><div className="team-access-card"><span className="team-status">Team UI preview</span><h1>Care starts here.</h1><p>A workspace for the Tru Fit team to review customer profiles, prepare diet plans, and manage recommended products.</p><div className="team-access-note">Explore three fictional customers. Changes stay in this browser tab and can be reviewed in the customer preview. This is a demo role, without live staff authentication.</div><button className="team-button" type="button" onClick={enter}>Enter team preview</button><Link to="/portal">Back to customer panel</Link></div></section>;
+  return <div className="team-panel team-compact" data-clarity-mask="true"><aside className="team-sidebar"><div className="team-sidebar-top"><Brand/><button className="team-menu-button" type="button" onClick={() => setMenu(!menu)} aria-expanded={menu} aria-controls="team-navigation">{menu ? 'Close' : 'Menu'}</button></div><span className="team-sidebar-label">Team workspace</span><nav id="team-navigation" className={menu ? 'is-open' : ''} aria-label="Team workspace"><NavLink to="/team" end className={!productsPage ? 'active' : ''} onClick={() => setMenu(false)}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2 M16 3a4 4 0 0 1 0 8 M22 21v-2a4 4 0 0 0-3-3.87 M13 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0"/></svg>Customers</NavLink><NavLink to="/team/products" onClick={() => setMenu(false)}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l2 13H4L6 8z M9 8V6a3 3 0 0 1 6 0v2"/></svg>Products & links</NavLink></nav><div className={`team-sidebar-bottom ${menu ? 'is-open' : ''}`}><span className="team-status">Demo workspace</span><p>Thoughtful guidance.<br/>One customer at a time.</p><Link to="/portal">Open customer preview</Link><button type="button" onClick={leave}>Leave team preview</button></div></aside><div className="team-workspace"><header className="team-topbar"><div><span className="team-kicker">Tru Fit team</span><strong>{productsPage ? 'Product catalogue' : customerId ? 'Customer record' : 'Customers'}</strong></div><span className="team-status">UI preview</span></header><div className="team-body"><div className="team-demo-banner">Demo workspace · changes stay in this browser tab</div><main className="team-content" tabIndex={0} aria-label="Team workspace content" key={location.pathname}>{customerId ? customer ? <CustomerDetail key={customer.id} customer={customer} workspace={workspace} saveWorkspace={saveWorkspace}/> : <div className="team-empty"><h1>Customer not found</h1><Link className="team-button" to="/team">Back to customers</Link></div> : productsPage ? <><header className="team-hero team-page-intro"><span className="team-kicker">Made for their progress</span><h1>Team essentials.</h1><p>Your products, links, and recommendations in one place.</p></header><ProductManager workspace={workspace} saveWorkspace={saveWorkspace}/></> : <Customers customers={customers} workspace={workspace}/>}</main><footer className="team-footer"><span>Tru Fit team workspace</span><span>Local session · {formatTeamDate(new Date().toISOString()).split(',')[0]}</span></footer></div></div></div>;
+}
