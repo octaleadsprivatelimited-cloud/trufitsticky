@@ -1,0 +1,190 @@
+/* Overview composition: readable groups instead of widely separated fragments. */
+#root .portal-compact .portal-overview.dashboard-refined {gap:14px;padding:0 0 6px;}
+#root .portal-compact .dashboard-refined .portal-member-hero {min-height:140px;margin:0;padding:20px 26px;border-radius:18px;}
+#root .portal-compact .dashboard-refined .portal-hero-copy h2 {font-size:34px;margin:5px 0 7px;}
+#root .portal-compact .dashboard-refined .portal-hero-copy .portal-hero-eyebrow {font-size:10px;letter-spacing:.02em;}
+#root .portal-compact .dashboard-refined .dashboard-member-since {display:block;color:#fff;font-size:10px;opacity:.75;margin-top:12px;}
+#root .portal-compact .dashboard-refined .portal-hero-days {min-width:130px;border:1px solid #ffffff2c;padding:12px 18px;background:linear-gradient(145deg,#ffffff12,#ffffff05);border-radius:16px;position:relative;}
+#root .portal-compact .dashboard-refined .portal-hero-days>svg {position:absolute;top:12px;right:12px;width:16px;height:16px;opacity:.5;}
+#root .portal-compact .dashboard-refined .portal-hero-days strong {font-size:42px;}
+#root .portal-compact .dashboard-refined .portal-hero-days span {margin-top:6px;font-size:10px;}
+#root .portal-compact .dashboard-metrics {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;flex-shrink:0;}
+#root .portal-compact .dashboard-metric {display:flex;align-items:center;gap:13px;padding:14px 16px;border:1px solid #e6ddf1;border-radius:13px;background:linear-gradient(130deg,#fff 45%,#fbf8ff);min-width:0;transition:border-color .2s;}
+#root .portal-compact .dashboard-metric:hover {border-color:#b89bdc;}
+#root .portal-compact .dashboard-metric>div {min-width:0;}
+#root .portal-compact .dashboard-metric-icon,#root .portal-compact .dashboard-shortcut-icon {display:grid;place-items:center;flex-shrink:0;background:linear-gradient(135deg,#eee4fc,#faf7ff);border:1px solid #e9ddf9;color:#753ac0;border-radius:12px;width:42px;height:42px;}
+#root .portal-compact .dashboard-metric-icon svg {width:21px;height:21px;}
+#root .portal-compact .dashboard-metric-label {display:block;color:#705b8c;font-size:11px;margin-bottom:5px;}
+#root .portal-compact .dashboard-metric-value {display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+#root .portal-compact .dashboard-metric-value strong {font:600 27px/1 'Manrope',sans-serif;color:#4f1c91;letter-spacing:-.045em;}
+#root .portal-compact .dashboard-metric-value small {font-size:10px;color:#88729e;}
+#root .portal-compact .dashboard-refined .compact-overview-grid {grid-template-columns:1.2fr 1fr;gap:14px;margin:0;flex:1;min-height:min-content;}
+#root .portal-compact .portal-overview.dashboard-refined .compact-overview-grid>.portal-card {padding:18px 20px;border:1px solid #e4daef;border-radius:16px;box-shadow:0 3px 14px #44157904;gap:12px;}
+#root .portal-compact .dashboard-refined .portal-card-heading {margin:0;align-items:center;flex-shrink:0;min-height:28px;}
+#root .portal-compact .dashboard-refined .portal-card-heading h3 {font-size:15px;font-weight:600;margin:0;}
+#root .portal-compact .dashboard-refined .portal-card-heading>a {font-size:11px;min-height:28px;display:inline-flex;align-items:center;}
+#root .portal-compact .dashboard-refined .portal-program-scene {min-height:104px;flex:1;gap:14px;}
+#root .portal-compact .dashboard-refined .portal-program-scene .compact-program-name strong {font:600 23px/1.25 'Manrope',sans-serif;letter-spacing:-.035em;color:#32104f;margin:5px 0 14px;}
+#root .portal-compact .dashboard-refined .portal-program-scene .dashboard-program-label {font-size:10px;color:#8b70a5;}
+#root .portal-compact .dashboard-refined .dashboard-coach {display:flex;align-items:center;gap:8px;color:#553275;font-size:11px;}
+#root .portal-compact .dashboard-refined .dashboard-coach-avatar {display:grid;place-items:center;width:30px;height:30px;border:1px solid #e3d4f4;border-radius:50%;background:#f0e7fc;color:#6c32ad;font-size:10px;flex-shrink:0;}
+#root .portal-compact .dashboard-refined .dashboard-coach>span>small {display:block;font-size:9px;color:#937eaa;line-height:1.3;}
+#root .portal-compact .dashboard-refined .dashboard-coach>span {font-size:11px;line-height:1.5;}
+#root .portal-compact .dashboard-refined .portal-program-runner {flex-basis:40%;max-width:180px;height:160px;align-self:center;}
+#root .portal-compact .dashboard-refined .dashboard-program-includes {list-style:none;display:flex;gap:12px;flex-wrap:wrap;margin:0;padding:12px 0;border-top:1px solid #e9dff4;border-bottom:1px solid #e9dff4;flex-shrink:0;}
+#root .portal-compact .dashboard-program-includes li {display:flex;align-items:center;gap:5px;font-size:10px;color:#806793;line-height:1.5;}
+#root .portal-compact .dashboard-program-includes svg {width:13px;height:13px;color:#8a55c2;flex-shrink:0;}
+#root .portal-compact .dashboard-refined .portal-program-progress {width:100%;padding-top:2px;}
+#root .portal-compact .dashboard-refined .compact-progress {font-size:11px;color:#593978;margin:0 0 9px;}
+#root .portal-compact .dashboard-progress-total {color:#937eaa;}
+#root .portal-compact .dashboard-refined .compact-progress>strong {font:600 12px 'DM Sans',sans-serif;color:#6d28d9;}
+#root .portal-compact .dashboard-refined progress {height:6px;}
+#root .portal-compact .dashboard-program-dates {display:flex;justify-content:space-between;gap:8px;color:#967fa9;font-size:9px;line-height:1.5;margin-top:8px;}
+#root .portal-compact .dashboard-program-dates strong {font-weight:500;color:#7c559b;}
+#root .portal-compact .dashboard-refined .dashboard-session-card {background:#fff;}
+#root .portal-compact .dashboard-session-content {display:flex;flex:1;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;padding:10px 0;}
+#root .portal-compact .dashboard-session-art {display:grid;place-items:center;width:76px;height:76px;border:1px solid #ebe0f8;border-radius:24px;color:#8650c2;background:radial-gradient(circle at 20% 10%,#fff,#f2eafd);box-shadow:0 0 0 9px #fbf8ff;}
+#root .portal-compact .dashboard-session-art>svg {width:34px;height:34px;}
+#root .portal-compact .dashboard-session-copy {display:flex;flex-direction:column;gap:7px;max-width:250px;}
+#root .portal-compact .dashboard-session-copy strong {font:600 17px/1.4 'Manrope',sans-serif;color:#482062;letter-spacing:-.02em;}
+#root .portal-compact .dashboard-session-copy p,#root .portal-compact .dashboard-session-copy>span {font-size:12px;line-height:1.7;color:#927ba6;margin:0;}
+#root .portal-compact .dashboard-session-button {min-height:40px;padding-inline:22px;border-radius:9px;font-size:11px;}
+#root .portal-compact .dashboard-session-support {display:flex;justify-content:space-between;gap:10px;padding-top:12px;border-top:1px solid #eee6f6;font-size:10px;color:#aa95bb;}
+#root .portal-compact .dashboard-session-support a {color:#80539f;}
+#root .portal-compact .dashboard-refined .compact-shortcuts {grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}
+#root .portal-compact .dashboard-refined .compact-shortcuts>a {display:flex;align-items:center;gap:11px;padding:13px 14px;border-radius:13px;background:#fff;border-color:#e6dcef;}
+#root .portal-compact .dashboard-shortcut-icon {width:34px;height:34px;border-radius:10px;}
+#root .portal-compact .dashboard-shortcut-icon svg {width:18px;height:18px;}
+#root .portal-compact .dashboard-refined .compact-shortcuts>a>div {min-width:0;}
+#root .portal-compact .dashboard-refined .compact-shortcuts strong {font-size:11px;color:#5c367b;margin:0 0 4px;line-height:1.4;}
+#root .portal-compact .dashboard-refined .compact-shortcuts div>span {font-size:10px;color:#9a83ad;line-height:1.4;}
+@media(min-width:768px) and (max-width:1100px){
+  #root .portal-compact .dashboard-refined .compact-overview-grid {grid-template-columns:1fr 1fr;}
+  #root .portal-compact .dashboard-metric {padding:12px;gap:9px;}
+  #root .portal-compact .dashboard-metric-icon {width:32px;height:32px;}
+  #root .portal-compact .dashboard-metric-value small {display:none;}
+  #root .portal-compact .dashboard-refined .compact-shortcuts {grid-template-columns:1fr 1fr;}
+  #root .portal-compact .dashboard-refined .portal-program-scene .compact-program-name strong {font-size:20px;}
+  #root .portal-compact .dashboard-refined .portal-program-runner {min-width:60px;height:130px;}
+  #root .portal-compact .dashboard-refined .portal-program-scene {gap:4px;}
+  #root .portal-compact .dashboard-refined .dashboard-coach-avatar {display:none;}
+  #root .portal-compact .dashboard-session-support {flex-direction:column;}
+}
+@media(max-width:767px){
+  #root .portal-compact .portal-overview.dashboard-refined {gap:10px;padding-bottom:6px;}
+  #root .portal-compact .dashboard-refined .portal-member-hero {min-height:102px;padding:15px 17px;border-radius:17px;}
+  #root .portal-compact .dashboard-refined .portal-hero-copy h2 {font-size:27px;margin:4px 0;}
+  #root .portal-compact .dashboard-refined .dashboard-member-since {margin-top:8px;font-size:9px;}
+  #root .portal-compact .dashboard-refined .portal-hero-copy .portal-hero-eyebrow {font-size:9px;}
+  #root .portal-compact .dashboard-refined .portal-hero-days {min-width:96px;border-radius:13px;padding:12px;}
+  #root .portal-compact .dashboard-refined .portal-hero-days>svg {display:none;}
+  #root .portal-compact .dashboard-refined .portal-hero-days strong {font-size:33px;}
+  #root .portal-compact .dashboard-refined .portal-hero-days span {font-size:9px;}
+  #root .portal-compact .dashboard-metrics {gap:8px;}
+  #root .portal-compact .dashboard-metric {padding:10px;display:block;border-radius:12px;}
+  #root .portal-compact .dashboard-metric-icon {display:none;}
+  #root .portal-compact .dashboard-metric-label {font-size:10px;margin-bottom:6px;}
+  #root .portal-compact .dashboard-metric-value {gap:5px;}
+  #root .portal-compact .dashboard-metric-value strong {font-size:25px;}
+  #root .portal-compact .dashboard-metric-value small {display:none;}
+  #root .portal-compact .dashboard-refined .compact-overview-grid {grid-template-columns:1fr;gap:10px;}
+  #root .portal-compact .portal-overview.dashboard-refined .compact-overview-grid>.portal-card {padding:12px 14px;gap:8px;border-radius:14px;}
+  #root .portal-compact .dashboard-refined .portal-card-heading {min-height:26px;}
+  #root .portal-compact .dashboard-refined .portal-card-heading h3 {font-size:13px;}
+  #root .portal-compact .dashboard-refined .portal-card-heading>a {min-height:30px;font-size:10px;}
+  #root .portal-compact .dashboard-refined .portal-program-scene {min-height:65px;gap:10px;}
+  #root .portal-compact .dashboard-refined .portal-program-scene .compact-program-name strong {font-size:19px;margin:4px 0 8px;}
+  #root .portal-compact .dashboard-refined .portal-program-scene .dashboard-program-label {font-size:9px;}
+  #root .portal-compact .dashboard-refined .portal-program-runner {min-height:0;min-width:90px;max-width:130px;flex-basis:34%;height:90px;}
+  #root .portal-compact .dashboard-refined .dashboard-coach-avatar {width:24px;height:24px;font-size:8px;}
+  #root .portal-compact .dashboard-refined .dashboard-coach>span {font-size:10px;}
+  #root .portal-compact .dashboard-refined .dashboard-coach>span>small {display:none;}
+  #root .portal-compact .dashboard-refined .dashboard-program-includes {display:none;}
+  #root .portal-compact .dashboard-refined .compact-progress {font-size:10px;margin:0 0 7px;}
+  #root .portal-compact .dashboard-program-dates {margin-top:6px;font-size:9px;}
+  #root .portal-compact .dashboard-program-dates>span {display:none;}
+  #root .portal-compact .dashboard-refined .dashboard-session-content {flex-direction:row;text-align:left;justify-content:flex-start;gap:10px;padding:0;}
+  #root .portal-compact .dashboard-session-art {width:36px;height:36px;border-radius:11px;box-shadow:none;flex-shrink:0;}
+  #root .portal-compact .dashboard-session-art>svg {width:20px;height:20px;}
+  #root .portal-compact .dashboard-session-copy {gap:3px;flex:1;max-width:none;}
+  #root .portal-compact .dashboard-session-copy strong {font:500 12px/1.4 'DM Sans',sans-serif;}
+  #root .portal-compact .dashboard-session-copy p {display:none;}
+  #root .portal-compact .dashboard-session-copy>span {font-size:10px;line-height:1.5;}
+  #root .portal-compact .dashboard-session-button {min-height:44px;font-size:10px;padding:8px 11px;white-space:nowrap;}
+  #root .portal-compact .dashboard-session-support {display:none;}
+  #root .portal-compact .dashboard-refined .compact-shortcuts {grid-template-columns:1fr 1fr;gap:8px;}
+  #root .portal-compact .dashboard-refined .compact-shortcuts>a {gap:9px;padding:10px 11px;border-radius:12px;min-height:56px;}
+  #root .portal-compact .dashboard-shortcut-icon {width:30px;height:30px;border-radius:9px;}
+  #root .portal-compact .dashboard-shortcut-icon svg {width:17px;height:17px;}
+  #root .portal-compact .dashboard-refined .compact-shortcuts strong {font-size:11px;margin:0;}
+  #root .portal-compact .dashboard-refined .compact-shortcuts div>span {display:none;}
+}
+@media(max-width:767px) and (max-height:760px){
+  #root .portal-compact .portal-overview.dashboard-refined {gap:8px;padding-bottom:4px;}
+  #root .portal-compact .dashboard-refined .portal-member-hero {min-height:86px;padding:11px 14px;}
+  #root .portal-compact .dashboard-refined .dashboard-member-since {display:none;}
+  #root .portal-compact .dashboard-refined .portal-hero-copy h2 {font-size:24px;}
+  #root .portal-compact .dashboard-refined .portal-hero-days {padding:8px 10px;min-width:86px;}
+  #root .portal-compact .dashboard-refined .portal-hero-days strong {font-size:30px;}
+  #root .portal-compact .dashboard-metric {padding:8px 9px;}
+  #root .portal-compact .dashboard-metric-label {margin-bottom:4px;font-size:9px;}
+  #root .portal-compact .dashboard-metric-value strong {font-size:23px;}
+  #root .portal-compact .portal-overview.dashboard-refined .compact-overview-grid>.portal-card {padding:10px 12px;gap:5px;}
+  #root .portal-compact .dashboard-refined .portal-program-scene {min-height:54px;}
+  #root .portal-compact .dashboard-refined .portal-program-scene .compact-program-name strong {font-size:15px;margin:2px 0 5px;}
+  #root .portal-compact .dashboard-refined .portal-program-runner {height:62px;min-width:76px;}
+  #root .portal-compact .dashboard-refined .dashboard-coach-avatar {display:none;}
+  #root .portal-compact .dashboard-refined .portal-program-progress {padding-top:0;}
+  #root .portal-compact .dashboard-program-dates {margin-top:4px;}
+  #root .portal-compact .dashboard-refined .compact-shortcuts>a {min-height:44px;padding:7px 9px;}
+  #root .portal-compact .dashboard-shortcut-icon {width:27px;height:27px;border-radius:8px;}
+  #root .portal-compact .dashboard-refined .compact-shortcuts strong {font-size:10px;}
+  #root .portal-compact .dashboard-session-art {display:none;}
+  #root .portal-compact .dashboard-session-copy strong {font-size:11px;}
+}
+@media(prefers-reduced-motion:reduce){#root .portal-compact .dashboard-refined a {transition:none;}}
+#root .portal-compact .dashboard-metric-value small,#root .portal-compact .dashboard-program-dates,#root .portal-compact .dashboard-session-support,#root .portal-compact .dashboard-refined .compact-shortcuts div>span {color:#806b92;}
+@media(max-width:767px){
+  #root .portal-compact .dashboard-refined .portal-hero-copy .portal-hero-eyebrow {display:none;}
+  #root .portal-compact .dashboard-refined .portal-member-hero {padding-block:13px;}
+  #root .portal-compact .dashboard-refined .portal-program-runner {height:84px;}
+}
+@media(max-width:767px) and (max-height:760px){
+  #root .portal-compact .dashboard-refined .portal-member-hero {padding-block:11px;}
+  #root .portal-compact .dashboard-refined .portal-program-runner {height:62px;}
+  #root .portal-compact .dashboard-metric>div {display:flex;flex-direction:row-reverse;align-items:center;justify-content:flex-end;gap:7px;}
+  #root .portal-compact .dashboard-metric-label {margin:0;line-height:1.4;}
+  #root .portal-compact .dashboard-metric-value {flex-shrink:0;}
+}
+@media(min-width:768px) and (max-height:800px){
+  #root .portal-compact .portal-overview.dashboard-refined {gap:12px;}
+  #root .portal-compact .dashboard-refined .portal-member-hero {min-height:104px;padding:14px 22px;}
+  #root .portal-compact .dashboard-refined .portal-hero-copy .portal-hero-eyebrow,#root .portal-compact .dashboard-refined .dashboard-member-since {display:none;}
+  #root .portal-compact .dashboard-refined .portal-hero-copy h2 {font-size:28px;}
+  #root .portal-compact .dashboard-refined .portal-hero-days {padding:10px 14px;}
+  #root .portal-compact .dashboard-refined .portal-hero-days strong {font-size:33px;}
+  #root .portal-compact .dashboard-metric {padding-block:10px;}
+  #root .portal-compact .portal-overview.dashboard-refined .compact-overview-grid>.portal-card {padding:14px 17px;gap:8px;}
+  #root .portal-compact .dashboard-refined .portal-program-scene {min-height:80px;}
+  #root .portal-compact .dashboard-refined .portal-program-runner {height:100px;}
+  #root .portal-compact .dashboard-refined .portal-program-scene .compact-program-name strong {font-size:21px;margin-bottom:8px;}
+  #root .portal-compact .dashboard-refined .dashboard-program-includes {padding-block:8px;gap:8px;}
+  #root .portal-compact .dashboard-session-content {gap:10px;padding:0;}
+  #root .portal-compact .dashboard-session-art {width:54px;height:54px;border-radius:18px;box-shadow:0 0 0 6px #fbf8ff;}
+  #root .portal-compact .dashboard-session-art>svg {width:26px;height:26px;}
+  #root .portal-compact .dashboard-session-copy strong {font-size:15px;}
+  #root .portal-compact .dashboard-session-copy p {font-size:11px;}
+  #root .portal-compact .dashboard-session-support {padding-top:8px;}
+}
+#root .portal-compact .dashboard-session-copy>.dashboard-session-mobile-date {display:none;}
+@media(max-width:767px){
+  #root .portal-compact .dashboard-session-copy>.dashboard-session-desktop-date {display:none;}
+  #root .portal-compact .dashboard-session-copy>.dashboard-session-mobile-date {display:block;}
+  #root .portal-compact .dashboard-session-card.has-booking .dashboard-session-art {display:none;}
+}
+@media(max-width:767px) and (max-height:760px){
+  #root .portal-compact .portal-overview.dashboard-refined {gap:6px;padding-bottom:0;}
+}
+#root .portal-compact .dashboard-refined .dashboard-coach .dashboard-coach-avatar {display:grid;}
+@media(min-width:768px) and (max-width:1100px){#root .portal-compact .dashboard-refined .dashboard-coach .dashboard-coach-avatar {display:none;}}
+@media(max-width:767px) and (max-height:760px){#root .portal-compact .dashboard-refined .dashboard-coach .dashboard-coach-avatar {display:none;}}

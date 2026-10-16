@@ -11,6 +11,7 @@ import { CompactOverview, CompactPrograms, CompactReferrals, CompactInvoices } f
 import '../styles/portal-compact.css';
 import '../styles/portal-app.css';
 import '../styles/portal-subpages.css';
+import '../styles/portal-dashboard.css';
 
 const sections = { overview: 'Overview', programs: 'My programs', profile: 'Fitness & diet', products: 'Training essentials', referrals: 'Refer a friend', invoices: 'Invoices & payments' };
 const iconPaths = {
