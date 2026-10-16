@@ -133,3 +133,7 @@
  #root .cpx-page .package-choice-row {margin-bottom:12px}
  #root .cpx-page .package-step {margin-bottom:9px}
 }
+
+/* The sticky booking bar carries the selected plan and next action. */
+#root .cpx-page .package-body>.cpx-selected-summary{display:none!important}
+#root .cpx-page .package-body{grid-template-columns:minmax(0,1fr)!important;gap:0!important}
