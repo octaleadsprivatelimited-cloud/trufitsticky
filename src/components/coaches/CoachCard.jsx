@@ -14,6 +14,7 @@ import SharedContext from "../../context/SharedContext";
 import CouplePlans from "./CouplePlans";
 import CoachProfileOverview from "./CoachProfileOverview";
 import BookingSteps from "./BookingSteps";
+import CoachingPackageIcon from "./CoachingPackageIcon";
 import "./coachBooking.css";
 import "./coachProfileHero.css";
 import "../../styles/featured-coaching.css";
@@ -29,12 +30,11 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
   const [activePlan, setActivePlan] = useState(initialPlan); // landing pages may carry an existing catalogue selection
   const [couplePlans, setCouplePlans] = useState([]);
   const [coupleMode, setCoupleMode] = useState(initialCoupleMode);
-  const { countryCode, setCountryCode, locationLoading } = useContext(SharedContext);
-  const [loadingLocation, setLoadingLocation] = useState(!countryCode);
+  const { countryCode: detectedCountryCode, locationLoading } = useContext(SharedContext);
+  const countryCode = detectedCountryCode || (!locationLoading ? "DOMESTIC" : "");
+  const loadingLocation = !countryCode;
   const [showForm, setShowForm] = useState(false);
   const [showAllPlans, setShowAllPlans] = useState(false);
-  const [showRegionSelector, setShowRegionSelector] = useState(false);
-  const [locationError, setLocationError] = useState("");
 
   // Waiting list state
   const [showWaitingList, setShowWaitingList] = useState(false);
@@ -281,27 +281,6 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
 
     setConsultationAvailable(coachEnabled && regionEnabled);
   }, [coach, countryCode, siteSettings]);
-
-  // Sync loading state with SharedContext's locationLoading.
-  useEffect(() => {
-    if (countryCode) {
-      setLoadingLocation(false);
-      setShowRegionSelector(false);
-    } else if (!locationLoading && !countryCode) {
-      setLoadingLocation(false);
-      setShowRegionSelector(true);
-    } else {
-      setLoadingLocation(locationLoading);
-    }
-  }, [countryCode, locationLoading]);
-
-  // Manual region handler.
-  const handleManualRegionSelect = (region) => {
-    const code = region === "india" ? "DOMESTIC" : "INTERNATIONAL";
-    if (setCountryCode) setCountryCode(code);
-    setShowRegionSelector(false);
-    setLocationError("");
-  };
 
   useEffect(() => {
     if (!initialCheckout || checkoutOpenedRef.current || !activePlan || !countryCode) return;
@@ -748,13 +727,13 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
         <div className="cpx-pad">
           <div hidden={showForm}>
           <BookingSteps current={1}/><div className="package-heading"><div><p className="eyebrow">Your next chapter starts here</p><h2>Choose your coaching plan.</h2></div><p>Clear options. A price up front.<br/>Support built around your everyday.</p></div>
-          <div className="package-choice-row"><div className="package-type-head">{countryCode && !loadingLocation && <label className="package-region">Pricing region<select value={countryCode} onChange={event => handleManualRegionSelect(event.target.value === 'DOMESTIC' ? 'india' : 'international')}><option value="DOMESTIC">India · INR</option><option value="INTERNATIONAL">International · USD</option></select></label>}</div>
+          <div className="package-choice-row">
           <div className="couple-mode-switch" aria-label="Coaching package">
-            <button type="button" aria-pressed={!isCoupleMode} onClick={() => { setCoupleMode(false); trackCoachEvent('plan_interest', coach, { plan_type: 'individual', pricing_region: countryCode }); }}><span><strong>Individual</strong><small>A plan built just for you</small></span><span className="selection-dot" aria-hidden="true"/></button>
-            <button type="button" aria-pressed={isCoupleMode} onClick={() => { setCoupleMode(true); trackCoachEvent('plan_interest', coach, { plan_type: 'couple', pricing_region: countryCode }); }}><span><strong>Couple</strong><small>Two people. Individual goals.</small></span><span className="selection-dot" aria-hidden="true"/></button>
+            <button type="button" aria-pressed={!isCoupleMode} onClick={() => { setCoupleMode(false); trackCoachEvent('plan_interest', coach, { plan_type: 'individual', pricing_region: countryCode }); }}><CoachingPackageIcon/><span><strong>Individual</strong><small>A plan built just for you</small></span><span className="selection-dot" aria-hidden="true"/></button>
+            <button type="button" aria-pressed={isCoupleMode} onClick={() => { setCoupleMode(true); trackCoachEvent('plan_interest', coach, { plan_type: 'couple', pricing_region: countryCode }); }}><CoachingPackageIcon couple/><span><strong>Couple</strong><small>Two people. Individual goals.</small></span><span className="selection-dot" aria-hidden="true"/></button>
           </div>
           </div>
-          {loadingLocation ? <p className="cpx-plan-selector-loading" role="status">Finding your pricing region…</p> : (!countryCode || showRegionSelector) ? <div className="cpx-region"><p>Select your region to view pricing</p><div className="cpx-region-btns"><button type="button" onClick={() => handleManualRegionSelect('india')}>India · INR</button><button type="button" onClick={() => handleManualRegionSelect('international')}>International · USD</button></div>{locationError && <p role="alert">{locationError}</p>}</div> : pricingLoading ? <p role="status" className="cpx-prices-loading">Loading coaching plans…</p> : isCoupleMode ? <CouplePlans coach={coach} plans={activeCouplePlans} region={countryCode} /> : (
+          {loadingLocation ? <p className="cpx-plan-selector-loading" role="status">Loading coaching plans…</p> : pricingLoading ? <p role="status" className="cpx-prices-loading">Loading coaching plans…</p> : isCoupleMode ? <CouplePlans coach={coach} plans={activeCouplePlans} region={countryCode} /> : (
             <div className="cpx-plan-selector" hidden={coach.preview && !coach.livePreview}>
               <p className="package-step">Choose your timeline</p>
               <div className="package-body">
@@ -796,7 +775,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
 
           {/* Collapsible "What's included" — full width so it aligns with the
               About panel below; expanded by default. */}
-          {!showForm && !isCoupleMode && !loadingLocation && countryCode && !showRegionSelector && activePlan && (
+          {!showForm && !isCoupleMode && !loadingLocation && countryCode && activePlan && (
             <details
               className="cpx-collapse included-design"
               id="coach-included"
