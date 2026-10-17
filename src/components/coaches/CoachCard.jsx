@@ -15,14 +15,16 @@ import CouplePlans from "./CouplePlans";
 import CoachProfileOverview from "./CoachProfileOverview";
 import BookingSteps from "./BookingSteps";
 import CoachingPackageIcon from "./CoachingPackageIcon";
+import PlanContinue from "./PlanContinue";
 import "./coachBooking.css";
 import "./coachProfileHero.css";
 import "../../styles/featured-coaching.css";
+import "./coachingJourney.css";
 import { fetchCatalog } from "./catalog";
 
 /**
- * Public coach profile and booking flow. Plans open first; biography and reviews
- * share the same tabs. Pricing, capacity, waitlists, program descriptions, and
+ * Public coach profile and booking flow. Plans open first; reviews are inline
+ * and the biography is secondary. Pricing, capacity, waitlists, program descriptions, and
  * payment selections are preserved while moving between views.
  */
 const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initialCheckout = false }) => {
@@ -30,6 +32,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
   const [activePlan, setActivePlan] = useState(initialPlan); // landing pages may carry an existing catalogue selection
   const [couplePlans, setCouplePlans] = useState([]);
   const [coupleMode, setCoupleMode] = useState(initialCoupleMode);
+  const [coupleCheckoutOpen, setCoupleCheckoutOpen] = useState(false);
   const { countryCode: detectedCountryCode, locationLoading } = useContext(SharedContext);
   const countryCode = detectedCountryCode || (!locationLoading ? "DOMESTIC" : "");
   const loadingLocation = !countryCode;
@@ -332,12 +335,6 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
     return totalAmount > 0 && weeks > 0 ? totalAmount / weeks : null;
   };
 
-  const selectedWeeklyRate = activePlan && activePlan !== "Consultation Call"
-    ? weeklyRateForPlan(activePlan)
-    : null;
-  const selectedWeeklyPrice = selectedWeeklyRate
-    ? `${currencySymbol}${Math.round(selectedWeeklyRate).toLocaleString()}`
-    : null;
 
   // ---- Capacity helpers (per plan + region) ---------------------------------
   const isPlanTabFull = (plan) => {
@@ -718,22 +715,22 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
       : "Continue to details";
 
   return (
-    <div className="cpx-page">
-      <CoachProfileOverview bookingOpen={showForm} coach={coach} testimonials={testimonials} certifications={certChips}>
+    <div className="cpx-page coaching-journey">
+      <CoachProfileOverview bookingOpen={showForm || coupleCheckoutOpen} coach={coach} testimonials={testimonials} certifications={certChips}>
 
       {/* WEEKLY PLANS */}
       <section className="cpx-section" id="cpx-plans" tabIndex={-1}>
         {coach.preview && !coach.livePreview && <div className="cpx-pad catalogue-note"><strong>Your coaching plan</strong><p>Personalized workouts, nutrition guidance, and regular check-ins. Connect the backend to view current plans and subscription prices.</p></div>}
         <div className="cpx-pad">
-          <div hidden={showForm}>
-          <BookingSteps current={1}/><div className="package-heading"><div><p className="eyebrow">Your next chapter starts here</p><h2>Choose your coaching plan.</h2></div><p>Clear options. A price up front.<br/>Support built around your everyday.</p></div>
+          <div hidden={showForm} className={coupleCheckoutOpen ? "couple-checkout-stage" : undefined}>
+          <div className="package-heading"><div><p className="eyebrow">Your next chapter starts here</p><h2>Choose your coaching plan</h2></div></div><BookingSteps current={1}/>
           <div className="package-choice-row">
           <div className="couple-mode-switch" aria-label="Coaching package">
-            <button type="button" aria-pressed={!isCoupleMode} onClick={() => { setCoupleMode(false); trackCoachEvent('plan_interest', coach, { plan_type: 'individual', pricing_region: countryCode }); }}><CoachingPackageIcon/><span><strong>Individual</strong><small>A plan built just for you</small></span><span className="selection-dot" aria-hidden="true"/></button>
+            <button type="button" aria-pressed={!isCoupleMode} onClick={() => { setCoupleMode(false); setCoupleCheckoutOpen(false); trackCoachEvent('plan_interest', coach, { plan_type: 'individual', pricing_region: countryCode }); }}><CoachingPackageIcon/><span><strong>Individual</strong><small>A plan built just for you</small></span><span className="selection-dot" aria-hidden="true"/></button>
             <button type="button" aria-pressed={isCoupleMode} onClick={() => { setCoupleMode(true); trackCoachEvent('plan_interest', coach, { plan_type: 'couple', pricing_region: countryCode }); }}><CoachingPackageIcon couple/><span><strong>Couple</strong><small>Two people. Individual goals.</small></span><span className="selection-dot" aria-hidden="true"/></button>
           </div>
           </div>
-          {loadingLocation ? <p className="cpx-plan-selector-loading" role="status">Loading coaching plans…</p> : pricingLoading ? <p role="status" className="cpx-prices-loading">Loading coaching plans…</p> : isCoupleMode ? <CouplePlans coach={coach} plans={activeCouplePlans} region={countryCode} /> : (
+          {loadingLocation ? <p className="cpx-plan-selector-loading" role="status">Loading coaching plans…</p> : pricingLoading ? <p role="status" className="cpx-prices-loading">Loading coaching plans…</p> : isCoupleMode ? <CouplePlans coach={coach} plans={activeCouplePlans} region={countryCode} onCheckoutChange={setCoupleCheckoutOpen} /> : (
             <div className="cpx-plan-selector" hidden={coach.preview && !coach.livePreview}>
               <p className="package-step">Choose your timeline</p>
               <div className="package-body">
@@ -741,15 +738,9 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
                   {hasCoachingPlans && inlineCoachingPlanNames.map(plan => renderCoachingPill(plan))}
                   {renderConsultationPill()}
                 </div>{hasAdditionalPlans && <button type="button" className="cpx-see-all-plans" onClick={() => setShowAllPlans(true)} aria-haspopup="dialog"><span>See all plans</span><small>{coachingPlanNames.length} weekly options</small></button>}</div>
-                <aside className="cpx-selected-summary" aria-label="Selected plan summary" aria-live="polite">
-                  <p className="eyebrow">Your plan at a glance</p><h3>{activePlan === 'Consultation Call' ? 'Let’s start with a conversation.' : `${String(activePlan || 'Your plan').replace(' weeks', '-week coaching')}`}</h3><p className="summary-coach">Individual · with {firstName}</p>
-                  <p className="summary-price">{hasSelectedPrice ? price : '—'}{hasSelectedPrice && <small> total</small>}</p>
-                  <p className="summary-rate">{activePlan === 'Consultation Call' ? 'One 20-minute consultation' : selectedWeeklyPrice ? `About ${selectedWeeklyPrice} / week` : 'Select a priced plan to continue'}</p>
-                  <ul className="summary-inclusions">{(activePlan === 'Consultation Call' ? ['Talk through your goals', 'Meet your coach', 'Understand your next steps'] : ['Personalized workouts', 'Nutrition guidance', 'Regular check-ins', 'Ongoing coach support']).map(item => <li key={item}>{item}</li>)}</ul>
-                  <button type="button" className="cpx-plan-selector-action" disabled={!hasSelectedPrice} onClick={goEnroll}>{selectedActionLabel}</button>
-                  <p className="summary-note">{activePlan === 'Consultation Call' ? 'A single consultation. Schedule your call after payment.' : 'One payment. A fixed-duration program. No automatic renewal.'}</p>
-                </aside>
+
               </div>
+              {hasSelectedPrice && <PlanContinue plan={prettyPlan(activePlan)} price={price} onContinue={goEnroll} label={selectedActionLabel}/>}
             </div>
           )}
 
@@ -773,8 +764,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
         />
       )}</InlineBooking>}
 
-          {/* Collapsible "What's included" — full width so it aligns with the
-              About panel below; expanded by default. */}
+          {/* Detailed inclusions are available without interrupting checkout. */}
           {!showForm && !isCoupleMode && !loadingLocation && countryCode && activePlan && (
             <details
               className="cpx-collapse included-design"
@@ -797,8 +787,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
       </section>
       </CoachProfileOverview>
 
-      <section className="profile-onboarding cpx-pad" id="coach-next" tabIndex={-1} data-reveal><p className="eyebrow">A little structure from day one</p><h2>What happens <em>next.</em></h2><div className="steps-grid">{[['1','Make it official','Choose an available package and complete your enrolment.'],['2','Tell us about you','Complete your intake so your coach understands your goals and routine.'],['3','Build your rhythm','Your coach reviews your details, then helps you get started with a personal plan.']].map(([number,title,copy]) => <div key={number}><span className="step-number">{number}</span><h3>{title}</h3><p>{copy}</p></div>)}</div></section>
-      <section id="coach-faq" tabIndex={-1} className="profile-faq cpx-pad" data-reveal><div><p className="eyebrow">Before you begin</p><h2>Good to <em>know.</em></h2></div><div className="faq-list">{[['What’s different about couple coaching?', 'Two people enrol with one coach and a shared start date. Each person receives individual guidance. The displayed couple price covers both participants.'],['Is the weekly price a subscription?', 'No. The weekly price helps compare programs. You pay the full program total once, with no automatic renewal.'],['Can I speak to my coach first?', 'Choose the 20-minute consultation when it is available for your coach and pricing region. You can schedule the call after payment.'],['What if my coach’s plan is full?', 'Available programs can be booked. When a plan is full, you can join its waitlist. Couple programs require two available places.']].map(([question,answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div></section>
+      <section id="coach-faq" tabIndex={-1} className="profile-faq cpx-pad" data-reveal><div><p className="eyebrow">Before you begin</p><h2>Good to <em>know.</em></h2></div><div className="faq-list">{[['What’s different about couple coaching?', 'Two people enrol with one coach and a shared start date. Each person receives individual guidance. The displayed couple price covers both participants.'],['What am I paying for?', 'The full displayed total covers your selected coaching duration. Weekly amounts are for comparison. There is one payment, with no automatic renewal.'],['Can I speak to my coach first?', 'Choose the 20-minute consultation when it is available for your coach and pricing region. You can schedule the call after payment.'],['What if my coach’s plan is full?', 'Available programs can be booked. When a plan is full, you can join its waitlist. Couple programs require two available places.']].map(([question,answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div></section>
 
       {/* STICKY BOTTOM CTA */}
       {!isCoupleMode && !showForm && <div className="cpx-sticky">

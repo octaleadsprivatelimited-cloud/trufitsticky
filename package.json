@@ -11,8 +11,9 @@
     "seo": "node scripts/generate-seo.mjs",
     "test:analytics": "node --test src/analytics/core.test.mjs",
     "test:portal": "node --test src/portal/data.test.mjs",
-    "test": "npm run test:analytics && npm run test:portal && npm run test:team",
-    "test:team": "node --test src/team/store.test.mjs"
+    "test": "npm run test:analytics && npm run test:portal && npm run test:team && npm run test:coaching",
+    "test:team": "node --test src/team/store.test.mjs",
+    "test:coaching": "node --test src/components/coaches/reviewData.test.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.23.12",

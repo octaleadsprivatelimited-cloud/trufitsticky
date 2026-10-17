@@ -1,61 +1,40 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import CoachPortrait from './CoachPortrait';
+import CoachReviews from './CoachReviews';
+import { reviewSummary } from './reviewData.mjs';
 import TruFitSymbol from '../../assets/logo-original.svg';
 import WhatsAppMark from './WhatsAppMark';
+import { scrollToSection } from '../../scroll/smoothScroll';
 import { trackCoachEvent } from '../../analytics/analytics';
 import './coachProfileOverview.css';
 
-const tabOptions = [['plans', 'Plans'], ['about', 'About me'], ['reviews', 'Reviews']];
 const levelLabel = coach => String(coach.coach_level_name || coach.coach_level || 'Coach').toLowerCase().replace(/^./, value => value.toUpperCase());
-function ProfileSpecialties({ specialties, className }) {
- if (!specialties.length) return null;
- return <section className={className}><h2>Specialties</h2><ul className="profile-specialty-list">{specialties.map(value => <li key={value}>{value}</li>)}</ul></section>;
-}
 
 export default function CoachProfileOverview({ coach, testimonials = [], certifications = [], bookingOpen = false, children }) {
- const [active, setActive] = useState('plans');
- const tabs = useRef([]);
- useLayoutEffect(() => { if (bookingOpen) setActive('plans'); }, [bookingOpen]);
+ const [aboutOpen, setAboutOpen] = useState(false);
  const firstName = coach.name.split(' ')[0];
- const reviews = testimonials.filter(review => review.body && review.client_name && String(review.coach_id ?? review.coach?.id ?? review.coach) === String(coach.id));
- const rated = reviews.filter(review => Number(review.rating) >= 1 && Number(review.rating) <= 5);
- const average = rated.length ? (rated.reduce((sum, review) => sum + Number(review.rating), 0) / rated.length).toFixed(1) : null;
+ const summary = reviewSummary(testimonials, coach.id);
  const specialties = String(coach.specializations || '').split(/[,;\n]/).map(value => value.trim()).filter(Boolean);
  const experience = Number(coach.experience);
  const number = String(coach.whatsapp_number || '917207259556').replace(/\D/g, '');
  const whatsapp = `https://wa.me/${number}?text=${encodeURIComponent(`Hi ${firstName}, I’d like to know more about your Tru Fit coaching plans.`)}`;
- const tabKeys = (event, index) => {
-  let next;
-  if (event.key === 'ArrowRight') next = (index + 1) % tabOptions.length;
-  else if (event.key === 'ArrowLeft') next = (index - 1 + tabOptions.length) % tabOptions.length;
-  else if (event.key === 'Home') next = 0;
-  else if (event.key === 'End') next = tabOptions.length - 1;
-  else return;
-  event.preventDefault(); setActive(tabOptions[next][0]); tabs.current[next]?.focus();
- };
+ function jump(event, id) {
+  event.preventDefault();
+  if (id === 'coach-about') setAboutOpen(true);
+  requestAnimationFrame(() => {
+   const target = document.getElementById(id);
+   target?.focus({ preventScroll:true });
+   scrollToSection(target);
+  });
+ }
  return <>
-  <header className="profile-banner" id="coach-overview" tabIndex={-1}>
+  <header className="profile-banner coaching-offer" id="coach-overview" tabIndex={-1}>
    <img className="profile-brand-mark" src={TruFitSymbol} alt="" aria-hidden="true"/>
-   <div className="profile-identity"><div className="profile-avatar"><CoachPortrait coach={coach} enablePreview={false}/></div><div><p className="profile-kicker">{levelLabel(coach)} coach{coach.location ? ` · ${coach.location}` : ''}</p><h1>{coach.name}</h1><p className="profile-location">Personal training, nutrition, and regular check-ins.</p></div></div>
-   <ProfileSpecialties specialties={specialties} className="profile-mobile-specialties"/>
-   <a className="profile-whatsapp" href={whatsapp} target="_blank" rel="noreferrer" onClick={()=>trackCoachEvent('contact_click',coach,{source:'profile_banner_whatsapp'})}><WhatsAppMark/>Ask a question</a>
+   <div className="coaching-offer-copy"><p className="coaching-offer-kicker">Personal fitness & nutrition coaching</p><h1>Your goal.<br/><span>A plan to get there.</span></h1><p className="coaching-offer-description">Workouts, nutrition and a real coach in your corner.</p><ul className="coaching-offer-benefits"><li>Made for your routine</li><li>Regular check-ins</li><li>Individual guidance</li></ul></div>
+   <div className="coaching-coach-card"><div className="profile-identity"><div className="profile-avatar"><CoachPortrait coach={coach} enablePreview={false}/></div><div><p className="profile-kicker">Your {levelLabel(coach).toLowerCase()} coach</p><h2>{coach.name}</h2>{coach.location && <p className="profile-location">{coach.location}</p>}{summary.average && <a className="coaching-rating-link" href="#coach-reviews" onClick={event => jump(event,'coach-reviews')}>★ {summary.average}/5 · {summary.rated.length} {summary.coachSpecific ? 'coach ratings' : 'Tru Fit ratings'}</a>}</div></div>{specialties.length > 0 && <div className="coaching-specialties"><span>Specialties</span><p>{specialties.slice(0,3).join(' · ')}</p></div>}</div>
   </header>
-  <div className="profile-tabs" role="tablist" aria-label="Explore this coach">{tabOptions.map(([value,label],index)=><button key={value} ref={node=>{tabs.current[index]=node}} role="tab" id={`profile-tab-${value}`} aria-selected={active===value} aria-controls={`profile-panel-${value}`} tabIndex={active===value?0:-1} onClick={()=>setActive(value)} onKeyDown={event=>tabKeys(event,index)}>{label}{value==='reviews' && reviews.length>0 ? ` (${reviews.length})` : ''}</button>)}</div>
-  <div role="tabpanel" id="profile-panel-plans" aria-labelledby="profile-tab-plans" hidden={active!=='plans'} tabIndex={0} className="profile-plans-panel">{children}</div>
-  <div role="tabpanel" id="profile-panel-about" aria-labelledby="profile-tab-about" hidden={active!=='about'} tabIndex={0} className="profile-about-panel">
-   <div className="profile-information" id="coach-about">
-    <section className="profile-content-panel"><h2>Meet {firstName}</h2>{coach.summary && <p>{coach.summary}</p>}{coach.bio && coach.bio!==coach.summary && <p>{coach.bio}</p>}{coach.previous_work && coach.previous_work!==coach.summary && coach.previous_work!==coach.bio && <p>{coach.previous_work}</p>}{!coach.summary && !coach.bio && !coach.previous_work && <p>Chat with {firstName} to discuss your goals and routine.</p>}<button type="button" className="text-link profile-return-to-plans" onClick={()=>{setActive('plans');tabs.current[0]?.focus();}}>Back to plans</button></section>
-    <aside className="profile-facts" aria-label="Coach details">
-     <section className="profile-fact-card"><h2>Coaching experience</h2><div className="profile-metrics"><div><strong>{experience > 0 ? experience : levelLabel(coach)}</strong><span>{experience > 0 ? `${experience === 1 ? 'year' : 'years'} coaching` : 'Coaching level'}</span></div><div><strong>{average ? `${average}/5` : '—'}</strong><span>{average ? `${rated.length} published reviews` : 'No rated reviews yet'}</span></div></div></section>
-     <ProfileSpecialties specialties={specialties} className="profile-fact-card profile-desktop-specialties"/>
-     {certifications.length > 0 && <section className="profile-fact-card"><h2>Qualifications</h2><ul className="profile-qualifications">{certifications.map(value=><li key={value}>{value}</li>)}</ul></section>}
-     {(coach.insta_link || coach.linkedin_link) && <div className="profile-social-links">{coach.insta_link && <a href={coach.insta_link} target="_blank" rel="noreferrer">Instagram</a>}{coach.linkedin_link && <a href={coach.linkedin_link} target="_blank" rel="noreferrer">LinkedIn</a>}</div>}
-    </aside>
-   </div>
-  </div>
-  <div role="tabpanel" id="profile-panel-reviews" aria-labelledby="profile-tab-reviews" hidden={active!=='reviews'} tabIndex={0} className="profile-content-panel">
-   {average && <div className="profile-rating-summary"><div><span>Average rating</span><strong>{average}<small>/5</small></strong><span className="profile-rating-stars" aria-hidden="true">{'★'.repeat(Math.round(Number(average)))}</span><span>{rated.length} published reviews</span></div><div className="profile-rating-bars">{[5,4,3,2,1].map(star=>{const count=rated.filter(review=>Math.round(Number(review.rating))===star).length;return <div key={star}><span>{star} star</span><progress value={count} max={rated.length} aria-label={`${star} star: ${count} reviews`}/><span>{count}</span></div>})}</div></div>}
-   {reviews.length ? <div className="profile-review-list">{reviews.map((review,index)=><article key={review.id||index}><header>{review.image_url?<img src={review.image_url} alt="" loading="lazy"/>:<span className="profile-review-initial" aria-hidden="true">{review.client_name.charAt(0)}</span>}<div><strong>{review.client_name}</strong>{Number(review.rating)>=1&&Number(review.rating)<=5&&<span className="profile-rating-stars" aria-label={`${review.rating} out of 5 stars`}>{'★'.repeat(Math.round(Number(review.rating)))}</span>}</div></header><p>{review.body}</p></article>)}</div>:<div className="profile-no-reviews"><h2>No published reviews yet</h2><p>Ask {firstName} about the coaching approach and what to expect before choosing a program.</p><a className="text-link" href={whatsapp} target="_blank" rel="noreferrer" onClick={()=>trackCoachEvent('contact_click',coach,{source:'profile_reviews'})}>Ask your coach</a></div>}
-  </div>
+  <nav className="profile-tabs coaching-page-nav" aria-label="On this coach page"><a id="profile-tab-plans" href="#cpx-plans" onClick={event => jump(event,'cpx-plans')}>Plans & pricing</a><a href="#coach-reviews" onClick={event => jump(event,'coach-reviews')}>Reviews{summary.reviews.length > 0 && ` (${summary.reviews.length})`}</a><a href="#coach-about" onClick={event => jump(event,'coach-about')}>About {firstName}</a></nav>
+  <div className={`coaching-booking-layout${bookingOpen ? ' is-booking' : ''}`}><div className="coaching-plan-panel">{children}</div><CoachReviews summary={summary} coachName={coach.name}/>{!bookingOpen && <aside className="coaching-guide" aria-label="What your coaching includes"><div><p className="coaching-eyebrow">More than a workout plan</p><h2>Your coach. Your complete plan.</h2><ul className="coaching-inclusions"><li><span aria-hidden="true">✓</span><div><strong>Training built around you</strong><p>Workouts shaped around your goal, routine and experience.</p></div></li><li><span aria-hidden="true">✓</span><div><strong>Nutrition that fits real life</strong><p>Personal guidance for your food preferences and daily habits.</p></div></li><li><span aria-hidden="true">✓</span><div><strong>Support as you progress</strong><p>Coach check-ins and adjustments as your needs change.</p></div></li></ul></div><div className="coaching-start-steps"><h3>Getting started is simple</h3><ol><li><span>1</span><div><strong>Choose your plan</strong><p>Individual or couple. Pick your duration.</p></div></li><li><span>2</span><div><strong>Add your details</strong><p>Sign in and complete one short form.</p></div></li><li><span>3</span><div><strong>Pay & get started</strong><p>Review the total and continue to payment.</p></div></li></ol></div><a className="coaching-question" href={whatsapp} target="_blank" rel="noreferrer" onClick={()=>trackCoachEvent('contact_click',coach,{source:'profile_booking_question'})}><WhatsAppMark/>Have a question? Chat with {firstName}</a></aside>}</div>
+  <details className="coaching-about" id="coach-about" open={aboutOpen} onToggle={event => setAboutOpen(event.currentTarget.open)} tabIndex={-1}><summary><div><span className="coaching-eyebrow">Get to know your coach</span><h2>About {firstName} & the story behind the coach</h2></div><span className="coaching-about-toggle" aria-hidden="true">+</span></summary><div className="profile-information"><section className="profile-content-panel"><h3>Meet {coach.name}</h3>{coach.summary && <p>{coach.summary}</p>}{coach.bio && coach.bio!==coach.summary && <p>{coach.bio}</p>}{coach.previous_work && coach.previous_work!==coach.summary && coach.previous_work!==coach.bio && <p>{coach.previous_work}</p>}{!coach.summary && !coach.bio && !coach.previous_work && <p>Chat with {firstName} to discuss your goals and routine.</p>}<a className="text-link" href="#cpx-plans" onClick={event => jump(event,'cpx-plans')}>View plans & pricing</a></section><aside className="profile-facts"><section className="profile-fact-card"><h3>Experience & specialties</h3>{experience > 0 && <p>{experience} {experience === 1 ? 'year' : 'years'} of coaching</p>}<ul className="profile-specialty-list">{specialties.map(value => <li key={value}>{value}</li>)}</ul></section>{certifications.length > 0 && <section className="profile-fact-card"><h3>Qualifications</h3><ul className="profile-qualifications">{certifications.map(value => <li key={value}>{value}</li>)}</ul></section>}{(coach.insta_link || coach.linkedin_link) && <div className="profile-social-links">{coach.insta_link && <a href={coach.insta_link} target="_blank" rel="noreferrer">Instagram</a>}{coach.linkedin_link && <a href={coach.linkedin_link} target="_blank" rel="noreferrer">LinkedIn</a>}</div>}</aside></div></details>
  </>;
 }

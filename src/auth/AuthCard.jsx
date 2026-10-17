@@ -23,12 +23,12 @@ export default function AuthCard({ booking = false, initialMode = 'signin' }) {
       <button className="member-primary" onClick={() => signInPreview(provider)}>Continue with demo account</button>
       <button className="member-text-button" onClick={() => setProvider(null)}>Choose another sign-in option</button>
     </> : <>
-      <div className="member-auth-tabs" aria-label="Account access"><button aria-pressed={mode === 'signin'} onClick={() => setMode('signin')}>Sign in</button><button aria-pressed={mode === 'signup'} onClick={() => setMode('signup')}>Sign up</button></div>
-      <Heading id="member-auth-title" tabIndex={-1}>{mode === 'signin' ? 'Welcome back.' : 'Your next chapter starts here.'}</Heading>
-      <p>{booking ? 'Sign in or create your account to continue. Your coach and plan are saved right here.' : 'Your coach, sessions, and progress. All in your Tru Fit space.'}</p>
-      <div className="member-provider-buttons">{['google', 'apple'].map(item => <button key={item} onClick={() => setProvider(item)}><ProviderIcon provider={item}/>Continue with {item === 'google' ? 'Google' : 'Apple'}</button>)}</div>
+      {!booking && <div className="member-auth-tabs" aria-label="Account access"><button aria-pressed={mode === 'signin'} onClick={() => setMode('signin')}>Sign in</button><button aria-pressed={mode === 'signup'} onClick={() => setMode('signup')}>Sign up</button></div>}
+      <Heading id="member-auth-title" tabIndex={-1}>{booking ? 'Continue with your account' : mode === 'signin' ? 'Welcome back.' : 'Your next chapter starts here.'}</Heading>
+      <p>{booking ? 'Use Google or Apple to sign in or create your account. Your coach and plan stay selected.' : 'Your coach, sessions, and progress. All in your Tru Fit space.'}</p>
+      <div className="member-provider-buttons">{['google', 'apple'].map(item => <button key={item} onClick={() => booking ? signInPreview(item) : setProvider(item)}><ProviderIcon provider={item}/>Continue with {item === 'google' ? 'Google' : 'Apple'}</button>)}</div>
       <p className="member-auth-note">The same Google or Apple account will be used for sign-in and sign-up. No password to remember.</p>
-      <p className="member-auth-demo-note">Demo only. No external account is connected.</p>
+      <p className="member-auth-demo-note">{booking ? 'Preview only. Choose Google or Apple to use the sample account. No external account is connected.' : 'Demo only. No external account is connected.'}</p>
       <p className="member-auth-terms">By continuing, you agree to our <Link to="/terms-conditions">Terms</Link> and <Link to="/privacy-policy">Privacy Policy</Link>.</p>
     </>}
   </div>;
