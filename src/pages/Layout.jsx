@@ -18,7 +18,7 @@ import '../styles/brand-theme.css';
 export default function Layout(){
  const location=useLocation();
  const landingPage=location.pathname.startsWith('/lp/');
- const portalPage=/^\/(?:portal|team)(?:\/|$)/.test(location.pathname)||location.pathname==='/signin';
+ const portalPage=/^\/(?:portal|team)(?:\/|$)/.test(location.pathname)||['/signin','/signup'].includes(location.pathname);
  const protectedPage=portalPage||location.pathname.startsWith('/payment')||location.pathname==='/survey';
  const contact=['/','/about','/coaches','/plans','/start'].includes(location.pathname);
  useEffect(()=>{if(location.hash){const t=setTimeout(()=>scrollToSection(document.getElementById(location.hash.slice(1))),150);return()=>clearTimeout(t)}},[location.pathname,location.hash]);

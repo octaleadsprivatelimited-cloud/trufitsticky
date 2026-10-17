@@ -35,7 +35,13 @@ function htmlFor(path,page,noindex=false){
 for(const [path,page] of Object.entries(allPages)){
  const file=path==='/'?join(dist,'index.html'):join(dist,path.slice(1)+'.html');await mkdir(dirname(file),{recursive:true});await writeFile(file,htmlFor(path,page));
 }
-for(const path of ['/survey','/payment/callback','/payment/couple','/payment/success','/portal','/portal/programs','/portal/referrals','/portal/invoices']){const file=join(dist,path.slice(1)+'.html');await mkdir(dirname(file),{recursive:true});await writeFile(file,htmlFor(path,{title:path.startsWith('/portal')?'Member Portal | Tru Fit':'Private Booking | Tru Fit',description:'Your Tru Fit coaching programs, referrals, and invoices.',heading:'Tru Fit'},true))}
+const privatePaths = ['/survey','/payment/callback','/payment/couple','/payment/success','/signin','/signup','/portal','/portal/programs','/portal/profile','/portal/products','/portal/referrals','/portal/invoices','/team','/team/products'];
+for (const path of privatePaths) {
+ const file = join(dist, path.slice(1) + '.html');
+ const title = path === '/signin' ? 'Sign in | Tru Fit' : path === '/signup' ? 'Sign up | Tru Fit' : path.startsWith('/portal') ? 'Member Portal | Tru Fit' : path.startsWith('/team') ? 'Team Workspace | Tru Fit' : 'Private Booking | Tru Fit';
+ await mkdir(dirname(file), { recursive:true });
+ await writeFile(file, htmlFor(path, { title, description:'Your private Tru Fit account and coaching workspace.', heading:'Tru Fit' }, true));
+}
 const sitemap=`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${Object.keys(allPages).map(path=>`  <url><loc>${escapeHtml(origin+path)}</loc></url>`).join('\n')}\n</urlset>\n`;
 const robots=`User-agent: *\nAllow: /\nDisallow: /admin_functions/\nDisallow: /api/\nDisallow: /backend/\n\nSitemap: ${origin}/sitemap.xml\n`;
 await writeFile(join(dist,'sitemap.xml'),sitemap);await writeFile(join(dist,'robots.txt'),robots);

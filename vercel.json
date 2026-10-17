@@ -12,6 +12,10 @@
     {
       "source": "/refer/:code",
       "destination": "/"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
     }
   ],
   "headers": [
@@ -71,6 +75,15 @@
     },
     {
       "source": "/signin",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/signup",
       "headers": [
         {
           "key": "X-Robots-Tag",

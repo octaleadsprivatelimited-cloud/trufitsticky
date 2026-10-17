@@ -36,6 +36,7 @@ const router = createBrowserRouter([
             { path: "/team/products", element: <Suspense fallback={null}><TeamPanelPage /></Suspense> },
             { path: "/team/customers/:customerId", element: <Suspense fallback={null}><TeamPanelPage /></Suspense> },
             { path: "/signin", element: <Suspense fallback={null}><SignInPage /></Suspense> },
+            { path: "/signup", element: <Suspense fallback={null}><SignInPage /></Suspense> },
             { path: "/start", element: <CoachLandingIndex/> },
             { path: "/start/:coachName", element: <LegacyCoachLanding /> },
             { path: "/lp/:coachName", element: <Suspense fallback={null}><CoachLandingPage /></Suspense> },
