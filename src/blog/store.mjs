@@ -1,3 +1,4 @@
+import { validCoverImage } from './images.mjs';
 import { articles, categories } from '../content/blog.mjs';
 export const BLOG_KEY = 'trufit_blog_preview_v1';
 export const BLOG_EVENT = 'trufit:blog-preview';
@@ -6,7 +7,7 @@ export function initialBlog() {
   return {version: 1, records: articles.map(article => ({id: article.slug, draft: structuredClone(article), published: structuredClone(article), updatedAt: null, publishedAt: null}))};
 }
 function validPostShape(post) {
-  return post && ['slug','title','excerpt','category','visual'].every(key=>typeof post[key] === 'string') &&
+  return post && validCoverImage(post.coverImage) && ['slug','title','excerpt','category','visual'].every(key=>typeof post[key] === 'string') &&
     Array.isArray(post.sections) && post.sections.length > 0 && post.sections.every(section=>typeof section.heading === 'string' && Array.isArray(section.paragraphs) && section.paragraphs.every(p=>typeof p === 'string'));
 }
 export function readBlog(storage) {
@@ -21,7 +22,7 @@ export function writeBlog(next) {
   window.dispatchEvent(new Event(BLOG_EVENT));
 }
 export const slugify = text => text.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,90).replace(/-$/,'');
-export function blankPost() { return {slug:'', title:'', excerpt:'', category:'Getting started', visual:'start', featured:false, sections:[{heading:'', paragraphs:[]}]}; }
+export function blankPost() { return {slug:'', title:'', excerpt:'', category:'Getting started', visual:'start', coverImage:null, featured:false, sections:[{heading:'', paragraphs:[]}]}; }
 export function validatePost(blog, id, post, publish = false) {
   if (!post.title.trim()) return 'Add a post title.';
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(post.slug) || post.slug.length > 90) return 'Use a URL slug with lowercase letters, numbers, and hyphens.';
@@ -29,6 +30,8 @@ export function validatePost(blog, id, post, publish = false) {
   const current = blog.records.find(r => r.id === id);
   if ((current?.canonicalSlug || current?.published?.slug) && (current.canonicalSlug || current.published.slug) !== post.slug) return 'Keep the published URL unchanged so existing links continue working.';
   if (!categories.slice(1).includes(post.category) || !visuals.includes(post.visual)) return 'Choose an available topic and cover illustration.';
+  if (!validCoverImage(post.coverImage)) return 'Choose a valid cover image or remove it.';
+  if (publish && post.coverImage && !post.coverImage.alt.trim()) return 'Add an image description (alt text) before publishing.';
   if (publish && !post.excerpt.trim()) return 'Add a short description before publishing.';
   if (publish && (!post.sections.length || post.sections.some(s => !s.heading.trim() || !s.paragraphs.some(p => p.trim())))) return 'Give every section a heading and at least one paragraph before publishing.';
   return '';
@@ -36,7 +39,7 @@ export function validatePost(blog, id, post, publish = false) {
 export function savePost(blog, id, post, publish = false, now = new Date().toISOString()) {
   const error = validatePost(blog,id,post,publish);
   if (error) throw new Error(error);
-  const draft = {...structuredClone(post), title:post.title.trim(), excerpt:post.excerpt.trim(), sections:post.sections.map(s=>({heading:s.heading.trim(), paragraphs:s.paragraphs.map(p=>p.trim()).filter(Boolean)}))};
+  const draft = {...structuredClone(post), ...(post.coverImage?{coverImage:{...post.coverImage,alt:post.coverImage.alt.trim()}}:{}), title:post.title.trim(), excerpt:post.excerpt.trim(), sections:post.sections.map(s=>({heading:s.heading.trim(), paragraphs:s.paragraphs.map(p=>p.trim()).filter(Boolean)}))};
   const previous = blog.records.find(r=>r.id === id);
   const record = {...previous, id, draft, updatedAt:now, ...(publish ? {published:structuredClone(draft), publishedAt:now, canonicalSlug:previous?.canonicalSlug || draft.slug} : {})};
   let records = previous ? blog.records.map(r=>r.id === id ? record : r) : [record,...blog.records];

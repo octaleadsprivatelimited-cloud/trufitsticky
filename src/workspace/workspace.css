@@ -228,3 +228,17 @@
 #root .workspace-account-menu a,#root .workspace-account-menu button{font:12px 'DM Sans',sans-serif;color:#6d28d9;min-height:36px;display:flex;align-items:center;background:white;border:0;text-align:left;padding:5px 0}
 @media(min-width:901px){#root .workspace-shortcuts>a{padding:9px 0}#root .workspace-task-list>a{padding:12px 0}#root .workspace-refresh .workspace-dashboard-grid .team-card{padding:17px 19px}#root .workspace-dashboard-grid .team-section-heading{margin-bottom:10px}}
 @media(max-width:767px){#root .workspace-account-menu{top:37px}#root .workspace-account-menu a,#root .workspace-account-menu button{min-height:44px}}
+#root .workspace-cover-upload{border-top:1px solid #e9e0f5;border-bottom:1px solid #e9e0f5;margin:18px 0;padding:17px 0}
+#root .workspace-cover-upload h3{font-size:13px;margin:0}
+#root .workspace-cover-upload .team-fine-print{font-size:10px;margin:7px 0 12px;line-height:1.6}
+#root .workspace-upload-preview{background:#f4edff;border:1px solid #e5d8fa;border-radius:10px;aspect-ratio:16/10;overflow:hidden;margin-bottom:9px}
+#root .workspace-upload-preview .journal-cover-image{object-fit:contain}
+#root .workspace-cover-filename{font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:10px;max-width:100%}
+#root .workspace-cover-actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+#root .workspace-cover-actions .team-button{font-size:11px;min-height:40px;padding:9px 12px}
+#root .workspace-cover-alt{margin-top:15px;margin-bottom:0!important}
+#root .workspace-cover-help{font-size:10px;color:#8a779e;line-height:1.6}
+#root .workspace-cover-error{font-size:11px;color:#6d28d9;margin-top:12px;line-height:1.6}
+#root .workspace-blog-thumb:has(.journal-cover-image){aspect-ratio:400/230}
+#root .workspace-post-settings>[hidden]{display:none!important}
+@media(max-width:900px) and (min-width:768px){#root .workspace-cover-upload{grid-column:1/-1}#root .workspace-upload-preview{max-width:320px}}
