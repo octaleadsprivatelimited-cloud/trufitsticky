@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createAnalytics, cleanUrl, safeParams, CONSENT_KEY } from './core.mjs';
+import { createAnalytics, cleanUrl, safeParams, CONSENT_KEY, isPrivatePath } from './core.mjs';
 function runtime(path='/'){
  const saved=new Map(), scripts=[], notifications=[];let reloads=0;
  const w={localStorage:{getItem:k=>saved.get(k)||null,setItem:(k,v)=>saved.set(k,v)},location:{pathname:path,origin:'https://www.betrufit.com',hostname:'www.betrufit.com',reload:()=>reloads++},Event:class{constructor(name){this.type=name}},dispatchEvent:e=>notifications.push(e)};
@@ -51,4 +51,10 @@ test('member portal and referral identifiers never initialize analytics or recor
   assert.equal(r.scripts.length,0);
   assert.equal(r.client.track('page_view',{}),false);
  }
+});
+
+test('coach workspaces suppress analytics while public coach pages remain measurable',()=>{
+ assert.equal(isPrivatePath('/coaches/srikar-peddapally'),false);
+ assert.equal(isPrivatePath('/coaches'),false);
+ for(const path of ['/coach','/coach/jaswant-medidi','/coach/srikar-peddapally/customers/demo-jamie']){const r=runtime();r.client.setConsent(true);r.client.page(path,'Coach workspace');assert.equal(r.client.track('page_view'),false);}
 });

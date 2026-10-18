@@ -36,10 +36,10 @@ function htmlFor(path,page,noindex=false){
 for(const [path,page] of Object.entries(allPages)){
  const file=path==='/'?join(dist,'index.html'):join(dist,path.slice(1)+'.html');await mkdir(dirname(file),{recursive:true});await writeFile(file,htmlFor(path,page));
 }
-const privatePaths = ['/survey','/payment/callback','/payment/couple','/payment/success','/signin','/signup','/portal','/portal/programs','/portal/profile','/portal/products','/portal/referrals','/portal/invoices','/team','/team/products'];
+const privatePaths = ['/survey','/payment/callback','/payment/couple','/payment/success','/signin','/signup','/portal','/portal/programs','/portal/profile','/portal/products','/portal/referrals','/portal/invoices','/team','/team/products','/team/customers','/team/coaches','/team/blog','/team/blog/new','/coach'];
 for (const path of privatePaths) {
  const file = join(dist, path.slice(1) + '.html');
- const title = path === '/signin' ? 'Sign in | Tru Fit' : path === '/signup' ? 'Sign up | Tru Fit' : path.startsWith('/portal') ? 'Member Portal | Tru Fit' : path.startsWith('/team') ? 'Team Workspace | Tru Fit' : 'Private Booking | Tru Fit';
+ const title = path === '/signin' ? 'Sign in | Tru Fit' : path === '/signup' ? 'Sign up | Tru Fit' : path.startsWith('/portal') ? 'Member Portal | Tru Fit' : path.startsWith('/team') ? 'Team Workspace | Tru Fit' : path.startsWith('/coach') ? 'Coach Workspace | Tru Fit' : 'Private Booking | Tru Fit';
  await mkdir(dirname(file), { recursive:true });
  await writeFile(file, htmlFor(path, { title, description:'Your private Tru Fit account and coaching workspace.', heading:'Tru Fit' }, true));
 }

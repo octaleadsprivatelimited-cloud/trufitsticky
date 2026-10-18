@@ -113,3 +113,11 @@ Coaching packages are selected on each coach profile. The standalone `/plans` pa
 ## Blog
 
 `/blog` replaces the Our approach page and appears in the header and footer. `/about` permanently redirects to `/blog` on Vercel, with a matching client redirect locally. The journal includes original guides, topic filters, full-text search, and article pages at `/blog/:slug`. Content lives in `src/content/blog.mjs`; it does not depend on the empty external blog feed. Add a guide there to include it in the listing, related reads, route metadata, and generated sitemap. No publication dates, coach bylines, or clinical claims are fabricated. `npm run test:blog` checks filtering and content links.
+
+## Team blog studio and coach workspace preview
+
+The redesigned `/team` workspace includes an overview, `/team/customers`, `/team/coaches`, `/team/blog`, and products. In Blog studio, create or edit a post, organise text into sections, select a topic and cover illustration, preview, save a draft, publish changes, or unpublish while keeping the draft. Draft edits never replace a published version until explicitly published. Published slugs remain stable. Unsaved edits are guarded on navigation and reload.
+
+Blog preview records live in `localStorage` under `trufit_blog_preview_v1` and update `/blog` and article pages across tabs on the same origin. They survive refreshes in that browser but never update the repository articles, server, sitemap, other devices, or visitor-wide content. Repository guides remain the default in a fresh browser. The UI labels publishing as a browser preview. New local posts are excluded from indexing.
+
+`/coach` opens the coach preview chooser; `/coach/jaswant-medidi` and `/coach/srikar-peddapally` show sample assigned customers, fitness details, and diet/product editors. Team assignment changes flow into the coach view within the same tab. Customer data and assignments retain the existing `sessionStorage` workspace. These are explicit demo roles, not staff authentication or a backend access-control boundary. Coach paths suppress analytics and use noindex headers. Public `/coaches` and coach booking pages are unchanged.

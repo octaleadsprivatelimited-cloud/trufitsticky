@@ -8,6 +8,7 @@ import ErrorPage from "./pages/ErrorPage";
 
 // Lazy load all page components for code splitting
 
+const CoachWorkspacePage = lazy(() => import("./pages/CoachWorkspacePage"));
 const TeamPanelPage = lazy(() => import("./pages/TeamPanelPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage"));
 const BlogPage = lazy(() => import("./pages/BlogPage"));
@@ -33,6 +34,15 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             { path: "/team", element: <Suspense fallback={null}><TeamPanelPage /></Suspense> },
+            { path: "/team/customers", element: <Suspense fallback={null}><TeamPanelPage /></Suspense> },
+            { path: "/team/coaches", element: <Suspense fallback={null}><TeamPanelPage /></Suspense> },
+            { path: "/team/blog", element: <Suspense fallback={null}><TeamPanelPage /></Suspense> },
+            { path: "/team/blog/new", element: <Suspense fallback={null}><TeamPanelPage /></Suspense> },
+            { path: "/team/blog/:postId/edit", element: <Suspense fallback={null}><TeamPanelPage /></Suspense> },
+            { path: "/coach", element: <Suspense fallback={null}><CoachWorkspacePage /></Suspense> },
+            { path: "/coach/:coachSlug", element: <Suspense fallback={null}><CoachWorkspacePage /></Suspense> },
+            { path: "/coach/:coachSlug/customers", element: <Suspense fallback={null}><CoachWorkspacePage /></Suspense> },
+            { path: "/coach/:coachSlug/customers/:customerId", element: <Suspense fallback={null}><CoachWorkspacePage /></Suspense> },
             { path: "/team/products", element: <Suspense fallback={null}><TeamPanelPage /></Suspense> },
             { path: "/team/customers/:customerId", element: <Suspense fallback={null}><TeamPanelPage /></Suspense> },
             { path: "/signin", element: <Suspense fallback={null}><SignInPage /></Suspense> },

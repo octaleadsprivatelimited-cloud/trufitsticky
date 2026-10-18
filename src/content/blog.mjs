@@ -67,18 +67,18 @@ export const articles = [
   },
 ];
 export const categories = ['All', 'Getting started', 'Training', 'Nutrition', 'Coaching'];
-export function filterArticles(query = '', category = 'All') {
+export function filterArticles(query = '', category = 'All', source = articles) {
   const term = query.trim().toLowerCase();
-  return articles.filter(article => (category === 'All' || article.category === category) &&
+  return source.filter(article => (category === 'All' || article.category === category) &&
     [article.title, article.excerpt, article.category, ...article.sections.flatMap(s => [s.heading, ...s.paragraphs])].join(' ').toLowerCase().includes(term));
 }
 export function readMinutes(article) {
   const words = [article.title, article.excerpt, ...article.sections.flatMap(s => [s.heading, ...s.paragraphs])].join(' ').split(/\s+/).length;
   return Math.max(1, Math.ceil(words / 200));
 }
-export function relatedArticles(slug) {
-  const current = articles.find(a => a.slug === slug);
-  return articles.filter(a => a.slug !== slug).sort((a, b) => Number(b.category === current?.category) - Number(a.category === current?.category)).slice(0, 3);
+export function relatedArticles(slug, source = articles) {
+  const current = source.find(a => a.slug === slug);
+  return source.filter(a => a.slug !== slug).sort((a, b) => Number(b.category === current?.category) - Number(a.category === current?.category)).slice(0, 3);
 }
 export const blogSeoPages = {
   '/blog': { title: 'The Tru Fit journal — Coaching & Everyday Fitness | Tru Fit', heading: 'Small reads. Forward steps.', description: 'Practical Tru Fit guides to getting started with a coach, planning your training week, and making your preferences part of your coaching plan.' },

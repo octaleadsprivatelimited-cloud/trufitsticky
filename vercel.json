@@ -99,6 +99,15 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/coach/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ],
   "trailingSlash": false,

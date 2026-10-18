@@ -1,0 +1,230 @@
+/* Shared compact team and coach workspace. */
+#root .workspace-refresh{background:#faf8ff;--team-line:#e9e0f5;--team-muted:#77658e}
+#root .workspace-refresh .team-sidebar{background:#fff;padding:28px 18px;border-color:#eee6f8}
+#root .workspace-refresh .team-sidebar-label{margin:33px 12px 12px;font-size:11px}
+#root .workspace-refresh .team-sidebar nav{gap:6px}
+#root .workspace-refresh .team-sidebar nav a{min-height:46px;padding:11px 14px;font-size:12px;font-weight:550;text-decoration:none;border-radius:11px}
+#root .workspace-refresh .team-sidebar nav a.active{background:linear-gradient(115deg,#5720b2,#7b35e4);box-shadow:0 5px 15px #6d28d91a;color:white}
+#root .workspace-refresh .team-sidebar nav a:not(.active):hover{background:#f6f1fd;color:#6d28d9}
+#root .workspace-refresh .team-sidebar-bottom{display:flex;flex-direction:column;gap:14px;padding-top:24px}
+#root .workspace-refresh .team-sidebar-bottom>a,#root .workspace-refresh .team-sidebar-bottom button{font-size:11px;min-height:25px;margin:0;text-decoration:none}
+#root .workspace-sidebar-note{background:#f7f2fe;border:1px solid #eee5fc;border-radius:13px;padding:17px 13px;margin-bottom:5px}
+#root .workspace-sidebar-note>span{font-size:35px;color:#7c3dd8;line-height:1;display:block;margin-bottom:12px}
+#root .workspace-sidebar-note strong{font-size:12px;display:block;font-weight:600}
+#root .workspace-sidebar-note p{font-size:11px!important;margin:7px 0 0!important;line-height:1.5!important}
+#root .workspace-refresh .team-workspace{background:#faf8ff}
+#root .workspace-refresh .team-topbar{background:#fff;padding:12px 28px;min-height:75px;border-color:#eee6f8}
+#root .workspace-refresh .team-topbar .team-kicker{display:block;font-size:10px;margin:0 0 2px}
+#root .workspace-refresh .team-topbar strong{font-size:19px;letter-spacing:-.03em}
+#root .workspace-top-actions{display:flex;align-items:center;gap:18px;font-size:11px}
+#root .workspace-top-actions a{color:#705b8c;text-decoration:none}
+#root .workspace-role-avatar{display:grid;place-items:center;border-radius:50%;width:34px;height:34px;background:#f0e6ff;color:#6d28d9;font-weight:700;font-size:11px;border:3px solid #faf7ff}
+#root .workspace-refresh .team-body{padding:15px 28px 0}
+#root .workspace-refresh .team-demo-banner{font-size:10px;display:flex;gap:7px;align-items:center;margin-bottom:14px}
+#root .workspace-preview-dot{height:5px;width:5px;background:#9d72dd;border-radius:50%;flex-shrink:0}
+#root .workspace-refresh .team-hero{background:linear-gradient(110deg,#4d1999,#722cda 70%,#8b4ee5);padding:25px 28px;border-radius:18px;min-height:132px;display:flex;justify-content:space-between;align-items:center;gap:22px;margin-bottom:18px}
+#root .workspace-refresh .team-hero h1{font-size:30px;letter-spacing:-.04em;max-width:540px;line-height:1.15;margin:6px 0 9px}
+#root .workspace-refresh .team-hero p{font-size:12px;color:#f2eaff}
+#root .workspace-refresh .team-hero .team-kicker{font-size:11px;color:#e9d9ff;margin:0}
+#root .workspace-hero-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap;border:1px solid #ffffff55;border-radius:9px;padding:12px 17px;font-size:12px;font-weight:600;text-decoration:none;min-height:44px;background:#ffffff17;color:white!important;z-index:1}
+#root .workspace-hero-button:hover{background:#ffffff2a}
+#root .workspace-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:20px}
+#root .workspace-metrics>div{position:relative;border:1px solid #e9e0f5;border-radius:13px;background:white;padding:16px 20px;min-width:0}
+#root .workspace-metrics span{display:block;font-size:11px;color:#77658e;line-height:1.45}
+#root .workspace-metrics strong{font:650 30px/1.1 'Manrope',sans-serif;letter-spacing:-.05em;display:block;margin:7px 0 4px;color:#4c208a}
+#root .workspace-metrics small{font-size:10px;color:#8c7c9e}
+#root .workspace-refresh .team-card{border:1px solid #e9e0f5;border-radius:14px;padding:20px;background:#fff}
+#root .workspace-refresh .team-content>section:last-child{flex:initial}
+#root .workspace-refresh .team-section-heading{margin-bottom:17px}
+#root .workspace-refresh h2{font-size:18px;letter-spacing:-.03em}
+#root .workspace-refresh .team-section-heading p{font-size:11px}
+#root .workspace-refresh .team-content{gap:0;scrollbar-gutter:stable}
+#root .workspace-dashboard-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,1fr);gap:18px;flex:1;min-height:240px}
+#root .workspace-task-list{display:grid}
+#root .workspace-task-list>a{display:flex;align-items:center;gap:12px;padding:17px 0;border-bottom:1px solid #f0e9f8;text-decoration:none;min-width:0}
+#root .workspace-task-list>a:last-child{border-bottom:0}
+#root .workspace-task-list>a>div{flex:1;min-width:0}
+#root .workspace-task-list strong{font-size:13px;font-weight:550;display:block;overflow-wrap:anywhere}
+#root .workspace-task-list p{font-size:11px;line-height:1.5;margin-top:4px}
+#root .workspace-refresh .team-avatar{background:#f5edff;border-color:#eadcfc;width:38px;height:38px;flex-shrink:0;font-size:11px}
+#root .workspace-text-link{font-size:11px;font-weight:600;color:#6d28d9!important;text-decoration:none}
+#root .workspace-text-link:hover{text-decoration:underline}
+#root .workspace-task-icon{display:grid;place-items:center;width:38px;height:38px;background:#f5edff;border-radius:10px;color:#6d28d9;flex-shrink:0}
+#root .workspace-task-icon svg{width:20px;height:20px}
+#root .workspace-shortcuts>p{font-size:11px;margin:5px 0 12px}
+#root .workspace-shortcuts>a{display:flex;align-items:center;gap:13px;padding:14px 0;border-bottom:1px solid #f0e9f8;text-decoration:none}
+#root .workspace-shortcuts>a:last-child{border:0}
+#root .workspace-shortcuts>a>svg{height:21px;width:21px;color:#7845bd}
+#root .workspace-shortcuts strong{font-size:12px;display:block}
+#root .workspace-shortcuts span{font-size:10px;display:block;color:#8b789f;margin-top:3px}
+#root .workspace-refresh .team-button{border-radius:8px;font-size:12px;padding:11px 16px;min-height:44px;text-decoration:none}
+#root .workspace-blog-list{display:grid}
+#root .workspace-blog-row{display:grid;grid-template-columns:74px minmax(0,1fr) auto 60px;align-items:center;gap:17px;border-bottom:1px solid #eee6f7;padding:14px 0;text-decoration:none}
+#root .workspace-blog-row:last-child{border-bottom:0}
+#root .workspace-blog-thumb{background:#f3ecfd;border-radius:9px;overflow:hidden}
+#root .workspace-blog-row h3{font-size:13px;line-height:1.4;margin:4px 0;overflow-wrap:anywhere}
+#root .workspace-blog-row p{font-size:10px}
+#root .workspace-eyebrow{font-size:10px;color:#8658bd}
+#root .workspace-row-edit{font-size:11px;color:#6d28d9;text-align:right}
+#root .workspace-editor-heading{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:0 0 18px}
+#root .workspace-editor-heading h1{font-size:26px;margin:3px 0 0}
+#root .workspace-editor-heading .team-breadcrumb{font-size:11px;margin:0;min-height:20px}
+#root .workspace-editor-toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:16px;background:white;border:1px solid #e9e0f5;padding:10px 12px;border-radius:12px;position:sticky;top:0;z-index:2}
+#root .workspace-editor-toolbar .team-editor-tabs{margin:0}
+#root .workspace-save-actions{display:flex;gap:8px}
+#root .workspace-post-editor{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:18px;align-items:start}
+#root .workspace-post-settings h2{margin-bottom:18px}
+#root .workspace-refresh .team-field{font-size:11px;gap:6px;margin-bottom:15px}
+#root .workspace-refresh .team-field input,#root .workspace-refresh .team-field select,#root .workspace-refresh .team-field textarea,#root .workspace-access .team-field select{font:13px/1.6 'DM Sans',sans-serif;border:1px solid #e5d8fa;border-radius:8px;min-height:43px;padding:9px 11px;background:#fff;color:#2e1065;max-width:100%;width:100%}
+#root .workspace-refresh textarea{resize:vertical}
+#root .workspace-refresh input[readonly]{background:#faf8ff;color:#89759f}
+#root .workspace-refresh :disabled{cursor:default;opacity:.45}
+#root .workspace-section-picker{display:flex;gap:10px;align-items:flex-end}
+#root .workspace-section-picker>label{flex:1;min-width:0}
+#root .workspace-section-picker>button{margin-bottom:15px;white-space:nowrap}
+#root .workspace-settings-art{background:#f4edff;border-radius:12px;margin:12px 0 18px;overflow:hidden}
+#root .workspace-checkbox{display:flex;gap:9px;font-size:11px;align-items:center}
+#root .workspace-checkbox input{accent-color:#6d28d9;width:16px;height:16px}
+#root .workspace-published-actions{display:grid;gap:10px;padding-top:17px;margin-top:15px;border-top:1px solid #e5d8fa;justify-items:start}
+#root .workspace-refresh .team-text-button{font-size:11px;min-height:34px}
+#root .workspace-post-preview.journal{padding:0;border:1px solid #e5d8fa;border-radius:16px;background:#fff;overflow:hidden}
+#root .workspace-post-preview .journal-post-header{border-radius:0;border:0;border-bottom:1px solid #e5d8fa;padding:26px;gap:15px}
+#root .workspace-post-preview .journal-post-header h1{font-size:32px;line-height:1.12;color:#2e1065;margin:16px 0}
+#root .workspace-post-preview .journal-post-header p{font-size:14px}
+#root .workspace-post-preview .journal-body{padding:30px;max-width:800px;margin:auto}
+#root .workspace-post-preview .journal-body h2{font-size:24px}
+#root .workspace-post-preview .journal-body p{font-size:15px;line-height:1.85;white-space:pre-wrap;overflow-wrap:anywhere}
+#root .workspace-leave{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:17px;border:1px solid #b791ed;border-radius:12px;background:#f4edff;margin-bottom:15px}
+#root .workspace-leave p{width:100%;font-size:12px}
+#root .workspace-coach-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-bottom:18px}
+#root .workspace-coach-card{position:relative;display:flex;flex-direction:column;align-items:flex-start}
+#root .workspace-coach-avatar{display:grid;place-items:center;background:linear-gradient(120deg,#5d23b3,#9962e6);color:white;font-size:21px;font-weight:600;width:66px;height:66px;border:5px solid #f5edff;border-radius:50%;margin-bottom:18px}
+#root .workspace-coach-card>.team-status{position:absolute;right:20px;top:22px}
+#root .workspace-coach-card h2{font-size:21px}
+#root .workspace-coach-card>p{font-size:12px;margin:4px 0 16px}
+#root .workspace-coach-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;flex:1;align-content:start}
+#root .workspace-coach-chips>span{font-size:10px;border:1px solid #e5d8fa;border-radius:20px;padding:5px 9px;color:#77658e}
+#root .workspace-coach-card>.workspace-text-link{margin-top:13px}
+#root .workspace-assignments>div{display:flex;align-items:center;justify-content:space-between;gap:17px;padding:15px 0;border-bottom:1px solid #f0e9f8}
+#root .workspace-assignments>div:last-child{border:0}
+#root .workspace-assignments strong{font-size:13px}
+#root .workspace-assignments p{font-size:11px;margin-top:4px}
+#root .workspace-assignments select{font:12px 'DM Sans',sans-serif;color:#2e1065;background:white;border:1px solid #e5d8fa;border-radius:8px;min-height:44px;padding:8px 12px;max-width:100%}
+#root .workspace-hero-initials{display:grid;place-items:center;width:70px;height:70px;border:1px solid #ffffff44;border-radius:50%;color:white;background:#ffffff18;font-size:25px;flex-shrink:0}
+#root .workspace-coach-focus{display:flex;flex-direction:column;align-items:flex-start;background:linear-gradient(150deg,#fff,#f4edff)!important}
+#root .workspace-focus-symbol{font-size:55px;color:#8954d2;line-height:1;margin-bottom:20px}
+#root .workspace-coach-focus h2{font-size:23px}
+#root .workspace-coach-focus p{font-size:12px;line-height:1.8;margin:12px 0 24px}
+#root .workspace-coach-focus .team-button{margin-top:auto}
+#root .workspace-coach-focus .workspace-text-link{margin-top:14px}
+#root .workspace-access{padding:35px;align-items:stretch;background:#faf8ff;min-height:100dvh}
+#root .workspace-access>.team-brand{margin:0 auto 28px}
+#root .workspace-access-layout{display:grid;grid-template-columns:1fr 1fr;max-width:940px;margin:auto;border:1px solid #e5d8fa;border-radius:24px;overflow:hidden;background:white}
+#root .workspace-access-story{padding:40px;background:linear-gradient(130deg,#46158e,#833aeb);color:white;display:flex;flex-direction:column;justify-content:center}
+#root .workspace-access-story .workspace-access-mark{font-size:65px;line-height:1;margin-bottom:25px}
+#root .workspace-access-story>p{font-size:13px;line-height:1.8;color:#eadcff}
+#root .workspace-access-story h1{font-size:41px;line-height:1.15;margin:18px 0 25px;color:white}
+#root .workspace-access .team-access-card{text-align:left;border:0;border-radius:0;padding:38px;max-width:none}
+#root .workspace-access .team-access-card h2{font:600 27px/1.15 'Manrope',sans-serif;letter-spacing:-.035em;color:#2e1065;margin:23px 0 16px}
+#root .workspace-access .team-access-card p{font-size:13px;line-height:1.8}
+#root .workspace-access-notice{font-size:11px;line-height:1.7;margin-top:18px;color:#8a779e}
+#root .workspace-access .team-field{display:grid;gap:7px;margin:18px 0;font-size:12px}
+#root .workspace-access .team-button{font-size:13px;border-radius:9px;min-height:46px}
+#root .workspace-refresh .team-footer{border:0;padding:11px 0;font-size:9px}
+@media(max-width:1100px){#root .workspace-dashboard-grid{grid-template-columns:minmax(0,1fr) minmax(240px,.85fr)}#root .workspace-post-editor{grid-template-columns:minmax(0,1fr) 235px}#root .workspace-refresh .team-body{padding-inline:20px}#root .workspace-refresh .team-hero h1{font-size:27px}#root .workspace-hero-button{font-size:11px;padding:11px}}
+@media(max-width:900px){#root .workspace-post-editor{grid-template-columns:1fr}#root .workspace-post-settings{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}#root .workspace-post-settings h2,#root .workspace-post-settings .workspace-published-actions,#root .workspace-post-settings #post-url-help{grid-column:1/-1}#root .workspace-settings-art{display:none}#root .workspace-dashboard-grid{grid-template-columns:1fr}#root .workspace-refresh .team-hero{flex-direction:column;align-items:flex-start;gap:17px}#root .workspace-hero-initials{display:none}}
+@media(max-width:767px){
+ #root .team-panel.team-compact.workspace-refresh{display:flex;height:100dvh;overflow:hidden}
+ #root .workspace-refresh .team-sidebar{height:60px;min-height:60px;padding:13px 18px;position:static;border-bottom:1px solid #e9e0f5;overflow:visible}
+ #root .workspace-refresh .team-brand{width:123px;gap:7px}
+ #root .workspace-refresh .team-brand img:first-child{width:24px;height:29px}
+ #root .workspace-refresh .team-brand img:last-child{width:87px}
+ #root .workspace-refresh .team-sidebar nav{display:flex!important;position:fixed;top:auto;bottom:0;left:0;right:0;height:calc(66px + env(safe-area-inset-bottom));padding:7px 8px calc(7px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #e5d8fa;box-shadow:0 -3px 20px #4b197008;gap:4px;z-index:5;align-items:stretch;margin:0}
+ #root .workspace-refresh .team-sidebar nav a{flex:1;min-width:0;min-height:48px;display:flex;flex-direction:column;justify-content:center;gap:4px;padding:5px 2px;font-size:9px;line-height:1.25;border-radius:10px}
+ #root .workspace-refresh .team-sidebar nav svg{width:19px;height:19px}
+ #root .workspace-refresh .team-sidebar nav a.active{box-shadow:none;background:#f1e7ff;color:#6d28d9}
+ #root .workspace-refresh .team-sidebar-bottom,#root .workspace-refresh .team-sidebar-label{display:none}
+ #root .workspace-refresh .team-workspace{padding-bottom:calc(66px + env(safe-area-inset-bottom))}
+ #root .workspace-refresh .team-topbar{min-height:54px;padding:8px 16px;gap:12px}
+ #root .workspace-refresh .team-topbar strong{font-size:17px}
+ #root .workspace-refresh .team-topbar .team-kicker{font-size:9px}
+ #root .workspace-top-actions{gap:10px}
+ #root .workspace-role-avatar{width:30px;height:30px;font-size:9px}
+ #root .workspace-site-link{font-size:10px}
+ #root .workspace-role-switch{display:none}
+ #root .workspace-refresh .team-body{padding:10px 14px 0}
+ #root .workspace-refresh .team-demo-banner{font-size:9px;line-height:1.5;margin-bottom:10px;gap:5px}
+ #root .workspace-refresh .team-content{scrollbar-gutter:auto;padding-bottom:15px}
+ #root .workspace-refresh .team-hero{padding:20px;min-height:135px;border-radius:16px;gap:15px;margin-bottom:12px}
+ #root .workspace-refresh .team-hero h1{font-size:27px;line-height:1.15;max-width:320px;margin:7px 0 10px}
+ #root .workspace-refresh .team-hero p{font-size:11px;line-height:1.65}
+ #root .workspace-refresh .team-hero .team-kicker{font-size:10px}
+ #root .workspace-hero-button{padding:10px 13px;font-size:11px;min-height:42px}
+ #root .workspace-metrics{gap:7px;margin-bottom:13px}
+ #root .workspace-metrics>div{border-radius:10px;padding:11px 10px}
+ #root .workspace-metrics span{font-size:9px;min-height:26px}
+ #root .workspace-metrics strong{font-size:26px;margin:4px 0 0}
+ #root .workspace-metrics small{display:none}
+ #root .workspace-refresh .team-card{padding:16px;border-radius:12px}
+ #root .workspace-refresh h2{font-size:17px}
+ #root .workspace-refresh .team-section-heading{margin-bottom:13px}
+ #root .workspace-refresh .team-section-heading p{display:block;font-size:10px}
+ #root .workspace-dashboard-grid{display:flex;flex-direction:column;gap:12px}
+ #root .workspace-task-list>a{padding:13px 0;gap:9px}
+ #root .workspace-task-list strong{font-size:12px}
+ #root .workspace-task-list p{font-size:10px}
+ #root .workspace-shortcuts>a{padding:13px 0}
+ #root .workspace-refresh .team-field input,#root .workspace-refresh .team-field select,#root .workspace-refresh .team-field textarea,#root .workspace-access .team-field select{font-size:16px;min-height:44px;padding:9px}
+ #root .workspace-blog-row{grid-template-columns:50px minmax(0,1fr);gap:9px;padding:13px 0}
+ #root .workspace-blog-row h3{font-size:12px;line-height:1.45;margin:3px 0}
+ #root .workspace-blog-row p{font-size:9px}
+ #root .workspace-blog-row>.team-status{grid-column:2;justify-self:start;white-space:normal}
+ #root .workspace-row-edit{display:none}
+ #root .workspace-editor-heading{margin-bottom:12px}
+ #root .workspace-editor-heading h1{font-size:24px}
+ #root .workspace-editor-heading .team-status{white-space:normal;text-align:right;font-size:9px;max-width:110px}
+ #root .workspace-editor-toolbar{gap:9px;flex-wrap:wrap;padding:9px;margin-bottom:12px}
+ #root .workspace-editor-toolbar .team-editor-tabs{flex:1}
+ #root .workspace-save-actions{gap:5px}
+ #root .workspace-refresh .workspace-save-actions .team-button{font-size:10px;padding:9px 10px;min-height:40px}
+ #root .workspace-editor-toolbar .team-editor-tabs button{font-size:10px;padding:8px 10px;min-height:40px}
+ #root .workspace-post-editor{gap:12px}
+ #root .workspace-post-settings{display:block}
+ #root .workspace-settings-art{display:block;max-width:220px;margin:0 0 17px}
+ #root .workspace-refresh .team-field{margin-bottom:13px}
+ #root .workspace-refresh .team-button{font-size:11px}
+ #root .workspace-refresh .team-text-button{min-height:44px}
+ #root .workspace-section-picker{gap:7px;align-items:flex-end}
+ #root .workspace-section-picker>button{font-size:10px;padding:9px;margin-bottom:13px}
+ #root .workspace-post-preview .journal-post-header{padding:22px}
+ #root .workspace-post-preview .journal-post-header h1{font-size:28px}
+ #root .workspace-post-preview .journal-body{padding:22px}
+ #root .workspace-post-preview .journal-body h2{font-size:23px}
+ #root .workspace-post-preview .journal-body p{font-size:15px}
+ #root .workspace-coach-grid{grid-template-columns:1fr;gap:12px;margin-bottom:12px}
+ #root .workspace-coach-card>.team-status{top:18px;right:16px}
+ #root .workspace-coach-avatar{width:60px;height:60px;font-size:19px;margin-bottom:14px}
+ #root .workspace-assignments>div{flex-direction:column;align-items:stretch;gap:9px;padding:14px 0}
+ #root .workspace-assignments select{font-size:16px;width:100%}
+ #root .workspace-coach-focus h2{font-size:23px}
+ #root .workspace-focus-symbol{font-size:39px;margin-bottom:16px}
+ #root .workspace-access{padding:24px 16px}
+ #root .workspace-access>.team-brand{margin-bottom:20px}
+ #root .workspace-access-layout{grid-template-columns:1fr;border-radius:20px}
+ #root .workspace-access-story{padding:25px}
+ #root .workspace-access-story h1{font-size:30px;margin:10px 0 0}
+ #root .workspace-access-story>p:last-child{display:none}
+ #root .workspace-access-story .workspace-access-mark{display:none}
+ #root .workspace-access .team-access-card{padding:25px}
+ #root .workspace-access .team-access-card h2{font-size:25px;margin:20px 0 14px}
+}
+@media(prefers-reduced-motion:reduce){#root .workspace-refresh *{animation:none!important;transition:none!important}}
+#root .workspace-account{position:relative}
+#root .workspace-account>summary{cursor:pointer;list-style:none}
+#root .workspace-account>summary::-webkit-details-marker{display:none}
+#root .workspace-account-menu{position:absolute;top:44px;right:0;width:210px;padding:16px;border:1px solid #e5d8fa;border-radius:12px;box-shadow:0 10px 35px #3f167619;background:#fff;z-index:10;display:flex;flex-direction:column;gap:8px;font-size:12px}
+#root .workspace-refresh .workspace-account-menu strong{font-size:13px}
+#root .workspace-account-menu>span{font-size:10px;color:#8d74a8;padding-bottom:8px;border-bottom:1px solid #eee6f8}
+#root .workspace-account-menu a,#root .workspace-account-menu button{font:12px 'DM Sans',sans-serif;color:#6d28d9;min-height:36px;display:flex;align-items:center;background:white;border:0;text-align:left;padding:5px 0}
+@media(min-width:901px){#root .workspace-shortcuts>a{padding:9px 0}#root .workspace-task-list>a{padding:12px 0}#root .workspace-refresh .workspace-dashboard-grid .team-card{padding:17px 19px}#root .workspace-dashboard-grid .team-section-heading{margin-bottom:10px}}
+@media(max-width:767px){#root .workspace-account-menu{top:37px}#root .workspace-account-menu a,#root .workspace-account-menu button{min-height:44px}}
