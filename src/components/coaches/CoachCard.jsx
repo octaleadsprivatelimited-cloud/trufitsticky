@@ -723,7 +723,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
         {coach.preview && !coach.livePreview && <div className="cpx-pad catalogue-note"><strong>Your coaching plan</strong><p>Personalized workouts, nutrition guidance, and regular check-ins. Connect the backend to view current plans and subscription prices.</p></div>}
         <div className="cpx-pad">
           <div hidden={showForm} className={coupleCheckoutOpen ? "couple-checkout-stage" : undefined}>
-          <div className="package-heading"><div><p className="eyebrow">Your next chapter starts here</p><h2>Choose your coaching plan</h2></div></div><BookingSteps current={1}/>
+          <div className="package-heading"><div><p className="eyebrow">Your next chapter starts here</p><h2>Choose your coaching plan</h2></div></div>
           <div className="package-choice-row">
           <div className="couple-mode-switch" aria-label="Coaching package">
             <button type="button" aria-pressed={!isCoupleMode} onClick={() => { setCoupleMode(false); setCoupleCheckoutOpen(false); trackCoachEvent('plan_interest', coach, { plan_type: 'individual', pricing_region: countryCode }); }}><CoachingPackageIcon/><span><strong>Individual</strong><small>A plan built just for you</small></span><span className="selection-dot" aria-hidden="true"/></button>
