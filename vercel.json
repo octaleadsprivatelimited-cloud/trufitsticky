@@ -111,6 +111,11 @@
       "source": "/start/:coachName",
       "destination": "/lp/:coachName",
       "permanent": true
+    },
+    {
+      "source": "/plans",
+      "destination": "/coaches",
+      "permanent": true
     }
   ]
 }

@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Layout from "./pages/Layout";
 import HomePage from "./pages/HomePage";
 import LegacyCoachLanding from "./pages/LegacyCoachLanding";
@@ -11,7 +11,6 @@ import ErrorPage from "./pages/ErrorPage";
 const TeamPanelPage = lazy(() => import("./pages/TeamPanelPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
-const PlansPage = lazy(() => import("./pages/PlansPage"));
 const CoachPage = lazy(() => import("./pages/CoachPage"));
 const CoachLandingPage = lazy(() => import("./pages/CoachLandingPage"));
 const CoachDetailPage = lazy(() => import("./pages/CoachDetailPage"));
@@ -40,7 +39,7 @@ const router = createBrowserRouter([
             { path: "/start", element: <CoachLandingIndex/> },
             { path: "/start/:coachName", element: <LegacyCoachLanding /> },
             { path: "/lp/:coachName", element: <Suspense fallback={null}><CoachLandingPage /></Suspense> },
-            { path: "/plans", element: <Suspense fallback={null}><PlansPage /></Suspense> },
+            { path: "/plans", element: <Navigate to="/coaches" replace/> },
             { path: "/payment/couple", element: <Suspense fallback={null}><CouplePaymentPage /></Suspense> },
             { path: "/payment/success", element: <Suspense fallback={null}><PaymentSuccessPage /></Suspense> },
             { path: "/portal/:section?", element: <Suspense fallback={null}><CustomerPortalPage /></Suspense> },

@@ -12,7 +12,7 @@ export default function HomePage() {
  return <>
  <section id="home-overview" tabIndex={-1} className="culture-hero wrap" aria-labelledby="home-title">
   <div className="culture-title-row"><h1 id="home-title">Personal coaching.<br/><span>Built around <em>you.</em></span></h1><div className="hero-sticker"><span aria-hidden="true">✳</span><p>Your pace.<br/>Your people.<br/><strong>Your progress.</strong></p></div></div>
-  <div className="culture-hero-bottom"><p>A coach who gets you. A plan that fits.<br/>Make room for a healthier everyday.</p><div className="button-row"><Link className="button" to="/coaches" data-track="cta_click" data-source="home_hero">Meet your coach</Link><Link className="text-link" to="/plans">Explore plans</Link></div></div>
+  <div className="culture-hero-bottom"><p>A coach who gets you. A plan that fits.<br/>Make room for a healthier everyday.</p><div className="button-row"><Link className="button" to="/coaches" data-track="cta_click" data-source="home_hero">Meet your coach</Link></div></div>
   <ProgressShowcase/>
 
  </section>
