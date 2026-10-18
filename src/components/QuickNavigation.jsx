@@ -2,7 +2,7 @@ import { scrollToSection } from '../scroll/smoothScroll';
 import { useEffect, useState } from 'react';
 import { trackEvent } from '../analytics/analytics';
 import '../styles/quick-navigation.css';
-const homeLinks=[['home-overview','Back to top'],['the-trufit-way','Our approach'],['home-programs','Coaching options'],['home-start','Getting started'],['faq','FAQs'],['contact-form','Contact us']];
+const homeLinks=[['home-overview','Back to top'],['the-trufit-way','Why Tru Fit'],['home-programs','Coaching options'],['home-start','Getting started'],['faq','FAQs'],['contact-form','Contact us']];
 const shortLabels={'home-overview':'Top','the-trufit-way':'Why us','home-programs':'Plans','home-start':'Start','faq':'FAQs','contact-form':'Talk','coach-overview':'Coach','cpx-plans':'Plans','coach-about':'About','coach-next':'Start','coach-faq':'FAQs'};
 const coachLinks=[['coach-overview','Coach overview'],['cpx-plans','Coaching plans'],['coach-about','About your coach'],['coach-next','Getting started'],['coach-faq','FAQs']];
 export default function QuickNavigation({coachPage=false}){

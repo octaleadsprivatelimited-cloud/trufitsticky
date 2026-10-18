@@ -28,7 +28,8 @@ function htmlFor(path,page,noindex=false){
  for(const [name,value] of [['google-site-verification',env.VITE_GOOGLE_SITE_VERIFICATION],['msvalidate.01',env.VITE_BING_SITE_VERIFICATION]])if(value)verification+=`<meta name="${name}" content="${escapeHtml(value)}"/>\n`;
  html=html.replace('</head>',verification+`<script id="trufit-schema" type="application/ld+json">${JSON.stringify(structuredData(origin)).replace(/</g,'\\u003c')}</script>\n</head>`);
  // Crawlable route-specific text and real navigation are present before JavaScript executes.
- const staticContent=`<main style="font-family:system-ui;max-width:1000px;margin:70px auto;padding:24px"><a href="/">Tru Fit</a><h1>${escapeHtml(page.heading||page.title)}</h1><p>${escapeHtml(page.description)}</p><nav aria-label="Explore Tru Fit">${Object.entries(pages).map(([href,p])=>`<a style="margin-right:20px" href="${href}">${escapeHtml(p.heading)}</a>`).join('')}</nav></main>`;
+ const articleContent=(page.articleSections||[]).map(section=>`<section><h2>${escapeHtml(section.heading)}</h2>${section.paragraphs.map(p=>`<p>${escapeHtml(p)}</p>`).join('')}</section>`).join('');
+ const staticContent=`<main style="font-family:system-ui;max-width:1000px;margin:70px auto;padding:24px"><a href="/">Tru Fit</a><h1>${escapeHtml(page.heading||page.title)}</h1><p>${escapeHtml(page.description)}</p>${articleContent}<nav aria-label="Explore Tru Fit">${Object.entries(pages).map(([href,p])=>`<a style="margin-right:20px" href="${href}">${escapeHtml(p.heading)}</a>`).join('')}</nav></main>`;
  html=html.replace('<div id="root"></div>',`<div id="root">${staticContent}</div>`);
  return html;
 }

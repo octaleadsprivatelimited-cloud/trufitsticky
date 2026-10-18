@@ -116,6 +116,11 @@
       "source": "/plans",
       "destination": "/coaches",
       "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/blog",
+      "permanent": true
     }
   ]
 }

@@ -10,7 +10,8 @@ import ErrorPage from "./pages/ErrorPage";
 
 const TeamPanelPage = lazy(() => import("./pages/TeamPanelPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage"));
-const AboutPage = lazy(() => import("./pages/AboutPage"));
+const BlogPage = lazy(() => import("./pages/BlogPage"));
+const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const CoachPage = lazy(() => import("./pages/CoachPage"));
 const CoachLandingPage = lazy(() => import("./pages/CoachLandingPage"));
 const CoachDetailPage = lazy(() => import("./pages/CoachDetailPage"));
@@ -52,14 +53,9 @@ const router = createBrowserRouter([
                     </Suspense>
                 )
             },
-            {
-                path: "/about", 
-                element: (
-                    <Suspense fallback={null}>
-                        <AboutPage />
-                    </Suspense>
-                )
-            },
+            { path: "/about", element: <Navigate to="/blog" replace/> },
+            { path: "/blog", element: <Suspense fallback={null}><BlogPage /></Suspense> },
+            { path: "/blog/:slug", element: <Suspense fallback={null}><BlogPostPage /></Suspense> },
             {
                 path: "/coaches", 
                 element: (

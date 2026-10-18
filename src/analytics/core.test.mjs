@@ -16,7 +16,7 @@ test('entering private flow drops loaded SDKs; withdrawal reloads with persisted
 test('expired and malformed consent never enable tracking',()=>{const r=runtime();r.saved.set(CONSENT_KEY,JSON.stringify({version:1,analytics:true,updatedAt:1}));r.client.page('/','Home');assert.equal(r.scripts.length,0);r.saved.set(CONSENT_KEY,'broken');assert.equal(r.client.readConsent(),null)});
 test('URLs exclude all queries and fragments',()=>{assert.equal(cleanUrl('https://example.com/path?token=secret#email'),'https://example.com/path')});
 
-test("disabled development tracking does not load vendors after opt-in",()=>{const r=runtime();const client=createAnalytics({ga4Id:"G-TEST123",clarityId:"test1234",enabled:false},r.w,r.d);client.setConsent(true);client.page("/about","Our approach");assert.equal(r.scripts.length,0);assert.equal(r.w.dataLayer,undefined)});
+test("disabled development tracking does not load vendors after opt-in",()=>{const r=runtime();const client=createAnalytics({ga4Id:"G-TEST123",clarityId:"test1234",enabled:false},r.w,r.d);client.setConsent(true);client.page("/blog","Blog");assert.equal(r.scripts.length,0);assert.equal(r.w.dataLayer,undefined)});
 test('every coach is attributed separately in GA4 and Clarity without repeated profile views',()=>{
  const r=runtime('/coaches/first');r.client.setConsent(true);
  const first={id:12,name:'First Coach',profile_slug:'first',coach_level:'senior'};
@@ -27,7 +27,7 @@ test('every coach is attributed separately in GA4 and Clarity without repeated p
  const selected=r.w.dataLayer.find(a=>a[0]==='event'&&a[1]==='select_plan');assert.equal(selected[2].coach_name,'First Coach');assert.equal(selected[2].duration_weeks,24);
  assert.ok(r.w.clarity.q.some(a=>a[0]==='set'&&a[1]==='coach_slug'&&a[2]==='second'));
  assert.ok(r.w.clarity.q.some(a=>a[0]==='event'&&a[1]==='select_plan_coach_12'));
- r.client.page('/about','Our approach');r.client.track('form_start',{form_id:'contact'});assert.equal(r.w.dataLayer.at(-1)[2].coach_id,undefined);
+ r.client.page('/blog','Blog');r.client.track('form_start',{form_id:'contact'});assert.equal(r.w.dataLayer.at(-1)[2].coach_id,undefined);
 });
 test('consenting on an already-open coach profile records that coach once',()=>{
  const r=runtime('/coaches/first');r.client.coach({id:12,name:'First Coach',profile_slug:'first'},'/coaches/first','First Coach');assert.equal(r.scripts.length,0);

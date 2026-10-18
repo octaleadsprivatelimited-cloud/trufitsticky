@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 const About = () => {
     const navigate = useNavigate();
 
-    const redirectToAbout = () => {
-        navigate("/about")
+    const redirectToBlog = () => {
+        navigate("/blog")
     }
 
   return (
@@ -35,8 +35,8 @@ const About = () => {
                         <p className="bey__text">Tru Fit isn’t just a fitness program, it’s a support system. Your coach helps with workouts, nutrition, and the ups and downs that come with real life. We’re here to make the plan work for you, not the other way around.</p>
                     </motion.div>
                 </div>
-                <div className="redirect__btn bey__btn" onClick={redirectToAbout}>
-                    <p>About Tru Fit</p>
+                <div className="redirect__btn bey__btn" onClick={redirectToBlog}>
+                    <p>Read our blog</p>
                     <div className="redirect__btn-bg">
                         <img src={Arrow} alt="Arrow" />
                     </div>
