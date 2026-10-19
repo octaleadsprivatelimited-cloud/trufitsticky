@@ -1,3 +1,4 @@
+import { sectionParagraphs } from '../blog/richText.mjs';
 export const articles = [
   {
     slug: 'getting-started-with-a-coach', category: 'Getting started', visual: 'start', featured: true,
@@ -70,10 +71,10 @@ export const categories = ['All', 'Getting started', 'Training', 'Nutrition', 'C
 export function filterArticles(query = '', category = 'All', source = articles) {
   const term = query.trim().toLowerCase();
   return source.filter(article => (category === 'All' || article.category === category) &&
-    [article.title, article.excerpt, article.category, ...article.sections.flatMap(s => [s.heading, ...s.paragraphs])].join(' ').toLowerCase().includes(term));
+    [article.title, article.excerpt, article.category, ...article.sections.flatMap(s => [s.heading, ...sectionParagraphs(s)])].join(' ').toLowerCase().includes(term));
 }
 export function readMinutes(article) {
-  const words = [article.title, article.excerpt, ...article.sections.flatMap(s => [s.heading, ...s.paragraphs])].join(' ').split(/\s+/).length;
+  const words = [article.title, article.excerpt, ...article.sections.flatMap(s => [s.heading, ...sectionParagraphs(s)])].join(' ').split(/\s+/).length;
   return Math.max(1, Math.ceil(words / 200));
 }
 export function relatedArticles(slug, source = articles) {

@@ -1,3 +1,4 @@
+import { normalizeRichText, richTextParagraphs, richTextImages, richTextHasContent } from './richText.mjs';
 import { validCoverImage } from './images.mjs';
 import { articles, categories } from '../content/blog.mjs';
 export const BLOG_KEY = 'trufit_blog_preview_v1';
@@ -33,13 +34,15 @@ export function validatePost(blog, id, post, publish = false) {
   if (!validCoverImage(post.coverImage)) return 'Choose a valid cover image or remove it.';
   if (publish && post.coverImage && !post.coverImage.alt.trim()) return 'Add an image description (alt text) before publishing.';
   if (publish && !post.excerpt.trim()) return 'Add a short description before publishing.';
-  if (publish && (!post.sections.length || post.sections.some(s => !s.heading.trim() || !s.paragraphs.some(p => p.trim())))) return 'Give every section a heading and at least one paragraph before publishing.';
+  if (post.sections.some(s=>s.richText && JSON.stringify(s.richText).length>200000)) return 'Keep each section under 200,000 characters.';
+  if (publish && post.sections.some(s=>s.richText && richTextImages(s.richText).some(image=>!image.alt.trim()))) return 'Add a description for every inline image before publishing.';
+  if (publish && (!post.sections.length || post.sections.some(s => !s.heading.trim() || !(s.richText?richTextHasContent(s.richText):s.paragraphs.some(p => p.trim()))))) return 'Give every section a heading and at least one paragraph before publishing.';
   return '';
 }
 export function savePost(blog, id, post, publish = false, now = new Date().toISOString()) {
   const error = validatePost(blog,id,post,publish);
   if (error) throw new Error(error);
-  const draft = {...structuredClone(post), ...(post.coverImage?{coverImage:{...post.coverImage,alt:post.coverImage.alt.trim()}}:{}), title:post.title.trim(), excerpt:post.excerpt.trim(), sections:post.sections.map(s=>({heading:s.heading.trim(), paragraphs:s.paragraphs.map(p=>p.trim()).filter(Boolean)}))};
+  const draft = {...structuredClone(post), ...(post.coverImage?{coverImage:{...post.coverImage,alt:post.coverImage.alt.trim()}}:{}), title:post.title.trim(), excerpt:post.excerpt.trim(), sections:post.sections.map(s=>({heading:s.heading.trim(), ...(s.richText?{richText:normalizeRichText(s.richText),paragraphs:richTextParagraphs(s.richText)}:{paragraphs:s.paragraphs.map(p=>p.trim()).filter(Boolean)})}))};
   const previous = blog.records.find(r=>r.id === id);
   const record = {...previous, id, draft, updatedAt:now, ...(publish ? {published:structuredClone(draft), publishedAt:now, canonicalSlug:previous?.canonicalSlug || draft.slug} : {})};
   let records = previous ? blog.records.map(r=>r.id === id ? record : r) : [record,...blog.records];

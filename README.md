@@ -125,3 +125,9 @@ Blog preview records live in `localStorage` under `trufit_blog_preview_v1` and u
 ### Blog cover images
 
 The blog editor accepts JPG, PNG, and WebP covers up to 8 MB. Uploads are decoded and resized to a maximum 1600-pixel edge, then stored as browser-local image assets in IndexedDB (`trufit_blog_images_v1`). Draft and published records retain small image references in localStorage rather than duplicating image bytes. Alt text is required when publishing an uploaded cover. Replace/remove actions stay in draft until published. Existing illustrations remain available as a fallback, and covers appear in the management library, article preview, public cards, featured guide, and article header. Images survive reloads in the same browser/origin; no image is uploaded to a server or shared with other visitors. Clearing browser data removes these preview assets.
+
+### Rich text in blog posts
+
+Each article section now uses a [Tiptap editor](https://tiptap.dev/docs/editor/getting-started/install/react) with headings (H2/H3), bold/italic, bullet and numbered lists, block quotes, undo/redo, and inline image uploads. Select text to format it; use Image to insert a picture with a description and optional caption. Click an inserted image to edit its description/caption or remove it. Inline images share the existing browser-local image store and 8 MB upload limit.
+
+Formatted sections persist as a restricted JSON document in `section.richText`. Plain-text copies are derived for search/read-time compatibility, and existing paragraph-only posts convert when edited. Preview and article pages render allowed JSON nodes as React elements; arbitrary HTML, scripts, external image URLs, and unsupported marks are not injected. Draft/published snapshots remain separate, and image descriptions are checked on publish. `npm run test:blog` covers normalization, legacy content, rich-text storage, image rules, search, and draft/published isolation.

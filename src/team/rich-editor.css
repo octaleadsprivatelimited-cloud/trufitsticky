@@ -1,0 +1,47 @@
+#root .rich-editor-field{margin:0 0 15px;min-width:0}
+#root .rich-editor-label{display:block;font-size:11px;color:#705b8c;margin-bottom:7px}
+#root .rich-editor{border:1px solid #dfd1f3;border-radius:10px;overflow:hidden;background:#fff}
+#root .rich-editor:focus-within{border-color:#9d6bdd;box-shadow:0 0 0 2px #6d28d90b}
+#root .rich-editor-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:4px;padding:8px;background:#faf7ff;border-bottom:1px solid #e7dcf7}
+#root .rich-editor-toolbar button{font:12px 'DM Sans',sans-serif;min-width:33px;height:34px;min-height:34px;border:1px solid transparent;background:transparent;color:#563382;border-radius:6px;padding:5px 9px;cursor:pointer}
+#root .rich-editor-toolbar button[aria-pressed=true]{color:#6d28d9;background:#eee3ff;border-color:#d7bdf7}
+#root .rich-editor-toolbar button:hover:not(:disabled){background:#eee3ff}
+#root .rich-editor-toolbar button:disabled{opacity:.35;cursor:default}
+#root .rich-editor-toolbar select{font:12px 'DM Sans',sans-serif;color:#563382;border:1px solid #e5d8fa;background:#fff;border-radius:6px;min-height:34px;height:34px;padding:5px 25px 5px 8px;width:auto}
+#root .rich-toolbar-divider{height:20px;border-left:1px solid #e2d5f1;margin:0 3px}
+#root .rich-editor-content{position:relative;outline:none;min-height:240px;max-height:560px;overflow:auto;padding:18px;font:15px/1.8 'DM Sans',sans-serif;color:#493066;overflow-wrap:anywhere}
+#root .rich-editor-content:focus{outline:none}
+#root .rich-editor-content p{font:inherit;line-height:1.8;color:inherit;margin:0 0 12px}
+#root .rich-editor-content p:last-child{margin-bottom:0}
+#root .rich-editor-content h2{font:650 25px/1.25 'Manrope',sans-serif;color:#3d1776;margin:22px 0 13px;letter-spacing:-.035em}
+#root .rich-editor-content h3{font:650 20px/1.3 'Manrope',sans-serif;color:#3d1776;margin:20px 0 11px}
+#root .rich-editor-content ul,#root .rich-editor-content ol{padding-left:25px;margin:12px 0 18px;list-style-position:outside}
+#root .rich-editor-content ul{list-style-type:disc}
+#root .rich-editor-content ol{list-style-type:decimal}
+#root .rich-editor-content li{padding-left:3px;margin:5px 0}
+#root .rich-editor-content li p{margin:0 0 5px}
+#root .rich-editor-content blockquote{border-left:3px solid #a373e3;padding:8px 0 8px 17px;margin:16px 0;color:#765a95;background:#faf7ff}
+#root .rich-editor-content strong{font-weight:750}
+#root .rich-editor-content :is(h2,h3):first-child{margin-top:0}
+#root .rich-editor-help{font-size:10px;line-height:1.7;margin:8px 0 0;color:#88739d}
+#root .rich-editor-error{font-size:11px;line-height:1.7;margin:0;padding:10px 14px;color:#6d28d9;border-bottom:1px solid #e5d8fa;background:#fbf8ff}
+#root .rich-image-panel{display:grid;gap:11px;padding:16px;border-bottom:1px solid #e5d8fa;background:#fcfaff}
+#root .rich-image-panel>strong{font-size:13px}
+#root .rich-image-panel>p{font-size:10px;line-height:1.5}
+#root .rich-image-panel label,#root .rich-image-controls label{display:grid;gap:5px;font-size:11px;color:#705b8c}
+#root .rich-image-panel input,#root .rich-image-controls input{font:13px 'DM Sans',sans-serif;background:white;color:#2e1065;border:1px solid #e5d8fa;border-radius:7px;min-height:40px;padding:9px;width:100%;min-width:0}
+#root .rich-image-panel>div{display:flex;align-items:center;gap:12px}
+#root .rich-image-node{border:2px solid transparent;border-radius:9px;margin:16px 0;padding:3px}
+#root .rich-image-node.is-selected{border-color:#9d72db;background:#fcfaff}
+#root .rich-image-controls{padding:12px;display:grid;gap:10px;background:#f6f0ff;border-radius:7px}
+#root .rich-image-controls button{justify-self:start;border:0;background:none;color:#6d28d9;min-height:36px;font:11px 'DM Sans',sans-serif;padding:6px 0}
+#root .rich-editor .journal-inline-image{margin:0}
+#root .rich-editor .journal-inline-image img{display:block;width:100%;max-height:430px;object-fit:contain;border-radius:7px}
+#root .rich-editor .journal-inline-image figcaption{font-size:11px;text-align:center;padding:10px 0;color:#806a98}
+#root .rich-editor.is-busy .rich-editor-content{opacity:.6}
+@media(max-width:767px){#root .rich-editor-toolbar{padding:6px;gap:3px}#root .rich-editor-toolbar button{min-height:40px;height:40px;padding:6px 9px}#root .rich-editor-toolbar select{height:40px;min-height:40px;font-size:13px;max-width:140px}#root .rich-toolbar-divider{display:none}#root .rich-editor-content{padding:14px;min-height:245px;max-height:450px;font-size:16px}#root .rich-editor-content h2{font-size:24px}#root .rich-editor-content h3{font-size:20px}#root .rich-image-panel input,#root .rich-image-controls input{font-size:16px;min-height:44px}#root .rich-image-controls button{min-height:44px}#root .rich-editor-content ul,#root .rich-editor-content ol{padding-left:23px}}
+/* Keep formatting within reach while the workspace itself scrolls. */
+#root .rich-editor{overflow:clip}
+#root .rich-editor-toolbar{position:sticky;top:70px;z-index:1;border-top:1px solid #eee5fa}
+@media(max-width:767px){#root .rich-editor-toolbar{top:65px}}
+@media(max-width:360px){#root .rich-editor-toolbar{top:108px}}
