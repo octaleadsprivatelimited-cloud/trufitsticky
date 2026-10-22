@@ -1,0 +1,36 @@
+/* Keep navigation accessible while the header settles into a smaller shape. */
+#root .site-header {
+  transition: box-shadow 320ms ease;
+}
+#root .site-header .site-nav {
+  height: 80px;
+  transition: height 360ms cubic-bezier(.22, 1, .36, 1);
+}
+#root .site-header .brand {
+  min-height: 54px;
+  transform-origin: left center;
+  transition: transform 360ms cubic-bezier(.22, 1, .36, 1);
+}
+#root .site-header.is-compact {
+  box-shadow: 0 3px 16px #43158b0d;
+}
+#root .site-header.is-compact .site-nav {
+  height: 60px;
+}
+#root .site-header.is-compact .brand {
+  transform: scale(.8);
+}
+#root .site-header .menu-button {
+  min-height: 44px;
+  min-width: 56px;
+}
+@media (max-width: 700px) {
+  #root .site-header .site-nav { height: 68px; }
+  #root .site-header.is-compact .site-nav { height: 56px; }
+  #root .site-header .nav-links { top: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #root .site-header,
+  #root .site-header .site-nav,
+  #root .site-header .brand { transition: none; }
+}

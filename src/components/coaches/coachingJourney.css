@@ -1,23 +1,25 @@
 /* A package-first journey: offer, price, reviews, then the optional coach story. */
 #root .coaching-journey {padding-bottom:90px!important;}
 #root .coaching-journey .coaching-offer {display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);padding:30px 34px!important;gap:32px;min-height:0;margin:8px 0 0;border-radius:20px;}
+#root .coaching-journey .coaching-offer {background:radial-gradient(ellipse at 0% 100%,#e3f8ff,transparent 60%),linear-gradient(250deg,#43158b 0%,#6d28d9 45%,#a6b9f0 78%,#d9f4ff 100%);}
 #root .coaching-offer .coaching-offer-kicker {font:500 12px/1.5 'DM Sans',sans-serif;color:#eee4ff;margin:0 0 10px;}
 #root .coaching-journey .coaching-offer h1 {font:600 clamp(32px,3.4vw,46px)/1.12 'Manrope',sans-serif!important;letter-spacing:-.045em!important;margin:0 0 12px;}
-#root .coaching-offer h1 span {color:#e8d9ff;}
+#root .coaching-offer h1 span {color:#def5ff;}
 #root .coaching-offer .coaching-offer-description {font:13px/1.6 'DM Sans',sans-serif;color:#f5eeff;margin:0 0 16px;}
 #root .coaching-offer-benefits {display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0;}
 #root .coaching-offer-benefits li {font:11px/1.5 'DM Sans',sans-serif;padding:5px 9px;border:1px solid #ffffff40;background:#ffffff0c;border-radius:6px;color:#fff;}
-#root .coaching-coach-card {padding:18px;border:1px solid #ffffff40;border-radius:14px;background:#ffffff0d;min-width:0;}
+#root .coaching-coach-card {padding:18px;border:1px solid #8f76b0;border-radius:14px;background:linear-gradient(125deg,#352152,#493468);min-width:0;}
 #root .coaching-journey .coaching-coach-card .profile-identity {gap:16px;}
-#root .coaching-journey .coaching-coach-card .profile-avatar {width:94px;height:110px;border:2px solid #ffffff80;border-radius:12px;}
-#root .coaching-journey .coaching-coach-card .coach-portrait-media {border-radius:9px;}
-#root .coaching-journey .coaching-coach-card .profile-kicker {padding:0;min-height:0;margin:0 0 5px;font:11px/1.4 'DM Sans',sans-serif!important;color:#e8d9ff;}
-#root .coaching-coach-card h2 {font:600 21px/1.25 'Manrope',sans-serif!important;letter-spacing:-.025em;color:#fff;margin:0 0 5px;overflow-wrap:anywhere;}
-#root .coaching-journey .coaching-coach-card .profile-location {font:11px/1.5 'DM Sans',sans-serif!important;margin:0;color:#eee4ff;}
-#root .coaching-rating-link {display:inline-flex;font-size:11px;color:#fff;margin-top:8px;min-height:28px;align-items:center;text-decoration:underline;text-underline-offset:3px;}
-#root .coaching-specialties {margin-top:12px;padding-top:10px;border-top:1px solid #ffffff30;}
-#root .coaching-specialties>span {font:500 10px/1.4 'DM Sans',sans-serif;color:#e8d9ff;}
-#root .coaching-specialties p {font:11px/1.6 'DM Sans',sans-serif;color:#fff;margin:3px 0 0;}
+#root .coaching-journey .coaching-coach-card .profile-avatar {width:94px;height:110px;border:0;border-radius:12px;background:transparent;}
+#root .coaching-journey .coaching-coach-card .profile-avatar .coach-portrait-media {border-radius:inherit;background:transparent;}
+#root .coaching-journey .coaching-coach-card .profile-avatar img {object-fit:cover;object-position:center;}
+#root .coaching-journey .coaching-coach-card .profile-kicker {padding:0;min-height:0;margin:0 0 5px;font:11px/1.4 'DM Sans',sans-serif!important;color:#d6c9e8;}
+#root .coaching-coach-card h2 {font:600 21px/1.25 'Manrope',sans-serif!important;letter-spacing:-.025em;color:#f5f0fb;margin:0 0 5px;overflow-wrap:anywhere;}
+#root .coaching-journey .coaching-coach-card .profile-location {font:11px/1.5 'DM Sans',sans-serif!important;margin:0;color:#d6c9e8;}
+#root .coaching-rating-link {display:inline-flex;font-size:11px;color:#e2d7f5;margin-top:8px;min-height:28px;align-items:center;text-decoration:underline;text-underline-offset:3px;}
+#root .coaching-specialties {margin-top:12px;padding-top:10px;border-top:1px solid #c8b5e333;}
+#root .coaching-specialties>span {font:500 10px/1.4 'DM Sans',sans-serif;color:#d6c9e8;}
+#root .coaching-specialties p {font:11px/1.6 'DM Sans',sans-serif;color:#f5f0fb;margin:3px 0 0;}
 #root .coaching-journey .coaching-page-nav {gap:26px;margin:0 0 22px;border-color:var(--line);}
 #root .coaching-page-nav a {display:inline-flex;align-items:center;min-height:52px;font:500 13px/1.5 'DM Sans',sans-serif;color:var(--muted);padding:12px 0;border-bottom:2px solid transparent;text-decoration:none;}
 #root .coaching-page-nav a:first-child {color:var(--accent);border-color:var(--accent);font-weight:600;}
@@ -123,6 +125,16 @@
  #root .coaching-journey .coaching-coach-card .profile-avatar {width:76px;height:90px;}
  #root .coaching-coach-card h2 {font-size:18px!important;}
 }
+@media(min-width:951px){
+ #root .coaching-journey .coaching-offer {grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
+ #root .coaching-journey .coaching-coach-card {position:relative;align-self:stretch;display:grid;grid-template-columns:42% minmax(0,1fr);column-gap:26px;align-content:center;min-height:224px;padding:22px 20px 22px 0;overflow:hidden;}
+ #root .coaching-journey .coaching-coach-card .profile-identity {grid-column:2;width:100%;}
+ #root .coaching-journey .coaching-coach-card .coaching-specialties {grid-column:2;}
+ #root .coaching-journey .coaching-coach-card .profile-identity>div:last-child {min-width:0;}
+ #root .coaching-journey .coaching-coach-card .profile-avatar {position:absolute;inset:0 auto 0 0;width:42%;height:100%;margin:0;border:0;border-radius:0;box-shadow:none;}
+ #root .coaching-journey .coaching-coach-card .coach-portrait-media {border-radius:0;}
+ #root .coaching-journey .coaching-coach-card .profile-avatar img {object-fit:cover;object-position:center;}
+}
 @media(max-width:750px){
  #root .coaching-booking-layout {grid-template-columns:1fr;}
  #root .coaching-booking-layout>.coaching-plan-panel,#root .coaching-booking-layout>.coaching-guide,#root .coaching-booking-layout>.coaching-reviews {grid-column:auto;grid-row:auto;}
@@ -136,12 +148,14 @@
  #root .coaching-journey .coaching-offer {grid-template-columns:1fr;padding:18px!important;gap:15px;border-radius:16px;}
  #root .coaching-offer .coaching-offer-kicker {font-size:10px;margin-bottom:6px;}
  #root .coaching-journey .coaching-offer h1 {font-size:30px!important;line-height:1.08;margin-bottom:8px;}
+ #root .coaching-journey .coaching-offer-copy h1 {display:none;}
  #root .coaching-offer .coaching-offer-description {font-size:11px;line-height:1.5;margin:0;}
  #root .coaching-offer-benefits {display:none;}
- #root .coaching-coach-card {padding:12px 0 0;border:0;border-top:1px solid #ffffff35;border-radius:0;background:none;}
- #root .coaching-journey .coaching-coach-card .profile-identity {gap:12px;}
- #root .coaching-journey .coaching-coach-card .profile-avatar {width:58px;height:66px;border-radius:9px;}
- #root .coaching-journey .coaching-coach-card .coach-portrait-media {border-radius:6px;}
+ #root .coaching-journey .coaching-offer {background:radial-gradient(ellipse at 0% 0%,#e3f8ff,transparent 60%),linear-gradient(325deg,#43158b 0%,#6d28d9 40%,#a6b9f0 76%,#d9f4ff 100%);}
+ #root .coaching-coach-card {padding:12px;}
+ #root .coaching-journey .coaching-coach-card .profile-identity {display:grid;grid-template-columns:40% minmax(0,1fr);gap:12px;}
+ #root .coaching-journey .coaching-coach-card .profile-avatar {width:100%;height:auto;aspect-ratio:1;border-radius:12px;}
+ #root .coaching-journey .coaching-coach-card .coach-portrait-media {border-radius:9px;}
  #root .coaching-journey .coaching-coach-card .profile-kicker {font-size:9px!important;margin-bottom:4px;}
  #root .coaching-coach-card h2 {font-size:18px!important;margin-bottom:3px;}
  #root .coaching-journey .coaching-coach-card .profile-location {font-size:10px!important;}
