@@ -16,7 +16,6 @@ import CoachProfileOverview from "./CoachProfileOverview";
 import BookingSteps from "./BookingSteps";
 import CoachingPackageIcon from "./CoachingPackageIcon";
 import PlanContinue from "./PlanContinue";
-import useMobileCardStack from "./useMobileCardStack";
 import "./coachBooking.css";
 import "./coachProfileHero.css";
 import "../../styles/featured-coaching.css";
@@ -38,8 +37,6 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
   const countryCode = detectedCountryCode || (!locationLoading ? "DOMESTIC" : "");
   const loadingLocation = !countryCode;
   const [showForm, setShowForm] = useState(false);
-  const stackEnabled = !showForm && !coupleCheckoutOpen;
-  const stackRef = useMobileCardStack(stackEnabled);
   const [showAllPlans, setShowAllPlans] = useState(false);
 
   // Waiting list state
@@ -718,7 +715,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
       : "Continue to details";
 
   return (
-    <div ref={stackRef} className={`cpx-page coaching-journey${stackEnabled ? ' has-card-stack' : ''}`}>
+    <div className="cpx-page coaching-journey">
       <CoachProfileOverview bookingOpen={showForm || coupleCheckoutOpen} coach={coach} testimonials={testimonials} certifications={certChips}>
 
       {/* WEEKLY PLANS */}
@@ -790,8 +787,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
       </section>
       </CoachProfileOverview>
 
-      <div className="coaching-stack-anchor" data-stack-for="coach-faq" aria-hidden="true"/>
-      <section id="coach-faq" tabIndex={-1} className="profile-faq cpx-pad"><div><p className="eyebrow">Before you begin</p><h2>Good to <em>know.</em></h2></div><div className="faq-list">{[['What’s different about couple coaching?', 'Two people enrol with one coach and a shared start date. Each person receives individual guidance. The displayed couple price covers both participants.'],['What am I paying for?', 'The full displayed total covers your selected coaching duration. Weekly amounts are for comparison. There is one payment, with no automatic renewal.'],['Can I speak to my coach first?', 'Choose the 20-minute consultation when it is available for your coach and pricing region. You can schedule the call after payment.'],['What if my coach’s plan is full?', 'Available programs can be booked. When a plan is full, you can join its waitlist. Couple programs require two available places.']].map(([question,answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div></section>
+      <section id="coach-faq" tabIndex={-1} className="profile-faq cpx-pad" data-reveal><div><p className="eyebrow">Before you begin</p><h2>Good to <em>know.</em></h2></div><div className="faq-list">{[['What’s different about couple coaching?', 'Two people enrol with one coach and a shared start date. Each person receives individual guidance. The displayed couple price covers both participants.'],['What am I paying for?', 'The full displayed total covers your selected coaching duration. Weekly amounts are for comparison. There is one payment, with no automatic renewal.'],['Can I speak to my coach first?', 'Choose the 20-minute consultation when it is available for your coach and pricing region. You can schedule the call after payment.'],['What if my coach’s plan is full?', 'Available programs can be booked. When a plan is full, you can join its waitlist. Couple programs require two available places.']].map(([question,answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div></section>
 
       {/* STICKY BOTTOM CTA */}
       {!isCoupleMode && !showForm && <div className="cpx-sticky">
