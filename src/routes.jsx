@@ -12,6 +12,8 @@ const CoachWorkspacePage = lazy(() => import("./pages/CoachWorkspacePage"));
 const TeamPanelPage = lazy(() => import("./pages/TeamPanelPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage"));
 const BlogPage = lazy(() => import("./pages/BlogPage"));
+const BmiCalculatorPage = lazy(() => import("./pages/BmiCalculatorPage"));
+const CalorieCalculatorPage = lazy(() => import("./pages/CalorieCalculatorPage"));
 const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const CoachPage = lazy(() => import("./pages/CoachPage"));
 const CoachLandingPage = lazy(() => import("./pages/CoachLandingPage"));
@@ -65,6 +67,8 @@ const router = createBrowserRouter([
             },
             { path: "/about", element: <Navigate to="/blog" replace/> },
             { path: "/blog", element: <Suspense fallback={null}><BlogPage /></Suspense> },
+            { path: "/bmi-calculator", element: <Suspense fallback={null}><BmiCalculatorPage /></Suspense> },
+            { path: "/calorie-calculator", element: <Suspense fallback={null}><CalorieCalculatorPage /></Suspense> },
             { path: "/blog/:slug", element: <Suspense fallback={null}><BlogPostPage /></Suspense> },
             {
                 path: "/coaches", 

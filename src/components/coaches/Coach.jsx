@@ -1,6 +1,6 @@
 import { scrollToSection } from '../../scroll/smoothScroll';
 import { useState, useEffect, useContext, useMemo, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import SharedContext from '../../context/SharedContext';
 import LeadCapture from './LeadCapture';
 import { fetchCatalog, previewCoaches, coachSlug } from './catalog';
@@ -8,29 +8,33 @@ import { trackEvent, trackCoachEvent } from '../../analytics/analytics';
 import './coachPage.css';
 import CoachPortrait from './CoachPortrait';
 import WhatsAppMark from './WhatsAppMark';
+import { COACH_FOCUSES, normalizeCoachFocus, coachMatchesFocus } from './focus.mjs';
 import './coachDirectory.css';
 export default function Coach(){
  const { countryCode, setCountryCode, queFilteredCoaches, setQueFilteredCoaches } = useContext(SharedContext);
  const location = useLocation();
+ const [searchParams, setSearchParams] = useSearchParams();
+ const goal = normalizeCoachFocus(searchParams.get('focus'));
+ const hasFocusQuery = searchParams.has('focus');
  const featuredSlug=location.hash.startsWith('#coach-')?location.hash.slice(7):'';
  const scrolledVisit=useRef(null);
  const [coaches,setCoaches] = useState([]), [plans,setPlans] = useState([]), [loading,setLoading] = useState(true), [error,setError] = useState(''), [retry,setRetry] = useState(0);
  const [reviews,setReviews] = useState([]);
- const [tier,setTier] = useState('all'), [query,setQuery] = useState(''), [goal,setGoal] = useState('all');
+ const [tier,setTier] = useState('all'), [query,setQuery] = useState('');
  const [showLead,setShowLead] = useState(Boolean(location.state?.fromQuestionnaire) && sessionStorage.getItem('leadCaptureDate') !== new Date().toISOString().split('T')[0]);
  const [leadData,setLeadData] = useState({name:'',email:''});
  useEffect(()=>{
   const controller = new AbortController(); setLoading(true); setError('');
-  const request = queFilteredCoaches && !featuredSlug ? Promise.resolve(queFilteredCoaches) : fetchCatalog('coach-profiles',controller.signal);
+  const request = queFilteredCoaches && !featuredSlug && !hasFocusQuery ? Promise.resolve(queFilteredCoaches) : fetchCatalog('coach-profiles',controller.signal);
   request.then(data=>setCoaches(Array.isArray(data)?data:[])).catch(e=>{if(e.name !== 'AbortError'){setError(e.message);setCoaches(previewCoaches)}}).finally(()=>{if(!controller.signal.aborted)setLoading(false)});
   fetchCatalog('plans',controller.signal).then(setPlans).catch(()=>setPlans([]));
   fetchCatalog('testimonials',controller.signal).then(setReviews).catch(()=>setReviews([]));
   return ()=>controller.abort();
- },[queFilteredCoaches,retry,featuredSlug]);
+ },[queFilteredCoaches,retry,featuredSlug,hasFocusQuery]);
  const region = countryCode || 'DOMESTIC';
  const livePreview = coaches.some(c=>c.livePreview);
  const tiers = [...new Set(coaches.map(c=>c.coach_level).filter(Boolean))];
- const filtered = useMemo(()=>coaches.filter(c=>c.status !== 'hard' && (tier==='all'||c.coach_level===tier) && `${c.name} ${c.specializations||''}`.toLowerCase().includes(query.toLowerCase()) && (goal==='all'||(goal==='weight loss'?/weight loss|fat loss/.test(String(c.specializations||'').toLowerCase()):String(c.specializations||'').toLowerCase().includes(goal)))),[coaches,tier,query,goal]);
+ const filtered = useMemo(()=>coaches.filter(c=>c.status !== 'hard' && (tier==='all'||c.coach_level===tier) && `${c.name} ${c.specializations||''}`.toLowerCase().includes(query.toLowerCase()) && coachMatchesFocus(c,goal)),[coaches,tier,query,goal]);
  useEffect(()=>{
   if(loading||!featuredSlug||scrolledVisit.current===location.key)return;
   const target=document.getElementById(`coach-${featuredSlug}`);
@@ -43,15 +47,17 @@ export default function Coach(){
   return()=>cancelAnimationFrame(frame);
  },[loading,filtered,featuredSlug,location.key]);
  const closeLead = submitted => {if(submitted) sessionStorage.setItem('leadCaptureDate',new Date().toISOString().split('T')[0]);else setQueFilteredCoaches(null);setShowLead(false)};
- const focuses = [['all','All coaching','✦'],['weight loss','Weight loss','↘'],['strength','Strength training',''],['nutrition','Nutrition coaching','◉'],['habit','Healthy habits','✓'],['beginner','Beginner fitness','◎']];
- const selectFocus = value => {setGoal(value);trackEvent('filter_coaches',{filter:value})};
+ const focuses = COACH_FOCUSES;
+ const updateFocus = value => setSearchParams(previous => {const next = new URLSearchParams(previous);next.set('focus',normalizeCoachFocus(value).replace(/ /g,'-'));return next;}, {replace:true});
+ const selectFocus = value => {updateFocus(value);trackEvent('filter_coaches',{filter:value})};
+ const clearFilters = () => {setTier('all');updateFocus('all');setQuery('')};
  return <div className="coach-catalogue">
  {showLead && <LeadCapture leadData={leadData} setLeadData={setLeadData} onSubmit={()=>closeLead(true)} onClose={closeLead} coachCount={location.state?.coachCount||filtered.length}/>}
  <div className="catalogue-layout">
   <aside className="catalogue-sidebar" aria-label="Coaching specialties"><p>Find your focus</p><nav>{focuses.map(([value,label,icon])=><button key={value} aria-pressed={goal===value} onClick={()=>selectFocus(value)}><span aria-hidden="true">{icon}</span>{label}</button>)}</nav><Link className="catalogue-match" to="/findmycoach">Need help choosing?<strong>Find my coach </strong></Link></aside>
   <section className="catalogue-main" aria-label="Browse coaches">
    <header className="catalogue-heading"><div><h1>Fitness & nutrition coaches</h1><p><Link to="/">Home</Link><span aria-hidden="true"> /</span>Our coaches</p></div><label className="catalogue-search"><span className="sr-only">Search coaches</span><span aria-hidden="true">⌕</span><input type="search" placeholder="Search name or specialty" value={query} onChange={e=>setQuery(e.target.value)} data-clarity-mask="true"/></label></header>
-   <div className="catalogue-controls"><span className="catalogue-count" aria-live="polite">{loading?'Loading coaches…':`${filtered.length} coaches`}</span><details className="catalogue-filters"><summary>Filters <span aria-hidden="true">☰</span></summary><div><label>Coach level<select value={tier} onChange={e=>{setTier(e.target.value);trackEvent('filter_coaches',{filter:e.target.value})}}><option value="all">All levels</option>{tiers.map(t=><option key={t} value={t}>{coaches.find(c=>c.coach_level===t)?.coach_level_name||t}</option>)}</select></label><label>Pricing region<select value={region} onChange={e=>setCountryCode(e.target.value)}><option value="DOMESTIC">India · INR</option><option value="INTERNATIONAL">International · USD</option></select></label><button onClick={()=>{setTier('all');setGoal('all');setQuery('')}}>Clear filters</button></div></details></div>
+   <div className="catalogue-controls"><span className="catalogue-count" aria-live="polite">{loading?'Loading coaches…':`${filtered.length} coaches`}</span><details className="catalogue-filters"><summary>Filters <span aria-hidden="true">☰</span></summary><div><label>Coach level<select value={tier} onChange={e=>{setTier(e.target.value);trackEvent('filter_coaches',{filter:e.target.value})}}><option value="all">All levels</option>{tiers.map(t=><option key={t} value={t}>{coaches.find(c=>c.coach_level===t)?.coach_level_name||t}</option>)}</select></label><label>Pricing region<select value={region} onChange={e=>setCountryCode(e.target.value)}><option value="DOMESTIC">India · INR</option><option value="INTERNATIONAL">International · USD</option></select></label><button onClick={clearFilters}>Clear filters</button></div></details></div>
    {livePreview && <p className="preview-notice">Catalogue preview. Booking is unavailable in this preview.</p>}
    {location.state?.coupleMode && <p className="package-family-note">Choose a coach to explore couple packages.</p>}
    {error && <div className="empty-state" role="alert"><h2>We couldn’t load our coaches.</h2><p>Please try again.</p><button className="button" onClick={()=>setRetry(r=>r+1)}>Retry</button></div>}
@@ -74,7 +80,7 @@ export default function Coach(){
      <div className="catalogue-card-info"><span className="catalogue-tier">{String(coach.coach_level_name||coach.coach_level||'Coach').toLowerCase().replace(/^./,value=>value.toUpperCase())}</span><h2><Link to={profile} state={state} onClick={()=>selected('directory_name')}>{coach.name}</Link></h2><p className="catalogue-specialties">{specialties.join(' · ')}</p><p className="catalogue-proof">{rating?<><span aria-label={`${rating} out of 5 stars`}>★ {rating}</span><span> · {feedback.length} reviews</span></>:experience>0?<span>{experience} {experience===1?'year':'years'} experience</span>:<span>Personalized training & nutrition</span>}</p><div className="catalogue-availability">{slots!==null?(slots>0?`${slots} ${slots===1?'place':'places'} available`:'Join waitlist'):startingPrice?`Programs from ${new Intl.NumberFormat(region==='DOMESTIC'?'en-IN':'en-US',{style:'currency',currency:region==='DOMESTIC'?'INR':'USD',maximumFractionDigits:0}).format(startingPrice)} total`:'Explore coaching programs'}</div><div className="catalogue-card-actions"><a className="catalogue-chat" href={`https://wa.me/${whatsapp}?text=${encodeURIComponent(`Hi ${coach.name.split(' ')[0]}, I’d like to ask about your Tru Fit coaching plans.`)}`} target="_blank" rel="noreferrer" aria-label={`Chat with ${coach.name} on WhatsApp`} onClick={()=>trackCoachEvent('contact_click',coach,{source:'directory_whatsapp',pricing_region:region})}><WhatsAppMark/></a><Link className="button" to={`${profile}#cpx-plans`} state={state} onClick={()=>selected('directory_plans')}>See plans</Link></div></div>
     </article>;
    })}</div>}
-   {!loading&&!error&&filtered.length===0&&<div className="empty-state"><h2>No matching coaches.</h2><p>Try another specialty or name.</p><button className="button button-outline" onClick={()=>{setTier('all');setGoal('all');setQuery('')}}>Clear filters</button></div>}
+   {!loading&&!error&&filtered.length===0&&<div className="empty-state"><h2>No matching coaches.</h2><p>Try another specialty or name.</p><button className="button button-outline" onClick={clearFilters}>Clear filters</button></div>}
   </section>
  </div>
  </div>;

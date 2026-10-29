@@ -1,0 +1,68 @@
+.calorie-page{--calorie-ink:#1d1d1f;--calorie-muted:#69696f;--calorie-purple:#6d28d9;--calorie-line:#e7e7eb;max-width:1000px;padding-top:28px;padding-bottom:38px;color:var(--calorie-ink);font-family:-apple-system,BlinkMacSystemFont,'Inter','Manrope',sans-serif}
+#root .calorie-page :is(h1,h2,h3),.calorie-page p{margin:0}
+#root .calorie-page :is(h1,h2,h3){font-family:inherit;color:var(--calorie-ink);letter-spacing:-.035em;text-transform:none}
+.calorie-page :is(button,input,select){font:inherit}
+.calorie-page :is(button,a,input,select,summary):focus-visible{outline:3px solid #9d75db;outline-offset:4px}
+.calorie-page :is(button,a){touch-action:manipulation}
+.calorie-intro{text-align:center;margin-bottom:22px}
+#root .calorie-intro h1{font-size:11px;font-weight:600;line-height:1.5;letter-spacing:0;color:var(--calorie-muted)}
+.calorie-workspace{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);overflow:hidden;border:1px solid var(--calorie-line);border-radius:28px;background:#fff;box-shadow:0 15px 50px #1d1d1f07,0 2px 6px #1d1d1f03}
+.calorie-input-panel{padding:28px 30px;min-width:0}
+.calorie-section-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+#root .calorie-section-top h2{font-size:21px;font-weight:600;line-height:1.3}
+.calorie-section-top>span{font-size:10px;color:var(--calorie-muted);white-space:nowrap}
+.calorie-unit-switch{display:grid;grid-template-columns:1fr 1fr;padding:4px;gap:4px;background:#f0f0f3;border-radius:12px;margin-bottom:19px}
+.calorie-unit-switch button{border:0;border-radius:9px;background:transparent;min-height:44px;padding:8px 10px;color:#707078;font-size:12px;font-weight:600;cursor:pointer}
+.calorie-unit-switch button span{font-size:10px;font-weight:400;margin-left:5px}
+.calorie-unit-switch button[aria-pressed=true]{background:#fff;color:var(--calorie-ink);box-shadow:0 2px 5px #1d1d1f12}
+.calorie-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.calorie-fields>label,.calorie-field{display:block;min-width:0;font-size:12px;font-weight:500;line-height:1.5;color:#525259}
+.calorie-height-fields,.calorie-details-fields{margin-top:15px}
+.calorie-input-wrap{display:flex;align-items:center;border:1px solid #dcdce1;border-radius:11px;background:#fff;margin-top:7px;min-height:51px;overflow:hidden}
+.calorie-input-wrap:focus-within{border-color:#9466d6;box-shadow:0 0 0 3px #6d28d914}
+.calorie-input-wrap input{border:0;outline:none!important;min-width:0;width:100%;font-size:21px;font-weight:500;letter-spacing:-.03em;color:var(--calorie-ink);padding:11px 8px 11px 12px;background:transparent;line-height:1.3}
+.calorie-input-wrap input::placeholder{color:#b3b3bb;opacity:1}
+.calorie-input-wrap>span{padding-right:12px;font-size:11px;font-weight:400;color:var(--calorie-muted)}
+.calorie-page select{display:block;width:100%;min-width:0;min-height:53px;margin-top:7px;padding:11px 10px;border:1px solid #dcdce1;border-radius:11px;background:#fff;color:var(--calorie-ink);font-size:16px;font-weight:400;line-height:1.3}
+.calorie-page .calorie-field-hint{font-size:10px;line-height:1.65;color:#76767f;margin-top:9px}
+.calorie-activity{margin-top:15px}
+.calorie-eligibility{display:flex;gap:9px;align-items:center;min-height:44px;margin:12px 0;font-size:11px;line-height:1.6;cursor:pointer;color:#525259}
+.calorie-eligibility input{width:17px;height:17px;flex:none;margin:0;accent-color:var(--calorie-purple)}
+.calorie-primary-button{display:inline-flex;width:100%;align-items:center;justify-content:center;min-height:48px;border:0;border-radius:24px;padding:12px 18px;font-size:13px;font-weight:600;line-height:1.5;cursor:pointer;color:#fff;background:var(--calorie-purple)}
+.calorie-primary-button:hover{background:#5920b5}
+.calorie-primary-button:active{transform:scale(.985)}
+.calorie-page .calorie-local-note{font-size:10px;line-height:1.65;color:var(--calorie-muted);margin-top:12px;text-align:center}
+.calorie-page .calorie-error{padding:10px 12px;margin:0 0 12px;background:#f2edf9;border:1px solid #d9c9ee;border-radius:9px;color:#4e2470;font-size:12px;line-height:1.6}
+.calorie-result-panel{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;padding:28px 26px;background:linear-gradient(145deg,#f8f8fa,#f3f3f6);border-left:1px solid var(--calorie-line);text-align:center}
+#root .calorie-result-panel h2{font-size:12px;line-height:1.5;font-weight:500;color:var(--calorie-muted);letter-spacing:0;scroll-margin-top:12px}
+#root .calorie-result-panel h2:focus{outline:none}
+.calorie-result-symbol{display:grid;place-items:center;width:74px;height:74px;margin:26px 0 20px;border-radius:23px;background:#ededf2;color:#a6a6b1}
+.calorie-result-symbol svg{width:39px;height:39px;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.has-result .calorie-result-symbol{color:#7b50b5;background:#eee7f7}
+.calorie-result-value{display:flex;flex-direction:column;align-items:center;font-variant-numeric:tabular-nums}
+.calorie-result-value>span{font-size:57px;font-weight:550;letter-spacing:-.06em;line-height:1.08}
+.calorie-result-value>small{font-size:11px;font-weight:400;color:#96969f;margin:3px 0}
+.calorie-result-placeholder{font-size:78px;font-weight:550;letter-spacing:-.07em;color:#b0b0ba;line-height:1}
+.calorie-page .calorie-result-unit{font-size:11px;line-height:1.6;color:var(--calorie-muted);margin-top:10px}
+.calorie-activity-pill{display:inline-flex;align-items:center;min-height:27px;border-radius:16px;padding:4px 12px;background:#e9e1f3;color:#5a3689;font-size:11px;font-weight:600;line-height:1.5;margin-top:18px}
+.calorie-resting{display:grid;gap:6px;border-top:1px solid #e1e1e8;width:100%;max-width:290px;padding-top:19px;margin-top:23px}
+.calorie-resting>span{font-size:10px;color:var(--calorie-muted)}
+.calorie-resting strong{font-size:21px;font-weight:500;line-height:1.4;letter-spacing:-.025em}
+.calorie-resting small{font-size:10px;font-weight:400;color:var(--calorie-muted);letter-spacing:0}
+.calorie-page .calorie-result-description{font-size:12px;line-height:1.75;color:var(--calorie-muted);max-width:280px;margin-top:21px}
+.calorie-page .calorie-estimate-note{font-size:10px;line-height:1.7;color:#777780;max-width:290px;margin-top:16px}
+.calorie-footnote{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin:16px 4px 0;font-size:11px;color:var(--calorie-muted)}
+.calorie-footnote details{max-width:650px;min-width:0}
+.calorie-footnote summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px;list-style:none}
+.calorie-footnote summary::-webkit-details-marker{display:none}
+.calorie-footnote summary::before{content:'+';font-size:16px;color:#898993}
+.calorie-footnote details[open] summary::before{content:'−'}
+.calorie-footnote details>div{padding:0 0 10px 16px}
+.calorie-footnote p{font-size:11px;line-height:1.8;margin-bottom:10px}
+.calorie-footnote a{display:inline-flex;align-items:center;min-height:44px;color:var(--calorie-purple)}
+.calorie-footnote details a+a{margin-left:16px}.calorie-footnote>a{flex:none}
+.calorie-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(max-width:1000px){.calorie-input-panel{padding:24px}.calorie-result-panel{padding:24px 20px}.calorie-result-value>span{font-size:49px}.calorie-section-top{align-items:flex-start;flex-direction:column;gap:5px}}
+@media(max-width:700px){.calorie-page{padding-top:18px;padding-bottom:28px}.calorie-intro{margin-bottom:18px}.calorie-workspace{grid-template-columns:1fr;border-radius:23px}.calorie-input-panel{padding:21px 20px}.calorie-section-top{flex-direction:row;align-items:center;margin-bottom:17px}#root .calorie-section-top h2{font-size:20px}.calorie-unit-switch{margin-bottom:17px}.calorie-fields{gap:10px}.calorie-input-wrap input{font-size:22px}.calorie-result-panel{border-left:0;border-top:1px solid var(--calorie-line);padding:24px 20px}.calorie-result-symbol{margin:18px 0 17px;width:60px;height:60px;border-radius:19px}.calorie-result-symbol svg{width:33px;height:33px}.calorie-result-value{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:8px}.calorie-result-value>span{font-size:44px}.calorie-result-value>small{margin-inline:0}.calorie-resting{margin-top:18px;padding-top:15px}.calorie-page .calorie-result-description{margin-top:16px}.calorie-footnote{flex-direction:column;gap:0;font-size:10px}.calorie-footnote details{width:100%}.calorie-footnote p{font-size:11px}.calorie-page .calorie-field-hint{font-size:9px}.calorie-eligibility{font-size:10px}}
+@media(max-width:360px){.calorie-input-panel,.calorie-result-panel{padding:18px 16px}.calorie-section-top{gap:8px}#root .calorie-section-top h2{font-size:18px}.calorie-section-top>span{font-size:9px}.calorie-result-value>span{font-size:38px}.calorie-result-value{gap:6px}.calorie-unit-switch button{padding-inline:6px}}
+@media(prefers-reduced-motion:no-preference){.calorie-primary-button,.calorie-unit-switch button{transition:background .2s,transform .2s,box-shadow .2s}.calorie-result-panel.has-result .calorie-result-value{animation:calorie-result-arrive .35s ease-out}@keyframes calorie-result-arrive{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}}

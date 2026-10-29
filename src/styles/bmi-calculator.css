@@ -1,0 +1,120 @@
+.bmi-page{--bmi-ink:#1d1d1f;--bmi-muted:#69696f;--bmi-purple:#6d28d9;--bmi-line:#e7e7eb;max-width:1000px;padding-top:35px;padding-bottom:45px;color:var(--bmi-ink);font-family:-apple-system,BlinkMacSystemFont,'Inter','Manrope',sans-serif}
+#root .bmi-page h1,#root .bmi-page h2,#root .bmi-page h3,.bmi-page p{margin:0}
+#root .bmi-page h1,#root .bmi-page h2,#root .bmi-page h3{font-family:inherit;color:var(--bmi-ink);letter-spacing:-.04em;text-transform:none}
+.bmi-page button,.bmi-page input{font:inherit}
+.bmi-page button,.bmi-page a{touch-action:manipulation}
+.bmi-page :is(button,a,input,summary):focus-visible{outline:3px solid #9d75db;outline-offset:4px}
+.bmi-intro{text-align:center;margin:0 auto 28px;padding:0 16px}
+.bmi-eyebrow{font-size:11px;font-weight:600;line-height:1.5;color:var(--bmi-muted)}
+#root .bmi-intro h1{font-size:clamp(38px,4.2vw,52px);line-height:1.08;font-weight:650;margin:9px 0 12px;letter-spacing:-.055em}
+.bmi-intro>p:last-child{font-size:15px;line-height:1.65;color:var(--bmi-muted)}
+#root .bmi-intro h1.bmi-eyebrow{font-size:11px;font-weight:600;line-height:1.5;color:var(--bmi-muted);letter-spacing:0;margin:0}
+.bmi-workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);overflow:hidden;border:1px solid var(--bmi-line);border-radius:28px;background:#fff;box-shadow:0 15px 50px #1d1d1f07,0 2px 6px #1d1d1f03}
+.bmi-calculator{padding:30px 32px;min-width:0;align-self:center}
+.bmi-section-top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:22px}
+#root .bmi-section-top h2{font-size:22px;font-weight:600;line-height:1.3;letter-spacing:-.035em}
+.bmi-section-top>span{font-size:10px;color:var(--bmi-muted);white-space:nowrap}
+.bmi-unit-switch{display:grid;grid-template-columns:1fr 1fr;padding:4px;gap:4px;background:#f0f0f3;border-radius:12px;margin-bottom:23px}
+.bmi-unit-switch button{border:0;border-radius:9px;background:transparent;min-height:44px;padding:8px 10px;color:#707078;font-size:12px;font-weight:600;cursor:pointer}
+.bmi-unit-switch button span{font-size:10px;font-weight:400;margin-left:5px}
+.bmi-unit-switch button[aria-pressed=true]{background:#fff;color:var(--bmi-ink);box-shadow:0 2px 5px #1d1d1f12,0 0 1px #1d1d1f15}
+.bmi-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bmi-fields>label,.bmi-field{display:block;min-width:0;font-size:12px;font-weight:500;line-height:1.5;color:#525259}
+.bmi-height-fields{margin-top:14px}
+.bmi-input-wrap{display:flex;align-items:center;border:1px solid #dcdce1;border-radius:12px;background:#fff;margin-top:7px;min-height:57px;overflow:hidden}
+.bmi-input-wrap:focus-within{border-color:#9466d6;box-shadow:0 0 0 3px #6d28d914}
+.bmi-input-wrap input{border:0;outline:none!important;min-width:0;width:100%;font-size:24px;font-weight:500;letter-spacing:-.035em;color:var(--bmi-ink);padding:12px 8px 12px 13px;background:transparent;line-height:1.3}
+.bmi-input-wrap input::placeholder{color:#b3b3bb;opacity:1}
+.bmi-input-wrap>span{padding-right:13px;font-size:12px;font-weight:400;color:var(--bmi-muted)}
+.bmi-page .bmi-field-hint{font-size:10px;line-height:1.6;color:#76767f;margin-top:10px}
+.bmi-adult-check{display:flex;gap:9px;align-items:center;min-height:44px;margin:9px 0 12px;font-size:12px;cursor:pointer;color:#525259}
+.bmi-adult-check input{width:17px;height:17px;flex:none;margin:0;accent-color:var(--bmi-purple)}
+.bmi-primary-button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;border:0;border-radius:24px;padding:12px 21px;font-size:13px;font-weight:600;line-height:1.5;cursor:pointer;color:#fff;background:var(--bmi-purple)}
+.bmi-primary-button:hover{background:#5920b5}
+.bmi-primary-button:active{transform:scale(.985)}
+.bmi-calculator .bmi-primary-button{width:100%}
+.bmi-page .bmi-local-note{font-size:10px;line-height:1.65;color:var(--bmi-muted);margin-top:12px}
+.bmi-calculator .bmi-local-note{text-align:center}
+.bmi-local-note>span{font-size:15px;margin-right:3px}
+.bmi-page .bmi-error{padding:10px 12px;margin:0 0 12px;background:#f2edf9;border:1px solid #d9c9ee;border-radius:9px;color:#4e2470;font-size:12px;line-height:1.6}
+.bmi-report{display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;min-width:0;padding:28px 24px;background:linear-gradient(145deg,#f8f8fa,#f3f3f6);border-left:1px solid var(--bmi-line);text-align:center}
+#root .bmi-report h2{font-size:12px;line-height:1.5;font-weight:500;color:#69696f;letter-spacing:0;scroll-margin-top:12px}
+#root .bmi-report h2:focus{outline:none}
+.bmi-result-orbit{position:relative;display:grid;place-items:center;width:210px;height:210px;margin:13px 0 8px;flex:none}
+.bmi-orbit-ring{position:absolute;inset:0;border-radius:50%;border:1px solid #dcdce5;box-shadow:inset 0 0 0 12px #ffffff55}
+.bmi-orbit-ring::before{content:'';position:absolute;inset:9px;border-radius:50%;border:1px solid #e6e6ec}
+.bmi-orbit-ring::after{content:'';position:absolute;width:7px;height:7px;background:#c6c6cf;border:3px solid #f7f7fa;border-radius:50%;top:3px;left:50%;transform:translateX(-50%)}
+.bmi-result-core{display:flex;align-items:center;flex-direction:column;position:relative}
+.bmi-result-number{font-size:78px;font-weight:550;line-height:1;letter-spacing:-.075em;color:#b0b0ba;font-variant-numeric:tabular-nums;padding-right:5px}
+.bmi-result-unit{font-size:11px;line-height:1.6;color:#787883;margin-top:7px}
+.is-ready .bmi-result-number{color:var(--bmi-ink)}
+.is-ready .bmi-orbit-ring{border-color:#bba4df;box-shadow:inset 0 0 0 12px #eeebf4}
+.is-ready .bmi-orbit-ring::after{background:var(--bmi-purple)}
+.bmi-category-pill{display:inline-flex;align-items:center;min-height:27px;border-radius:15px;padding:4px 12px;background:#e9e1f3;color:#5a3689;font-size:11px;font-weight:600;line-height:1.5}
+.bmi-page .bmi-measurement-summary{font-size:11px;line-height:1.5;color:#777780;margin-top:9px}
+.bmi-measurement-summary>span{margin:0 6px;color:#b6b6bd}
+.bmi-category-scale{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;align-self:stretch;margin-top:23px;text-align:left}
+.bmi-category-scale>div{border-top:3px solid #dcdce4;padding-top:7px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.bmi-category-scale>div.is-current{border-color:var(--bmi-purple)}
+.bmi-category-scale span{font-size:9px;line-height:1.4;color:#777780}
+.bmi-category-scale strong{font-size:9px;font-weight:500;line-height:1.5;color:#54545e}
+.bmi-report-empty{font-size:12px;line-height:1.6;color:#75757e}
+.bmi-page .bmi-screening-note{font-size:10px;line-height:1.6;color:#777780;margin-top:15px}
+.bmi-email-section{grid-column:1/-1;border-top:1px solid var(--bmi-line);background:#fff;min-width:0}
+.bmi-email-heading{display:flex;align-items:center;gap:13px;min-height:77px;padding:17px 28px;color:var(--bmi-ink);max-width:686px;margin:0 auto;box-sizing:border-box}
+#root .bmi-email-heading h2{font-size:14px;font-weight:550;letter-spacing:-.015em;line-height:1.4}
+.bmi-email-heading p{font-size:10px;line-height:1.5;color:var(--bmi-muted);margin-top:4px}
+.bmi-mail-icon{display:grid;place-items:center;width:37px;height:37px;background:#f3f3f6;border-radius:11px;flex:none}
+.bmi-mail-icon svg{width:21px;height:21px;stroke:#686873;stroke-width:1.4}
+.bmi-email-content{padding:0 28px 24px}
+.bmi-email-form{max-width:630px;margin:0 auto;min-width:0;padding-top:8px}
+.bmi-email-form>label{font-size:11px;font-weight:500;display:block;margin-bottom:8px;color:#525259}
+.bmi-email-controls{display:flex;gap:10px;align-items:stretch}
+.bmi-email-controls input{min-width:0;flex:1;width:100%;border:1px solid #dcdce1;border-radius:12px;background:#fff;color:var(--bmi-ink);padding:12px 13px;font-size:16px;letter-spacing:-.015em}
+.bmi-email-controls button{flex:none;font-size:12px;padding-inline:18px}
+.bmi-email-form .bmi-error{margin-top:12px;margin-bottom:0}
+.bmi-email-preview{border:1px solid var(--bmi-line);border-radius:16px;background:#fff;overflow:hidden;max-width:680px;margin:20px auto 0;text-align:left;scroll-margin-top:12px;overflow-wrap:anywhere}
+.bmi-email-preview:focus{outline:none}
+.bmi-preview-top{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:11px 18px;background:#f6f6f8;border-bottom:1px solid var(--bmi-line)}
+.bmi-preview-top>span{font-size:10px;font-weight:600;color:#6a557f}
+.bmi-preview-top button{min-height:44px;padding:5px 0;border:0;background:none;font-size:11px;color:var(--bmi-purple);cursor:pointer}
+.bmi-email-envelope{display:grid;gap:7px;margin:0;padding:15px 18px;border-bottom:1px solid var(--bmi-line);font-size:11px;line-height:1.5}
+.bmi-email-envelope>div{display:grid;grid-template-columns:46px minmax(0,1fr);gap:9px}
+.bmi-email-envelope dt{color:var(--bmi-muted)}
+.bmi-email-envelope dd{margin:0;overflow-wrap:anywhere}
+.bmi-email-body{padding:20px 18px}
+#root .bmi-email-body h3{font-size:25px;line-height:1.3;font-weight:600;margin:10px 0 16px}
+.bmi-email-body>p:not(.bmi-eyebrow){font-size:12px;line-height:1.8;color:var(--bmi-muted);margin-top:10px}
+.bmi-email-body strong{color:var(--bmi-ink)}
+.bmi-next-steps{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.9fr);gap:22px 32px;margin-top:22px;padding:25px 28px;border:1px solid var(--bmi-line);border-radius:23px;background:#fafafc;min-width:0}
+.bmi-next-guidance{min-width:0}
+#root .bmi-next-guidance h2{font-size:22px;font-weight:600;line-height:1.3;letter-spacing:-.035em;margin:7px 0 13px}
+.bmi-next-tips{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+.bmi-next-tips li{position:relative;padding-left:13px;font-size:12px;line-height:1.7;color:#56565f}
+.bmi-next-tips li::before{content:'';position:absolute;left:0;top:.7em;width:4px;height:4px;border-radius:50%;background:#9f83c4}
+.bmi-page .bmi-next-intro{font-size:12px;line-height:1.8;color:var(--bmi-muted);max-width:430px}
+.bmi-guidance-source{display:inline-flex;align-items:center;min-height:44px;font-size:10px;color:#6a557f;text-decoration:underline;text-underline-offset:3px;margin-top:5px}
+.bmi-next-coach{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:0;padding-left:26px;border-left:1px solid var(--bmi-line)}
+#root .bmi-next-coach h3{font-size:13px;font-weight:600;line-height:1.5;letter-spacing:-.015em}
+.bmi-page .bmi-next-coach>p{font-size:12px;line-height:1.7;color:var(--bmi-muted);margin:6px 0 15px}
+.bmi-next-coach .bmi-primary-button{font-size:12px;text-decoration:none;max-width:100%;box-sizing:border-box;text-align:center}
+.bmi-other-goal{display:inline-flex;align-items:center;min-height:44px;font-size:11px;color:#69696f;text-decoration:underline;text-underline-offset:3px;margin-top:2px}
+.bmi-page .bmi-next-note{grid-column:1/-1;padding-top:14px;border-top:1px solid var(--bmi-line);font-size:10px;line-height:1.7;color:#777780}
+.bmi-footnote{display:flex;align-items:start;justify-content:space-between;gap:20px;margin:18px 5px 0;font-size:11px}
+.bmi-footnote>a{color:var(--bmi-purple);min-height:44px;display:inline-flex;align-items:center;flex:none}
+.bmi-context{max-width:650px;color:var(--bmi-muted);min-width:0}
+.bmi-context summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px;list-style:none;color:#676771}
+.bmi-context summary::-webkit-details-marker{display:none}
+.bmi-context summary::before{content:'+';font-size:16px;color:#898993}
+.bmi-context[open] summary::before{content:'−'}
+.bmi-context>div{padding:0 0 10px 16px}
+.bmi-context p{font-size:11px;line-height:1.8;max-width:550px}
+.bmi-context a{display:inline-flex;align-items:center;min-height:44px;color:var(--bmi-purple)}
+.bmi-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(max-width:1000px){.bmi-page{padding-top:28px}.bmi-calculator{padding:25px}.bmi-report{padding:25px 20px}.bmi-section-top{flex-wrap:wrap;gap:6px}.bmi-result-orbit{width:190px;height:190px}.bmi-result-number{font-size:72px}}
+@media(max-width:700px){.bmi-page{padding-top:20px;padding-bottom:30px}.bmi-intro{padding:0 5px;margin-bottom:21px}.bmi-intro .bmi-eyebrow{font-size:10px}#root .bmi-intro h1{font-size:36px;margin:8px 0 10px}.bmi-intro>p:last-child{font-size:12px;line-height:1.6}.bmi-workspace{grid-template-columns:1fr;border-radius:23px}.bmi-calculator{padding:21px 20px}.bmi-section-top{flex-wrap:nowrap;margin-bottom:17px}#root .bmi-section-top h2{font-size:20px}.bmi-unit-switch{margin-bottom:20px}.bmi-input-wrap input{font-size:23px}.bmi-fields{gap:11px}.bmi-field-hint{font-size:9px!important}.bmi-adult-check{margin:8px 0 10px}.bmi-primary-button{min-height:46px}.bmi-report{border-left:0;border-top:1px solid var(--bmi-line);padding:20px}.bmi-result-orbit{width:150px;height:150px;margin:10px 0 9px}.bmi-result-number{font-size:66px}.bmi-result-unit{font-size:10px}.bmi-category-scale{max-width:400px;width:100%;align-self:center;margin-top:19px}.bmi-page .bmi-screening-note{margin-top:14px}.bmi-report-empty{font-size:11px}.bmi-email-heading{padding:16px 20px 12px;gap:11px;min-height:0}.bmi-email-content{padding:0 20px 20px}.bmi-email-controls{flex-direction:column;gap:9px}.bmi-email-controls input{min-height:48px;box-sizing:border-box}.bmi-email-controls button{width:100%}.bmi-mail-icon{width:34px;height:34px;border-radius:10px}#root .bmi-email-heading h2{font-size:13px}.bmi-email-heading p{font-size:10px}.bmi-email-envelope,.bmi-preview-top{padding-inline:13px}.bmi-email-body{padding:18px 13px}#root .bmi-email-body h3{font-size:23px}.bmi-footnote{gap:12px;margin:10px 2px 0;font-size:10px}.bmi-context summary{font-size:10px}.bmi-context p{font-size:11px}}
+@media(prefers-reduced-motion:no-preference){.bmi-primary-button,.bmi-unit-switch button{transition:background .2s,transform .2s,box-shadow .2s}.bmi-result-orbit.is-ready .bmi-result-core{animation:bmi-number-appear .4s cubic-bezier(.2,.7,.2,1)}.bmi-result-orbit.is-ready .bmi-orbit-ring::after{animation:bmi-orbit-arrive .65s cubic-bezier(.2,.7,.2,1)}.bmi-email-content{animation:bmi-number-appear .25s ease-out}@keyframes bmi-number-appear{from{opacity:.3;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}@keyframes bmi-orbit-arrive{from{opacity:0;transform:translateX(-50%) scale(.3)}to{opacity:1;transform:translateX(-50%) scale(1)}}}
+
+@media(max-width:360px){.bmi-calculator,.bmi-report{padding:18px 16px}#root .bmi-section-top h2{font-size:18px}.bmi-section-top{gap:10px}.bmi-unit-switch button{padding-inline:6px}.bmi-unit-switch button span{margin-left:3px}.bmi-email-heading{padding-inline:16px}.bmi-email-content{padding-inline:16px}.bmi-footnote{flex-wrap:wrap;gap:0}.bmi-page .bmi-field-hint{font-size:9px}}
+@media(max-width:700px){.bmi-next-steps{grid-template-columns:1fr;gap:17px;margin-top:17px;padding:21px 20px;border-radius:20px}#root .bmi-next-guidance h2{font-size:20px;margin-bottom:11px}.bmi-next-tips{gap:8px}.bmi-next-coach{padding:17px 0 0;border-left:0;border-top:1px solid var(--bmi-line)}.bmi-next-coach .bmi-primary-button{width:100%}.bmi-other-goal{align-self:center}.bmi-page .bmi-next-note{padding-top:13px}}
+@media(max-width:360px){.bmi-next-steps{padding:19px 16px}.bmi-next-tips li{font-size:11px}}

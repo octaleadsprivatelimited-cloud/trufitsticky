@@ -112,7 +112,7 @@ Coaching packages are selected on each coach profile. The standalone `/plans` pa
 
 ## Blog
 
-`/blog` replaces the Our approach page and appears in the header and footer. `/about` permanently redirects to `/blog` on Vercel, with a matching client redirect locally. The journal includes original guides, topic filters, full-text search, and article pages at `/blog/:slug`. Content lives in `src/content/blog.mjs`; it does not depend on the empty external blog feed. Add a guide there to include it in the listing, related reads, route metadata, and generated sitemap. No publication dates, coach bylines, or clinical claims are fabricated. `npm run test:blog` checks filtering and content links.
+`/blog` replaces the Our approach page and remains linked in the footer. The header links to the BMI calculator instead. `/about` permanently redirects to `/blog` on Vercel, with a matching client redirect locally. The journal includes original guides, topic filters, full-text search, and article pages at `/blog/:slug`. Content lives in `src/content/blog.mjs`; it does not depend on the empty external blog feed. Add a guide there to include it in the listing, related reads, route metadata, and generated sitemap. No publication dates, coach bylines, or clinical claims are fabricated. `npm run test:blog` checks filtering and content links.
 
 ## Team blog studio and coach workspace preview
 
@@ -131,3 +131,19 @@ The blog editor accepts JPG, PNG, and WebP covers up to 8 MB. Uploads are decode
 Each article section now uses a [Tiptap editor](https://tiptap.dev/docs/editor/getting-started/install/react) with headings (H2/H3), bold/italic, bullet and numbered lists, block quotes, undo/redo, and inline image uploads. Select text to format it; use Image to insert a picture with a description and optional caption. Click an inserted image to edit its description/caption or remove it. Inline images share the existing browser-local image store and 8 MB upload limit.
 
 Formatted sections persist as a restricted JSON document in `section.richText`. Plain-text copies are derived for search/read-time compatibility, and existing paragraph-only posts convert when edited. Preview and article pages render allowed JSON nodes as React elements; arbitrary HTML, scripts, external image URLs, and unsupported marks are not injected. Draft/published snapshots remain separate, and image descriptions are checked on publish. `npm run test:blog` covers normalization, legacy content, rich-text storage, image rules, search, and draft/published isolation.
+
+## BMI calculator and email report preview
+
+`/bmi-calculator` calculates adult BMI using metric or imperial measurements. It is intended for adults aged 20 and older. Categories follow the [CDC adult BMI reference](https://www.cdc.gov/bmi/adult-calculator/bmi-categories.html); the one-decimal BMI is also used for classification so the label agrees with the displayed value. BMI is a screening measure, not a diagnosis. Shared calculation and validation live in `src/bmi/core.mjs`; run `npm run test:bmi` for formula, boundary, and invalid-input checks.
+
+Email is an explicitly labelled browser-only preview, as requested. Entering an address shows the report as it would appear in an email; it sends no message, makes no email API request, and stores no address or measurements. Live delivery needs a future server-side email provider integration and verified sender. Never put email API keys in `VITE_` variables.
+
+The calculator route suppresses analytics and session recording, including when arriving from a public page with previously granted analytics consent. Results are not placed in URLs or browser storage.
+
+The BMI page footer offers basic category-aware tips with NHS/CDC source links and an optional coaching focus. Suggestions are not medical matching; visitors can choose a different goal. `/coaches?focus=nutrition`, `?focus=habit`, and `?focus=weight-loss` open the full catalogue filtered by listed specialties. Only allowlisted focus values are used; no BMI, measurements, email, or category is passed to the directory. Guidance and specialty filtering are covered by `src/bmi/guidance.test.mjs`.
+
+## Calorie calculator
+
+`/calorie-calculator` offers a metric/imperial maintenance-energy estimate for adults aged 18–80. It uses rounded Mifflin–St Jeor resting-energy coefficients (`10 × kg +6.25 × cm −5 × age`, then `+5` for the male equation or `−161` for the female equation). The resting estimate is multiplied by FAO/WHO/UNU lifestyle bands 1.40–1.69, 1.70–1.99, or 2.00–2.40. The displayed range represents the chosen activity band, not a confidence interval or a prescribed intake. Maintenance values are rounded to the nearest 10 kcal. Sources: [original Mifflin paper](https://pubmed.ncbi.nlm.nih.gov/2305711/), [FAO adult energy requirements](https://www.fao.org/4/Y5686e/y5686e07.htm).
+
+This general-purpose tool excludes pregnancy/breastfeeding, children, and low BMI; these cases require individual nutrition guidance. It does not calculate weight-loss deficits or weight-gain surpluses. Inputs are not stored, transmitted or added to URLs; analytics and recording are disabled on the route. `npm run test:calories` verifies equations, activity ranges, units and suitability validation.
