@@ -17,7 +17,7 @@ const formatPrice = (plan, region) => new Intl.NumberFormat(region === 'DOMESTIC
   style: 'currency', currency: plan.currency || (region === 'DOMESTIC' ? 'INR' : 'USD'), minimumFractionDigits: 0, maximumFractionDigits: 2,
 }).format(Number(plan.price));
 
-export default function CouplePlans({ coach, plans, region = 'DOMESTIC', onCheckoutChange }) {
+export default function CouplePlans({ coach, plans, region = 'DOMESTIC', onCheckoutChange, demoMode = false }) {
   const { user } = useAuth();
   const [selectedId, setSelectedId] = useState(null);
   const [showCheckout, setShowCheckout] = useState(false);
@@ -47,6 +47,6 @@ export default function CouplePlans({ coach, plans, region = 'DOMESTIC', onCheck
     <PlanContinue couple plan={`${plan.duration_weeks}-week couple coaching`} price={price} onContinue={openCheckout} label={full ? 'Join waitlist' : 'Continue to details'}/>
     </div>
     {!showCheckout && <div className="cpx-sticky"><div className="cpx-sticky-inner couple-sticky-inner"><div className="cpx-sticky-info"><div className="cpx-sticky-name">{coach.name}</div><div className="cpx-sticky-sub"><span className="cpx-sticky-plan">Couple · {plan.duration_weeks} weeks</span><span className="cpx-sticky-price">{price} for both</span></div></div><button className="cpx-sticky-btn" type="button" onClick={openCheckout}>{full ? 'Join waitlist' : 'Continue to details'}</button></div></div>}
-    {showCheckout && <InlineBooking>{!user ? <><button type="button" className="booking-back" onClick={closeCheckout}>Back to plans</button><BookingSteps current={2}/><AuthCard booking/></> : <CoupleCheckout coach={coach} plan={plan} waitlist={full} onClose={closeCheckout}/>}</InlineBooking>}
+    {showCheckout && <InlineBooking>{!user ? <><button type="button" className="booking-back" onClick={closeCheckout}>Back to plans</button><BookingSteps current={2}/><AuthCard booking/></> : <CoupleCheckout demoMode={demoMode} coach={coach} plan={plan} waitlist={full} onClose={closeCheckout}/>}</InlineBooking>}
   </div>;
 }

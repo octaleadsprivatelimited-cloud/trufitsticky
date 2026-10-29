@@ -1,0 +1,226 @@
+/* Isolated premium coach concept. Shared catalogue and checkout copy stay intact. */
+#root .coach-reserve-demo {background:#f5f4f8;color:#25213c;}
+#root .coach-reserve-demo .reserve-demo-notice {display:flex;align-items:center;justify-content:center;gap:12px 24px;flex-wrap:wrap;padding:12px 24px;background:#ede6f8;font-size:11px;line-height:1.5;color:#563582;}
+#root .coach-reserve-demo .reserve-demo-notice a {text-decoration:underline;text-underline-offset:3px;font-weight:600;}
+#root .coach-reserve-demo .coaching-journey.cpx-page {width:100%!important;max-width:none!important;margin:0!important;padding-bottom:100px!important;}
+#root .coach-reserve-demo .coaching-journey .coaching-offer.profile-banner {display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:50px;align-items:center;min-height:540px;padding:58px max(5vw,24px)!important;margin:0;border:0;border-radius:0;overflow:hidden;background:radial-gradient(ellipse at 76% 40%,#c3aeff77,transparent 42%),radial-gradient(ellipse at 12% 100%,#608ad95c,transparent 54%),linear-gradient(115deg,#17102c,#34205b 52%,#6a4e9c);box-shadow:none;color:#fff;}
+#root .coach-reserve-demo .coaching-journey .coaching-offer.profile-banner::before {background:linear-gradient(155deg,transparent 65%,#d8c4ff15 65%,transparent 85%);}
+#root .coach-reserve-demo .coaching-journey .coaching-offer.profile-banner>.profile-brand-mark {top:26px;right:30px;filter:brightness(0) invert(1);opacity:.65;}
+#root .coach-reserve-demo .coaching-offer .coaching-offer-copy {order:0;text-align:left;}
+#root .coach-reserve-demo .coaching-offer .coaching-coach-card {order:1;padding:0;background:transparent;border:0;overflow:visible;}
+#root .coach-reserve-demo .coaching-offer .profile-identity {display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;}
+#root .coach-reserve-demo .coaching-offer .profile-identity>div:last-child {display:block;}
+#root .coach-reserve-demo .coaching-offer .profile-avatar {position:relative;inset:auto;width:min(100%,300px);height:300px;margin:0;border:1px solid #ffffff50;border-radius:22px;box-shadow:0 30px 50px #10092066,0 0 75px #c5abff3b;}
+#root .coach-reserve-demo .coaching-offer .profile-avatar .coach-portrait-media {background:#798c9b;border-radius:inherit;}
+#root .coach-reserve-demo .coaching-offer .profile-avatar img {object-fit:cover;object-position:center;width:100%;height:100%;}
+#root .coach-reserve-demo .coaching-offer .coaching-coach-card h2 {font-size:27px!important;color:#fff;margin:5px 0;}
+#root .coach-reserve-demo .coaching-offer :is(.profile-kicker,.profile-location,.coaching-offer-kicker,.coaching-offer-description,.coaching-specialties>span) {color:#e5dcf5;}
+#root .coach-reserve-demo .coaching-offer .coaching-offer-kicker {font-size:12px;letter-spacing:.02em;margin-bottom:18px;}
+#root .coach-reserve-demo .coaching-offer .coaching-offer-copy h1 {display:block;font-size:clamp(40px,4.6vw,66px)!important;line-height:1.1;color:#fff;letter-spacing:-.045em;max-width:650px;margin:0 0 22px;}
+#root .coach-reserve-demo .coaching-offer .coaching-offer-copy h1 span {color:#d9c5ff;}
+#root .coach-reserve-demo .coaching-offer .coaching-offer-description {font-size:15px;line-height:1.7;}
+#root .coach-reserve-demo .coaching-offer .coaching-offer-benefits {display:flex;flex-wrap:wrap;gap:9px;margin-top:25px;}
+#root .coach-reserve-demo .coaching-offer .coaching-offer-benefits li {background:#ffffff13;color:#eee7fa;border-color:#ffffff2e;}
+#root .coach-reserve-demo .coaching-offer .coaching-specialties {border-color:#ffffff2e;text-align:center;max-width:400px;margin:20px auto 0;padding-top:15px;}
+#root .coach-reserve-demo .coaching-offer .coaching-specialties p {color:#e5dcf5;font-size:11px;line-height:1.6;}
+#root .coach-reserve-demo .coaching-page-nav {max-width:1180px;margin:0 auto!important;padding:18px 24px 0;background:#f5f4f8;justify-content:center;}
+#root .coach-reserve-demo .coaching-booking-layout {display:flex!important;flex-direction:column!important;max-width:1180px;margin:42px auto;padding:0 24px;gap:40px;}
+#root .coach-reserve-demo .coaching-booking-layout .coaching-guide {display:block!important;order:-1;position:static!important;width:100%;padding:32px!important;border:0;background:transparent;box-shadow:none;}
+#root .coach-reserve-demo .coaching-guide>.coaching-question,#root .coach-reserve-demo .coaching-guide .coaching-start-steps {display:none;}
+#root .coach-reserve-demo .coaching-guide>div:first-child>h2 {text-align:center;font-size:clamp(28px,3.3vw,44px)!important;margin-bottom:28px;color:#5c3295;}
+#root .coach-reserve-demo .coaching-guide .coaching-eyebrow {text-align:center;}
+#root .coach-reserve-demo .coaching-inclusions {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
+#root .coach-reserve-demo .coaching-inclusions>li {padding:24px 20px;background:linear-gradient(145deg,#eee5fa,#fff);border:1px solid #e0d5ed;border-radius:18px;box-shadow:0 8px 24px #3b24590a;}
+#root .coach-reserve-demo .coaching-plan-panel {width:100%;}
+#root .coach-reserve-demo #cpx-plans {background:#fff;border:1px solid #e7dfef;border-radius:24px;box-shadow:0 12px 40px #37204e06;}
+#root .coach-reserve-demo .coaching-reviews {width:100%;}
+#root .coach-reserve-demo .coaching-about,#root .coach-reserve-demo .coaching-faq {max-width:1132px;width:calc(100% - 48px);margin:40px auto!important;}
+#root .coach-reserve-demo .coaching-booking-layout.is-booking .coaching-guide {display:none!important;}
+@media(max-width:700px){
+ #root .coach-reserve-demo .reserve-demo-notice {font-size:10px;gap:6px 15px;text-align:center;padding:10px 18px;}
+ #root .coach-reserve-demo .reserve-demo-notice>span:last-child {width:100%;}
+ #root .coach-reserve-demo .coaching-journey .coaching-offer.profile-banner {grid-template-columns:minmax(0,1fr);gap:30px;min-height:0;padding:36px 24px!important;}
+ #root .coach-reserve-demo .coaching-offer .coaching-offer-copy {margin:0;padding:0;border:0;text-align:center;}
+ #root .coach-reserve-demo .coaching-offer .coaching-offer-copy h1 {font-size:38px!important;margin-bottom:16px;}
+ #root .coach-reserve-demo .coaching-offer .coaching-offer-kicker {font-size:11px;margin-bottom:14px;}
+ #root .coach-reserve-demo .coaching-offer .coaching-offer-description {font-size:13px;}
+ #root .coach-reserve-demo .coaching-offer .coaching-offer-benefits {justify-content:center;margin-top:18px;}
+ #root .coach-reserve-demo .coaching-offer .coaching-offer-benefits li {font-size:10px;}
+ #root .coach-reserve-demo .coaching-offer .profile-avatar {width:230px;height:230px;aspect-ratio:1;}
+ #root .coach-reserve-demo .coaching-offer .profile-kicker {padding:0;}
+ #root .coach-reserve-demo .coaching-offer .profile-location {font-size:11px!important;}
+ #root .coach-reserve-demo .coaching-page-nav {justify-content:flex-start;padding-inline:18px;}
+ #root .coach-reserve-demo .coaching-booking-layout {margin:24px auto;padding-inline:14px;gap:24px;}
+ #root .coach-reserve-demo .coaching-booking-layout .coaching-guide {padding:20px 5px!important;}
+ #root .coach-reserve-demo .coaching-guide>div:first-child>h2 {font-size:29px!important;}
+ #root .coach-reserve-demo .coaching-inclusions {grid-template-columns:1fr;gap:10px;}
+ #root .coach-reserve-demo .coaching-inclusions>li {padding:18px;}
+ #root .coach-reserve-demo .coaching-about,#root .coach-reserve-demo .coaching-faq {width:calc(100% - 28px);margin:24px auto!important;}
+}
+
+/* Outrank shared hero palette/layout rules without affecting standard profiles. */
+#root .coach-reserve-demo .coaching-journey .coaching-offer.profile-banner .coaching-coach-card {display:block!important;grid-template-columns:none!important;background:transparent!important;border:0!important;padding:0!important;width:100%;}
+#root .coach-reserve-demo .coaching-journey .coaching-offer.profile-banner .profile-identity {display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center;grid-template-columns:none!important;width:100%;gap:18px;text-align:center;}
+#root .coach-reserve-demo .coaching-journey .coaching-offer.profile-banner .profile-identity>div:last-child {display:block!important;}
+#root .coach-reserve-demo .coaching-journey .coaching-offer.profile-banner :is(.profile-kicker,.profile-location,.coaching-offer-kicker,.coaching-offer-description,.coaching-specialties>span) {color:#e5dcf5!important;}
+#root .coach-reserve-demo .coaching-journey .coaching-offer.profile-banner .coaching-coach-card h2 {color:#fff!important;}
+#root .coach-reserve-demo .coaching-journey .coaching-offer.profile-banner .coaching-specialties p {color:#e5dcf5!important;}
+#root .coach-reserve-demo .coaching-journey #coach-inclusions {display:block!important;order:-1;}
+#root .coach-reserve-demo .coaching-journey .coaching-booking-layout.is-booking #coach-inclusions {display:none!important;}
+
+/* Reserve concept sections: the page structure follows the reference, not just its palette. */
+#root .coach-reserve-demo .reserve-demo-sections {width:min(1180px,calc(100% - 48px));margin:0 auto;}
+#root .coach-reserve-demo .reserve-kicker {font:500 12px/1.6 'DM Sans',sans-serif;color:#6b587f;margin:0 0 10px;}
+#root .coach-reserve-demo :is(.reserve-advantages,.reserve-benefit-panel,.reserve-story-split) {margin:60px 0;}
+#root .coach-reserve-demo .reserve-advantages {text-align:center;}
+#root .coach-reserve-demo .reserve-advantages>h2 {font-size:clamp(32px,3.5vw,48px);line-height:1.15;color:#6d28d9;margin:0 0 38px;letter-spacing:-.04em;}
+#root .coach-reserve-demo .reserve-advantage-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;text-align:left;}
+#root .coach-reserve-demo .reserve-advantage-card {padding:25px 21px;min-width:0;border:1px solid #e2d9ec;border-radius:18px;background:linear-gradient(140deg,#e9def7,#fbf8ff);box-shadow:0 8px 18px #2b124719;}
+#root .coach-reserve-demo .reserve-advantage-card svg {width:32px;height:32px;color:#6d28d9;margin-bottom:20px;}
+#root .coach-reserve-demo .reserve-advantage-card h3 {font-size:18px;line-height:1.35;letter-spacing:-.025em;margin:0 0 9px;color:#30213e;}
+#root .coach-reserve-demo .reserve-advantage-card p {font-size:12px;line-height:1.65;color:#665572;margin:0;}
+#root .coach-reserve-demo .reserve-benefit-panel {padding:40px;border-radius:26px;background:#fff;box-shadow:0 14px 35px #36204e12;}
+#root .coach-reserve-demo .reserve-benefit-panel>h2 {font-size:clamp(28px,3.2vw,42px);line-height:1.2;margin:0 0 24px;letter-spacing:-.04em;}
+#root .coach-reserve-demo .reserve-pill-tabs {display:flex;align-items:stretch;gap:5px;padding:5px;width:max-content;max-width:100%;background:#f2eff6;border-radius:28px;margin:0 0 28px;}
+#root .coach-reserve-demo .reserve-pill-tabs button {min-height:44px;padding:10px 22px;border:0;border-radius:24px;font:500 12px/1.4 'DM Sans',sans-serif;background:transparent;color:#50445f;cursor:pointer;}
+#root .coach-reserve-demo .reserve-pill-tabs button[aria-selected=true] {background:#39234f;color:#fff;box-shadow:0 3px 9px #2b12471c;}
+#root .coach-reserve-demo .reserve-benefit-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;}
+#root .coach-reserve-demo .reserve-benefit-card {border:1px solid #e2d9eb;border-radius:15px;padding:26px;min-width:0;background:#fff;}
+#root .coach-reserve-demo .reserve-benefit-number {display:block;font-size:12px;color:#865aba;margin-bottom:28px;}
+#root .coach-reserve-demo .reserve-benefit-card h3 {font-size:21px;line-height:1.3;margin:0 0 12px;letter-spacing:-.025em;}
+#root .coach-reserve-demo .reserve-benefit-card p {font-size:13px;line-height:1.7;color:#71617e;margin:0;}
+#root .coach-reserve-demo .reserve-story-split {display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:70px;padding:10px 25px;}
+#root .coach-reserve-demo .reserve-story-copy>h2 {font-size:clamp(30px,3.8vw,48px);line-height:1.15;letter-spacing:-.04em;margin:0 0 28px;}
+#root .coach-reserve-demo .reserve-step-list {display:grid;gap:23px;margin-bottom:26px;}
+#root .coach-reserve-demo .reserve-step-list>div {display:grid;grid-template-columns:42px minmax(0,1fr);gap:17px;align-items:start;}
+#root .coach-reserve-demo .reserve-step-list>div>span {font-size:37px;line-height:1;color:#8c5bbe;font-weight:600;}
+#root .coach-reserve-demo .reserve-step-list h3 {font-size:17px;margin:0 0 5px;}
+#root .coach-reserve-demo .reserve-step-list p {font-size:13px;line-height:1.6;color:#6f5d7e;margin:0;}
+#root .coach-reserve-demo .reserve-story-portrait {position:relative;overflow:hidden;border-radius:26px;background:linear-gradient(130deg,#d2e8fc,#b796df);box-shadow:0 18px 35px #3824501c;}
+#root .coach-reserve-demo .reserve-story-portrait .coach-portrait-media {display:block;width:100%;height:340px;overflow:hidden;}
+#root .coach-reserve-demo .reserve-story-portrait img {width:100%;height:100%;object-fit:cover;object-position:center 30%;}
+#root .coach-reserve-demo .reserve-story-portrait>div:last-child {position:relative;padding:22px 26px;background:#ffffffef;}
+#root .coach-reserve-demo .reserve-story-portrait span {font-size:11px;color:#72538d;}
+#root .coach-reserve-demo .reserve-story-portrait strong {display:block;font-size:25px;line-height:1.3;margin:5px 0;}
+#root .coach-reserve-demo .reserve-story-portrait p {font-size:12px;color:#6e5c7d;line-height:1.6;margin:0;}
+#root .coach-reserve-demo .reserve-text-link {display:inline-flex;align-items:center;min-height:44px;color:#6d28d9;font-size:12px;font-weight:600;text-decoration:underline;text-underline-offset:5px;}
+#root .coach-reserve-demo .coaching-journey .coaching-booking-layout {display:grid!important;grid-template-columns:minmax(0,1.75fr) minmax(280px,1fr)!important;align-items:start!important;gap:24px!important;padding:0 24px;margin:70px auto;}
+#root .coach-reserve-demo .coaching-journey .coaching-booking-layout>.coaching-plan-panel {grid-column:1!important;grid-row:1!important;padding:0;border:0;background:transparent;box-shadow:none;}
+#root .coach-reserve-demo .coaching-journey .coaching-booking-layout>.reserve-onboarding {grid-column:2;grid-row:1;}
+#root .coach-reserve-demo .coaching-journey .coaching-booking-layout>.coaching-reviews {grid-column:1/-1!important;grid-row:2!important;}
+#root .coach-reserve-demo .reserve-onboarding {min-width:0;border:1px solid #e4dbed;border-radius:24px;padding:30px 24px;background:linear-gradient(145deg,#fff,#f4ecfc);box-shadow:0 12px 30px #38205010;}
+#root .coach-reserve-demo .reserve-onboarding>h2 {font-size:29px;line-height:1.2;letter-spacing:-.04em;margin:0 0 22px;}
+#root .coach-reserve-demo .reserve-onboarding .reserve-pill-tabs {width:100%;margin-bottom:24px;}
+#root .coach-reserve-demo .reserve-onboarding .reserve-pill-tabs button {flex:1;min-width:0;padding:9px;font-size:10px;}
+#root .coach-reserve-demo .reserve-onboarding-content>svg {width:46px;height:46px;color:#8053b2;margin-bottom:20px;}
+#root .coach-reserve-demo .reserve-onboarding-content h3 {font-size:21px;margin:0 0 12px;}
+#root .coach-reserve-demo .reserve-onboarding-content p,#root .coach-reserve-demo .reserve-onboarding-content li {font-size:13px;line-height:1.75;color:#6b5979;}
+#root .coach-reserve-demo .reserve-onboarding-content ul {padding:0 0 0 18px;margin:20px 0 34px;display:grid;gap:12px;}
+#root .coach-reserve-demo .reserve-onboarding-content .reserve-preview-note {font-size:10px;border-top:1px solid #ded2eb;padding-top:16px;margin:0;}
+#root .coach-reserve-demo .coaching-journey .coaching-booking-layout.is-booking {display:block!important;}
+#root .coach-reserve-demo .coaching-journey .coaching-booking-layout.is-booking>.reserve-onboarding {display:none;}
+#root .coach-reserve-demo .reserve-faq-layout {display:grid;grid-template-columns:minmax(0,1.8fr) minmax(280px,1fr);gap:24px;max-width:1132px;width:calc(100% - 48px);margin:50px auto;align-items:start;}
+#root .coach-reserve-demo .reserve-faq-layout #coach-faq {display:block;width:100%;max-width:none;margin:0!important;padding:30px!important;border:1px solid #e5deed;border-radius:24px;background:#fff;box-shadow:0 12px 30px #3820500c;}
+#root .coach-reserve-demo .reserve-faq-layout #coach-faq h2 {font-size:32px!important;margin:0 0 23px;}
+#root .coach-reserve-demo .reserve-faq-layout .faq-list summary {font-size:13px;padding:20px 0;}
+#root .coach-reserve-demo .reserve-faq-layout .faq-list details>p {font-size:12px;line-height:1.8;}
+#root .coach-reserve-demo .reserve-reads {min-width:0;padding:28px 24px;border-radius:24px;background:#fff;border:1px solid #e5deed;box-shadow:0 12px 30px #3820500c;}
+#root .coach-reserve-demo .reserve-reads>h2 {font-size:25px;margin:0 0 20px;}
+#root .coach-reserve-demo .reserve-reads .reserve-pill-tabs {width:100%;margin-bottom:20px;}
+#root .coach-reserve-demo .reserve-reads .reserve-pill-tabs button {padding:8px 10px;font-size:10px;flex:1;}
+#root .coach-reserve-demo .reserve-read-visual {height:140px;display:grid;place-items:center;border-radius:15px;background:radial-gradient(ellipse at 60% 15%,#e0d2fa,#b9d9f4);margin-bottom:20px;}
+#root .coach-reserve-demo .reserve-read-visual svg {width:65px;height:65px;color:#70519d;}
+#root .coach-reserve-demo .reserve-reads h3 {font-size:18px;line-height:1.4;margin:0 0 9px;}
+#root .coach-reserve-demo .reserve-reads p:not(.reserve-kicker) {font-size:12px;line-height:1.7;color:#6e5b7e;}
+#root .coach-reserve-demo :is(.reserve-advantage-card,.reserve-benefit-card,.reserve-story-portrait,.reserve-read-visual) {transition:transform 240ms ease,box-shadow 240ms ease,border-color 240ms ease;}
+#root .coach-reserve-demo .reserve-story-portrait img {transition:transform 350ms ease;}
+#root .coach-reserve-demo .reserve-pill-tabs button {transition:background 180ms ease,color 180ms ease,transform 180ms ease;}
+#root .coach-reserve-demo :is(a,button):focus-visible {outline:3px solid #9b6fde;outline-offset:4px;}
+#root .coach-reserve-demo :is(.reserve-advantage-card,.reserve-benefit-card):focus-within {border-color:#9d78c6;box-shadow:0 14px 25px #3d1b6420;}
+@media(hover:hover) and (pointer:fine){
+ #root .coach-reserve-demo :is(.reserve-advantage-card,.reserve-benefit-card):hover {transform:translateY(-7px);box-shadow:0 17px 28px #3d1b6423;border-color:#bea3dd;}
+ #root .coach-reserve-demo .reserve-story-portrait:hover {transform:translateY(-4px);box-shadow:0 22px 38px #38245026;}
+ #root .coach-reserve-demo .reserve-story-portrait:hover img {transform:scale(1.04);}
+ #root .coach-reserve-demo .reserve-pill-tabs button:hover {transform:translateY(-1px);}
+ #root .coach-reserve-demo .reserve-text-link:hover {color:#3b116f;}
+}
+@media(max-width:1000px){
+ #root .coach-reserve-demo .reserve-advantage-grid {grid-template-columns:repeat(2,minmax(0,1fr));}
+ #root .coach-reserve-demo .reserve-story-split {gap:30px;padding-inline:0;}
+ #root .coach-reserve-demo .coaching-journey .coaching-booking-layout {grid-template-columns:minmax(0,1.4fr) minmax(245px,1fr)!important;}
+}
+@media(max-width:700px){
+ #root .coach-reserve-demo .reserve-demo-sections {width:calc(100% - 28px);}
+ #root .coach-reserve-demo :is(.reserve-advantages,.reserve-benefit-panel,.reserve-story-split) {margin:34px 0;}
+ #root .coach-reserve-demo .reserve-advantages>h2 {font-size:29px;margin-bottom:24px;}
+ #root .coach-reserve-demo .reserve-advantage-grid {gap:10px;}
+ #root .coach-reserve-demo .reserve-advantage-card {padding:18px 13px;border-radius:14px;}
+ #root .coach-reserve-demo .reserve-advantage-card svg {width:27px;height:27px;margin-bottom:17px;}
+ #root .coach-reserve-demo .reserve-advantage-card h3 {font-size:15px;}
+ #root .coach-reserve-demo .reserve-advantage-card p {font-size:11px;line-height:1.6;}
+ #root .coach-reserve-demo .reserve-benefit-panel {padding:24px 18px;border-radius:20px;}
+ #root .coach-reserve-demo .reserve-benefit-panel>h2 {font-size:28px;}
+ #root .coach-reserve-demo .reserve-pill-tabs {width:100%;margin-bottom:22px;}
+ #root .coach-reserve-demo .reserve-pill-tabs button {flex:1;min-width:0;padding:9px 10px;font-size:11px;}
+ #root .coach-reserve-demo .reserve-benefit-grid {grid-template-columns:1fr;gap:12px;}
+ #root .coach-reserve-demo .reserve-benefit-card {padding:20px;}
+ #root .coach-reserve-demo .reserve-benefit-number {margin-bottom:17px;}
+ #root .coach-reserve-demo .reserve-story-split {grid-template-columns:1fr;gap:24px;}
+ #root .coach-reserve-demo .reserve-story-copy>h2 {font-size:31px;}
+ #root .coach-reserve-demo .reserve-story-portrait .coach-portrait-media {height:280px;}
+ #root .coach-reserve-demo .coaching-journey .coaching-booking-layout {grid-template-columns:minmax(0,1fr)!important;padding-inline:14px;margin:34px auto;}
+ #root .coach-reserve-demo .coaching-journey .coaching-booking-layout>.reserve-onboarding {grid-column:1;grid-row:2;}
+ #root .coach-reserve-demo .coaching-journey .coaching-booking-layout>.coaching-reviews {grid-column:1!important;grid-row:3!important;}
+ #root .coach-reserve-demo .reserve-faq-layout {grid-template-columns:1fr;width:calc(100% - 28px);margin:34px auto;}
+ #root .coach-reserve-demo .reserve-faq-layout #coach-faq {padding:24px 20px!important;}
+ #root .coach-reserve-demo .reserve-reads {padding:24px 20px;}
+}
+@media(prefers-reduced-motion:reduce){
+ #root .coach-reserve-demo :is(.reserve-advantage-card,.reserve-benefit-card,.reserve-story-portrait,.reserve-read-visual,.reserve-pill-tabs button,.reserve-story-portrait img) {transition:none;transform:none!important;}
+}
+
+/* The pricing surface reserves the same interior space as the reference cards. */
+#root .coach-reserve-demo .coaching-journey #cpx-plans {padding:30px!important;box-sizing:border-box;}
+#root .coach-reserve-demo .coaching-journey #cpx-plans>.cpx-pad {padding:0!important;}
+@media(max-width:700px){
+ #root .coach-reserve-demo .coaching-journey #cpx-plans {padding:22px 17px!important;}
+}
+
+#root .coach-reserve-demo #demo-coach-benefits {scroll-margin-top:90px;}
+
+/* Pricing is the first content section after the hero navigation. */
+#root .coach-reserve-demo .coaching-booking-layout>.reserve-demo-sections {grid-column:1/-1;grid-row:2;width:100%;margin:0;}
+#root .coach-reserve-demo .coaching-journey .coaching-booking-layout>.coaching-reviews {grid-row:3!important;}
+#root .coach-reserve-demo .coaching-journey .coaching-booking-layout {margin-top:32px;}
+@media(max-width:700px){
+ #root .coach-reserve-demo .coaching-booking-layout>.reserve-demo-sections {grid-row:3;}
+ #root .coach-reserve-demo .coaching-journey .coaching-booking-layout>.coaching-reviews {grid-row:4!important;}
+}
+
+/* A compact package selector keeps the focus on the plan prices. */
+#root .coach-reserve-demo .coaching-journey #cpx-plans .couple-mode-switch {
+ display:inline-flex!important;
+ flex:0 0 auto!important;
+ width:max-content!important;
+ max-width:100%;
+ gap:4px!important;
+ margin:0 0 12px!important;
+}
+#root .coach-reserve-demo .coaching-journey #cpx-plans .couple-mode-switch button {
+ flex:0 0 auto!important;
+ min-width:108px;
+ min-height:44px!important;
+ padding:7px 12px!important;
+ gap:6px!important;
+ font-size:12px!important;
+ border-radius:8px!important;
+}
+#root .coach-reserve-demo .coaching-journey #cpx-plans .couple-mode-switch button svg {width:17px;height:17px;}
+#root .coach-reserve-demo .coaching-journey #cpx-plans .couple-mode-switch button strong {font-size:12px!important;}
+#root .coach-reserve-demo .coaching-journey #cpx-plans .package-type-head {margin-bottom:8px;}
+@media(max-width:360px){
+ #root .coach-reserve-demo .coaching-journey #cpx-plans .couple-mode-switch button {min-width:96px;padding-inline:9px!important;}
+}
+#root .coach-reserve-demo .coaching-journey #cpx-plans .package-type-head {margin:0!important;}
+#root .coach-reserve-demo .coaching-journey #cpx-plans .package-step {margin:4px 0 10px!important;}
+#root .coach-reserve-demo .coaching-journey #cpx-plans .couple-mode-switch {margin-bottom:8px!important;}

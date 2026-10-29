@@ -67,3 +67,10 @@ test('calorie calculator never records measurements or nutrition estimates',()=>
  assert.equal(arriving.reloads(),1);
  assert.equal(arriving.client.track('page_view'),false);
 });
+
+test('coach design demos stay out of analytics and recording',()=>{
+ const path='/demo/coaches/jaswant-medidi';
+ const r=runtime(path);r.client.setConsent(true);r.client.page(path,'Coach design demo');
+ assert.equal(r.scripts.length,0);
+ assert.equal(r.client.track('view_coach',{coach_id:'1'}),false);
+});

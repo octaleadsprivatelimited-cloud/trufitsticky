@@ -1,0 +1,499 @@
+/* The homepage owns its design shell; all rules are scoped to this route. */
+#root .axis-home{--ah-purple:#6d28d9;--ah-dark:#34125a;--ah-ink:#252529;--ah-muted:#606068;--ah-gray:#eef2f5;--ah-line:#d9dce1;color:var(--ah-ink);font-family:'DM Sans',Arial,sans-serif;background:#fff;line-height:1.5;font-size:15px;isolation:isolate}
+#root .axis-home *{box-sizing:border-box}
+#root .axis-home a{color:inherit;text-decoration:none}
+#root .axis-home button,#root .axis-home input{font:inherit}
+#root .axis-home button{cursor:pointer}
+#root .axis-home a:focus-visible,#root .axis-home button:focus-visible,#root .axis-home input:focus-visible{outline:3px solid #9662ea;outline-offset:4px}
+#root .axis-home button:disabled{cursor:default;opacity:.35}
+#root .axis-home svg{width:24px;height:24px;flex-shrink:0}
+#root .axis-home h1,#root .axis-home h2,#root .axis-home h3,#root .axis-home p{margin:0;font-family:inherit;letter-spacing:normal}
+#root .axis-home h1,#root .axis-home h2,#root .axis-home h3{color:inherit}
+#root .axis-home em{font-style:italic;color:var(--ah-purple);font-weight:750}
+#root .axis-home section[id],#root .axis-home footer[id]{scroll-margin-top:82px}
+#root .ah-container{width:min(1140px,calc(100% - 80px));margin-inline:auto}
+#root .axis-home .ah-button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 22px;border:1px solid var(--ah-purple);border-radius:7px;background:var(--ah-purple);color:#fff;font-size:13px;font-weight:650;white-space:nowrap;transition:background .18s,box-shadow .18s}
+#root .axis-home .ah-button:hover{background:#5720ae;box-shadow:0 5px 16px #5720ae22}
+#root .axis-home .ah-button-light{background:#fff;border-color:#eee;color:var(--ah-purple)}
+#root .axis-home .ah-button-light:hover{background:#f0e9fa}
+#root .ah-header{background:white;position:relative;z-index:30;font-size:12px}
+#root .axis-home .ah-skip{height:28px;padding:4px 34px;display:flex;align-items:center;gap:18px;background:#f2eafa;font-size:12px}
+#root .ah-masthead{display:flex;background:var(--ah-purple);min-height:95px;padding-left:max(34px,calc((100vw - 1190px)/2));color:#fff}
+#root .axis-home .ah-brand{display:flex;align-items:center;gap:7px;flex-shrink:0}
+#root .ah-brand img:first-child{width:30px;height:35px;object-fit:contain}
+#root .ah-brand img:last-child{width:112px;height:auto}
+#root .ah-masthead>.ah-brand{width:190px;margin-right:18px;padding-right:15px;align-self:stretch;position:relative}
+#root .ah-masthead>.ah-brand:after{content:'';position:absolute;right:-14px;bottom:0;width:29px;height:51px;background:var(--ah-purple);transform:skew(-35deg);z-index:2}
+#root .ah-brand-light img{filter:brightness(0) invert(1)}
+#root .ah-header-right{flex:1;min-width:0}
+#root .ah-audience{height:44px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-right:24px}
+#root .ah-audience nav,#root .ah-utilities{display:flex;align-items:center;gap:16px;white-space:nowrap}
+#root .ah-audience nav a{padding:4px 6px;border-radius:3px;font-size:11px}
+#root .ah-audience nav .is-selected{background:#fff;color:var(--ah-purple)}
+#root .ah-utilities a:first-child{font-size:11px}
+#root .ah-utilities a:not(:first-child){font-size:18px}
+#root .ah-search-row{height:51px;display:flex;align-items:center;gap:19px;background:#fff;color:var(--ah-purple);padding:6px 20px 6px 14px;border-top-left-radius:20px}
+#root .ah-search-row form{display:flex;align-items:center;gap:11px;height:42px;max-width:460px;flex:1;border:2px solid #bca5da;border-radius:13px;padding:0 12px;margin-right:auto}
+#root .ah-search-row form>svg{width:17px;height:17px;color:#8b689f}
+#root .ah-search-row input{width:100%;min-width:0;outline:0;border:0;padding:0;background:none;font-size:13px;color:#333}
+#root .ah-search-row form button{display:grid;place-items:center;border:0;background:none;color:var(--ah-purple);padding:0;width:27px;min-height:32px}
+#root .ah-search-row form button svg{width:17px;height:17px}
+#root .axis-home .ah-support-link{font-weight:650;letter-spacing:.06em;font-size:11px}
+#root .axis-home .ah-header-match{padding:8px 13px;border:1px solid #e2dce9;border-radius:8px;white-space:nowrap;background:#f9f8fa;font-size:11px;font-weight:600}
+#root .axis-home .ah-login{display:flex;gap:12px;align-items:center;background:var(--ah-purple);padding:8px 14px;border-radius:9px;color:#fff;white-space:nowrap;font-size:11px;font-weight:650}
+#root .ah-category-nav{min-height:41px;display:flex;justify-content:center;align-items:center;gap:26px;padding:0 24px;white-space:nowrap}
+#root .ah-category-nav a{display:flex;align-items:center;gap:8px;font-size:13px;min-height:41px}
+#root .ah-category-nav a:hover{color:var(--ah-purple)}
+#root .ah-category-nav a span{font-size:13px}
+#root .ah-hero{background:linear-gradient(105deg,#f1e5fc 0%,#faf0f9 42%,#edf6ff 69%,#eed6fa 100%);padding:62px 0 68px;min-height:462px;border-radius:0 0 160px 0;position:relative;overflow:hidden;box-shadow:inset 0 -13px 22px #b29fc020}
+#root .ah-hero:after{content:'';position:absolute;right:-54px;bottom:-130px;width:180px;height:400px;transform:rotate(33deg);border-radius:65px 0 0 0;background:#fff;pointer-events:none}
+#root .ah-hero h1{font-size:40px;line-height:1.35;font-weight:500;letter-spacing:-1px}
+#root .ah-hero>div>p{font-size:18px;margin-top:18px}
+#root .ah-hero-tabs{display:flex;width:830px;max-width:100%;margin-top:30px;border-bottom:1px solid #82828a}
+#root .ah-hero-tabs button{flex:1;padding:8px 10px;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;color:#555;font-size:13px;white-space:nowrap}
+#root .ah-hero-tabs button[aria-selected=true]{color:var(--ah-purple);border-bottom-color:var(--ah-purple)}
+#root .ah-hero-links{display:flex;align-items:center;gap:20px;position:relative;z-index:1;margin-top:16px;padding:23px 16px;background:#ffffffed;border-radius:16px;min-height:96px}
+#root .ah-hero-links>a:not(.ah-button){flex:1;padding:13px;background:var(--ah-gray);border-radius:13px;font-size:14px;line-height:1.4}
+#root .ah-hero-links>a:not(.ah-button):hover{background:#e6e0f2}
+#root .ah-quick{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-block:85px}
+#root .ah-apply{border:1px solid #dedee2;border-radius:24px;min-height:202px;padding:30px 15px 26px}
+#root .ah-apply h2{text-align:center;font-size:16px;font-weight:650;margin-bottom:24px}
+#root .ah-quick-items{display:grid;grid-template-columns:22px repeat(3,minmax(0,1fr)) 22px;align-items:center;gap:12px}
+#root .ah-quick-items>a{display:grid;justify-items:center;gap:12px;text-align:center;font-size:13px}
+#root .ah-quick-items>a>span{width:45px;height:45px;display:grid;place-items:center;background:var(--ah-gray);border-radius:7px;color:var(--ah-purple)}
+#root .ah-quick-items>a:hover>span{background:#e9ddfa}
+#root .ah-quick-items>button{border:0;background:none;color:var(--ah-purple);font-size:27px;padding:0;min-height:44px}
+#root .ah-promo{position:relative;border-radius:24px;overflow:hidden;background:#f0e9fa;min-height:202px}
+#root .ah-promo>img{position:absolute;right:0;top:0;height:100%;width:52%;object-fit:cover;mask-image:linear-gradient(to right,transparent,#000 25%)}
+#root .ah-promo-copy{position:relative;width:70%;padding:24px 26px;background:linear-gradient(90deg,#f1e9fa 38%,#f1e9fa99 72%,transparent);height:100%}
+#root .ah-promo h2{font-size:20px;line-height:1.2;font-weight:650;max-width:250px}
+#root .ah-promo p{font-size:13px;margin:7px 0 13px;max-width:215px}
+#root .ah-promo .ah-button{min-height:33px;font-size:11px;padding:5px 12px}
+#root .ah-dots{display:flex;gap:5px;position:absolute;bottom:10px;left:50%;transform:translateX(-50%)}
+#root .ah-dots button{height:6px;width:6px;padding:0;border:0;border-radius:4px;background:#85808a;position:relative}
+#root .ah-dots button:before{content:'';position:absolute;inset:-8px -4px}
+#root .ah-dots button[aria-pressed=true]{width:17px;background:var(--ah-purple)}
+#root .ah-section-rail{position:sticky;top:0;z-index:25;min-height:62px;display:flex;align-items:center;justify-content:center;background:#252525;color:#fff;margin-bottom:72px;box-shadow:0 5px 16px #22222207}
+#root .ah-section-rail>div{display:flex;gap:16px;overflow-x:auto;padding:15px 24px;scrollbar-width:none}
+#root .ah-section-rail a{border:1px solid #646464;border-radius:25px;padding:5px 23px;white-space:nowrap;font-size:13px;line-height:1.4}
+#root .ah-section-rail a:hover,#root .ah-section-rail a[aria-current=location]{background:var(--ah-purple);border-color:#d2b8f5}
+#root .ah-coaching{background:var(--ah-gray);border-radius:16px;margin-bottom:86px;overflow:hidden;padding:0 52px;position:relative}
+#root .ah-editorial{position:relative;min-height:319px;display:grid;grid-template-columns:58% 42%;align-items:start}
+#root .ah-article-copy{position:relative;z-index:1;padding:0 0 40px 50px}
+#root .ah-article-copy h2{display:inline-block;background:var(--ah-purple);color:#fff;font-size:17px;font-weight:500;padding:6px 13px;border-radius:0 0 5px 5px;max-width:100%;margin-bottom:25px}
+#root .ah-article-copy h2 em{color:inherit}
+#root .ah-article-copy>div>a{display:block;padding:13px 0;border-bottom:1px solid #d6dbe0;font-size:23px;line-height:1.3;font-weight:500}
+#root .ah-article-copy>div>a:hover{color:var(--ah-purple)}
+#root .axis-home .ah-learn{display:inline-block;color:var(--ah-purple);font-weight:600;font-size:17px;margin-top:23px}
+#root .ah-editorial>img{width:100%;height:319px;object-fit:cover;object-position:50% 20%;mask-image:linear-gradient(to right,transparent,#000 18%);border-radius:0 14px 0 0}
+#root .ah-product{position:relative;background:linear-gradient(110deg,#7730d0,#36124d);color:#fff;border-radius:12px 12px 0 0;padding:24px 32px 26px;z-index:2}
+#root .ah-product-heading{display:flex;align-items:center;gap:24px;justify-content:space-between;margin-bottom:24px}
+#root .ah-product-heading h3{font-size:21px;line-height:1.35;font-weight:650;max-width:580px}
+#root .ah-product-heading>div{display:flex;gap:5px;flex-shrink:0}
+#root .ah-product-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+#root .ah-product-tiles>a{min-width:0;display:flex;gap:9px;align-items:center;background:#ffffff12;border-radius:9px;min-height:107px;padding:15px 10px;transition:background .2s,transform .2s}
+#root .ah-product-tiles>a:hover{background:#ffffff25;transform:translateY(-3px)}
+#root .ah-tile-icon{width:29px;height:29px;border-radius:50%;background:#ffffff12;display:grid;place-items:center;flex-shrink:0}
+#root .ah-tile-icon svg{width:17px;height:17px}
+#root .ah-product-tiles>a>span:nth-child(2){min-width:0}
+#root .ah-product-tiles strong{font-size:14px;line-height:1.4;display:block;font-weight:650}
+#root .ah-product-tiles small{font-size:12px;line-height:1.4;display:block;margin-top:5px}
+#root .ah-product-tiles>a>svg{width:15px;height:15px;margin-left:auto}
+#root .ah-reverse{background:linear-gradient(115deg,#6f26b7,#321040);color:#fff}
+#root .ah-reverse .ah-editorial{grid-template-columns:45% 55%}
+#root .ah-reverse .ah-editorial>img{grid-column:1;grid-row:1;mask-image:linear-gradient(to left,transparent,#000 20%);border-radius:14px 0 0 0}
+#root .ah-reverse .ah-article-copy{grid-column:2;padding-left:0}
+#root .ah-reverse .ah-article-copy h2{background:var(--ah-gray);color:#28202e}
+#root .ah-reverse .ah-article-copy h2 em{color:var(--ah-purple)}
+#root .ah-reverse .ah-article-copy>div>a{border-color:#ffffff1f}
+#root .ah-reverse .ah-article-copy>div>a:hover{color:#e5d0ff}
+#root .ah-reverse .ah-learn{color:#fff}
+#root .ah-reverse .ah-product{background:linear-gradient(110deg,#eef3f5,#eee5f2);color:#28242d}
+#root .ah-reverse .ah-product-tiles>a{background:#fff}
+#root .ah-reverse .ah-tile-icon{color:var(--ah-purple);background:#f4edf9}
+#root .ah-reverse .ah-product-tiles>a:hover{background:#e3d5f4}
+#root .ah-reverse .ah-button-light{background:var(--ah-purple);border-color:var(--ah-purple);color:#fff}
+#root .ah-support-promos{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:86px}
+#root .ah-support-promos>div{border-radius:20px;padding:32px;min-height:250px;background:#f0f3f5}
+#root .ah-support-promos h2{font-size:28px;font-weight:550;line-height:1.2}
+#root .ah-support-promos p{font-size:15px;margin-top:11px}
+#root .ah-easy>div{display:grid;grid-template-columns:repeat(4,1fr);margin-top:36px;gap:12px}
+#root .ah-easy>div>a{font-size:12px;display:grid;justify-items:center;text-align:center;gap:12px}
+#root .ah-easy>div>a svg{color:var(--ah-purple);width:28px;height:28px}
+#root .ah-support-promos .ah-reward{display:grid;grid-template-columns:1.3fr 1fr;gap:15px;background:#f3ebf9}
+#root .ah-referral-art{display:flex;align-items:center;justify-content:center;color:#fff}
+#root .ah-referral-art span{display:grid;place-items:center;width:70px;height:98px;border-radius:13px;background:linear-gradient(150deg,#b58fe5,#6d28d9);transform:rotate(-10deg);box-shadow:0 14px 18px #6d28d91c}
+#root .ah-referral-art span:last-child{transform:rotate(12deg);margin-left:-7px}
+#root .ah-referral-art span svg{width:40px;height:40px}
+#root .ah-referral-art i{position:relative;z-index:1;font-style:normal;color:#6d28d9;background:#fff;border-radius:50%;width:27px;height:27px;display:grid;place-items:center;margin-inline:-8px;font-size:21px}
+#root .ah-planner-section{margin-bottom:0;text-align:center}
+#root .ah-planner-section>h2{font-size:34px;line-height:1.3;font-weight:550}
+#root .ah-tool-tabs{display:flex;justify-content:center;gap:40px;margin:30px 0}
+#root .ah-tool-tabs>a{padding:7px 10px;font-size:15px;border-bottom:2px solid transparent}
+#root .ah-tool-tabs>a[aria-current]{color:var(--ah-purple);border-color:var(--ah-purple)}
+#root .ah-planner{background:var(--ah-gray);border-radius:18px;padding:38px 52px;text-align:center}
+#root .ah-planner h3{font-size:34px;font-weight:550}
+#root .ah-planner>p{max-width:950px;margin:16px auto 25px;font-size:15px;color:#55565d;line-height:1.6}
+#root .ah-period-tabs{display:flex;justify-content:center;gap:8px;margin-bottom:24px}
+#root .ah-period-tabs button{border:1px solid #ddd;border-radius:3px;padding:10px 23px;background:#fff;color:#555;text-transform:uppercase;font-size:12px;min-height:40px}
+#root .ah-period-tabs button[aria-pressed=true]{background:var(--ah-purple);color:#fff;border-color:var(--ah-purple)}
+#root .ah-planner-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:45px;text-align:left}
+#root .ah-planner-inputs>label{display:block;margin-bottom:22px}
+#root .ah-planner-inputs>label>span:first-child{display:flex;align-items:center;justify-content:space-between;font-size:17px;font-weight:550;gap:10px;margin-bottom:6px}
+#root .ah-planner-inputs output{display:inline-block;min-width:116px;text-align:center;background:#fff;border:1px solid #dedee2;border-radius:8px;padding:8px 10px;font-size:15px;font-weight:400}
+#root .ah-planner-inputs output small{font-size:12px;color:#62616a}
+#root .ah-planner input[type=range]{width:100%;padding:0;height:18px;accent-color:var(--ah-purple);cursor:pointer;margin:0;background:none;border:0}
+#root .ah-range-ends{display:flex;justify-content:space-between;color:#71717a}
+#root .ah-range-ends small{font-size:12px}
+#root .ah-plan-total{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:15px;border-radius:8px;background:#fff;font-size:14px;margin-top:25px}
+#root .ah-plan-total strong{font-size:24px;color:var(--ah-purple);font-weight:650}
+#root .ah-plan-total .ah-button{margin-left:auto;font-size:12px;padding:8px 15px}
+#root .ah-donut-card{background:#fff;border-radius:17px;padding:27px 25px 20px;text-align:center}
+#root .ah-donut{width:min(260px,100%);aspect-ratio:1;margin:auto;border-radius:50%;background:conic-gradient(#6d28d9 var(--ah-share),#c5a0e0 0);padding:17px;transform:rotate(-5deg)}
+#root .ah-donut>div{width:100%;height:100%;border-radius:50%;background:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;transform:rotate(5deg);padding:12px}
+#root .ah-donut span{font-size:13px;color:#68636c}
+#root .ah-donut strong{font-size:39px;line-height:1.3;font-weight:600;color:#33203e}
+#root .ah-donut strong small{font-size:19px;font-weight:400}
+#root .ah-donut span:last-child{font-size:11px;margin-top:5px}
+#root .ah-chart-key{display:flex;justify-content:center;gap:15px;font-size:10px;margin-top:20px}
+#root .ah-chart-key span{display:flex;gap:5px;align-items:center}
+#root .ah-chart-key i{width:9px;height:9px;border-radius:50%;background:#6d28d9}
+#root .ah-chart-key span:last-child i{background:#c5a0e0}
+#root .ah-donut-card>p{font-size:10px;color:#6b6570;line-height:1.5;max-width:290px;margin:13px auto 0}
+#root .ah-digital{background:linear-gradient(130deg,#f4f3f5,#fff);padding:75px 0 0;margin-top:85px;text-align:center;overflow:hidden}
+#root .ah-digital h2{font-size:34px;line-height:1.3;font-weight:550}
+#root .ah-digital>div>p{margin-top:16px;color:#5d5961;font-size:15px}
+#root .ah-digital>div>p a{color:var(--ah-purple);font-weight:600;margin-left:9px}
+#root .ah-digital-scene{display:flex;justify-content:center;align-items:center;gap:60px;padding-top:45px;position:relative;background:radial-gradient(ellipse at 50% 90%,#dfc8f4 0%,#efebf833 45%,transparent 65%)}
+#root .ah-digital-features{display:flex;flex-direction:column;gap:52px;width:240px;text-align:left;padding-bottom:30px}
+#root .ah-digital-features span{display:flex;gap:18px;align-items:center;font-size:16px}
+#root .ah-digital-features svg{width:38px;height:38px;color:var(--ah-purple);padding:6px;border:1px solid #d8cae9;border-radius:50%}
+#root .ah-features-left span:nth-child(2){transform:translateX(-18px)}
+#root .ah-features-right span:nth-child(2){transform:translateX(18px)}
+#root .ah-phone{width:262px;border:7px solid #262029;border-radius:38px 38px 0 0;background:#fff;padding:18px 13px 13px;box-shadow:0 0 0 2px #b3a9bc,0 15px 35px #49236c25;flex-shrink:0;position:relative;min-height:420px;text-align:left;border-bottom:0}
+#root .ah-phone-speaker{height:8px;width:65px;background:#262029;border-radius:0 0 8px 8px;position:absolute;top:0;left:50%;transform:translateX(-50%)}
+#root .ah-phone-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+#root .ah-phone-top .ah-brand{gap:3px}
+#root .ah-phone-top .ah-brand img:first-child{width:16px;height:20px}
+#root .ah-phone-top .ah-brand img:last-child{width:61px}
+#root .ah-phone-top>span{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#6d28d9;color:#fff;font-size:9px}
+#root .ah-phone-welcome{padding:18px 13px;border-radius:12px;background:linear-gradient(120deg,#4d158b,#8a4ce0);color:#fff;display:flex;flex-direction:column;gap:7px}
+#root .ah-phone-welcome small{font-size:8px;opacity:.8}
+#root .ah-phone-welcome strong{font-size:21px}
+#root .ah-phone-welcome>span{font-size:9px}
+#root .ah-phone-metrics{display:flex;gap:8px;margin:12px 0}
+#root .ah-phone-metrics>span{flex:1;padding:8px;border:1px solid #e5d9f3;border-radius:7px;font-size:8px;color:#6b5582}
+#root .ah-phone-metrics strong{display:block;color:#6d28d9;font-size:18px}
+#root .ah-phone-program{display:flex;flex-direction:column;gap:8px;background:#f6f2fa;border:1px solid #e5d9f3;border-radius:9px;padding:12px}
+#root .ah-phone-program small{font-size:8px;color:#73607e}
+#root .ah-phone-program strong{font-size:13px;color:#42215b}
+#root .ah-phone-program span{font-size:8px;color:#73607e}
+#root .ah-phone-program>div{height:4px;border-radius:4px;background:linear-gradient(to right,#6d28d9 60%,#e9dff4 60%);margin-top:5px}
+#root .ah-phone-shortcuts{display:flex;justify-content:space-around;margin-top:17px;font-size:7px;color:#6b4a86}
+#root .ah-phone-shortcuts span{display:grid;justify-items:center;gap:3px}
+#root .ah-phone-shortcuts svg{width:16px;height:16px}
+#root .ah-phone-preview{font-size:7px;color:#84798d;display:block;text-align:center;margin-top:16px}
+#root .ah-impact{display:grid;grid-template-columns:1.6fr 1fr;align-items:center;gap:40px;margin-block:85px;background:#f6f2f8;border-radius:20px;padding:44px 60px}
+#root .ah-impact h2,#root .ah-safety h2{font-size:32px;font-weight:550;line-height:1.3}
+#root .ah-impact>div>p{margin-top:14px;color:#67616b;font-size:15px}
+#root .ah-impact-numbers{display:flex;gap:35px;margin-top:30px}
+#root .ah-impact-numbers span{flex:1;font-size:12px;color:#69616f;max-width:140px}
+#root .ah-impact-numbers strong{display:block;font-size:44px;line-height:1.4;font-weight:550;color:var(--ah-purple)}
+#root .ah-impact-art{border-radius:50%;background:radial-gradient(circle,#e3d1f2,transparent 70%);aspect-ratio:1;display:grid;align-content:center;justify-items:center;color:var(--ah-purple);gap:16px;text-align:center}
+#root .ah-impact-art svg{width:85px;height:85px;stroke-width:1}
+#root .ah-impact-art span{font-size:20px;line-height:1.4}
+#root .ah-safety{display:flex;align-items:center;gap:50px;padding:0 70px 70px}
+#root .ah-safety-icon{display:grid;place-items:center;flex-shrink:0;width:170px;height:170px;border:1px solid #e3d9ee;border-radius:50%;background:#f8f4fc;color:var(--ah-purple)}
+#root .ah-safety-icon svg{width:72px;height:72px;stroke-width:1}
+#root .ah-safety p{margin-top:15px;font-size:15px;color:#68616e;max-width:670px}
+#root .ah-footer{background:#f0f2f4;padding:43px 0 24px;font-size:12px}
+#root .ah-footer-columns{display:grid;grid-template-columns:1.2fr repeat(4,1fr);gap:30px;padding-bottom:32px}
+#root .ah-footer h2{font-size:15px;font-weight:650;line-height:1.3;margin-bottom:18px}
+#root .ah-footer-columns a{display:block;margin:0 0 11px;color:#535059;font-size:11px;line-height:1.5;overflow-wrap:anywhere}
+#root .ah-footer a:hover{color:var(--ah-purple);text-decoration:underline}
+#root .ah-footer-offerings{display:flex;gap:8px 13px;flex-wrap:wrap;border-block:1px solid #d9dce1;padding:20px 0;font-size:11px;color:#615b66}
+#root .ah-footer-offerings strong{color:#33283e}
+#root .ah-footer-note{font-size:10px;line-height:1.8;padding:20px 0;color:#77717a}
+#root .ah-footer-social{display:flex;align-items:center;gap:18px;font-size:11px;padding:14px 0 24px}
+#root .ah-footer-social>.ah-brand{margin-left:auto}
+#root .ah-footer-social>.ah-brand img:first-child{width:24px;height:29px}
+#root .ah-footer-social>.ah-brand img:last-child{width:89px}
+#root .ah-footer-bottom{display:flex;justify-content:space-between;gap:20px;align-items:center;border-top:1px solid #d9dce1;padding-top:20px;font-size:10px;color:#716a78}
+#root .ah-footer-bottom>div{display:flex;gap:22px}
+#root .axis-home .ah-plans-float{position:fixed;right:0;top:76%;z-index:26;border-radius:10px 0 0 10px;background:var(--ah-purple);color:#fff;padding:8px 10px;text-align:center;box-shadow:0 3px 12px #34204c20;font-size:12px;display:grid;justify-items:center}
+#root .ah-plans-float svg{width:20px;height:20px}
+#root .axis-home .ah-chat-float{position:fixed;right:28px;bottom:65px;z-index:26;border-radius:4px;transform:rotate(-5deg);background:#52209d;color:#fff;box-shadow:0 2px 15px #3e206229;padding:9px 12px;text-align:center;font-size:16px;font-style:italic;line-height:1.1}
+#root .axis-home .ah-back-top{position:fixed;right:12px;bottom:12px;z-index:28;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#fff;color:var(--ah-purple);box-shadow:0 2px 10px #3c274a1f;font-size:25px}
+#root .ah-sticky-start{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:29;display:flex;align-items:center;gap:14px;background:#fff;padding:8px;border-radius:15px 15px 0 0;box-shadow:0 -4px 25px #34224b20;max-width:calc(100% - 100px)}
+#root .ah-sticky-start>span{width:43px;height:43px;border-radius:7px;display:grid;place-items:center;background:#eee2fa;color:var(--ah-purple)}
+#root .ah-sticky-start p{font-size:13px;white-space:nowrap}
+#root .ah-sticky-start .ah-button{min-height:41px;padding:9px 18px;font-size:12px}
+@media(min-width:1600px){#root .ah-masthead{padding-right:calc((100vw - 1440px)/2)}#root .ah-audience{padding-right:0}#root .ah-search-row{padding-right:12px}}
+@media(max-width:1100px){
+ #root .ah-container{width:calc(100% - 56px)}
+ #root .ah-masthead{padding-left:26px}
+ #root .ah-masthead>.ah-brand{width:158px;margin-right:10px}
+ #root .ah-brand img:last-child{width:102px}
+ #root .ah-audience nav{gap:7px}
+ #root .ah-audience nav a{font-size:10px}
+ #root .ah-utilities{gap:12px}
+ #root .ah-utilities a:first-child{display:none}
+ #root .ah-search-row{gap:12px}
+ #root .ah-category-nav{gap:20px;overflow-x:auto;justify-content:flex-start;scrollbar-width:none}
+ #root .ah-category-nav a{font-size:12px}
+ #root .ah-coaching{padding-inline:28px}
+ #root .ah-article-copy{padding-left:25px}
+ #root .ah-article-copy>div>a{font-size:21px}
+ #root .ah-product{padding-inline:22px}
+ #root .ah-product-heading h3{font-size:19px}
+ #root .ah-product-tiles{gap:9px}
+ #root .ah-product-tiles>a{padding:12px 8px;gap:7px;min-height:110px}
+ #root .ah-product-tiles strong{font-size:12px}
+ #root .ah-product-tiles small{font-size:10px}
+ #root .ah-tile-icon{width:22px;height:22px}
+ #root .ah-tile-icon svg{width:14px;height:14px}
+ #root .ah-product-tiles>a>svg{width:12px}
+ #root .ah-product-heading .ah-button{padding:8px 15px;font-size:11px}
+ #root .ah-section-rail>div{gap:12px}
+ #root .ah-section-rail a{padding:5px 16px}
+ #root .ah-support-promos>div{padding:25px}
+ #root .ah-support-promos h2{font-size:24px}
+ #root .ah-support-promos .ah-reward{grid-template-columns:1.3fr 1fr}
+ #root .ah-referral-art span{width:56px;height:80px}
+ #root .ah-planner{padding:32px}
+ #root .ah-planner-grid{gap:30px}
+ #root .ah-digital-scene{gap:35px}
+ #root .ah-digital-features{width:190px}
+ #root .ah-digital-features span{font-size:14px;gap:12px}
+ #root .ah-impact{padding:38px}
+ #root .ah-impact-numbers{gap:25px}
+ #root .ah-footer-columns{gap:20px}
+}
+@media(max-width:760px){
+ #root .ah-container{width:calc(100% - 32px)}
+ #root .axis-home section[id]{scroll-margin-top:66px}
+ #root .ah-skip{position:absolute;left:-9999px}
+ #root .ah-skip:focus{left:0;top:0;z-index:3}
+ #root .ah-masthead{padding:0 16px;min-height:116px;background:#fff;position:relative;align-items:flex-start}
+ #root .ah-masthead>.ah-brand{width:143px;height:61px;margin:0;padding:0;align-self:auto;z-index:1}
+ #root .ah-masthead>.ah-brand:after{display:none}
+ #root .ah-brand-light img{filter:none}
+ #root .ah-masthead>.ah-brand img:first-child{width:28px;height:31px}
+ #root .ah-masthead>.ah-brand img:last-child{width:100px}
+ #root .ah-header-right{display:contents}
+ #root .ah-audience{display:none}
+ #root .ah-search-row{display:contents}
+ #root .ah-search-row form{position:absolute;left:16px;right:16px;bottom:8px;max-width:none;height:41px;margin:0;padding:0 11px;border-width:1px;border-color:#c8b6e1;border-radius:9px}
+ #root .ah-search-row input{font-size:13px}
+ #root .axis-home .ah-support-link{display:none}
+ #root .axis-home .ah-header-match{position:absolute;right:79px;top:13px;padding:10px 12px;font-size:10px;min-height:37px}
+ #root .axis-home .ah-login{position:absolute;right:16px;top:13px;padding:10px;font-size:11px;min-height:37px}
+ #root .ah-login span{display:none}
+ #root .ah-category-nav{border-bottom:1px solid #eee7f5;padding-inline:16px;min-height:40px;gap:22px}
+ #root .ah-category-nav a{min-height:40px;font-size:11px}
+ #root .ah-hero{padding:36px 0 40px;min-height:auto;border-radius:0 0 65px 0}
+ #root .ah-hero:after{width:60px;height:170px;right:-47px;bottom:-73px;transform:rotate(35deg)}
+ #root .ah-hero h1{font-size:clamp(25px,5.4vw,36px);line-height:1.35;letter-spacing:-.5px}
+ #root .ah-hero>div>p{font-size:13px;margin-top:16px;max-width:310px}
+ #root .ah-hero-tabs{overflow-x:auto;scrollbar-width:none;margin-top:25px;gap:15px;width:100%}
+ #root .ah-hero-tabs button{flex:none;padding:9px 5px;font-size:11px;min-height:39px}
+ #root .ah-hero-links{display:grid;grid-template-columns:1fr;gap:9px;padding:12px;margin-top:12px;min-height:0;border-radius:12px}
+ #root .ah-hero-links>a:not(.ah-button){font-size:12px;padding:10px 12px;border-radius:8px}
+ #root .ah-hero-links .ah-button{justify-self:start;min-height:37px;padding:8px 15px;font-size:11px}
+ #root .ah-quick{grid-template-columns:1fr;gap:18px;margin-block:35px}
+ #root .ah-apply{min-height:180px;border-radius:18px;padding:23px 10px}
+ #root .ah-apply h2{font-size:15px;margin-bottom:20px}
+ #root .ah-quick-items{gap:5px;grid-template-columns:18px repeat(3,minmax(0,1fr)) 18px}
+ #root .ah-quick-items>a{font-size:11px;gap:10px;line-height:1.4}
+ #root .ah-quick-items>a>span{width:40px;height:40px}
+ #root .ah-promo{min-height:184px;border-radius:18px}
+ #root .ah-promo-copy{padding:22px;width:74%}
+ #root .ah-promo h2{font-size:21px;max-width:220px}
+ #root .ah-promo p{font-size:12px;max-width:180px}
+ #root .ah-section-rail{min-height:53px;margin-bottom:34px;justify-content:flex-start}
+ #root .ah-section-rail>div{padding:10px 16px;gap:9px;width:100%}
+ #root .ah-section-rail a{font-size:11px;padding:6px 16px}
+ #root .ah-coaching{padding:0 16px;border-radius:13px;margin-bottom:34px}
+ #root .ah-editorial{min-height:250px;grid-template-columns:66% 34%;align-items:stretch}
+ #root .ah-article-copy{padding:0 0 23px 0}
+ #root .ah-article-copy h2{font-size:12px;padding:6px 8px;margin-bottom:13px;line-height:1.4;max-width:calc(100% + 60px)}
+ #root .ah-article-copy>div>a{font-size:16px;line-height:1.4;padding:10px 0}
+ #root .axis-home .ah-learn{font-size:13px;margin-top:16px}
+ #root .ah-editorial>img{height:100%;min-height:250px;object-position:47% 20%;border-radius:0;mask-image:linear-gradient(to right,transparent,#000 30%);width:calc(100% + 16px);margin-left:0}
+ #root .ah-product{padding:20px 14px;border-radius:10px 10px 0 0;margin-top:0}
+ #root .ah-product-heading{display:block;margin-bottom:17px}
+ #root .ah-product-heading h3{font-size:18px;line-height:1.4}
+ #root .ah-product-heading>div{gap:7px;margin-top:15px}
+ #root .ah-product-heading .ah-button{min-height:36px;padding:8px 13px;font-size:10px}
+ #root .ah-product-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ #root .ah-product-tiles>a{padding:11px 8px;min-height:93px;gap:7px}
+ #root .ah-product-tiles strong{font-size:11px}
+ #root .ah-product-tiles small{font-size:10px;line-height:1.35}
+ #root .ah-tile-icon{width:23px;height:23px}
+ #root .ah-product-tiles>a>svg{display:none}
+ #root .ah-reverse .ah-editorial{grid-template-columns:34% 66%}
+ #root .ah-reverse .ah-editorial>img{margin-left:-16px;mask-image:linear-gradient(to left,transparent,#000 30%);width:calc(100% + 16px)}
+ #root .ah-reverse .ah-article-copy{padding-left:4px}
+ #root .ah-support-promos{grid-template-columns:1fr;gap:18px;margin-bottom:40px}
+ #root .ah-support-promos>div{padding:25px 22px;min-height:210px;border-radius:15px}
+ #root .ah-support-promos h2{font-size:25px}
+ #root .ah-support-promos p{font-size:13px}
+ #root .ah-easy>div{margin-top:27px;gap:8px}
+ #root .ah-easy>div>a{font-size:10px}
+ #root .ah-support-promos .ah-reward{grid-template-columns:1.4fr 1fr}
+ #root .ah-planner-section>h2{font-size:26px;padding-inline:10px}
+ #root .ah-tool-tabs{gap:13px;margin:20px 0;overflow-x:auto;justify-content:flex-start;padding-inline:6px}
+ #root .ah-tool-tabs>a{font-size:11px;padding:8px 4px;white-space:nowrap}
+ #root .ah-planner{padding:25px 18px;border-radius:14px}
+ #root .ah-planner h3{font-size:26px}
+ #root .ah-planner>p{font-size:12px;margin:12px auto 20px}
+ #root .ah-period-tabs{gap:5px;margin-bottom:25px}
+ #root .ah-period-tabs button{font-size:9px;padding:9px;flex:1;min-height:38px;white-space:nowrap}
+ #root .ah-planner-grid{grid-template-columns:1fr;gap:23px}
+ #root .ah-planner-inputs>label{margin-bottom:20px}
+ #root .ah-planner-inputs>label>span:first-child{font-size:13px}
+ #root .ah-planner-inputs output{font-size:12px;padding:8px;min-width:92px}
+ #root .ah-planner-inputs output small{font-size:10px}
+ #root .ah-range-ends small{font-size:10px}
+ #root .ah-plan-total{padding:13px;gap:10px;margin-top:20px;font-size:12px}
+ #root .ah-plan-total strong{font-size:22px}
+ #root .ah-plan-total .ah-button{font-size:11px;margin-left:0;width:100%;min-height:38px}
+ #root .ah-donut-card{padding:22px;border-radius:12px}
+ #root .ah-donut{width:220px}
+ #root .ah-digital{padding-top:40px;margin-top:40px}
+ #root .ah-digital h2{font-size:26px}
+ #root .ah-digital>div>p{font-size:12px;line-height:1.7;margin-top:12px}
+ #root .ah-digital>div>p a{display:block;margin-left:0}
+ #root .ah-digital-scene{flex-wrap:wrap;gap:20px;padding-top:28px;align-items:flex-start}
+ #root .ah-phone{order:0;width:242px;min-height:410px;border-radius:31px 31px 0 0;margin-inline:calc((100% - 242px)/2);border-bottom:7px solid #262029;border-bottom-left-radius:30px;border-bottom-right-radius:30px}
+ #root .ah-digital-features{width:calc(50% - 10px);order:1;gap:16px;padding-bottom:30px}
+ #root .ah-digital-features span{font-size:10px;gap:8px;min-height:37px}
+ #root .ah-digital-features svg{width:28px;height:28px;padding:4px}
+ #root .ah-features-left span:nth-child(2),#root .ah-features-right span:nth-child(2){transform:none}
+ #root .ah-impact{grid-template-columns:1fr;padding:28px 22px;gap:20px;margin-block:40px}
+ #root .ah-impact h2,#root .ah-safety h2{font-size:26px}
+ #root .ah-impact>div>p{font-size:13px;margin-top:11px}
+ #root .ah-impact-numbers{gap:15px;margin-top:22px}
+ #root .ah-impact-numbers span{font-size:10px}
+ #root .ah-impact-numbers strong{font-size:36px}
+ #root .ah-impact-art{display:none}
+ #root .ah-safety{padding:0 8px 38px;gap:18px;align-items:flex-start}
+ #root .ah-safety-icon{width:55px;height:55px;margin-top:2px}
+ #root .ah-safety-icon svg{width:28px;height:28px}
+ #root .ah-safety h2{font-size:23px}
+ #root .ah-safety p{font-size:12px;margin-top:10px}
+ #root .ah-footer{padding-top:30px;padding-bottom:90px}
+ #root .ah-footer-columns{grid-template-columns:1fr 1fr;gap:25px 20px;padding-bottom:22px}
+ #root .ah-footer h2{font-size:13px;margin-bottom:13px}
+ #root .ah-footer-columns a{font-size:10px;margin-bottom:9px}
+ #root .ah-footer-offerings{font-size:10px;gap:7px 11px;padding-block:16px}
+ #root .ah-footer-note{font-size:9px;padding-block:16px}
+ #root .ah-footer-social{flex-wrap:wrap;gap:12px;font-size:10px}
+ #root .ah-footer-social>.ah-brand{width:100%;margin:8px 0 0}
+ #root .ah-footer-bottom{align-items:flex-start;flex-direction:column;font-size:9px;gap:12px}
+ #root .ah-footer-bottom>div{gap:20px}
+ #root .axis-home .ah-plans-float{padding:7px 6px;font-size:9px;top:72%;border-radius:7px 0 0 7px}
+ #root .ah-plans-float svg{width:16px;height:16px}
+ #root .axis-home .ah-chat-float{right:12px;bottom:84px;padding:7px 9px;font-size:12px}
+ #root .ah-sticky-start{max-width:calc(100% - 20px);width:100%;gap:9px;padding:8px;border-radius:12px 12px 0 0}
+ #root .ah-sticky-start>span{width:34px;height:37px;flex-shrink:0}
+ #root .ah-sticky-start>span svg{width:20px;height:20px}
+ #root .ah-sticky-start p{font-size:10px;white-space:normal;line-height:1.4}
+ #root .ah-sticky-start .ah-button{font-size:10px;min-height:37px;padding:8px 12px;flex-shrink:0}
+ #root .axis-home .ah-back-top{bottom:74px;width:28px;height:28px;font-size:22px}
+}
+@media(max-width:360px){#root .axis-home .ah-header-match{font-size:9px;right:73px;padding:10px 8px}#root .ah-masthead>.ah-brand img:first-child{width:23px}#root .ah-masthead>.ah-brand img:last-child{width:85px}#root .ah-hero h1{font-size:24px}#root .ah-product-tiles>a{gap:5px;padding:10px 6px}#root .ah-tile-icon{width:20px;height:20px}#root .ah-product-tiles strong{font-size:10px}#root .ah-product-tiles small{font-size:9px}#root .ah-article-copy>div>a{font-size:15px}}
+@media(prefers-reduced-motion:reduce){#root .axis-home *,#root .axis-home *:before,#root .axis-home *:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+#root .ah-mobile-hero-actions,#root .ah-quick-mobile,#root .ah-quick-mobile-dots{display:none}
+#root .ah-contact-anchor{display:block;scroll-margin-top:80px}
+#root .ah-impact{background:linear-gradient(110deg,#782bce,#3d1258);color:#fff;position:relative;overflow:hidden;min-height:350px}
+#root .ah-impact h2 em{color:#fff}
+#root .ah-impact>div>p{color:#eee2f8}
+#root .ah-impact-numbers{margin-bottom:30px;gap:16px}
+#root .ah-impact-numbers span{max-width:none;padding:14px 12px;border:1px solid #ffffff33;background:#ffffff10;border-radius:9px;text-align:center;color:#f8efff}
+#root .ah-impact-numbers strong{color:#fff}
+#root .ah-impact-art{border-radius:14px;aspect-ratio:auto;height:300px;background:none;position:relative;align-self:stretch;display:block;overflow:hidden}
+#root .ah-impact-art img{width:100%;height:100%;object-fit:cover;object-position:45% 50%;border-radius:14px;mask-image:linear-gradient(to right,transparent,#000 25%)}
+#root .ah-safety{padding:42px 65px;background:radial-gradient(ellipse at 37% 50%,#e8d6f6,#eef2f5 78%);border-radius:17px;margin-bottom:40px;min-height:310px;gap:70px}
+#root .ah-safety-icon{width:280px;height:230px;border:0;border-radius:25px;background:linear-gradient(145deg,#cbb0eb,#9d70cd);transform:rotate(-7deg);box-shadow:15px 15px 0 #decdec;position:relative}
+#root .ah-safety-icon:before{content:'Tru Fit';position:absolute;top:23px;left:27px;font-weight:600;font-size:16px;color:#fff}
+#root .ah-safety-icon svg{width:90px;height:90px;color:#fff;stroke-width:1.3}
+#root .ah-safety .ah-button{margin-top:25px}
+@media(max-width:760px){
+ #root .ah-hero-tabs,#root .ah-hero-links{display:none}
+ #root .ah-hero{padding:48px 0 50px}
+ #root .ah-mobile-hero-actions{display:flex;gap:8px;margin-top:20px}
+ #root .ah-mobile-hero-actions .ah-button{font-size:10px;padding:9px 13px;min-height:37px}
+ #root .ah-quick-items{display:none}
+ #root .ah-quick-mobile{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;padding:6px}
+ #root .ah-quick-mobile>a{display:grid;justify-items:center;text-align:center;font-size:10px;gap:11px;line-height:1.4}
+ #root .ah-quick-mobile>a>span{width:40px;height:40px;display:grid;place-items:center;background:var(--ah-gray);color:var(--ah-purple);border-radius:6px}
+ #root .ah-quick-mobile-dots{display:flex;justify-content:center;gap:5px;margin-top:22px}
+ #root .ah-quick-mobile-dots button{width:6px;height:6px;background:#999;border:0;padding:0;border-radius:5px;position:relative}
+ #root .ah-quick-mobile-dots button:before{content:'';position:absolute;inset:-8px}
+ #root .ah-quick-mobile-dots button[aria-pressed=true]{width:16px;background:var(--ah-purple)}
+ #root .ah-impact{padding:28px 20px;min-height:0;grid-template-columns:1fr}
+ #root .ah-impact-numbers{gap:7px;margin-bottom:22px}
+ #root .ah-impact-numbers span{padding:10px 5px;font-size:9px}
+ #root .ah-impact-art{display:none}
+ #root .ah-safety{padding:27px 20px;gap:25px;min-height:0;align-items:center}
+ #root .ah-safety-icon{width:75px;height:115px;border-radius:12px;box-shadow:6px 6px 0 #decdec}
+ #root .ah-safety-icon:before{top:15px;left:14px;font-size:10px}
+ #root .ah-safety-icon svg{width:35px;height:35px}
+ #root .ah-safety h2{font-size:21px}
+ #root .ah-safety .ah-button{min-height:36px;font-size:10px;padding:8px 15px;margin-top:17px}
+}
+#root .axis-home em{font-style:italic!important}
+#root .ah-utilities svg{width:17px;height:17px;vertical-align:middle}
+#root .ah-footer-bottom button{border:0;padding:0;background:none;color:inherit;font:inherit;cursor:pointer;text-align:left}
+#root .ah-footer-bottom button:hover{color:var(--ah-purple);text-decoration:underline}
+@media(max-width:760px){#root .ah-footer-bottom>div{flex-wrap:wrap;gap:12px 20px}}
+#root .ah-footer-mobile{display:none}
+@media(max-width:760px){
+ #root .ah-footer-columns{display:none}
+ #root .ah-footer-mobile{display:block;margin-bottom:22px}
+ #root .ah-footer-mobile details{border-bottom:1px solid #d9dce1}
+ #root .ah-footer-mobile summary{min-height:50px;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600;cursor:pointer;list-style:none;padding:10px 0}
+ #root .ah-footer-mobile summary::-webkit-details-marker{display:none}
+ #root .ah-footer-mobile summary span{font-size:20px;font-weight:400;color:var(--ah-purple);transition:transform .18s}
+ #root .ah-footer-mobile details[open] summary span{transform:rotate(45deg)}
+ #root .ah-footer-mobile details>div{display:grid;gap:0;padding:0 0 14px 12px}
+ #root .ah-footer-mobile details a{display:flex;align-items:center;min-height:40px;font-size:13px;line-height:1.5;color:#595360;overflow-wrap:anywhere;padding:7px 0}
+ #root .ah-footer-mobile summary:focus-visible{outline:3px solid #9662ea;outline-offset:3px}
+}
+/* Motion remains within the established hero and editorial footprints. */
+#root .axis-home .ah-video-hero{background-size:cover;background-position:center;color:#fff;box-shadow:none}
+#root .ah-video-hero:before{content:'';position:absolute;inset:0;background:linear-gradient(100deg,#25103be8 0%,#35134ecb 46%,#25103b80 100%);z-index:1;pointer-events:none}
+#root .ah-video-hero:after{z-index:2}
+#root .ah-video-hero>.ah-container{position:relative;z-index:3}
+#root .ah-hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
+#root .axis-home .ah-video-hero em{color:#e7d3ff}
+#root .ah-video-hero .ah-hero-tabs{border-color:#ffffff80}
+#root .ah-video-hero .ah-hero-tabs button{color:#f4ebfc}
+#root .ah-video-hero .ah-hero-tabs button[aria-selected=true]{color:#fff;border-bottom-color:#dfbaff}
+#root .ah-video-hero .ah-hero-links{color:var(--ah-ink)}
+#root .axis-home .ah-hero-video-toggle{position:absolute;z-index:4;right:90px;bottom:16px;display:flex;align-items:center;gap:8px;min-height:36px;padding:6px 12px;background:#2612379c;border:1px solid #ffffff70;border-radius:20px;color:#fff;font-size:11px;line-height:1.3}
+#root .ah-hero-video-toggle>span{font-size:13px}
+#root .ah-coach-carousel{height:319px;min-width:0;width:100%;overflow:hidden;position:relative;border-radius:0 14px 0 0;background:#dce6ed;isolation:isolate}
+#root .ah-coach-track{display:flex;width:100%;height:100%;transition:transform .55s cubic-bezier(.22,.68,.2,1);will-change:transform}
+#root .ah-coach-slide{height:100%;flex:0 0 100%;min-width:0;position:relative}
+#root .ah-coach-slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+#root .ah-coach-slide>span{position:absolute;left:14px;right:14px;bottom:13px;display:block;border-radius:7px;background:#31134dcf;color:#fff;padding:8px 11px;font-size:13px;line-height:1.4;backdrop-filter:blur(4px)}
+#root .axis-home .ah-carousel-pause{position:absolute;top:12px;right:12px;width:36px;height:36px;display:grid;place-items:center;background:#2c1547b3;color:#fff;border:1px solid #ffffff80;border-radius:50%;font-size:14px;line-height:1;z-index:1}
+@media(max-width:760px){
+ #root .ah-coach-carousel{height:100%;min-height:250px;width:calc(100% + 16px);border-radius:0}
+ #root .ah-coach-slide img{object-position:50% 14%}
+ #root .ah-coach-slide>span{left:6px;right:6px;bottom:9px;padding:6px;font-size:10px}
+ #root .axis-home .ah-carousel-pause{width:30px;height:30px;top:8px;right:8px;font-size:12px}
+ #root .axis-home .ah-hero-video-toggle{right:52px;bottom:8px;min-height:30px;padding:5px 9px;font-size:9px}
+ #root .ah-video-hero:before{background:linear-gradient(100deg,#25103be8,#35134ec9 70%,#25103b9c)}
+}
+@media(prefers-reduced-motion:reduce){#root .ah-coach-track{will-change:auto}}
+/* Reserve both the restored compact header and the in-page section rail. */
+html:has(#root .axis-home){scroll-padding-top:0}
+#root .axis-home .ah-section-rail{top:60px}
+#root .axis-home section[id],#root .axis-home footer[id],#root .axis-home .ah-contact-anchor,#root .axis-home #ah-activity-planner{scroll-margin-top:140px}
+@media(max-width:700px){
+ #root .axis-home .ah-section-rail{top:56px}
+ #root .axis-home section[id],#root .axis-home footer[id],#root .axis-home .ah-contact-anchor,#root .axis-home #ah-activity-planner{scroll-margin-top:125px}
+}

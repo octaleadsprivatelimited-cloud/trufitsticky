@@ -13,6 +13,7 @@ import ProgramBenefit from "./ProgramBenefit";
 import SharedContext from "../../context/SharedContext";
 import CouplePlans from "./CouplePlans";
 import CoachProfileOverview from "./CoachProfileOverview";
+import { CoachDemoSections, CoachDemoOnboarding, CoachDemoReads } from "./CoachDemoSections";
 import BookingSteps from "./BookingSteps";
 import CoachingPackageIcon from "./CoachingPackageIcon";
 import PlanContinue from "./PlanContinue";
@@ -29,7 +30,7 @@ import { fetchCatalog } from "./catalog";
  * and the biography is secondary. Pricing, capacity, waitlists, program descriptions, and
  * payment selections are preserved while moving between views.
  */
-const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initialCheckout = false }) => {
+const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initialCheckout = false, demoMode = false }) => {
   const { user } = useAuth();
   const [activePlan, setActivePlan] = useState(initialPlan); // landing pages may carry an existing catalogue selection
   const [couplePlans, setCouplePlans] = useState([]);
@@ -43,7 +44,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
 
   // Waiting list state
   const [showWaitingList, setShowWaitingList] = useState(false);
-  const motionRootRef = useMobileCardMotion({ bookingOpen: showForm || coupleCheckoutOpen || showWaitingList });
+  const motionRootRef = useMobileCardMotion({ bookingOpen: demoMode || showForm || coupleCheckoutOpen || showWaitingList });
   const [waitingListData, setWaitingListData] = useState({ name: "", email: "", phone_number: "", details: "" });
   const [waitingListLoading, setWaitingListLoading] = useState(false);
   const [waitingListError, setWaitingListError] = useState("");
@@ -713,7 +714,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
 
   return (
     <div className="cpx-page coaching-journey" ref={motionRootRef}>
-      <CoachProfileOverview bookingOpen={showForm || coupleCheckoutOpen} coach={coach} testimonials={testimonials} certifications={certChips}>
+      <CoachProfileOverview afterPricing={demoMode && !showForm && !coupleCheckoutOpen ? <CoachDemoSections coach={coach}/> : null} pricingAside={demoMode ? <CoachDemoOnboarding/> : null} bookingOpen={showForm || coupleCheckoutOpen} coach={coach} testimonials={testimonials} certifications={certChips}>
 
       {/* WEEKLY PLANS */}
       <section className="cpx-section" id="cpx-plans" tabIndex={-1}>
@@ -727,7 +728,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
             <button type="button" aria-pressed={isCoupleMode} onClick={() => { setCoupleMode(true); trackCoachEvent('plan_interest', coach, { plan_type: 'couple', pricing_region: countryCode }); }}><CoachingPackageIcon couple/><span><strong>Couple</strong><small>Two people. Individual goals.</small></span><span className="selection-dot" aria-hidden="true"/></button>
           </div>
           </div>
-          {loadingLocation ? <p className="cpx-plan-selector-loading" role="status">Loading coaching plans…</p> : pricingLoading ? <p role="status" className="cpx-prices-loading">Loading coaching plans…</p> : isCoupleMode ? <CouplePlans coach={coach} plans={activeCouplePlans} region={countryCode} onCheckoutChange={setCoupleCheckoutOpen} /> : (
+          {loadingLocation ? <p className="cpx-plan-selector-loading" role="status">Loading coaching plans…</p> : pricingLoading ? <p role="status" className="cpx-prices-loading">Loading coaching plans…</p> : isCoupleMode ? <CouplePlans demoMode={demoMode} coach={coach} plans={activeCouplePlans} region={countryCode} onCheckoutChange={setCoupleCheckoutOpen} /> : (
             <div className="cpx-plan-selector" hidden={coach.preview && !coach.livePreview}>
               <p className="package-step">Choose your timeline</p>
               <div className="package-body">
@@ -745,7 +746,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
 
       {showForm && <InlineBooking>{!user ? <><button type="button" className="booking-back" onClick={closeBooking}>Back to plans</button><BookingSteps current={2}/><AuthCard booking/></> : (
         <ClientPaymentForm
-          previewMode={Boolean(coach.preview) || user.isPreview}
+          previewMode={demoMode || Boolean(coach.preview) || user.isPreview}
           coachSlug={coachSlug(coach)}
           coachImage={coach.image}
           coachId={coach.id}
@@ -784,7 +785,10 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
       </section>
       </CoachProfileOverview>
 
+      <div className={demoMode ? 'reserve-faq-layout' : undefined} style={demoMode ? undefined : {display:'contents'}}>
       <section id="coach-faq" tabIndex={-1} className="profile-faq cpx-pad" data-reveal><div><p className="eyebrow">Before you begin</p><h2>Good to <em>know.</em></h2></div><div className="faq-list">{[['What’s different about couple coaching?', 'Two people enrol with one coach and a shared start date. Each person receives individual guidance. The displayed couple price covers both participants.'],['What am I paying for?', 'The full displayed total covers your selected coaching duration. Weekly amounts are for comparison. There is one payment, with no automatic renewal.'],['Can I speak to my coach first?', 'Choose the 20-minute consultation when it is available for your coach and pricing region. You can schedule the call after payment.'],['What if my coach’s plan is full?', 'Available programs can be booked. When a plan is full, you can join its waitlist. Couple programs require two available places.']].map(([question,answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div></section>
+      {demoMode && <CoachDemoReads/>}
+      </div>
 
       {/* STICKY BOTTOM CTA */}
       {!isCoupleMode && !showForm && <div className="cpx-sticky">
@@ -872,6 +876,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
             </p>
             <form data-clarity-mask="true" data-form-id="waiting_list" onSubmit={async (e) => {
               e.preventDefault();
+              if (demoMode) { setWaitingListSuccess(true); return; }
               if (coach.preview || waitingListLoading) return;
               setWaitingListLoading(true);
               setWaitingListError("");
@@ -894,10 +899,10 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
                 <div style={{ textAlign: "center", padding: "20px 0" }}>
                   <p style={{ fontSize: "48px", marginBottom: "12px", lineHeight: 1 }}>✅</p>
                   <p style={{ fontSize: "16px", fontWeight: "600", color: "#6d28d9" }}>
-                    You've been added to the waiting list!
+                    {demoMode ? 'Waitlist preview complete' : "You've been added to the waiting list!"}
                   </p>
                   <p style={{ fontSize: "14px", color: "#705b8c", marginTop: "8px" }}>
-                    We'll reach out when {coach.name} has an opening.
+                    {demoMode ? 'No waiting list request has been submitted.' : `We'll reach out when ${coach.name} has an opening.`}
                   </p>
                   <button type="button" onClick={() => setShowWaitingList(false)} style={{
                     marginTop: "20px", padding: "10px 24px", borderRadius: "8px",

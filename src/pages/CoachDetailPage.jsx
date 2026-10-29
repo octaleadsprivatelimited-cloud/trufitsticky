@@ -6,7 +6,7 @@ import { analytics } from '../analytics/analytics';
 import Loading from "../components/Loading";
 import "../components/coaches/coachPage.css";
 
-const CoachDetailPage = () => {
+const CoachDetailPage = ({ demoMode = false }) => {
   const { coachName } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -132,7 +132,7 @@ const CoachDetailPage = () => {
     );
   }
 
-  return <CoachCard key={coach.id} coach={coach} initialPlan={location.state?.landingPlan || null} initialCoupleMode={Boolean(location.state?.coupleMode)} initialCheckout={Boolean(location.state?.openCheckout)} onClose={handleClose} isPage={true} />;
+  return <CoachCard key={coach.id} demoMode={demoMode} coach={coach} initialPlan={location.state?.landingPlan || null} initialCoupleMode={Boolean(location.state?.coupleMode)} initialCheckout={Boolean(location.state?.openCheckout)} onClose={handleClose} isPage={true} />;
 };
 
 export default CoachDetailPage;

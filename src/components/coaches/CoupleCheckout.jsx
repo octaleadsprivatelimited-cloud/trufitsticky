@@ -12,9 +12,9 @@ import { trackCoachEvent } from "../../analytics/analytics";
 
 const blankPerson = domestic => ({ name: "", email: "", phone_number: domestic ? "+91" : "+", residence: domestic ? "India" : "" });
 
-export default function CoupleCheckout({ coach, plan, waitlist = false, onClose }) {
+export default function CoupleCheckout({ coach, plan, waitlist = false, onClose, demoMode = false }) {
   const { user } = useAuth();
-  const previewMode = Boolean(user?.isPreview || coach.preview);
+  const previewMode = Boolean(demoMode || user?.isPreview || coach.preview);
   const [slot, setSlot] = useState({ date: "", time: "" });
   const [previewPayment, setPreviewPayment] = useState(false);
   const [waitlistMode, setWaitlistMode] = useState(waitlist);

@@ -17,6 +17,7 @@ const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const CoachPage = lazy(() => import("./pages/CoachPage"));
 const CoachLandingPage = lazy(() => import("./pages/CoachLandingPage"));
 const CoachDetailPage = lazy(() => import("./pages/CoachDetailPage"));
+const CoachDemoPage = lazy(() => import("./pages/CoachDemoPage"));
 const FindMyCoachPage = lazy(() => import("./pages/FindMyCoachPage"));
 const SurveyPage = lazy(() => import("./pages/SurveyPage"));
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
@@ -76,6 +77,7 @@ const router = createBrowserRouter([
                     </Suspense>
                 )
             },
+            { path: "/demo/coaches/:coachName", element: <Suspense fallback={null}><CoachDemoPage /></Suspense> },
             {
                 path: "/coaches/:coachName",
                 element: (
