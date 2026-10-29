@@ -90,9 +90,66 @@ function HomeHero(){
 }
 const quickActions=[['person','Individual coaching','/coaches'],['people','Couple coaching','/coaches'],['calendar','Consultation','/coaches/jaswant-medidi'],['food','Nutrition coaching','/coaches?focus=nutrition'],['strength','Strength training','/coaches?focus=strength'],['phone','Member portal','/portal']];
 const promotions=[{title:'A little support. A lot of possibility.',copy:'Personal coaching, built around you.',image:togetherImage,link:'/coaches',cta:'Explore coaching'},{title:'Make your next step a shared one.',copy:'Individual goals. A coach for both of you.',image:nutritionImage,link:'/coaches',cta:'Discover couple coaching'},{title:'Your routine, all in one place.',copy:'Your program, diet plan and check-ins.',image:habitsImage,link:'/portal',cta:'Explore your portal'}];
+function useHomeCarousel(count, delay) {
+ const ref=useRef(null);const {reducedMotion,canAnimate}=useMotionEnvironment(ref);
+ const [index,setIndex]=useState(1);const [animate,setAnimate]=useState(true);
+ const [hovered,setHovered]=useState(false);const [focused,setFocused]=useState(false);const [interaction,setInteraction]=useState(0);
+ const transitionRunning=useRef(false);const resumeAt=useRef(0);const gesture=useRef(null);const suppressClickUntil=useRef(0);
+ const active=(index-1+count)%count;
+ const move=(direction,manual=true)=>{
+  if(transitionRunning.current)return;
+  if(manual){resumeAt.current=Date.now()+6000;setInteraction(value=>value+1)}
+  if(reducedMotion){setIndex(current=>((current-1+direction+count)%count)+1);return}
+  transitionRunning.current=true;setIndex(current=>Math.max(0,Math.min(count+1,current+direction)));
+ };
+ const choose=page=>{
+  if(transitionRunning.current)return;
+  resumeAt.current=Date.now()+6000;setInteraction(value=>value+1);
+  if(page!==active){transitionRunning.current=!reducedMotion;setIndex(page+1)}
+ };
+ useEffect(()=>{
+  if(!canAnimate||hovered||focused)return;
+  const timer=setInterval(()=>{if(Date.now()<resumeAt.current||transitionRunning.current)return;transitionRunning.current=true;setIndex(current=>current>=count+1?2:current+1)},delay);
+  return()=>clearInterval(timer);
+ },[canAnimate,count,delay,hovered,focused,interaction]);
+ useEffect(()=>{if(animate)return;let second;const frame=requestAnimationFrame(()=>{second=requestAnimationFrame(()=>setAnimate(true))});return()=>{cancelAnimationFrame(frame);cancelAnimationFrame(second)}},[animate]);
+ const end=event=>{
+  if(event.target!==event.currentTarget||event.propertyName!=='transform')return;
+  transitionRunning.current=false;
+  if(index===0||index===count+1){setAnimate(false);setIndex(index===0?count:1)}
+ };
+ const resetGesture=()=>{gesture.current=null};
+ const handlers={
+  onPointerEnter:event=>{if(event.pointerType==='mouse')setHovered(true)},
+  onPointerLeave:()=>setHovered(false),
+  onFocusCapture:()=>setFocused(true),
+  onBlurCapture:event=>{if(!event.currentTarget.contains(event.relatedTarget))setFocused(false)},
+  onPointerDown:event=>{if(event.button!==0||event.target.closest('button'))return;gesture.current={x:event.clientX,y:event.clientY,id:event.pointerId,horizontal:false};resumeAt.current=Date.now()+6000},
+  onPointerMove:event=>{const current=gesture.current;if(!current||current.id!==event.pointerId)return;const dx=event.clientX-current.x,dy=event.clientY-current.y;if(!current.horizontal&&Math.abs(dy)>14&&Math.abs(dy)>Math.abs(dx)){resetGesture();return}if(Math.abs(dx)>12&&Math.abs(dx)>Math.abs(dy)*1.2){current.horizontal=true;event.preventDefault();event.currentTarget.setPointerCapture?.(event.pointerId)}},
+  onPointerUp:event=>{const current=gesture.current;if(!current||current.id!==event.pointerId)return;const dx=event.clientX-current.x;if(current.horizontal){suppressClickUntil.current=Date.now()+600;if(Math.abs(dx)>32)move(dx<0?1:-1)}resetGesture()},
+  onPointerCancel:resetGesture,
+  onClickCapture:event=>{if(Date.now()<suppressClickUntil.current){event.preventDefault();event.stopPropagation()}},
+  onKeyDown:event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();if(event.target.closest('a'))event.currentTarget.focus();if(event.key==='Home')choose(0);else if(event.key==='End')choose(count-1);else move(event.key==='ArrowRight'?1:-1)},
+ };
+ return {ref,index,active,move,choose,handlers,track:{style:{transform:`translateX(-${index*100}%)`,transition:animate&&!reducedMotion?undefined:'none'},onTransitionEnd:end,onTransitionCancel:end}};
+}
+function CarouselNavigation({carousel,count,label}) {
+ return <div className="ah-carousel-navigation"><button type="button" className="ah-carousel-control ah-carousel-previous" aria-label={`Previous ${label}`} onClick={()=>carousel.move(-1)}>‹</button><div className="ah-carousel-indicators">{Array.from({length:count},(_,i)=><button key={i} type="button" aria-label={`Show ${label} ${i+1}`} aria-pressed={carousel.active===i} onClick={()=>carousel.choose(i)}><span/></button>)}</div><button type="button" className="ah-carousel-control ah-carousel-next" aria-label={`Next ${label}`} onClick={()=>carousel.move(1)}>›</button></div>;
+}
 function QuickActions(){
- const [page,setPage]=useState(0);const [slide,setSlide]=useState(0);const promo=promotions[slide];
- return <section className="ah-quick ah-container" aria-label="Get started with Tru Fit"><div className="ah-apply"><h2>Get started</h2><div className="ah-quick-mobile">{quickActions.slice(page*2,page*2+4).map(([icon,label,to])=><Link key={label} to={to} state={label==='Couple coaching'?{coupleMode:true}:undefined}><span><Icon type={icon}/></span>{label}</Link>)}</div><div className="ah-quick-mobile-dots">{[0,1].map(i=><button key={i} aria-label={`Show coaching options ${i+1}`} aria-pressed={page===i} onClick={()=>setPage(i)}/>)}</div><div className="ah-quick-items"><button aria-label="Previous coaching options" disabled={page===0} onClick={()=>setPage(0)}>‹</button>{quickActions.slice(page*3,page*3+3).map(([icon,label,to])=><Link key={label} to={to} state={label==='Couple coaching'?{coupleMode:true}:undefined}><span><Icon type={icon}/></span>{label}</Link>)}<button aria-label="Next coaching options" disabled={page===1} onClick={()=>setPage(1)}>›</button></div></div><div className="ah-promo" aria-roledescription="carousel" aria-label="Tru Fit highlights"><img src={promo.image} alt=""/><div className="ah-promo-copy"><h2>{promo.title}</h2><p>{promo.copy}</p><Link className="ah-button" to={promo.link} state={slide===1?{coupleMode:true}:undefined}>{promo.cta}</Link></div><div className="ah-dots">{promotions.map((item,i)=><button key={item.title} aria-label={`Show highlight ${i+1}`} aria-pressed={slide===i} onClick={()=>setSlide(i)}/>)}</div></div></section>;
+ const [mobile,setMobile]=useState(()=>window.matchMedia('(max-width: 760px)').matches);
+ useEffect(()=>{const query=window.matchMedia('(max-width: 760px)');const update=()=>setMobile(query.matches);query.addEventListener('change',update);return()=>query.removeEventListener('change',update)},[]);
+ const groups=mobile?[quickActions.slice(0,4),[...quickActions.slice(4),...quickActions.slice(0,2)]]:[quickActions.slice(0,3),quickActions.slice(3)];
+ const actions=useHomeCarousel(groups.length,3600);const highlights=useHomeCarousel(promotions.length,4000);
+ const actionSlides=[groups[groups.length-1],...groups,groups[0]];const promoSlides=[promotions[promotions.length-1],...promotions,promotions[0]];
+ return <section className="ah-quick ah-container" aria-label="Get started with Tru Fit">
+  <div ref={actions.ref} className="ah-apply ah-actions-carousel" role="region" aria-roledescription="carousel" aria-label="Coaching options" tabIndex={0} {...actions.handlers}>
+   <h2>Get started</h2><div className="ah-actions-viewport"><div className="ah-motion-track" {...actions.track}>{actionSlides.map((group,i)=><div className="ah-action-slide" key={i} aria-hidden={i!==actions.index} inert={i!==actions.index}>{group.map(([icon,label,to])=><Link key={label} to={to} draggable={false} state={label==='Couple coaching'?{coupleMode:true}:undefined}><span><Icon type={icon}/></span>{label}</Link>)}</div>)}</div></div><CarouselNavigation carousel={actions} count={groups.length} label="coaching options"/>
+  </div>
+  <div ref={highlights.ref} className="ah-promo ah-highlights-carousel" role="region" aria-roledescription="carousel" aria-label="Tru Fit highlights" tabIndex={0} {...highlights.handlers}>
+   <div className="ah-motion-track" {...highlights.track}>{promoSlides.map((promo,i)=><div className="ah-promo-slide" key={i} aria-hidden={i!==highlights.index} inert={i!==highlights.index}><img src={promo.image} alt="" draggable={false}/><div className="ah-promo-copy"><h2>{promo.title}</h2><p>{promo.copy}</p><Link className="ah-button" to={promo.link} draggable={false} state={promo===promotions[1]?{coupleMode:true}:undefined}>{promo.cta}</Link></div></div>)}</div><CarouselNavigation carousel={highlights} count={promotions.length} label="highlight"/>
+  </div>
+ </section>;
 }
 function SectionRail(){
  const [active,setActive]=useState(sections[0].id);
@@ -121,5 +178,5 @@ function HomeFooter(){return <footer className="ah-footer" id="home-support" tab
 export default function HomePage(){
  const [showSticky,setShowSticky]=useState(false);
  useEffect(()=>{const update=()=>setShowSticky(window.scrollY>900);update();window.addEventListener('scroll',update,{passive:true});return()=>window.removeEventListener('scroll',update)},[]);
- return <div className="axis-home"><HomeHero/><QuickActions/><SectionRail/><div className="ah-sections">{sections.map((section,index)=><CoachingSection key={section.id} section={section} index={index}/>)}</div><SupportPromos/><ActivityPlanner/><DigitalPortal/><ImpactAndSafety/><HomeFooter/><a className="ah-chat-float" href="https://wa.me/917207259556" target="_blank" rel="noopener noreferrer" aria-label="Chat with Tru Fit on WhatsApp (opens in a new tab)"><img src={whatsAppLogo} alt=""/></a>{showSticky&&<div className="ah-sticky-start"><span><Icon type="person"/></span><p>Find a coach who understands your goals</p><Link to="/findmycoach" className="ah-button">Get started</Link></div>}<a className="ah-back-top" href="#home-overview" aria-label="Back to top">⌃</a></div>;
+ return <div className="axis-home"><HomeHero/><QuickActions/><SectionRail/><div className="ah-sections">{sections.map((section,index)=><CoachingSection key={section.id} section={section} index={index}/>)}</div><SupportPromos/><ActivityPlanner/><DigitalPortal/><ImpactAndSafety/><HomeFooter/><a className="ah-chat-float" href="https://wa.me/917207259556" target="_blank" rel="noopener noreferrer" aria-label="Chat with Tru Fit on WhatsApp (opens in a new tab)"><img src={whatsAppLogo} alt=""/></a>{showSticky&&<div className="ah-sticky-start"><span><Icon type="person"/></span><p>Find a coach who understands your goals</p><Link to="/findmycoach" className="ah-button">Get started</Link></div>}</div>;
 }
