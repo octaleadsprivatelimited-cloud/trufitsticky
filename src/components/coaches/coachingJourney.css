@@ -238,3 +238,17 @@
  #root .coaching-action-row button {flex:1;}
 }
 @media(prefers-reduced-motion:reduce){#root .coaching-journey * {scroll-behavior:auto!important;}}
+
+/* Desktop plans use the full content width; the guide remains a mobile section. */
+@media(min-width:701px){
+ #root .coaching-booking-layout {grid-template-columns:minmax(0,1fr);}
+ #root .coaching-booking-layout>.coaching-plan-panel {grid-column:1/-1;}
+ #root .coaching-booking-layout>#coach-inclusions {display:none!important;}
+ #root .coaching-page-nav a[href="#coach-inclusions"] {display:none;}
+}
+@media(min-width:701px){
+ #root .coaching-journey .coaching-booking-layout .package-options :is(.cpx-plan-pill-row,.couple-options) {grid-template-columns:repeat(3,minmax(0,1fr))!important;}
+}
+@media(min-width:701px){
+ #root .coaching-journey.cpx-page .package-options .cpx-plan-pill--consultation {grid-column:1/-1!important;}
+}

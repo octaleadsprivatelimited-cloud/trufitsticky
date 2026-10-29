@@ -74,3 +74,11 @@
 .contact-panel .contact-spark{display:none}
 .contact-fields{grid-template-columns:1fr}
 .contact-fields>.contact-field{grid-column:1/-1}
+
+/* Keep each desktop footer contact label beside its own icon. */
+@media(min-width:701px){
+ .compact-contact-footer .contact-direct-links {min-width:0;align-content:start;}
+ .compact-contact-footer .contact-direct-links>a {display:grid;grid-template-columns:38px minmax(0,1fr);align-items:center;justify-content:start;gap:14px;text-align:left;min-height:44px;}
+ .compact-contact-footer .contact-direct-links>a>span:last-child {margin-left:0;text-align:left;line-height:1.5;}
+ .compact-contact-footer .contact-direct-links small {margin-bottom:3px;line-height:1.4;}
+}
