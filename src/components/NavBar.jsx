@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import Logo from '../assets/logo-original.svg';
 import LogoText from '../assets/footer-logo-text.svg';
 import './navBar.css';
 export default function NavBar() {
   const { user } = useAuth();
-  const [open, setOpen] = useState(false);
   const [compact, setCompact] = useState(false);
-  const { pathname } = useLocation();
-  const expanded = open === pathname;
   useEffect(() => {
     let wasCompact = false;
     const updateHeader = () => {
@@ -28,10 +25,12 @@ export default function NavBar() {
     <a className="skip-link" href="#main-content">Skip to content</a>
     <div className="site-nav wrap">
       <Link className="brand" to="/" aria-label="Tru Fit home"><img src={Logo} alt=""/><img className="original-wordmark" src={LogoText} alt=""/></Link>
-      <button className="menu-button" aria-expanded={expanded} aria-controls="site-links" onClick={() => setOpen(expanded ? false : pathname)}>{expanded ? 'Close' : 'Menu'}</button>
-      <nav id="site-links" className={expanded ? 'nav-links is-open' : 'nav-links'} aria-label="Main navigation">
-        <NavLink to="/coaches">Our coaches</NavLink><NavLink to="/bmi-calculator">BMI calculator</NavLink><NavLink to="/calorie-calculator">Calorie calculator</NavLink>
-        <NavLink to={user ? "/portal" : "/signin"} className="customer-portal-link">{user ? "My account" : "Sign in / Sign up"}</NavLink>
+      <nav id="site-links" className="nav-links" aria-label="Main navigation">
+        <NavLink to="/coaches" className="coaching-link">Coaching</NavLink>
+        <NavLink to={user ? "/portal" : "/signin"} className="customer-portal-link" aria-label={user ? "My account" : "Sign in or sign up"}>
+          <svg className="nav-account-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg>
+          <span className="nav-account-label">{user ? "My account" : "Sign in / Sign up"}</span>
+        </NavLink>
       </nav>
     </div>
   </header>;

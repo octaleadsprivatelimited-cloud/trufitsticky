@@ -9,7 +9,7 @@ export default function SmoothScrolling(){
  const {pathname}=useLocation();
  useEffect(()=>{
   const engine=new Lenis({autoRaf:true,lerp:.12,smoothWheel:true,syncTouch:false,allowNestedScroll:true,autoToggle:true,respectReducedMotion:true,stopInertiaOnNavigate:true,
-   prevent:node=>Boolean(node.closest?.('input,textarea,select,[role="dialog"],[aria-modal="true"],[class*="modal"],[data-lenis-prevent]'))||getComputedStyle(document.body).overflow==='hidden'
+   prevent:node=>document.documentElement.classList.contains('coach-section-snap')||Boolean(node.closest?.('input,textarea,select,[role="dialog"],[aria-modal="true"],[class*="modal"],[data-lenis-prevent]'))||getComputedStyle(document.body).overflow==='hidden'
   });
   setScrollEngine(engine);
   const anchor=event=>{

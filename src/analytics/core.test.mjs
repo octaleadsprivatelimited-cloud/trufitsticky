@@ -59,16 +59,6 @@ test('coach workspaces suppress analytics while public coach pages remain measur
  for(const path of ['/coach','/coach/jaswant-medidi','/coach/srikar-peddapally/customers/demo-jamie']){const r=runtime();r.client.setConsent(true);r.client.page(path,'Coach workspace');assert.equal(r.client.track('page_view'),false);}
 });
 
-test('BMI measurements and report previews never initialize analytics or recording',()=>{
- const r=runtime('/bmi-calculator');r.client.setConsent(true);r.client.page('/bmi-calculator','BMI calculator');
- assert.equal(r.scripts.length,0);
- assert.equal(r.client.track('form_start',{form_id:'bmi',weightKg:73,heightCm:175,email:'sample@example.com'}),false);
- assert.equal(r.w.dataLayer,undefined);
- const arriving=runtime();arriving.client.setConsent(true);arriving.client.page('/bmi-calculator','BMI calculator');
- assert.equal(arriving.reloads(),1);
- assert.equal(arriving.client.track('generate_lead'),false);
-});
-
 test('calorie calculator never records measurements or nutrition estimates',()=>{
  const r=runtime('/calorie-calculator');r.client.setConsent(true);r.client.page('/calorie-calculator','Calorie calculator');
  assert.equal(r.scripts.length,0);

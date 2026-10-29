@@ -1,0 +1,18 @@
+/* Native touch snapping keeps oversized cards freely scrollable within their bounds. */
+@media (max-width: 700px) and (prefers-reduced-motion: no-preference) {
+  html.coach-section-snap {
+    scroll-snap-type: y mandatory;
+    scroll-padding-block: 76px 88px;
+  }
+  html.coach-section-snap #root .coaching-journey :is(#coach-overview, #cpx-plans, #coach-reviews, #coach-inclusions, #coach-about, #coach-faq) {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    scroll-margin-block: 0;
+  }
+  /* Give the footer a final resting point so contacts and legal links stay reachable. */
+  html.coach-section-snap .compact-contact-footer {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+    scroll-margin-block: 0;
+  }
+}

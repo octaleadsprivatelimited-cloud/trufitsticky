@@ -16,10 +16,12 @@ import CoachProfileOverview from "./CoachProfileOverview";
 import BookingSteps from "./BookingSteps";
 import CoachingPackageIcon from "./CoachingPackageIcon";
 import PlanContinue from "./PlanContinue";
+import useMobileCardMotion from "./useMobileCardMotion";
 import "./coachBooking.css";
 import "./coachProfileHero.css";
 import "../../styles/featured-coaching.css";
 import "./coachingJourney.css";
+import "./planCards.css";
 import { fetchCatalog } from "./catalog";
 
 /**
@@ -41,6 +43,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
 
   // Waiting list state
   const [showWaitingList, setShowWaitingList] = useState(false);
+  const motionRootRef = useMobileCardMotion({ bookingOpen: showForm || coupleCheckoutOpen || showWaitingList });
   const [waitingListData, setWaitingListData] = useState({ name: "", email: "", phone_number: "", details: "" });
   const [waitingListLoading, setWaitingListLoading] = useState(false);
   const [waitingListError, setWaitingListError] = useState("");
@@ -624,6 +627,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
         key={plan}
         className={[
           "cpx-plan-pill",
+          "plan-sculpted-card",
           recommended ? "cpx-plan-pill--recommended" : "",
           isActive ? "cpx-plan-pill--active" : "",
           full ? "cpx-plan-pill--full" : "",
@@ -632,20 +636,13 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
         aria-pressed={isActive}
         aria-label={`${weeks ? `${weeks} week coaching plan` : plan}${isActive ? ", selected" : ""}`}
       >
-        {recommended && <span className="cpx-plan-pill-badge">Coach recommended</span>}
+        <span className="plan-card-tab">{weeks ? `${weeks} weeks` : plan}</span>
         <span className="selection-dot" aria-hidden="true"/>
-        <span className="cpx-plan-pill-topline">
-          <span className="cpx-plan-pill-name">{weeks ? `${weeks} weeks` : plan}</span>
-</span>
-        <span className="cpx-plan-pill-mobile-label" aria-hidden="true">
-          <strong>{weeks || plan}</strong>
-          <span>{weeks ? "week" : "coaching"}</span>
-</span>
-        <span className="package-card-caption">{Number(weeks) <= 12 ? 'Build your foundation' : Number(weeks) <= 24 ? 'Find your rhythm' : 'Keep moving forward'}</span>
-        <span className="cpx-plan-pill-price">
-          {cardPrice || "Unavailable"}
-          {cardPrice && <small> total</small>}
-</span>
+        <span className="plan-price-line">
+          <span className="cpx-plan-pill-price">{cardPrice || "Unavailable"}{cardPrice && <small>total</small>}</span>
+          <span className="plan-price-context"><strong>{weeks ? `${weeks}-week plan` : plan}</strong><span>{Number(weeks) <= 12 ? 'Build your foundation' : Number(weeks) <= 24 ? 'Find your rhythm' : 'Keep moving forward'}</span></span>
+        </span>
+        {recommended && <span className="plan-recommendation">Coach recommended</span>}
         {weeklyRateForPlan(plan) && <span className="package-card-weekly">About {currencySymbol}{Math.round(weeklyRateForPlan(plan)).toLocaleString()} / week</span>}
         {full ? (
           <span className="cpx-plan-pill-status cpx-plan-pill-status--full">Join waitlist</span>
@@ -715,7 +712,7 @@ const CoachCard = ({ coach, initialCoupleMode = false, initialPlan = null, initi
       : "Continue to details";
 
   return (
-    <div className="cpx-page coaching-journey">
+    <div className="cpx-page coaching-journey" ref={motionRootRef}>
       <CoachProfileOverview bookingOpen={showForm || coupleCheckoutOpen} coach={coach} testimonials={testimonials} certifications={certChips}>
 
       {/* WEEKLY PLANS */}

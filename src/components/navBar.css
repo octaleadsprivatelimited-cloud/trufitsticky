@@ -20,14 +20,49 @@
 #root .site-header.is-compact .brand {
   transform: scale(.8);
 }
-#root .site-header .menu-button {
-  min-height: 44px;
-  min-width: 56px;
+#root .site-header .nav-account-icon { display: none; }
+@media (max-width: 1000px) {
+  #root .site-header .site-nav { gap: 12px; }
+  #root .site-header .brand { flex-shrink: 0; }
+  #root .site-header .nav-links {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 8px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+  #root .site-header .nav-links > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 8px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  #root .site-header .nav-links > .coaching-link { color: var(--ink); font-weight: 600; border: 1px solid var(--line); border-radius: 10px; padding-inline: 12px; text-align: center; }
+  #root .site-header .nav-links > .customer-portal-link {
+    width: 44px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    color: var(--accent);
+  }
+  #root .site-header .nav-account-icon { display: block; width: 21px; height: 21px; }
+  #root .site-header .nav-account-label { display: none; }
+}
+@media (max-width: 360px) {
+  #root .site-header .site-nav { gap: 8px; }
+  #root .site-header .brand { gap: 7px; }
+  #root .site-header .brand img:first-child { width: 24px; height: 29px; }
+  #root .site-header .brand img.original-wordmark { width: 80px; height: 29px; }
 }
 @media (max-width: 700px) {
   #root .site-header .site-nav { height: 68px; }
   #root .site-header.is-compact .site-nav { height: 56px; }
-  #root .site-header .nav-links { top: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   #root .site-header,

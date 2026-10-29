@@ -1,0 +1,72 @@
+/* Reference-inspired offer panels: sloped shoulders, a top tab, and a fading surface. */
+#root .cpx-page .package-options {container-type:inline-size;}
+#root .cpx-page .package-options :is(.cpx-plan-pill-row,.couple-options) {display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important;margin:20px 0 0!important;padding:0!important;overflow:visible!important;}
+#root .cpx-page .package-options .plan-sculpted-card {
+ position:relative!important;isolation:isolate;box-sizing:border-box;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:7px!important;width:100%!important;min-width:0;min-height:194px!important;height:auto!important;max-height:none!important;overflow:visible!important;padding:43px 14px 17px!important;
+ color:#472279!important;text-align:center!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;cursor:pointer;transition:transform .22s ease!important;
+}
+#root .cpx-page .package-options .plan-sculpted-card::before {content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22surface%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23b995e6%22%20stop-opacity%3D%22.46%22%2F%3E%3Cstop%20offset%3D%22.55%22%20stop-color%3D%22%23dfcef3%22%20stop-opacity%3D%22.15%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%220%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22edge%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%239470bd%22%20stop-opacity%3D%22.7%22%2F%3E%3Cstop%20offset%3D%22.7%22%20stop-color%3D%22%23c5a7e9%22%20stop-opacity%3D%220%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%22M0%20106%20L29%2035%20Q46%203%2080%203%20H320%20Q354%203%20371%2035%20L400%20106%20V180%20H0%20Z%22%20fill%3D%22url%28%23surface%29%22%2F%3E%3Cpath%20d%3D%22M0%20106%20L29%2035%20Q46%203%2080%203%20H320%20Q354%203%20371%2035%20L400%20106%22%20fill%3D%22none%22%20stroke%3D%22url%28%23edge%29%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E"); background-size:100% 100%;background-repeat:no-repeat;opacity:.65;transition:opacity .22s ease;}
+#root .cpx-page .package-options .plan-sculpted-card[aria-pressed=true]::before {opacity:1;}
+/* Clip only the decorative tab surface; clipping the text box cuts glyphs on
+   narrow cards and when text is enlarged. Keep its label in an unclipped box. */
+#root .cpx-page .package-options .plan-card-tab {position:absolute;isolation:isolate;top:2px;left:50%;transform:translateX(-50%);display:grid;place-items:center;min-height:32px;height:auto;max-height:none;box-sizing:border-box;min-width:90px;max-width:calc(100% - 48px);padding:7px 18px 9px;clip-path:none;overflow:visible;background:transparent;color:#fff;font:600 11px/1.45 'DM Sans',sans-serif;white-space:normal;overflow-wrap:anywhere;}
+#root .cpx-page .package-options .plan-card-tab::before {content:'';position:absolute;inset:0;z-index:-1;background:#6d28d9;clip-path:polygon(0 0,100% 0,94% 78%,90% 100%,10% 100%,6% 78%);pointer-events:none;}
+#root .cpx-page .package-options .plan-sculpted-card .selection-dot {display:none!important;}
+#root .cpx-page .package-options .plan-price-line {display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;width:100%;min-width:0;}
+#root .cpx-page .package-options .plan-sculpted-card :is(.cpx-plan-pill-price,.package-option-price) {display:block!important;margin:0!important;font:600 clamp(25px,4.6cqi,34px)/1.3 'Manrope',sans-serif!important;letter-spacing:-.06em;color:#472279!important;white-space:nowrap!important;}
+#root .cpx-page .package-options .plan-sculpted-card :is(.cpx-plan-pill-price,.package-option-price) small {display:block!important;margin-top:4px;font:400 10px/1.3 'DM Sans',sans-serif!important;letter-spacing:0;color:#806695!important;}
+#root .cpx-page .package-options .plan-price-context {display:grid;gap:4px;min-width:0;max-width:96px;color:#806695;font:400 10px/1.4 'DM Sans',sans-serif;text-align:left;}
+#root .cpx-page .package-options .plan-price-context strong {font-size:12px;line-height:1.3;font-weight:600;color:#472279;}
+#root .cpx-page .package-options .plan-recommendation {display:block;align-self:center!important;margin:0!important;background:transparent!important;padding:0!important;border:0!important;position:static!important;font:500 9px/1.4 'DM Sans',sans-serif;color:#6d28d9;}
+#root .cpx-page .package-options .plan-sculpted-card .package-card-weekly {display:block!important;margin:0!important;color:#806695!important;font:400 10px/1.5 'DM Sans',sans-serif;overflow-wrap:anywhere;}
+#root .cpx-page .package-options .plan-sculpted-card .cpx-plan-pill-status {display:block!important;margin:0!important;color:#472279!important;font-size:10px!important;}
+#root .cpx-page .package-options .plan-sculpted-card[aria-pressed=true]::after {content:'✓';position:absolute;right:24px;top:37px;width:17px;height:17px;display:grid;place-items:center;border:1px solid #b18bd7;border-radius:50%;color:#6d28d9;font-size:10px;}
+#root .cpx-page .package-options .plan-sculpted-card:focus-visible {outline:3px solid #a172e3;outline-offset:2px;}
+#root .cpx-page .package-options .plan-sculpted-card:hover {transform:translateY(-2px);}
+#root .cpx-page .package-options .cpx-plan-pill--consultation {border-radius:14px!important;background:#faf7ff!important;border:1px solid #ddcdef!important;min-height:68px!important;padding:13px!important;}
+@media(max-width:1000px){
+ #root .cpx-page .package-options :is(.cpx-plan-pill-row,.couple-options) {grid-template-columns:minmax(0,1fr)!important;gap:10px!important;margin-top:14px!important;}
+ #root .cpx-page .package-options .plan-sculpted-card {min-height:156px!important;padding:41px 24px 17px!important;gap:5px!important;}
+ #root .cpx-page .package-options .plan-sculpted-card :is(.cpx-plan-pill-price,.package-option-price) {font-size:clamp(27px,10.5cqi,39px)!important;}
+ #root .cpx-page .package-options .plan-price-context {max-width:93px;}
+ #root .cpx-page .package-options .plan-price-context strong {font-size:12px;}
+ #root .cpx-page .package-options .cpx-plan-pill--consultation {grid-column:1!important;}
+}
+@media(max-width:360px){
+ #root .cpx-page .package-options .plan-sculpted-card {padding-inline:18px!important;min-height:150px!important;}
+ #root .cpx-page .package-options .plan-price-line {column-gap:8px;}
+ #root .cpx-page .package-options .plan-price-context {max-width:75px;font-size:9px;}
+ #root .cpx-page .package-options .plan-price-context strong {font-size:10px;}
+}
+@media(prefers-reduced-motion:reduce){#root .cpx-page .package-options .plan-sculpted-card,#root .cpx-page .package-options .plan-sculpted-card::before {transition:none!important;}#root .cpx-page .package-options .plan-sculpted-card:hover {transform:none;}}
+
+/* Separate the price and plan copy so long amounts cannot collide with week labels. */
+#root .cpx-page .package-options .plan-price-line {flex-direction:column;flex-wrap:nowrap;gap:8px;}
+#root .cpx-page .package-options .plan-price-context {width:100%;max-width:none;text-align:center;justify-items:center;gap:3px;}
+#root .cpx-page .package-options .plan-price-context strong {display:none;}
+#root .cpx-page .package-options .plan-sculpted-card {padding-top:48px!important;}
+#root .cpx-page .package-options .plan-sculpted-card :is(.cpx-plan-pill-price,.package-option-price) {max-width:100%;white-space:normal!important;overflow-wrap:anywhere;}
+#root .cpx-page .package-options .plan-sculpted-card[aria-pressed=true]::after {top:36px;right:15px;}
+
+/* Legacy package styles must not shrink or truncate the new offer content. */
+#root .cpx-page .package-options .plan-sculpted-card > :not(.plan-card-tab) {flex-shrink:0;max-height:none;overflow:visible;}
+#root .cpx-page .package-options .plan-sculpted-card :is(.cpx-plan-pill-price,.package-option-price) {box-sizing:border-box;padding:2px 0!important;height:auto!important;max-height:none!important;overflow:visible!important;text-overflow:clip!important;}
+
+/* Keep the duration in normal flow: its full height is reserved above every price. */
+#root .cpx-page .package-options .plan-sculpted-card {
+  justify-content:flex-start!important;
+  padding-top:2px!important;
+  gap:8px!important;
+}
+#root .cpx-page .package-options .plan-sculpted-card > .plan-card-tab {
+  position:relative!important;
+  top:auto!important;
+  left:auto!important;
+  transform:none!important;
+  flex:0 0 auto!important;
+  align-self:center!important;
+  margin:0 0 10px!important;
+  min-height:32px;
+}
+#root .cpx-page .package-options .plan-price-line {flex:0 0 auto!important;}
+#root .cpx-page .package-options .plan-sculpted-card:hover {transform:none!important;}

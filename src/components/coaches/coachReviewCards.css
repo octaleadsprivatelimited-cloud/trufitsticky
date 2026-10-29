@@ -1,0 +1,59 @@
+/* Image-led member stories. Monograms stand in when no real photo is supplied. */
+#root .coaching-reviews.review-showcase .coaching-section-heading {align-items:center;margin-bottom:24px;}
+#root .coaching-reviews.review-showcase .review-showcase-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px 18px;align-items:start;}
+#root .coaching-reviews.review-showcase .review-showcase-card {padding:0;border:0;background:transparent;border-radius:0;box-shadow:none;min-width:0;overflow:visible;}
+#root .review-showcase .review-showcase-visual {height:210px;position:relative;display:grid;place-items:center;overflow:hidden;border-radius:26px 26px 16px 16px;background:radial-gradient(ellipse at 60% 20%,#bc98e7,#7546af 65%,#512782);}
+#root .review-showcase .review-showcase-visual>img {display:block;width:100%;height:100%;object-fit:cover;object-position:center;}
+#root .review-showcase .review-showcase-monogram {font:500 64px/1 'Manrope',sans-serif;color:#fff9;letter-spacing:-.06em;}
+#root .review-showcase .review-showcase-panel {position:relative;margin-top:-38px;min-width:0;padding:42px 16px 20px;text-align:center;isolation:isolate;}
+#root .review-showcase .review-showcase-panel::before {content:'';position:absolute;inset:0;z-index:-1;border:1px solid #d7c3ee;border-bottom:0;border-radius:32px 32px 12px 12px;background:linear-gradient(180deg,#eee4fa,#faf7fe 55%,#fff 100%);box-shadow:0 -5px 15px #38125c0a;}
+#root .review-showcase .review-showcase-badge {position:absolute;left:50%;top:-23px;transform:translateX(-50%);display:grid;place-items:center;width:48px;height:48px;padding:0;border:3px solid #fff;border-radius:50%;background:#6d28d9;color:#fff;box-shadow:0 4px 10px #43158b1a;font:600 15px/1 'Manrope',sans-serif;}
+#root .review-showcase .review-showcase-panel header {display:grid;justify-items:center;gap:7px;min-width:0;}
+#root .review-showcase .review-showcase-panel header strong {font:600 14px/1.4 'Manrope',sans-serif;color:#34135d;overflow-wrap:anywhere;}
+#root .review-showcase .review-showcase-panel .coaching-review-stars {font-size:11px;line-height:1.3;letter-spacing:1px;color:#6d28d9;}
+#root .review-showcase .review-showcase-panel blockquote {margin:12px 0 0;font:400 12px/1.7 'DM Sans',sans-serif;color:#6c587e;white-space:pre-line;overflow-wrap:anywhere;}
+#root .review-showcase .coaching-more-reviews {margin-top:24px;}
+#root .review-showcase .coaching-more-reviews summary {cursor:pointer;min-height:44px;display:flex;align-items:center;justify-content:center;color:#6d28d9;font-size:12px;}
+#root .review-showcase .coaching-more-reviews .review-showcase-grid {margin-top:18px;}
+#root .review-showcase .review-showcase-empty {max-width:440px;margin:0 auto;}
+#root .review-showcase .review-showcase-empty-stage {height:158px;display:grid;place-items:center;border-radius:26px 26px 16px 16px;background:radial-gradient(ellipse at 50% 25%,#bc98e788,transparent 70%),linear-gradient(145deg,#e9def6,#c6afe5);overflow:hidden;}
+#root .review-showcase .review-showcase-empty-stage>span {font:400 138px/1 Georgia,serif;color:#7441a577;transform:translateY(16px);}
+#root .review-showcase .review-showcase-empty .review-showcase-badge>img {width:22px;height:26px;filter:brightness(0) invert(1);}
+#root .review-showcase .review-showcase-empty-title {font:600 17px/1.4 'Manrope',sans-serif;color:#34135d;margin:0 0 8px;}
+#root .review-showcase .review-showcase-empty .coaching-review-empty {font:400 12px/1.7 'DM Sans',sans-serif;color:#6c587e;max-width:280px;margin:0 auto;}
+@media(max-width:1000px){#root .coaching-reviews.review-showcase .review-showcase-grid {grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:700px){
+ #root .coaching-reviews.review-showcase .coaching-section-heading {justify-content:center;text-align:center;flex-wrap:wrap;gap:14px;margin-bottom:24px;}
+ #root .review-showcase .coaching-review-score {text-align:center;}
+ #root .coaching-reviews.review-showcase .review-showcase-grid {gap:20px 12px;}
+ #root .review-showcase .review-showcase-visual {height:clamp(130px,42vw,195px);border-radius:20px 20px 12px 12px;}
+ #root .review-showcase .review-showcase-monogram {font-size:44px;}
+ #root .review-showcase .review-showcase-panel {padding:33px 8px 15px;margin-top:-28px;}
+ #root .review-showcase .review-showcase-panel::before {border-radius:24px 24px 10px 10px;}
+ #root .review-showcase .review-showcase-badge {width:40px;height:40px;top:-20px;font-size:12px;}
+ #root .review-showcase .review-showcase-panel header strong {font-size:12px;}
+ #root .review-showcase .review-showcase-panel blockquote {font-size:11px;line-height:1.65;margin-top:10px;}
+ #root .review-showcase .review-showcase-panel .coaching-review-stars {font-size:10px;letter-spacing:.5px;}
+ #root .review-showcase .review-showcase-empty-stage {height:148px;}
+ #root .review-showcase .review-showcase-empty .review-showcase-panel {padding:35px 18px 22px;}
+}
+
+#root .review-showcase .review-demo-label {font-size:9px;line-height:1.5;color:#6d28d9;background:#eee4fa;border-radius:12px;padding:3px 8px;}
+
+/* Compact member stories with a small portrait holder and readable copy. */
+#root .review-showcase .review-showcase-card {padding:16px 12px;border:1px solid #e4d8f2;border-radius:18px;background:linear-gradient(160deg,#faf7ff,#fff);}
+#root .review-showcase .review-showcase-visual {width:64px;height:64px;margin:0 auto;border-radius:16px;}
+#root .review-showcase .review-showcase-monogram {font-size:27px;}
+#root .review-showcase .review-showcase-panel {margin-top:0;padding:12px 0 0;}
+#root .review-showcase .review-showcase-panel::before,#root .review-showcase .review-showcase-badge {display:none;}
+#root .review-showcase .review-showcase-panel header {gap:5px;}
+#root .review-showcase .review-showcase-panel blockquote {margin-top:9px;line-height:1.55;}
+@media(max-width:700px){
+ #root .coaching-reviews.review-showcase .review-showcase-grid {gap:10px;}
+ #root .coaching-reviews.review-showcase .coaching-section-heading {margin-bottom:16px;}
+ #root .review-showcase .review-showcase-card {padding:12px 9px;border-radius:14px;}
+ #root .review-showcase .review-showcase-visual {width:46px;height:46px;border-radius:12px;}
+ #root .review-showcase .review-showcase-monogram {font-size:21px;}
+ #root .review-showcase .review-showcase-panel {padding-top:9px;}
+ #root .review-showcase .review-showcase-panel blockquote {font-size:11px;}
+}
