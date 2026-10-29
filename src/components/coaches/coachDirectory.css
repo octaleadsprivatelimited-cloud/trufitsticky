@@ -16,6 +16,7 @@
 #root .catalogue-focus-tabs button[aria-pressed=true]{background:#6d28d9;color:#fff;box-shadow:0 3px 8px #6d28d916}
 #root .catalogue-controls{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:16px 0 26px;padding-bottom:15px;border-bottom:1px solid #eee9f4}
 #root .catalogue-count{font-size:12px;color:#786889}
+#root .catalogue-active-focus{display:block;font-size:10px;line-height:1.5;color:#6d28d9;margin-top:3px}
 #root .catalogue-toolbar-actions{display:flex;align-items:center;gap:18px;min-width:0}
 #root .catalogue-match{font-size:12px;line-height:1.5;color:#6d28d9;white-space:nowrap}
 #root .catalogue-filters{position:relative;font-size:12px}

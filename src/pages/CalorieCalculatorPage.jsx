@@ -7,7 +7,7 @@ import '../styles/calorie-calculator.css';
 const initial = { kg: '', cm: '', lb: '', feet: '', inches: '', age: '', sex: '', activity: '' };
 const formatCalories = value => new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(value);
 
-export default function CalorieCalculatorPage() {
+export default function CalorieCalculatorPage({ embedded = false } = {}) {
   const [units, setUnits] = useState('metric');
   const [fields, setFields] = useState(initial);
   const [eligible, setEligible] = useState(false);
@@ -54,8 +54,8 @@ export default function CalorieCalculatorPage() {
 
   const activity = ACTIVITY_LEVELS.find(level => level.key === fields.activity);
 
-  return <div className="calorie-page wrap" data-clarity-mask="true">
-    <header className="calorie-intro"><h1>The Tru Fit calorie calculator</h1></header>
+  return <div className={`calorie-page${embedded ? ' calorie-embedded' : ' wrap'}`} data-clarity-mask="true">
+    {!embedded && <header className="calorie-intro"><h1>The Tru Fit calorie calculator</h1></header>}
     <div className="calorie-workspace">
       <section className="calorie-input-panel" aria-labelledby="calorie-input-title">
         <div className="calorie-section-top"><h2 id="calorie-input-title">Your everyday energy.</h2><span>Adults 18–80</span></div>

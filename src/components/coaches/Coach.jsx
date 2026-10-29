@@ -33,7 +33,10 @@ export default function Coach(){
  },[queFilteredCoaches,retry,featuredSlug,hasFocusQuery]);
  const region = countryCode || 'DOMESTIC';
  const livePreview = coaches.some(c=>c.livePreview);
- const tiers = [...new Set(coaches.map(c=>c.coach_level).filter(Boolean))];
+ const levelOrder = ['junior','juniorplus','senior','expert','elite'];
+ const levelKey = value => String(value).toLowerCase().replace(/\+/g,'plus').replace(/[^a-z]/g,'');
+ const tiers = [...new Set(coaches.filter(c=>c.status !== 'hard').map(c=>c.coach_level).filter(Boolean))].sort((a,b)=>{const rank=value=>{const index=levelOrder.indexOf(levelKey(value));return index<0?levelOrder.length:index};return rank(a)-rank(b)||String(a).localeCompare(String(b))});
+ const levelLabel = value => ({junior:'Junior',juniorplus:'Junior+',senior:'Senior',expert:'Expert',elite:'Elite'}[levelKey(value)] || String(coaches.find(c=>c.coach_level===value)?.coach_level_name || value));
  const filtered = useMemo(()=>coaches.filter(c=>c.status !== 'hard' && (tier==='all'||c.coach_level===tier) && `${c.name} ${c.specializations||''}`.toLowerCase().includes(query.toLowerCase()) && coachMatchesFocus(c,goal)),[coaches,tier,query,goal]);
  useEffect(()=>{
   if(loading||!featuredSlug||scrolledVisit.current===location.key)return;
@@ -50,14 +53,15 @@ export default function Coach(){
  const focuses = COACH_FOCUSES;
  const updateFocus = value => setSearchParams(previous => {const next = new URLSearchParams(previous);next.set('focus',normalizeCoachFocus(value).replace(/ /g,'-'));return next;}, {replace:true});
  const selectFocus = value => {updateFocus(value);trackEvent('filter_coaches',{filter:value})};
+ const selectTier = value => {setTier(value);trackEvent('filter_coaches',{filter:value,filter_type:'coach_level'})};
  const clearFilters = () => {setTier('all');updateFocus('all');setQuery('')};
  return <div className="coach-catalogue">
  {showLead && <LeadCapture leadData={leadData} setLeadData={setLeadData} onSubmit={()=>closeLead(true)} onClose={closeLead} coachCount={location.state?.coachCount||filtered.length}/>}
  <div className="catalogue-layout">
   <section className="catalogue-main" aria-label="Browse coaches">
    <header className="catalogue-heading"><div><h1>Fitness & nutrition coaches</h1><p><Link to="/">Home</Link><span aria-hidden="true"> / </span>Coaching</p></div><label className="catalogue-search"><span className="sr-only">Search coaches</span><span aria-hidden="true">⌕</span><input type="search" placeholder="Search name or specialty" value={query} onChange={e=>setQuery(e.target.value)} data-clarity-mask="true"/></label></header>
-   <nav className="catalogue-focus-tabs" aria-label="Coaching specialties">{focuses.map(([value,label])=><button type="button" key={value} aria-pressed={goal===value} onClick={()=>selectFocus(value)}>{label}</button>)}</nav>
-   <div className="catalogue-controls"><span className="catalogue-count" aria-live="polite">{loading?'Loading coaches…':`${filtered.length} ${filtered.length === 1 ? 'coach' : 'coaches'}`}</span><div className="catalogue-toolbar-actions"><Link className="catalogue-match" to="/findmycoach">Help me choose</Link><details className="catalogue-filters"><summary>Filters <span aria-hidden="true">☰</span></summary><div><label>Coach level<select value={tier} onChange={e=>{setTier(e.target.value);trackEvent('filter_coaches',{filter:e.target.value})}}><option value="all">All levels</option>{tiers.map(t=><option key={t} value={t}>{coaches.find(c=>c.coach_level===t)?.coach_level_name||t}</option>)}</select></label><label>Pricing region<select value={region} onChange={e=>setCountryCode(e.target.value)}><option value="DOMESTIC">India · INR</option><option value="INTERNATIONAL">International · USD</option></select></label><button onClick={clearFilters}>Clear filters</button></div></details></div></div>
+   <nav className="catalogue-focus-tabs" aria-label="Coach levels"><button type="button" aria-pressed={tier==='all'} onClick={()=>selectTier('all')}>All coaches</button>{tiers.map(value=><button type="button" key={value} aria-pressed={tier===value} onClick={()=>selectTier(value)}>{levelLabel(value)}</button>)}</nav>
+   <div className="catalogue-controls"><span className="catalogue-count" aria-live="polite">{loading?'Loading coaches…':`${filtered.length} ${filtered.length === 1 ? 'coach' : 'coaches'}`}{goal!=='all'&&<small className="catalogue-active-focus">{focuses.find(([value])=>value===goal)?.[1]}</small>}</span><div className="catalogue-toolbar-actions"><Link className="catalogue-match" to="/findmycoach">Help me choose</Link><details className="catalogue-filters"><summary>Filters <span aria-hidden="true">☰</span></summary><div><label>Coaching specialty<select value={goal} onChange={e=>selectFocus(e.target.value)}>{focuses.map(([value,label])=><option key={value} value={value}>{label}</option>)}</select></label><label>Pricing region<select value={region} onChange={e=>setCountryCode(e.target.value)}><option value="DOMESTIC">India · INR</option><option value="INTERNATIONAL">International · USD</option></select></label><button onClick={clearFilters}>Clear filters</button></div></details></div></div>
    {livePreview && <p className="preview-notice">Catalogue preview. Booking is unavailable in this preview.</p>}
    {location.state?.coupleMode && <p className="package-family-note">Choose a coach to explore couple packages.</p>}
    {error && <div className="empty-state" role="alert"><h2>We couldn’t load our coaches.</h2><p>Please try again.</p><button className="button" onClick={()=>setRetry(r=>r+1)}>Retry</button></div>}

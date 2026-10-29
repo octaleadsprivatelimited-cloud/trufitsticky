@@ -220,9 +220,8 @@
 #root .ah-footer-social>.ah-brand img:last-child{width:89px}
 #root .ah-footer-bottom{display:flex;justify-content:space-between;gap:20px;align-items:center;border-top:1px solid #d9dce1;padding-top:20px;font-size:10px;color:#716a78}
 #root .ah-footer-bottom>div{display:flex;gap:22px}
-#root .axis-home .ah-plans-float{position:fixed;right:0;top:76%;z-index:26;border-radius:10px 0 0 10px;background:var(--ah-purple);color:#fff;padding:8px 10px;text-align:center;box-shadow:0 3px 12px #34204c20;font-size:12px;display:grid;justify-items:center}
-#root .ah-plans-float svg{width:20px;height:20px}
-#root .axis-home .ah-chat-float{position:fixed;right:28px;bottom:65px;z-index:26;border-radius:4px;transform:rotate(-5deg);background:#52209d;color:#fff;box-shadow:0 2px 15px #3e206229;padding:9px 12px;text-align:center;font-size:16px;font-style:italic;line-height:1.1}
+#root .axis-home .ah-chat-float{position:fixed;right:28px;bottom:65px;z-index:26;width:54px;height:54px;display:grid;place-items:center;border-radius:50%;background:var(--ah-purple);box-shadow:0 4px 18px #6d28d933;padding:13px}
+#root .ah-chat-float img{display:block;width:100%;height:100%;object-fit:contain;filter:brightness(0) invert(1)}
 #root .axis-home .ah-back-top{position:fixed;right:12px;bottom:12px;z-index:28;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#fff;color:var(--ah-purple);box-shadow:0 2px 10px #3c274a1f;font-size:25px}
 #root .ah-sticky-start{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:29;display:flex;align-items:center;gap:14px;background:#fff;padding:8px;border-radius:15px 15px 0 0;box-shadow:0 -4px 25px #34224b20;max-width:calc(100% - 100px)}
 #root .ah-sticky-start>span{width:43px;height:43px;border-radius:7px;display:grid;place-items:center;background:#eee2fa;color:var(--ah-purple)}
@@ -392,9 +391,7 @@
  #root .ah-footer-social>.ah-brand{width:100%;margin:8px 0 0}
  #root .ah-footer-bottom{align-items:flex-start;flex-direction:column;font-size:9px;gap:12px}
  #root .ah-footer-bottom>div{gap:20px}
- #root .axis-home .ah-plans-float{padding:7px 6px;font-size:9px;top:72%;border-radius:7px 0 0 7px}
- #root .ah-plans-float svg{width:16px;height:16px}
- #root .axis-home .ah-chat-float{right:12px;bottom:84px;padding:7px 9px;font-size:12px}
+ #root .axis-home .ah-chat-float{right:12px;bottom:84px;width:48px;height:48px;padding:11px}
  #root .ah-sticky-start{max-width:calc(100% - 20px);width:100%;gap:9px;padding:8px;border-radius:12px 12px 0 0}
  #root .ah-sticky-start>span{width:34px;height:37px;flex-shrink:0}
  #root .ah-sticky-start>span svg{width:20px;height:20px}
@@ -472,20 +469,15 @@
 #root .ah-video-hero .ah-hero-tabs button{color:#f4ebfc}
 #root .ah-video-hero .ah-hero-tabs button[aria-selected=true]{color:#fff;border-bottom-color:#dfbaff}
 #root .ah-video-hero .ah-hero-links{color:var(--ah-ink)}
-#root .axis-home .ah-hero-video-toggle{position:absolute;z-index:4;right:90px;bottom:16px;display:flex;align-items:center;gap:8px;min-height:36px;padding:6px 12px;background:#2612379c;border:1px solid #ffffff70;border-radius:20px;color:#fff;font-size:11px;line-height:1.3}
-#root .ah-hero-video-toggle>span{font-size:13px}
 #root .ah-coach-carousel{height:319px;min-width:0;width:100%;overflow:hidden;position:relative;border-radius:0 14px 0 0;background:#dce6ed;isolation:isolate}
 #root .ah-coach-track{display:flex;width:100%;height:100%;transition:transform .55s cubic-bezier(.22,.68,.2,1);will-change:transform}
 #root .ah-coach-slide{height:100%;flex:0 0 100%;min-width:0;position:relative}
 #root .ah-coach-slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
 #root .ah-coach-slide>span{position:absolute;left:14px;right:14px;bottom:13px;display:block;border-radius:7px;background:#31134dcf;color:#fff;padding:8px 11px;font-size:13px;line-height:1.4;backdrop-filter:blur(4px)}
-#root .axis-home .ah-carousel-pause{position:absolute;top:12px;right:12px;width:36px;height:36px;display:grid;place-items:center;background:#2c1547b3;color:#fff;border:1px solid #ffffff80;border-radius:50%;font-size:14px;line-height:1;z-index:1}
 @media(max-width:760px){
  #root .ah-coach-carousel{height:100%;min-height:250px;width:calc(100% + 16px);border-radius:0}
  #root .ah-coach-slide img{object-position:50% 14%}
  #root .ah-coach-slide>span{left:6px;right:6px;bottom:9px;padding:6px;font-size:10px}
- #root .axis-home .ah-carousel-pause{width:30px;height:30px;top:8px;right:8px;font-size:12px}
- #root .axis-home .ah-hero-video-toggle{right:52px;bottom:8px;min-height:30px;padding:5px 9px;font-size:9px}
  #root .ah-video-hero:before{background:linear-gradient(100deg,#25103be8,#35134ec9 70%,#25103b9c)}
 }
 @media(prefers-reduced-motion:reduce){#root .ah-coach-track{will-change:auto}}
@@ -496,4 +488,45 @@ html:has(#root .axis-home){scroll-padding-top:0}
 @media(max-width:700px){
  #root .axis-home .ah-section-rail{top:56px}
  #root .axis-home section[id],#root .axis-home footer[id],#root .axis-home .ah-contact-anchor,#root .axis-home #ah-activity-planner{scroll-margin-top:125px}
+}
+/* Both tools stay mounted when switching, keeping in-progress values local. */
+#root .axis-home .ah-tool-panel[hidden]{display:none!important}
+#root .ah-tool-navigation{display:flex;justify-content:center;align-items:center;gap:40px;margin:30px 0}
+#root .ah-tool-navigation .ah-tool-tabs{display:flex;justify-content:center;gap:40px;margin:0;padding:0;overflow:visible}
+#root .ah-tool-tabs>button,#root .axis-home .ah-tool-coach-link{padding:8px 10px;font-size:15px;border:0;border-bottom:2px solid transparent;color:var(--ah-ink);background:none;white-space:nowrap;min-height:44px;line-height:1.4}
+#root .ah-tool-tabs>button[aria-selected=true]{color:var(--ah-purple);border-bottom-color:var(--ah-purple)}
+#root .ah-tool-panel:focus-visible{outline:3px solid #9662ea;outline-offset:4px}
+#root .ah-calorie-panel{padding:30px;background:var(--ah-gray);border-radius:18px;text-align:left}
+#root .axis-home .calorie-embedded{width:100%;max-width:none;margin:0;padding:0;color:var(--calorie-ink);font-size:15px}
+#root .axis-home .calorie-embedded .calorie-workspace{border-radius:20px}
+#root .axis-home .calorie-embedded .calorie-input-wrap input{font-size:21px;font-weight:500;line-height:1.3}
+#root .axis-home .calorie-embedded .calorie-unit-switch button{font-size:12px}
+#root .axis-home .calorie-embedded .calorie-primary-button{font-size:13px}
+#root .axis-home .calorie-embedded .calorie-field-hint{margin-top:9px}
+#root .axis-home .calorie-embedded .calorie-error{margin-bottom:12px}
+#root .axis-home .calorie-embedded .calorie-local-note{margin-top:12px}
+#root .axis-home .calorie-embedded .calorie-result-unit{margin-top:10px}
+#root .axis-home .calorie-embedded .calorie-result-description{margin-top:21px}
+#root .axis-home .calorie-embedded .calorie-estimate-note{margin-top:16px}
+#root .axis-home .calorie-embedded .calorie-footnote p{margin-bottom:10px}
+#root .axis-home .calorie-embedded .calorie-result-panel h2{scroll-margin-top:140px}
+#root .axis-home .calorie-embedded .calorie-footnote a{color:var(--calorie-purple)}
+@media(max-width:760px){
+ #root .ah-tool-navigation{gap:17px;margin:20px 0;justify-content:center}
+ #root .ah-tool-navigation .ah-tool-tabs{gap:17px;min-width:0}
+ #root .ah-tool-tabs>button,#root .axis-home .ah-tool-coach-link{font-size:11px;padding:8px 3px}
+ #root .ah-calorie-panel{padding:16px;border-radius:14px}
+ #root .axis-home .calorie-embedded .calorie-workspace{border-radius:15px}
+ #root .axis-home .calorie-embedded .calorie-input-panel,#root .axis-home .calorie-embedded .calorie-result-panel{padding:20px 16px}
+ #root .axis-home .calorie-embedded .calorie-input-wrap input{font-size:20px}
+ #root .axis-home .calorie-embedded .calorie-section-top{flex-direction:column;align-items:flex-start}
+ #root .axis-home .calorie-embedded .calorie-section-top h2{font-size:20px}
+ #root .axis-home .calorie-embedded .calorie-result-description{margin-top:16px}
+ #root .axis-home .calorie-embedded .calorie-result-panel h2{scroll-margin-top:125px}
+}
+@media(max-width:360px){
+ #root .ah-tool-navigation,#root .ah-tool-navigation .ah-tool-tabs{gap:10px}
+ #root .ah-tool-tabs>button,#root .axis-home .ah-tool-coach-link{font-size:10px}
+ #root .ah-calorie-panel{padding:10px}
+ #root .axis-home .calorie-embedded .calorie-input-panel,#root .axis-home .calorie-embedded .calorie-result-panel{padding:18px 13px}
 }
