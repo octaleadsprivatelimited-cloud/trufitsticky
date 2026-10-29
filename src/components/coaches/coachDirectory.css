@@ -86,6 +86,27 @@
  #root .catalogue-card-actions .button{font-size:11px;line-height:1.25;min-height:44px;padding:6px 4px;border-radius:12px;white-space:normal;text-align:center;display:flex;align-items:center}
 
 }
+
+/* Keep the mobile catalogue controls compact, including wider phones. */
+@media(max-width:760px){
+ #root .coach-catalogue{padding:12px 10px 24px}
+ #root .catalogue-main{padding:16px 10px;border-radius:18px}
+ #root .catalogue-heading{gap:10px;margin-bottom:10px}
+ #root .catalogue-heading h1{font-size:clamp(20px,4vw,23px);line-height:1.2;margin-bottom:4px}
+ #root .catalogue-heading p{font-size:10px;line-height:1.3}
+ #root .catalogue-search{min-width:0;height:44px;padding-inline:12px}
+ #root .catalogue-search input{height:42px;font-size:16px}
+ #root .catalogue-search>span:not(.sr-only){font-size:20px}
+ #root .catalogue-focus-tabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1px;padding:3px;margin-inline:0;max-width:100%;overflow:visible;border-radius:16px}
+ #root .catalogue-focus-tabs button{min-width:0;min-height:44px;padding:5px 1px;font-size:clamp(10px,1.8vw,11px);line-height:1.25;border-radius:13px;white-space:nowrap;letter-spacing:-.02em}
+ #root .catalogue-controls{gap:8px;margin:8px 0 14px;padding-bottom:8px}
+ #root .catalogue-count{font-size:11px}
+ #root .catalogue-active-focus{margin-top:1px}
+ #root .catalogue-toolbar-actions{gap:10px}
+ #root .catalogue-match{font-size:10px;line-height:1.3;max-width:70px;white-space:normal}
+ #root .catalogue-filters summary{gap:7px;min-height:40px;padding:7px 10px;font-size:11px}
+}
+
 @media(prefers-reduced-motion:reduce){#root .catalogue-card,#root .catalogue-card::before,#root .catalogue-focus-tabs button{transition:none}}
 
 @media(min-width:1001px){
@@ -93,3 +114,6 @@
  #root .catalogue-card h2{font-size:18px;line-height:1.35}
  #root .catalogue-card-actions .button{padding-inline:8px;white-space:normal;text-align:center}
 }
+
+#root .catalogue-all-short{display:none}
+@media(max-width:760px){#root .catalogue-all-label{display:none}#root .catalogue-all-short{display:inline}}
