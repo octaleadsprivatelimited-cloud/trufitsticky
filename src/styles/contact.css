@@ -82,3 +82,46 @@
  .compact-contact-footer .contact-direct-links>a>span:last-child {margin-left:0;text-align:left;line-height:1.5;}
  .compact-contact-footer .contact-direct-links small {margin-bottom:3px;line-height:1.4;}
 }
+
+/* The enquiry panel has its own dark surface; shared white-card rules must not
+   leave white heading text on a white background. Compact footers stay separate. */
+#root .contact-shell .contact-panel .contact-details {
+ background:linear-gradient(145deg,#351066,#54228b)!important;
+ color:#ffffff!important;
+ border:1px solid #54228b!important;
+ align-items:stretch;
+ text-align:left;
+}
+#root .contact-shell .contact-details-heading {width:100%;min-width:0;text-align:left;}
+#root .contact-shell .contact-details-heading .eyebrow {color:#e5d8fa!important;font-size:11px;line-height:1.5;margin:0 0 12px;}
+#root .contact-shell .contact-details-heading h2 {color:#ffffff!important;font-size:clamp(30px,3.4vw,44px);line-height:1.16;letter-spacing:-.035em;margin:0 0 16px;overflow-wrap:normal;}
+#root .contact-shell .contact-details-heading h2 em {color:#e5d8fa!important;}
+#root .contact-shell .contact-details-heading>p:last-child {color:#e5d8fa!important;font-size:13px;line-height:1.7;margin:0;}
+#root .contact-shell .contact-panel .contact-details a {color:#ffffff;}
+#root .contact-shell .contact-panel .contact-details :is(.contact-explore h3,.contact-direct-links small) {color:#e5d8fa!important;}
+#root .contact-shell .contact-direct-links>a {display:grid;grid-template-columns:34px minmax(0,1fr);align-items:center;gap:12px;text-align:left;}
+#root .contact-shell .contact-direct-links>a>span:last-child {margin-left:0;line-height:1.5;}
+#root .contact-shell .contact-link-icon {color:#ffffff;border-color:#ffffff60;}
+#root .contact-shell .contact-explore {border-color:#ffffff38;}
+#root .contact-shell .contact-socials a:hover {color:#e5d8fa;}
+@media(max-width:700px){
+ #root .contact-shell .contact-details-heading h2 {font-size:34px;}
+}
+
+/* Visible field boundaries on the white homepage enquiry form. */
+#root .contact-shell .contact-form-column .contact-field > input,
+#root .contact-shell .contact-form-column .contact-field > textarea,
+#root .contact-shell .contact-form-column .react-international-phone-input-container {
+ border:1px solid #b8a4d2!important;
+ border-radius:8px;
+ background:#fff;
+}
+#root .contact-shell .contact-form-column .react-international-phone-input-container {padding:0;}
+#root .contact-shell .contact-form-column .react-international-phone-input-container input {border:0!important;}
+#root .contact-shell .contact-form-column .contact-field > input:focus-visible,
+#root .contact-shell .contact-form-column .contact-field > textarea:focus-visible,
+#root .contact-shell .contact-form-column .react-international-phone-input-container:focus-within {
+ border-color:#6d28d9!important;
+ outline:2px solid #6d28d933;
+ outline-offset:2px;
+}
