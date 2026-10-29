@@ -133,9 +133,6 @@ function useHomeCarousel(count, delay) {
  };
  return {ref,index,active,move,choose,handlers,track:{style:{transform:`translateX(-${index*100}%)`,transition:animate&&!reducedMotion?undefined:'none'},onTransitionEnd:end,onTransitionCancel:end}};
 }
-function CarouselNavigation({carousel,count,label}) {
- return <div className="ah-carousel-navigation"><button type="button" className="ah-carousel-control ah-carousel-previous" aria-label={`Previous ${label}`} onClick={()=>carousel.move(-1)}>‹</button><div className="ah-carousel-indicators">{Array.from({length:count},(_,i)=><button key={i} type="button" aria-label={`Show ${label} ${i+1}`} aria-pressed={carousel.active===i} onClick={()=>carousel.choose(i)}><span/></button>)}</div><button type="button" className="ah-carousel-control ah-carousel-next" aria-label={`Next ${label}`} onClick={()=>carousel.move(1)}>›</button></div>;
-}
 function QuickActions(){
  const [mobile,setMobile]=useState(()=>window.matchMedia('(max-width: 760px)').matches);
  useEffect(()=>{const query=window.matchMedia('(max-width: 760px)');const update=()=>setMobile(query.matches);query.addEventListener('change',update);return()=>query.removeEventListener('change',update)},[]);
@@ -144,10 +141,10 @@ function QuickActions(){
  const actionSlides=[groups[groups.length-1],...groups,groups[0]];const promoSlides=[promotions[promotions.length-1],...promotions,promotions[0]];
  return <section className="ah-quick ah-container" aria-label="Get started with Tru Fit">
   <div ref={actions.ref} className="ah-apply ah-actions-carousel" role="region" aria-roledescription="carousel" aria-label="Coaching options" tabIndex={0} {...actions.handlers}>
-   <h2>Get started</h2><div className="ah-actions-viewport"><div className="ah-motion-track" {...actions.track}>{actionSlides.map((group,i)=><div className="ah-action-slide" key={i} aria-hidden={i!==actions.index} inert={i!==actions.index}>{group.map(([icon,label,to])=><Link key={label} to={to} draggable={false} state={label==='Couple coaching'?{coupleMode:true}:undefined}><span><Icon type={icon}/></span>{label}</Link>)}</div>)}</div></div><CarouselNavigation carousel={actions} count={groups.length} label="coaching options"/>
+   <h2>Get started</h2><div className="ah-actions-viewport"><div className="ah-motion-track" {...actions.track}>{actionSlides.map((group,i)=><div className="ah-action-slide" key={i} aria-hidden={i!==actions.index} inert={i!==actions.index}>{group.map(([icon,label,to])=><Link key={label} to={to} draggable={false} state={label==='Couple coaching'?{coupleMode:true}:undefined}><span><Icon type={icon}/></span>{label}</Link>)}</div>)}</div></div>
   </div>
   <div ref={highlights.ref} className="ah-promo ah-highlights-carousel" role="region" aria-roledescription="carousel" aria-label="Tru Fit highlights" tabIndex={0} {...highlights.handlers}>
-   <div className="ah-motion-track" {...highlights.track}>{promoSlides.map((promo,i)=><div className="ah-promo-slide" key={i} aria-hidden={i!==highlights.index} inert={i!==highlights.index}><img src={promo.image} alt="" draggable={false}/><div className="ah-promo-copy"><h2>{promo.title}</h2><p>{promo.copy}</p><Link className="ah-button" to={promo.link} draggable={false} state={promo===promotions[1]?{coupleMode:true}:undefined}>{promo.cta}</Link></div></div>)}</div><CarouselNavigation carousel={highlights} count={promotions.length} label="highlight"/>
+   <div className="ah-motion-track" {...highlights.track}>{promoSlides.map((promo,i)=><div className="ah-promo-slide" key={i} aria-hidden={i!==highlights.index} inert={i!==highlights.index}><img src={promo.image} alt="" draggable={false}/><div className="ah-promo-copy"><h2>{promo.title}</h2><p>{promo.copy}</p><Link className="ah-button" to={promo.link} draggable={false} state={promo===promotions[1]?{coupleMode:true}:undefined}>{promo.cta}</Link></div></div>)}</div>
   </div>
  </section>;
 }

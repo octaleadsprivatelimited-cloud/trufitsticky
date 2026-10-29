@@ -550,23 +550,10 @@ html:has(#root .axis-home){scroll-padding-top:0}
 #root .ah-action-slide>a{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;font-size:12px;line-height:1.4;min-height:86px;padding:2px;user-select:none}
 #root .ah-action-slide>a>span{display:grid;place-items:center;width:44px;height:44px;flex-shrink:0;border-radius:7px;background:var(--ah-gray);color:var(--ah-purple);transition:background .18s}
 #root .ah-action-slide>a:hover>span{background:#e8dcf8}
-#root .ah-carousel-navigation{display:flex;align-items:center;justify-content:center;gap:12px;height:44px}
-#root .ah-carousel-indicators{display:flex;justify-content:center;gap:0;height:44px}
-#root .axis-home .ah-carousel-indicators>button{width:44px;height:44px;min-height:44px;border:0;padding:0;background:transparent;display:grid;place-items:center;touch-action:manipulation}
-#root .ah-carousel-indicators>button>span{width:6px;height:6px;border-radius:5px;background:#918998;transition:width .2s,background .2s}
-#root .ah-carousel-indicators>button[aria-pressed=true]>span{width:17px;background:var(--ah-purple)}
-#root .axis-home .ah-carousel-control{width:44px;height:44px;min-height:44px;flex-shrink:0;display:grid;place-items:center;padding:0;border:0;background:transparent;border-radius:50%;color:var(--ah-purple);font-size:27px;line-height:1;touch-action:manipulation}
-#root .ah-actions-carousel .ah-carousel-control{position:absolute;top:88px}
-#root .ah-actions-carousel .ah-carousel-previous{left:5px}
-#root .ah-actions-carousel .ah-carousel-next{right:5px}
 #root .ah-highlights-carousel{min-height:220px}
 #root .ah-promo-slide{flex:0 0 100%;min-width:0;position:relative;min-height:220px;overflow:hidden}
 #root .ah-promo-slide>img{position:absolute;right:0;top:0;height:100%;width:52%;object-fit:cover;mask-image:linear-gradient(to right,transparent,#000 25%);user-select:none}
 #root .ah-promo-slide .ah-promo-copy{padding:22px 25px 48px;width:76%;user-select:none}
-#root .ah-highlights-carousel .ah-carousel-navigation{position:absolute;left:6px;right:6px;bottom:2px;justify-content:space-between;gap:4px}
-#root .ah-highlights-carousel .ah-carousel-control{width:44px;color:#5b229e;background:#ffffffa6}
-#root .ah-highlights-carousel .ah-carousel-indicators>button>span{background:#8c769d}
-#root .ah-highlights-carousel .ah-carousel-indicators>button[aria-pressed=true]>span{background:#6d28d9}
 @media(max-width:760px){
  #root .ah-actions-carousel{min-height:216px;padding:23px 13px 8px}
  #root .ah-actions-viewport{margin:0}
@@ -574,13 +561,10 @@ html:has(#root .axis-home){scroll-padding-top:0}
  #root .ah-action-slide>a{font-size:10px;gap:11px;min-height:84px;overflow-wrap:normal}
  #root .ah-action-slide>a>span{width:40px;height:40px}
  #root .ah-action-slide>a>span svg{width:23px;height:23px}
- #root .ah-actions-carousel .ah-carousel-control{position:static}
- #root .ah-actions-carousel .ah-carousel-navigation{justify-content:space-between;gap:4px;margin-top:8px}
  #root .ah-highlights-carousel,#root .ah-promo-slide{min-height:228px}
  #root .ah-promo-slide .ah-promo-copy{padding:21px 22px 50px;width:78%}
  #root .ah-promo-slide h2{font-size:20px;max-width:230px}
  #root .ah-promo-slide p{font-size:12px;max-width:200px}
- #root .ah-highlights-carousel .ah-carousel-control{background:#ffffffc2}
 }
 @media(max-width:360px){
  #root .ah-action-slide{gap:3px}
@@ -588,4 +572,4 @@ html:has(#root .axis-home){scroll-padding-top:0}
  #root .ah-promo-slide .ah-promo-copy{padding-inline:18px;width:85%}
  #root .ah-promo-slide h2{font-size:19px}
 }
-@media(prefers-reduced-motion:reduce){#root .ah-motion-track{transition:none;will-change:auto}#root .ah-carousel-indicators>button>span{transition:none}}
+@media(prefers-reduced-motion:reduce){#root .ah-motion-track{transition:none;will-change:auto}}
