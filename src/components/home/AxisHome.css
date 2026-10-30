@@ -458,6 +458,7 @@
 #root .ah-video-hero>.ah-container{position:relative;z-index:3;text-shadow:0 2px 8px #0009}
 #root .ah-hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
 #root .axis-home .ah-video-hero em{color:#e7d3ff}
+#root .axis-home .ah-hero-highlight{display:inline-block;background:var(--ah-purple);color:#fff;padding:0 .15em .04em;border-radius:.15em;text-shadow:none;line-height:1.15}
 #root .ah-coach-carousel{height:319px;min-width:0;width:100%;overflow:hidden;position:relative;border-radius:0 14px 0 0;background:#dce6ed;isolation:isolate}
 #root .ah-coach-track{display:flex;width:100%;height:100%;transition:transform .55s cubic-bezier(.22,.68,.2,1);will-change:transform}
 #root .ah-coach-slide{height:100%;flex:0 0 100%;min-width:0;position:relative}
