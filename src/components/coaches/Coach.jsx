@@ -8,10 +8,10 @@ import { trackEvent, trackCoachEvent } from '../../analytics/analytics';
 import './coachPage.css';
 import CoachPortrait from './CoachPortrait';
 import WhatsAppMark from './WhatsAppMark';
-import { COACH_FOCUSES, normalizeCoachFocus, coachMatchesFocus } from './focus.mjs';
+import { normalizeCoachFocus, coachMatchesFocus } from './focus.mjs';
 import './coachDirectory.css';
 export default function Coach(){
- const { countryCode, setCountryCode, queFilteredCoaches, setQueFilteredCoaches } = useContext(SharedContext);
+ const { countryCode, queFilteredCoaches, setQueFilteredCoaches } = useContext(SharedContext);
  const location = useLocation();
  const [searchParams, setSearchParams] = useSearchParams();
  const goal = normalizeCoachFocus(searchParams.get('focus'));
@@ -50,9 +50,7 @@ export default function Coach(){
   return()=>cancelAnimationFrame(frame);
  },[loading,filtered,featuredSlug,location.key]);
  const closeLead = submitted => {if(submitted) sessionStorage.setItem('leadCaptureDate',new Date().toISOString().split('T')[0]);else setQueFilteredCoaches(null);setShowLead(false)};
- const focuses = COACH_FOCUSES;
  const updateFocus = value => setSearchParams(previous => {const next = new URLSearchParams(previous);next.set('focus',normalizeCoachFocus(value).replace(/ /g,'-'));return next;}, {replace:true});
- const selectFocus = value => {updateFocus(value);trackEvent('filter_coaches',{filter:value})};
  const selectTier = value => {setTier(value);trackEvent('filter_coaches',{filter:value,filter_type:'coach_level'})};
  const clearFilters = () => {setTier('all');updateFocus('all');setQuery('')};
  return <div className="coach-catalogue">
@@ -61,7 +59,6 @@ export default function Coach(){
   <section className="catalogue-main" aria-label="Browse coaches">
    <header className="catalogue-heading"><div><h1>Fitness & nutrition coaches</h1><p><Link to="/">Home</Link><span aria-hidden="true"> / </span>Coaching</p></div><label className="catalogue-search"><span className="sr-only">Search coaches</span><span aria-hidden="true">⌕</span><input type="search" placeholder="Search name or specialty" value={query} onChange={e=>setQuery(e.target.value)} data-clarity-mask="true"/></label></header>
    <nav className="catalogue-focus-tabs" aria-label="Coach levels"><button type="button" aria-pressed={tier==='all'} onClick={()=>selectTier('all')} aria-label="All coaches"><span className="catalogue-all-label">All coaches</span><span className="catalogue-all-short" aria-hidden="true">All</span></button>{tiers.map(value=><button type="button" key={value} aria-pressed={tier===value} onClick={()=>selectTier(value)}>{levelLabel(value)}</button>)}</nav>
-   <div className="catalogue-controls"><span className="catalogue-count" aria-live="polite">{loading?'Loading coaches…':`${filtered.length} ${filtered.length === 1 ? 'coach' : 'coaches'}`}{goal!=='all'&&<small className="catalogue-active-focus">{focuses.find(([value])=>value===goal)?.[1]}</small>}</span><div className="catalogue-toolbar-actions"><Link className="catalogue-match" to="/findmycoach">Help me choose</Link><details className="catalogue-filters"><summary>Filters <span aria-hidden="true">☰</span></summary><div><label>Coaching specialty<select value={goal} onChange={e=>selectFocus(e.target.value)}>{focuses.map(([value,label])=><option key={value} value={value}>{label}</option>)}</select></label><label>Pricing region<select value={region} onChange={e=>setCountryCode(e.target.value)}><option value="DOMESTIC">India · INR</option><option value="INTERNATIONAL">International · USD</option></select></label><button onClick={clearFilters}>Clear filters</button></div></details></div></div>
    {livePreview && <p className="preview-notice">Catalogue preview. Booking is unavailable in this preview.</p>}
    {location.state?.coupleMode && <p className="package-family-note">Choose a coach to explore couple packages.</p>}
    {error && <div className="empty-state" role="alert"><h2>We couldn’t load our coaches.</h2><p>Please try again.</p><button className="button" onClick={()=>setRetry(r=>r+1)}>Retry</button></div>}

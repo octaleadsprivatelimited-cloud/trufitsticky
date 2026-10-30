@@ -45,16 +45,10 @@
 #root .ah-category-nav a{display:flex;align-items:center;gap:8px;font-size:13px;min-height:41px}
 #root .ah-category-nav a:hover{color:var(--ah-purple)}
 #root .ah-category-nav a span{font-size:13px}
-#root .ah-hero{background:linear-gradient(105deg,#f1e5fc 0%,#faf0f9 42%,#edf6ff 69%,#eed6fa 100%);padding:62px 0 68px;min-height:462px;border-radius:0 0 160px 0;position:relative;overflow:hidden;box-shadow:inset 0 -13px 22px #b29fc020}
+#root .ah-hero{background:linear-gradient(105deg,#f1e5fc 0%,#faf0f9 42%,#edf6ff 69%,#eed6fa 100%);padding:108.7px 0 114.7px;min-height:554.4px;border-radius:0 0 160px 0;position:relative;overflow:hidden;box-shadow:inset 0 -13px 22px #b29fc020}
 #root .ah-hero:after{content:'';position:absolute;right:-54px;bottom:-130px;width:180px;height:400px;transform:rotate(33deg);border-radius:65px 0 0 0;background:#fff;pointer-events:none}
 #root .ah-hero h1{font-size:40px;line-height:1.35;font-weight:500;letter-spacing:-1px}
 #root .ah-hero>div>p{font-size:18px;margin-top:18px}
-#root .ah-hero-tabs{display:flex;width:830px;max-width:100%;margin-top:30px;border-bottom:1px solid #82828a}
-#root .ah-hero-tabs button{flex:1;padding:8px 10px;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;color:#555;font-size:13px;white-space:nowrap}
-#root .ah-hero-tabs button[aria-selected=true]{color:var(--ah-purple);border-bottom-color:var(--ah-purple)}
-#root .ah-hero-links{display:flex;align-items:center;gap:20px;position:relative;z-index:1;margin-top:16px;padding:23px 16px;background:#ffffffed;border-radius:16px;min-height:96px}
-#root .ah-hero-links>a:not(.ah-button){flex:1;padding:13px;background:var(--ah-gray);border-radius:13px;font-size:14px;line-height:1.4}
-#root .ah-hero-links>a:not(.ah-button):hover{background:#e6e0f2}
 #root .ah-quick{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-block:85px}
 #root .ah-apply{border:1px solid #dedee2;border-radius:24px;min-height:202px;padding:30px 15px 26px}
 #root .ah-apply h2{text-align:center;font-size:16px;font-weight:650;margin-bottom:24px}
@@ -74,7 +68,10 @@
 #root .ah-dots button:before{content:'';position:absolute;inset:-8px -4px}
 #root .ah-dots button[aria-pressed=true]{width:17px;background:var(--ah-purple)}
 #root .ah-section-rail{position:sticky;top:0;z-index:25;min-height:62px;display:flex;align-items:center;justify-content:center;background:#252525;color:#fff;margin-bottom:72px;box-shadow:0 5px 16px #22222207}
-#root .ah-section-rail>div{display:flex;gap:16px;overflow-x:auto;padding:15px 24px;scrollbar-width:none}
+#root .ah-section-rail .ah-rail-inner{width:100%}
+#root .ah-section-rail .ah-rail-links{display:flex;gap:16px;overflow-x:auto;padding:15px 24px;scrollbar-width:none;min-width:0}
+#root .ah-rail-brand,#root .ah-rail-account{display:none}
+#root .ah-rail-sentinel{display:block;height:1px;margin-bottom:-1px;pointer-events:none}
 #root .ah-section-rail a{border:1px solid #646464;border-radius:25px;padding:5px 23px;white-space:nowrap;font-size:13px;line-height:1.4}
 #root .ah-section-rail a:hover,#root .ah-section-rail a[aria-current=location]{background:var(--ah-purple);border-color:#d2b8f5}
 #root .ah-coaching{background:var(--ah-gray);border-radius:16px;margin-bottom:86px;overflow:hidden;padding:0 52px;position:relative}
@@ -252,7 +249,7 @@
  #root .ah-tile-icon svg{width:14px;height:14px}
  #root .ah-product-tiles>a>svg{width:12px}
  #root .ah-product-heading .ah-button{padding:8px 15px;font-size:11px}
- #root .ah-section-rail>div{gap:12px}
+ #root .ah-section-rail .ah-rail-links{gap:12px}
  #root .ah-section-rail a{padding:5px 16px}
  #root .ah-support-promos>div{padding:25px}
  #root .ah-support-promos h2{font-size:24px}
@@ -293,11 +290,6 @@
  #root .ah-hero:after{width:60px;height:170px;right:-47px;bottom:-73px;transform:rotate(35deg)}
  #root .ah-hero h1{font-size:clamp(25px,5.4vw,36px);line-height:1.35;letter-spacing:-.5px}
  #root .ah-hero>div>p{font-size:13px;margin-top:16px;max-width:310px}
- #root .ah-hero-tabs{overflow-x:auto;scrollbar-width:none;margin-top:25px;gap:15px;width:100%}
- #root .ah-hero-tabs button{flex:none;padding:9px 5px;font-size:11px;min-height:39px}
- #root .ah-hero-links{display:grid;grid-template-columns:1fr;gap:9px;padding:12px;margin-top:12px;min-height:0;border-radius:12px}
- #root .ah-hero-links>a:not(.ah-button){font-size:12px;padding:10px 12px;border-radius:8px}
- #root .ah-hero-links .ah-button{justify-self:start;min-height:37px;padding:8px 15px;font-size:11px}
  #root .ah-quick{grid-template-columns:1fr;gap:18px;margin-block:35px}
  #root .ah-apply{min-height:180px;border-radius:18px;padding:23px 10px}
  #root .ah-apply h2{font-size:15px;margin-bottom:20px}
@@ -309,7 +301,7 @@
  #root .ah-promo h2{font-size:21px;max-width:220px}
  #root .ah-promo p{font-size:12px;max-width:180px}
  #root .ah-section-rail{min-height:53px;margin-bottom:34px;justify-content:flex-start}
- #root .ah-section-rail>div{padding:10px 16px;gap:9px;width:100%}
+ #root .ah-section-rail .ah-rail-links{padding:10px 16px;gap:9px;width:100%}
  #root .ah-section-rail a{font-size:11px;padding:6px 16px}
  #root .ah-coaching{padding:0 16px;border-radius:13px;margin-bottom:34px}
  #root .ah-editorial{min-height:250px;grid-template-columns:66% 34%;align-items:stretch}
@@ -415,8 +407,7 @@
 #root .ah-safety-icon svg{width:90px;height:90px;color:#fff;stroke-width:1.3}
 #root .ah-safety .ah-button{margin-top:25px}
 @media(max-width:760px){
- #root .ah-hero-tabs,#root .ah-hero-links{display:none}
- #root .ah-hero{padding:48px 0 50px}
+ #root .ah-hero{padding:76.4px 0 78.4px}
  #root .ah-mobile-hero-actions{display:flex;gap:8px;margin-top:20px}
  #root .ah-mobile-hero-actions .ah-button{font-size:10px;padding:9px 13px;min-height:37px}
  #root .ah-quick-items{display:none}
@@ -458,15 +449,15 @@
 }
 /* Motion remains within the established hero and editorial footprints. */
 #root .axis-home .ah-video-hero{background-size:cover;background-position:center;color:#fff;box-shadow:none}
-#root .ah-video-hero:before{content:'';position:absolute;inset:0;background:linear-gradient(100deg,#25103be8 0%,#35134ecb 46%,#25103b80 100%);z-index:1;pointer-events:none}
+@media(min-width:1001px){
+ /* A taller hero keeps the video behind the desktop navigation. */
+ #root .axis-home .ah-video-hero{padding-top:197.8px;padding-bottom:122.8px;min-height:651.6px}
+}
+#root .ah-video-hero:before{content:none}
 #root .ah-video-hero:after{z-index:2}
-#root .ah-video-hero>.ah-container{position:relative;z-index:3}
+#root .ah-video-hero>.ah-container{position:relative;z-index:3;text-shadow:0 2px 8px #0009}
 #root .ah-hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
 #root .axis-home .ah-video-hero em{color:#e7d3ff}
-#root .ah-video-hero .ah-hero-tabs{border-color:#ffffff80}
-#root .ah-video-hero .ah-hero-tabs button{color:#f4ebfc}
-#root .ah-video-hero .ah-hero-tabs button[aria-selected=true]{color:#fff;border-bottom-color:#dfbaff}
-#root .ah-video-hero .ah-hero-links{color:var(--ah-ink)}
 #root .ah-coach-carousel{height:319px;min-width:0;width:100%;overflow:hidden;position:relative;border-radius:0 14px 0 0;background:#dce6ed;isolation:isolate}
 #root .ah-coach-track{display:flex;width:100%;height:100%;transition:transform .55s cubic-bezier(.22,.68,.2,1);will-change:transform}
 #root .ah-coach-slide{height:100%;flex:0 0 100%;min-width:0;position:relative}
@@ -476,7 +467,6 @@
  #root .ah-coach-carousel{height:100%;min-height:250px;width:calc(100% + 16px);border-radius:0}
  #root .ah-coach-slide img{object-position:50% 14%}
  #root .ah-coach-slide>span{left:6px;right:6px;bottom:9px;padding:6px;font-size:10px}
- #root .ah-video-hero:before{background:linear-gradient(100deg,#25103be8,#35134ec9 70%,#25103b9c)}
 }
 @media(prefers-reduced-motion:reduce){#root .ah-coach-track{will-change:auto}}
 /* Reserve both the restored compact header and the in-page section rail. */
@@ -531,9 +521,27 @@ html:has(#root .axis-home){scroll-padding-top:0}
 
 @media(max-width:760px){
  #root .axis-home .ah-section-rail{min-height:0;margin-bottom:24px}
- #root .axis-home .ah-section-rail>div{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:3px;width:100%;padding:6px;overflow:visible}
+ #root .axis-home .ah-section-rail .ah-rail-links{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:3px;width:100%;padding:6px;overflow:visible}
  #root .axis-home .ah-section-rail a{display:flex;align-items:center;justify-content:center;min-width:0;min-height:44px;padding:5px 2px;font-size:clamp(9px,1.8vw,11px);white-space:nowrap;text-align:center}
 }
+@media(min-width:1001px){
+ #root .axis-home .ah-section-rail{top:0;min-height:72px;z-index:115}
+ #root .axis-home .ah-section-rail .ah-rail-inner{display:flex;align-items:center;justify-content:center;gap:14px;max-width:1280px;margin:auto;padding:10px 24px;min-height:72px}
+ #root .axis-home .ah-section-rail .ah-rail-links{justify-content:center;gap:7px;padding:0;overflow:visible}
+ #root .axis-home .ah-section-rail .ah-rail-links>a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:7px 12px;font-size:12px}
+ #root .axis-home .ah-section-rail.is-docked .ah-rail-inner{justify-content:space-between}
+ #root .axis-home .ah-section-rail.is-docked .ah-rail-brand{display:block;flex-shrink:0}
+ #root .axis-home .ah-section-rail .ah-rail-brand .ah-brand{padding:8px 10px;background:#fff;border-radius:11px;gap:6px;border:0}
+ #root .axis-home .ah-section-rail .ah-rail-brand img:first-child{width:23px;height:28px}
+ #root .axis-home .ah-section-rail .ah-rail-brand img:last-child{width:81px;height:28px}
+ #root .axis-home .ah-section-rail.is-docked .ah-rail-account{display:flex;align-items:center;gap:7px;flex-shrink:0}
+ #root .axis-home .ah-section-rail.is-docked .ah-rail-brand,#root .axis-home .ah-section-rail.is-docked .ah-rail-account{animation:ah-rail-join 200ms ease-out both}
+ #root .axis-home .ah-section-rail .ah-rail-account>a{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:8px 12px;border:1px solid #e5d8fa;border-radius:11px;background:#fff;color:var(--ah-dark);font-size:11px;font-weight:600}
+ #root .axis-home .ah-section-rail .ah-rail-account>a:hover{background:#f4edff;color:var(--ah-purple)}
+ #root .axis-home .ah-section-rail .ah-rail-account svg{width:18px;height:18px}
+ #root .axis-home section[id],#root .axis-home footer[id],#root .axis-home .ah-contact-anchor,#root .axis-home #ah-activity-planner,#root .axis-home .calorie-embedded .calorie-result-panel h2{scroll-margin-top:84px}
+}
+@keyframes ah-rail-join{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
 /* Matching slide tracks for quick actions and the adjacent image/copy stories. */
 #root .ah-actions-carousel,#root .ah-highlights-carousel{touch-action:pan-y;outline-offset:4px}
 #root .ah-actions-carousel{position:relative;padding:20px 14px;overflow:hidden;min-height:0;align-self:center}

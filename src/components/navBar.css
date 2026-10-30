@@ -21,6 +21,50 @@
   transform: scale(.8);
 }
 #root .site-header .nav-account-icon { display: none; }
+@media (min-width: 1001px) {
+  #root header.site-header {
+    background: transparent;
+    border-bottom-color: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+  #root .site-header .brand {
+    padding: 8px 14px;
+    border: 1px solid #e5d8fa;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 4px 18px #25103b0d;
+  }
+  #root .site-header .nav-links { gap: 10px; }
+  #root .site-header .nav-links > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 18px;
+    border: 1px solid #e5d8fa;
+    border-radius: 12px;
+    background: #fff;
+    color: var(--ink);
+    font-weight: 600;
+    box-shadow: 0 4px 18px #25103b0d;
+  }
+  #root .site-header .nav-links > a:hover,
+  #root .site-header .nav-links > a:focus-visible {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  /* Keep the video behind the navigation without a header-sized layout shift. */
+  #root:has(.axis-home) > header.site-header {
+    position: fixed;
+    left: 0;
+    right: 0;
+  }
+  #root:has(.ah-section-rail.is-docked) > header.site-header {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
 @media (max-width: 1000px) {
   #root .site-header .site-nav { gap: 12px; }
   #root .site-header .brand { flex-shrink: 0; }
